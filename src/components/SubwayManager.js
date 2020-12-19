@@ -1,6 +1,8 @@
 import ValidateSubwayManager from "./ValidateSubwayManager.js";
+import PrintSubwayManager from "./PrintSubwayManager.js";
 import { stations, lines } from "../@shared/data.js";
-import { hideElement, showElement } from "../@shared/domUtils.js";
+import { hideElement, getCheckedSearchType } from "../@shared/domUtils.js";
+
 class SubwayManager {
   constructor() {
     this.stations = stations;
@@ -28,6 +30,7 @@ class SubwayManager {
       this.getState,
       this.getStations
     );
+    this.printSubwayManager = new PrintSubwayManager();
   };
 
   resetState = () => {
@@ -48,6 +51,17 @@ class SubwayManager {
 
   handleSearchButton = event => {
     event.preventDefault();
+    this.userState.departureStation = this.$departureStationInput.value;
+    this.userState.arrivalStation = this.$arrivalStationInput.value;
+    this.userState.searchType = getCheckedSearchType(
+      this.$searchTypeRadioInputs
+    );
+
+    const isValidUserState = this.validateSubwayManager.checkNameValidation();
+
+    if (isValidUserState) {
+      this.printSubwayManager.print();
+    }
   };
 
   resetDOMElements = () => {
