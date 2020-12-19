@@ -28,16 +28,16 @@ export default class StationPathView {
         <input type="text" id="arrival-station-name-input"></input>
       </div>
       <div style="margin-bottom: 20px">
-        <input type="radio" name="seach-type" value="shortest-path" checked></input>
+        <input type="radio" name="search-type" value="shortest-path" checked></input>
         <label for="shortest-path">최단거리</label>
-        <input type="radio" name="seach-type" value="shortest-time"></input>
+        <input type="radio" name="search-type" value="shortest-time"></input>
         <label for="shortest-time">최소시간</label>
       </div>
       <button id="search-button">길 찾기</button>
     `
   }
 
-  resultView() {
+  resultView(distance, time, path) {
     document.getElementById('result-view').innerHTML = `
       <h2>결과</h2>
       <h3>최단거리</h3>
@@ -47,11 +47,13 @@ export default class StationPathView {
         <th align="center">총 소요 시간</th>
       </tr>
       <tr>
-        <td align="center">4km</td>
-        <td align="center">5분</td>
+        <td align="center">${distance}km</td>
+        <td align="center">${time}분</td>
       </tr>
       <tr>
-        <td align="center" colspan="2">경로</td>
+        <td align="center" colspan="2">
+        ${path}
+        </td>
       </tr>
     </table>
     `;
