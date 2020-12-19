@@ -42,6 +42,25 @@
             <div id="line-menu-container"></div>
             <div id="section-manage-container"></div>
         </div>
+        <div id="path-manager-container" style="display: none;">
+            <h1>🚇 지하철 길찾기</h1>
+            출발역
+            <input id="destination-input" />
+            <br />
+            <br />
+            도착역
+            <input id="arrive-input" />
+            <br />
+            <br />
+            <div>
+              <label for="distance">최단 거리</label>
+              <input type="radio" id="distance" />
+              <label for="time">최단 시간</label>
+              <input type="radio" id="time" />
+            </div>
+            <br />
+            <button id="find-path-button">길찾기</button>
+          </div>
     </div>
     <script type="module" src="src/index.js"></script>
 </body>

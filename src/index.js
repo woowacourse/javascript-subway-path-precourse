@@ -1,11 +1,13 @@
 import stationContainer from "./station/stationContainer";
 import lineContainer from "./line/lineContainer";
 import sectionContainer from "./section/sectionContainer";
+import pathContainer from "./path/pathContainer";
 
 const init = () => {
   const stationButton = document.querySelector("#station-manage");
   const lineButton = document.querySelector("#line-manage");
   const sectionButton = document.querySelector("#section-manage");
+  const pathButton = document.querySelector("#path-manage");
 
   stationButton.addEventListener("click", () => {
     clearScreen();
@@ -22,6 +24,11 @@ const init = () => {
     sectionContainer();
   });
 
+  pathButton.addEventListener("click", () => {
+    clearScreen();
+    pathContainer();
+  });
+
   const clearScreen = () => {
     const stationManageContainer = document.querySelector(
       "#station-manager-container",
@@ -32,10 +39,14 @@ const init = () => {
     const sectionManageContainer = document.querySelector(
       "#section-manager-container",
     );
+    const pathManageContainer = document.querySelector(
+      "#path-manager-container",
+    );
 
     stationManageContainer.style.display = "none";
     lineManageContainer.style.display = "none";
     sectionManageContainer.style.display = "none";
+    pathManageContainer.style.display = "none";
   };
 };
 
