@@ -113,7 +113,7 @@ const getDistanceAndTime = (_path) => {
   return section;
 };
 
-const init = () => {
+export const pathFinder = () => {
   const pathFinderInput = getPathFinderInput();
 
   if (pathFinderInput) {
@@ -126,5 +126,3 @@ const init = () => {
     return [searchType, section.distance, section.time, path];
   }
 };
-
-export { init };
