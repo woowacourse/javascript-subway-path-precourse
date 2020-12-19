@@ -53,11 +53,23 @@ const Functions = function () {
       setEdges(state.stations[this.getStationIndex(station.name)]);
     });
   };
+
+  this.getMinimumPath = () => {
+    setState("dijkstra", new Dijkstra());
+    setState("alreadyGoneStations", []);
+    const station =
+        state.stations[this.getStationIndex(state.departureStation)]
+    setEdges(station);
+    return state.dijkstra.findShortestPath(
+      state.departureStation,
+      state.arrivalStation
+    );
+  };
 };
 
 export const {
   setDepartureStation,
   setArrivalStation,
   isValid,
-  setEdges
+  setEdges,getMinimumPath
 } = new Functions();
