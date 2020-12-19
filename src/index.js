@@ -1,4 +1,19 @@
+import {validStationNameLength, notExistStation, sameStation} from "./handler.js"
+import Dijkstra from "./utils/Dijkstra.js"
+import {pathWithDistance, pathWithTime} from "./data.js"
+
 function init() {
+  const dijkstraDistance = new Dijkstra();
+  const dijkstraTime = new Dijkstra();
+  // TODO 1: 최단거리 로직
+  for (let i=0; i<pathWithDistance.length; i++) {
+    dijkstraDistance.addEdge(pathWithDistance[0], pathWithDistance[1], pathWithDistance[2])
+  }
+  console.log(dijkstraDistance)
+  // TODO 2: 최소시간 로직
+  for (let i=0; i<pathWithTime.length; i++) {
+    dijkstraTime.addEdge(pathWithTime[0], pathWithTime[1], pathWithTime[2])
+  }
   let inputArea = document.getElementById("input-area");
   inputArea.innerHTML = "";
   
@@ -31,7 +46,16 @@ function init() {
         radioInputValue = radioInput[i].value;
       }
     }
-    console.log(departure, arrival, radioInputValue)
+    // console.log(validStationNameLength(departure), validStationNameLength(arrival), notExistStation(departure), notExistStation(arrival), !sameStation(departure, arrival))
+    if (validStationNameLength(departure) && validStationNameLength(arrival) && (notExistStation(departure)) && (notExistStation(arrival)) && !(sameStation(departure, arrival))){
+      if (radioInputValue === "최단거리") {
+        console.log(dijkstraDistance.findShortestPath(departure, arrival))
+      } else {
+        console.log()
+      }
+    } else {
+      alert("유효한 입력값을 넣어주세요")
+    }
     printTable()
   }
   btn.type = "submit";
