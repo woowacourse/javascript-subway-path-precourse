@@ -1,5 +1,5 @@
-export const showResult = (route, distance, time, target) => {
-  let path = route.join(' ➡');
+export const showResult = (result, target) => {
+  let path = result.join(' ➡');
   const html = `
   <table>
   <thead>
@@ -10,8 +10,8 @@ export const showResult = (route, distance, time, target) => {
   </thead>
   <tbody>
     <tr>
-      <td>${distance}km</td>
-      <td>${time}분</td>
+      <td>10km</td>
+      <td>12분</td>
     </tr>
     <tr>
       <td colspan="2">${path}</td>
@@ -19,4 +19,8 @@ export const showResult = (route, distance, time, target) => {
   </tbody>
   </table>`;
   target.innerHTML = html;
+};
+
+export const clearInput = (...inputs) => {
+  inputs.forEach(element => (element.value = ''));
 };
