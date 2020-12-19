@@ -2,7 +2,7 @@ const getPathRowTemplate = (nodes) => {
   let nodesTemplate = '';
   nodes.forEach((node, index) => {
     nodesTemplate += node;
-    if (index !== nodes.length) {
+    if (index !== nodes.length - 1) {
       nodesTemplate += '🡆';
     }
   });

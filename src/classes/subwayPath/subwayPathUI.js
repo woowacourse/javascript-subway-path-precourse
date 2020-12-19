@@ -61,6 +61,37 @@ export default class SubwayPathUI {
     return alertMessage;
   }
 
+  static showResultToTable({
+    checkedOptionName,
+    departureStationName,
+    arrivalStationName,
+  }) {
+    let resultPath;
+    if (checkedOptionName === MIN_DISTANCE_CHECK_OPTION_NAME) {
+      resultPath = SubwayPath.getMinDistancePath(
+        departureStationName,
+        arrivalStationName
+      );
+    } else if (checkedOptionName === MIN_TIME_CHECK_OPTION_NAME) {
+      resultPath = SubwayPath.getMinTimePath(
+        departureStationName,
+        arrivalStationName
+      );
+    }
+    subwayMap.setPath(resultPath);
+    const {
+      totalDistance,
+      totalTime,
+    } = subwayMap.getTotalDistanceAndTimeFromPath();
+    const resultTableBodyTemplate = getResultTableBodyTemplate(
+      totalDistance,
+      totalTime,
+      resultPath
+    );
+    resultElement.setAttribute('style', 'display: block;');
+    resultTableBodyElement.innerHTML = resultTableBodyTemplate;
+  }
+
   static showPath() {
     const departureStationName = departureStationNameInputElement.value;
     const arrivalStationName = arrivalStationNameInputElement.value;
@@ -80,30 +111,11 @@ export default class SubwayPathUI {
     if (invalidSearchAlertMessage !== '') {
       alert(invalidSearchAlertMessage);
     } else {
-      let resultPath;
-      if (checkedOptionName === MIN_DISTANCE_CHECK_OPTION_NAME) {
-        resultPath = SubwayPath.getMinDistancePath(
-          departureStationName,
-          arrivalStationName
-        );
-      } else if (checkedOptionName === MIN_TIME_CHECK_OPTION_NAME) {
-        resultPath = SubwayPath.getMinTimePath(
-          departureStationName,
-          arrivalStationName
-        );
-      }
-      subwayMap.setPath(resultPath);
-      const {
-        totalDistance,
-        totalTime,
-      } = subwayMap.getTotalDistanceAndTimeFromPath();
-      const resultTableBodyTemplate = getResultTableBodyTemplate(
-        totalDistance,
-        totalTime,
-        resultPath
-      );
-      resultElement.setAttribute('style', 'display: block;');
-      resultTableBodyElement.innerHTML = resultTableBodyTemplate;
+      SubwayPathUI.showResultToTable({
+        checkedOptionName,
+        departureStationName,
+        arrivalStationName,
+      });
     }
   }
 }
