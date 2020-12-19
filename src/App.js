@@ -4,6 +4,7 @@ export default class App {
     this.createHeader(target);
     this.createStationInput(target);
     this.createRadioButton(target);
+    this.createSearchButton(target);
   }
 
   createHeader(target) {
@@ -59,5 +60,12 @@ export default class App {
         /> 최소시간
       </label>
     `;
+  }
+
+  createSearchButton(target) {
+    const container = document.createElement('div');
+    target.appendChild(container);
+
+    container.innerHTML = `<button id="search-button">길찾기</button>`;
   }
 }
