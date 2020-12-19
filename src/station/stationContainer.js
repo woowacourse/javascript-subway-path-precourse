@@ -16,7 +16,9 @@ export default function stationContainer() {
 
   const init = () => {
     stationContainer.style.display = "block";
-    stationListTemplate(stationList);
+    if (stationList) {
+      stationListTemplate(stationList);
+    }
     stationButton.addEventListener(
       "click",
       () => {

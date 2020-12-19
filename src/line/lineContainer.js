@@ -41,7 +41,9 @@ export default function lineContainer() {
   };
 
   const init = () => {
-    lineListTemplate(lineList);
+    if (lineList) {
+      lineListTemplate(lineList);
+    }
     lineNameContainer.style.display = "block";
     lineNameButton.addEventListener("click", () => {
       checkLineName(

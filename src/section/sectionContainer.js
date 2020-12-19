@@ -63,7 +63,9 @@ export default function sectionContainer() {
     const sectionContainer = document.querySelector(
       "#section-manager-container",
     );
-    lineMenuPresenter(lineData);
+    if (lineData) {
+      lineMenuPresenter(lineData);
+    }
     MenuButtonHandler();
     sectionContainer.style.display = "block";
   };
