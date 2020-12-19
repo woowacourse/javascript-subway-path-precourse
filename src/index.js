@@ -10,24 +10,24 @@ export default function SubwayPath() {
   this.findRoute = (departure, arrival, search_type) => {
     const dijkstra = new Dijkstra();
     this.addAllStationToVertex(stations, dijkstra);
-    if (search_type === '최단거리') {
-      this.addAllDistanceToEdge(dijkstra);
-    } else if (search_type === '최소시간') {
-      this.addAllTimeToEdge(dijkstra);
-    }
+    this.addEdge(search_type, dijkstra);
     const path = dijkstra.findShortestPath(departure, arrival);
     if (this.isValidRoute(path)) {
-      this.pathResult.render(
-        search_type,
-        this.getTotalDistance(path),
-        this.getTotalTime(path),
-        path
-      );
+      const [totalTime, totalDistance] = this.getTotalDistanceAndTime(path);
+      this.pathResult.render(search_type, totalTime, totalDistance, path);
     }
   };
 
   this.addAllStationToVertex = (stations, dijkstra) => {
     stations.forEach(({ name }) => dijkstra.addVertex(name));
+  };
+
+  this.addEdge = (search_type, dijkstra) => {
+    if (search_type === '최단거리') {
+      this.addAllDistanceToEdge(dijkstra);
+    } else if (search_type === '최소시간') {
+      this.addAllTimeToEdge(dijkstra);
+    }
   };
 
   this.addAllDistanceToEdge = dijkstra => {
@@ -59,42 +59,27 @@ export default function SubwayPath() {
     return true;
   };
 
-  this.getTotalDistance = path => {
-    let totalDistance = 0;
-    let start = 0;
+  this.getTotalDistanceAndTime = path => {
+    let [totalDistance, totalTime, start] = [0, 0, 0];
     while (start < path.length - 1) {
       lines.forEach(({ stations, sections }) => {
-        sections.forEach(({ distance }, index) => {
-          if (
-            stations[index].name === path[start] &&
-            stations[index + 1].name === path[start + 1]
-          ) {
+        sections.forEach(({ distance, time }, index) => {
+          if (this.isSameSection(stations, index, path, start)) {
             totalDistance += Number(distance);
-            start += 1;
-          }
-        });
-      });
-    }
-    return totalDistance;
-  };
-
-  this.getTotalTime = path => {
-    let totalTime = 0;
-    let start = 0;
-    while (start < path.length - 1) {
-      lines.forEach(({ stations, sections }) => {
-        sections.forEach(({ time }, index) => {
-          if (
-            stations[index].name === path[start] &&
-            stations[index + 1].name === path[start + 1]
-          ) {
             totalTime += Number(time);
             start += 1;
           }
         });
       });
     }
-    return totalTime;
+    return [totalDistance, totalTime];
+  };
+
+  this.isSameSection = (stations, index, path, start) => {
+    return (
+      stations[index].name === path[start] &&
+      stations[index + 1].name === path[start + 1]
+    );
   };
 
   this.delegateEvent = ({ target }) => {
