@@ -16,6 +16,7 @@ const tableDom = (distance, time, path) => `
 
 export const clearTable = () => {
   const container = document.getElementById("path-result-container");
+
   container.innerHTML = "";
 };
 
@@ -26,9 +27,9 @@ export const clearInputArea = () => {
 
 export const setResultTable = (distance, time, path) => {
   clearTable();
-  console.log(distance, time);
   const container = document.getElementById("path-result-container");
   const div = document.createElement("div");
+
   div.innerHTML = tableDom(distance, time, path);
   container.appendChild(div);
 };
