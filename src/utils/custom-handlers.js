@@ -1,4 +1,5 @@
 import { ID_VALUES } from "../html-constant/html-id-values.js";
+import { SEARCH_TYPE } from "../html-constant/html-name-value.js";
 
 export const getChildById = (parent, id) => {
   const childrenList = parent.children;
@@ -31,4 +32,13 @@ export const getArrivalStationNameInput = (appContainer) => {
     $arrivalStationNameLabel,
     ID_VALUES.arrivalStationNameInput
   );
+};
+
+export const getSearchType = () => {
+  const searchTypes = document.getElementsByName(SEARCH_TYPE);
+  for (let i = 0; i < searchTypes.length; i++) {
+    if (searchTypes[i].checked) {
+      return searchTypes[i].value;
+    }
+  }
 };
