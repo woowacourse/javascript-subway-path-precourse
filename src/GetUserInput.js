@@ -6,8 +6,19 @@ export default class GetUserInput {
   constructor() {
     this.departure = document.getElementById('departure-station-name-input').value;
     this.arrival = document.getElementById('arrival-station-name-input').value;
-    this.option = document.getElementsByName('search-type');
+    this.option = "";
+    this.setOption();
     this.minNameLength = 2;
+  }
+
+  setOption() {
+    const options = document.getElementsByName('search-type');
+    options.forEach((option) => {
+      if (option.checked) {
+        console.log(option.value)
+        this.option = option.value;
+      }
+    })
   }
 
   isValid() {
