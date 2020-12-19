@@ -28,7 +28,7 @@ class SubwayInput {
 
   onClick({ target }) {
     if (target.id !== ID.SEARCH_BUTTON) return;
-    const { stations, sections, getTotalInfo } = this.props;
+    const { stations, sections, renderTotalInfo } = this.props;
     const [departure, arrival, option] = this.getInputValues();
 
     if (
@@ -41,7 +41,7 @@ class SubwayInput {
 
     const path = this.calculateResult(departure, arrival, option);
     if (!isExistPath(path)) return;
-    getTotalInfo(sections, path);
+    renderTotalInfo(sections, path);
   }
 
   getInputValues() {
