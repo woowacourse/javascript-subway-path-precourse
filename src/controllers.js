@@ -22,7 +22,7 @@ export const initListener = () => {
       'arrival: ',
       arrivalStationNameInput.value,
       'serchType: ',
-      aa(serchType)
+      checkradioValue(serchType)
     )
   );
 };
