@@ -3,7 +3,9 @@ import {
   getShortestSelect,
   hasValidName,
   hasValidInput,
-  getResult,
+  getResultPath,
+  getResultDistance,
+  getResultTime,
 } from './subwayPath.js';
 import { ID, NAME, ALERT } from '../constants/index.js';
 import { resultTableTemplate } from '../views/template.js';
@@ -25,13 +27,25 @@ export default class SubwayPathController {
       this.arrivalStation = getStation(ID.ARRIVAL_STATION_NAME_INPUT);
       hasValidInput(this.departureStation, this.arrivalStation);
       this.shortestSelect = getShortestSelect();
-      const result = getResult(this.departureStation, this.arrivalStation);
-      this.render(result);
+      this.getResult();
     });
   }
 
-  render(result) {
+  getResult() {
+    const resultPath = getResultPath(this.departureStation, this.arrivalStation);
+    const resultDistance = getResultDistance(resultPath);
+    const resultTime = getResultTime(resultPath);
+
+    this.render(resultPath, resultDistance, resultTime);
+  }
+
+  render(resultPath, resultDistance, resultTime) {
     const resultTable = document.querySelector(`#${ID.RESULT_TABLE}`);
-    resultTable.innerHTML = resultTableTemplate(this.shortestSelect, result);
+    resultTable.innerHTML = resultTableTemplate(
+      this.shortestSelect,
+      resultPath,
+      resultDistance,
+      resultTime
+    );
   }
 }

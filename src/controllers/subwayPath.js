@@ -1,6 +1,7 @@
 import { ID, NAME, ALERT } from '../constants/index.js';
 import { isValidNameLength, isNameInStations } from '../utils/userException.js';
 import { addDijkstraEdgeDistance } from '../utils/addDijkstra.js';
+import { stationsDistance, stationsTime } from '../models/stationsInitialData.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import Stations from '../models/stations.js';
 
@@ -42,11 +43,37 @@ export const hasValidInput = (departureStation, arrivalStation) => {
   }
 };
 
-export const getResult = (departureStation, arrivalStation) => {
+export const getResultPath = (departureStation, arrivalStation) => {
   const dijkstra = new Dijkstra();
   let result = '';
 
   addDijkstraEdgeDistance(dijkstra);
   result = dijkstra.findShortestPath(departureStation, arrivalStation);
   return result;
+};
+
+export const getResultDistance = (resultPath) => {
+  let totalDistance = 0;
+  stationsDistance.forEach((station) => {
+    for (let i = 0; i < resultPath.length - 1; i++) {
+      if (station.start === resultPath[i] && station.end === resultPath[i + 1]) {
+        totalDistance += station.distance;
+      }
+    }
+  });
+
+  return totalDistance;
+};
+
+export const getResultTime = (resultPath) => {
+  let totalTime = 0;
+  stationsTime.forEach((station) => {
+    for (let i = 0; i < resultPath.length - 1; i++) {
+      if (station.start === resultPath[i] && station.end === resultPath[i + 1]) {
+        totalTime += station.distance;
+      }
+    }
+  });
+
+  return totalTime;
 };
