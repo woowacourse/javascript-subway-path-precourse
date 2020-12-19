@@ -1,4 +1,5 @@
 import { INNER_TEXT } from "../Constants/Result.js";
+import { calculateTotalDistanceAndTime } from "../utils/Calculator.js";
 import AbstractComponent from "./AbstractComponent.js";
 
 export default class ResultTable extends AbstractComponent {
@@ -30,8 +31,10 @@ export default class ResultTable extends AbstractComponent {
 
   renderDistanceAndTimeValue() {
     const $trValue = document.createElement("tr");
-    const $totalDistanceValue = this.createThElement(`${5}km`); //TODO: props에서 값을 가지고 와야 함
-    const $totalTimeValue = this.createThElement(`${3}분`); //TODO: props에서 값을 가지고 와야 함
+    const { routes } = this.props;
+    const [totalDistance, totalTime] = calculateTotalDistanceAndTime(routes);
+    const $totalDistanceValue = this.createThElement(`${totalDistance}km`); //TODO: props에서 값을 가지고 와야 함
+    const $totalTimeValue = this.createThElement(`${totalTime}분`); //TODO: props에서 값을 가지고 와야 함
 
     this.$component.append($trValue);
     $trValue.append($totalDistanceValue, $totalTimeValue);
