@@ -41,6 +41,10 @@ export default class App {
     return this.subwayMapDistance.getTotalWeight(path);
   };
 
+  getTotalTime = (path) => {
+    return this.subwayMapTime.getTotalWeight(path);
+  };
+
   getSearchResult = () => {
     let shortestPath;
 
@@ -55,7 +59,7 @@ export default class App {
     return {
       path: shortestPath,
       distance: this.getTotalDistance(shortestPath),
-      time: 1,
+      time: this.getTotalTime(shortestPath),
     };
   };
 

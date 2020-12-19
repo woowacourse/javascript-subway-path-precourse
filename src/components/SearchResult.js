@@ -16,10 +16,6 @@ export default class SearchResult {
   }
 
   getShortestPathString = () => {
-    if (this.searchResult.path === []) {
-      return "";
-    }
-
     return this.searchResult.path.join("->");
   };
 
