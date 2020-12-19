@@ -9,7 +9,6 @@ function init() {
   for (let i=0; i<pathWithDistance.length; i++) {
     dijkstraDistance.addEdge(pathWithDistance[0], pathWithDistance[1], pathWithDistance[2])
   }
-  console.log(dijkstraDistance)
   // TODO 2: 최소시간 로직
   for (let i=0; i<pathWithTime.length; i++) {
     dijkstraTime.addEdge(pathWithTime[0], pathWithTime[1], pathWithTime[2])
@@ -46,12 +45,12 @@ function init() {
         radioInputValue = radioInput[i].value;
       }
     }
-    // console.log(validStationNameLength(departure), validStationNameLength(arrival), notExistStation(departure), notExistStation(arrival), !sameStation(departure, arrival))
+
     if (validStationNameLength(departure) && validStationNameLength(arrival) && (notExistStation(departure)) && (notExistStation(arrival)) && !(sameStation(departure, arrival))){
       if (radioInputValue === "최단거리") {
-        console.log(dijkstraDistance.findShortestPath(departure, arrival))
+        console.log(dijkstraDistance.adjacencyList)
       } else {
-        console.log()
+        console.log(dijkstraTime.adjacencyList)
       }
     } else {
       alert("유효한 입력값을 넣어주세요")
