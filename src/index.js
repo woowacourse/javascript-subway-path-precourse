@@ -46,13 +46,13 @@ export const getResultInfo = (departureStation, arrivalStation, dijkstra) => {
   const route = dijkstra.findShortestPath(departureStation, arrivalStation);
   const [totalDistance, totalTime] = getTotalDistanceAndTime(route);
   const shortestRoute = route.join(" => ");
-  console.log(totalDistance, totalTime, shortestRoute);
+
   return [totalDistance, totalTime, shortestRoute];
 };
-export const makeResultUI = () => {
-  const totalDistance = "1";
-  const totalTime = "20";
-  const route = "asd";
+export const makeResultUI = (distance, time, shortestRoute) => {
+  const totalDistance = distance;
+  const totalTime = time;
+  const route = shortestRoute;
   const resultTable = `<table>
                         <thead>
                           <tr>
@@ -62,8 +62,8 @@ export const makeResultUI = () => {
                         </thead>
                         <tbody id="result-table-content">
                           <tr>
-                            <td>${totalDistance}</td>
-                            <td>${totalTime}</td>
+                            <td>${totalDistance}km</td>
+                            <td>${totalTime}분</td>
                           </tr>
                           <tr>
                             <td colspan="2">${route}</td>
@@ -82,8 +82,12 @@ btnSearch.onclick = () => {
   const searchType = getSearchType();
   if (searchType === "minimum-distance") {
     const dijkstra = dijkstraByDistance;
-    getResultInfo(departureStation, arrivalStation, dijkstra);
-    makeResultUI();
+    const [totalDistance, totalTime, shortestRoute] = getResultInfo(
+      departureStation,
+      arrivalStation,
+      dijkstra
+    );
+    makeResultUI(totalDistance, totalTime, shortestRoute);
   } else {
     const dijkstra = dijkstraByTime;
     getResultInfo(dijkstra);
