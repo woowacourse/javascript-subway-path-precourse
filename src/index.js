@@ -19,6 +19,10 @@ function clickSearchButton() {
   const departureStation = departureStationNameInput.value;
   const arrivalStation = arrivalStationNameInput.value;
   const radio = document.querySelector('input[name="search-type"]:checked');
+  if (!(subwayPath.includeStation(departureStation) && subwayPath.includeStation(arrivalStation))) {
+    alert('존재하지 않는 역입니다.');
+    return;
+  }
   titleH3.textContent = radio.labels[0].textContent;
   const path = findShortestDistancePath(departureStation, arrivalStation, radio.value);
   showResult(path);

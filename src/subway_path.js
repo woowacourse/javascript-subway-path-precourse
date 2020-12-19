@@ -74,4 +74,10 @@ export default class SubwayPath {
       time: sumTime
     };
   }
+
+  // 지하철 역 존재 여부
+  includeStation(name) {
+    const index = this.subwayMap.getStationList().indexOf(name);
+    return (index !== -1);
+  }
 }
