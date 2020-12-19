@@ -1,5 +1,6 @@
 function searchPage(timeTableData, checkedRadioInput) {
   let page = ``;
+
   if (timeTableData && checkedRadioInput) {
     page += `
         <h2>📝 결과</h2>

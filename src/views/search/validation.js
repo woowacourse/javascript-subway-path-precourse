@@ -1,4 +1,5 @@
 import { notExistAlert, minimunLengthAlert, sameDepartArrivalAlert } from "../search/alert.js";
+import { SHORTEST_DISTANCE, SHORTEST_TIME } from "./const.js";
 
 function validateStation(stationNames) {
   let alertMsg = minimunLengthAlert(stationNames) || notExistAlert(stationNames) || sameDepartArrivalAlert(stationNames);
@@ -16,9 +17,9 @@ function validateRadioInput(radioInputs) {
   let checkedRadioInput = "";
 
   if (radioInputs[0].checked) {
-    checkedRadioInput = "최단거리";
+    checkedRadioInput = SHORTEST_DISTANCE;
   } else if (radioInputs[1].checked) {
-    checkedRadioInput = "최소시간";
+    checkedRadioInput = SHORTEST_TIME;
   }
 
   return checkedRadioInput;

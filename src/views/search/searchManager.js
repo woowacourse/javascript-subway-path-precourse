@@ -2,27 +2,26 @@ import render from "../../managers/render.js";
 import app from "../app.js";
 import Dijkstra from "../../utils/Dijkstra.js";
 import { validateStation, validateRadioInput } from "../search/validation.js";
+import { SHORTEST_DISTANCE, DISTANCE, TIME, SUBWAY_DATAS } from "../search/const.js";
 
 function onSearchBtnHandler() {
-  let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
-  //   let departure = validateStation(document.getElementById("departure-station-name-input").value);
-  //   let arrival = validateStation(document.getElementById("arrival-station-name-input").value);
   let [departure, arrival] = validateStation([
     document.getElementById("departure-station-name-input").value,
     document.getElementById("arrival-station-name-input").value,
   ]);
-  //   let arrival = validateStation(document.getElementById("arrival-station-name-input").value);
-
   let checkedRadioInput = validateRadioInput(document.all("search-type"));
 
+  showResult(departure, arrival, checkedRadioInput);
+}
+
+function showResult(departure, arrival, checkedRadioInput) {
   if (departure && arrival && checkedRadioInput) {
     let timeTableData = { totalTime: 0, totalDistance: 0, minPath: [] };
 
     timeTableData.minPath = makeMinPathResult(checkedRadioInput, departure, arrival);
-    timeTableData.totalDistance = calculateTotalCost(timeTableData.minPath, "distance");
-    timeTableData.totalTime = calculateTotalCost(timeTableData.minPath, "time");
+    timeTableData.totalDistance = calculateTotalCost(timeTableData.minPath, DISTANCE);
+    timeTableData.totalTime = calculateTotalCost(timeTableData.minPath, TIME);
 
-    console.log(timeTableData);
     render(app(timeTableData, checkedRadioInput));
   } else {
     render(app());
@@ -30,65 +29,39 @@ function onSearchBtnHandler() {
 }
 
 function calculateTotalCost(minPath, option) {
-  let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
-
+  let subwayDatas = JSON.parse(localStorage.getItem(SUBWAY_DATAS));
   let totalCost = 0;
+
   for (let i = 0; i < minPath.length - 1; i++) {
     subwayDatas.sections.forEach((section) => {
-      let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
-      let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
-      if ((conditionOne || conditionTwo) && option === "distance") {
-        totalCost += Number(section.distance);
-      }
-      if ((conditionOne || conditionTwo) && option === "time") {
-        totalCost += Number(section.time);
-      }
+      totalCost += calculateEachCost(section, { minPath, i, option });
     });
   }
 
   return totalCost;
 }
-// function makeTotalDistance(minPath) {
-//   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
 
-//   let distance = 0;
-//   for (let i = 0; i < minPath.length - 1; i++) {
-//     subwayDatas.sections.forEach((section) => {
-//       let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
-//       let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
-//       if (conditionOne || conditionTwo) {
-//         distance += Number(section.distance);
-//       }
-//     });
-//   }
+function calculateEachCost(section, datas) {
+  let conditionOne = section.depart === datas.minPath[datas.i] && section.end === datas.minPath[datas.i + 1];
+  let conditionTwo = section.end === datas.minPath[datas.i] && section.depart === datas.minPath[datas.i + 1];
+  let eachCost = 0;
 
-//   return distance;
-// }
+  if ((conditionOne || conditionTwo) && datas.option === DISTANCE) {
+    eachCost += Number(section.distance);
+  }
+  if ((conditionOne || conditionTwo) && datas.option === TIME) {
+    eachCost += Number(section.time);
+  }
 
-// function makeTotalTime(minPath) {
-//   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
-
-//   let time = 0;
-//   for (let i = 0; i < minPath.length - 1; i++) {
-//     subwayDatas.sections.forEach((section) => {
-//       let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
-//       let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
-//       if (conditionOne || conditionTwo) {
-//         time += Number(section.time);
-//       }
-//     });
-//   }
-
-//   return time;
-// }
+  return eachCost;
+}
 
 function makeMinPathResult(checkRadioInput, departure, arrival) {
-  let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
-
   const dijkstra = new Dijkstra();
+  let subwayDatas = JSON.parse(localStorage.getItem(SUBWAY_DATAS));
 
   subwayDatas.sections.forEach((section) => {
-    if (checkRadioInput === "최단거리") {
+    if (checkRadioInput === SHORTEST_DISTANCE) {
       dijkstra.addEdge(section.depart, section.end, section.distance);
     } else {
       dijkstra.addEdge(section.depart, section.end, section.time);
@@ -96,7 +69,8 @@ function makeMinPathResult(checkRadioInput, departure, arrival) {
   });
 
   let result = dijkstra.findShortestPath(departure, arrival);
-  console.log(result, dijkstra);
+
   return result;
 }
+
 export { onSearchBtnHandler };
