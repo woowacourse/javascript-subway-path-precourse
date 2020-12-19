@@ -45,13 +45,37 @@ const setDefaultOption = (option) => {
   document.getElementById(option).checked = true;
 };
 
-export const appendSearchResult = (path) => {
+export const appendSearchResult = (path, distance, time) => {
   const container = document.getElementById('container');
   const resultDiv = appendNew('div', container, '', 'search-result');
 
   appendNew('h3', resultDiv, '📝 결과');
   appendNew('h4', resultDiv, '최단거리');
-  appendTable(path);
+  appendNew('div', resultDiv, getResultTableHTML(path, distance, time));
 };
 
-const appendTable = (path, totalDistance, totalTime) => {};
+const getResultTableHTML = (path, distance, time) => {
+  return `
+  <table border="1">
+    <th style="text-align:center">총 거리</th>
+    <th style="text-align:center">총 소요시간</th>
+    ${getTotalRowHTML(distance, time)}
+    ${getPathRowHTML(path)}
+  </table>
+`;
+};
+
+const getTotalRowHTML = (distance, time) => {
+  return `<tr>
+          <td style="text-align:center">${distance}km</td>
+          <td style="text-align:center">${time}분</td>
+        </tr>`;
+};
+
+const getPathRowHTML = (path) => {
+  return `<tr>
+          <td colspan="2" style="text-align:center">
+            ${path.join().replace(/,/g, '➡')}
+          </td>
+        </tr>`;
+};
