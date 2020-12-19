@@ -41,6 +41,7 @@ export default function lineContainer() {
   };
 
   const init = () => {
+    lineListTemplate(lineList);
     lineNameContainer.style.display = "block";
     lineNameButton.addEventListener("click", () => {
       checkLineName(
@@ -53,5 +54,6 @@ export default function lineContainer() {
 
   setSelectorOption(lineStartSelector);
   setSelectorOption(lineEndSelector);
+  lineList = getLocalStorage("lineList");
   init();
 }
