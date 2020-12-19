@@ -1,4 +1,4 @@
-export const stations = [
+export const stationData = [
   {
     name: '교대',
     sections: {
@@ -50,7 +50,7 @@ export const stations = [
   },
 ];
 
-export const lines = [
+export const lineData = [
   {
     name: '2호선',
     stations: ['교대', '강남', '역삼'],
