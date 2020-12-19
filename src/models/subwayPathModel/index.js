@@ -12,6 +12,10 @@ export default class subwayPathModel {
     this.dijkstraForMinimumTimePath = new Dijkstra();
   }
 
+  getStations() {
+    return this.stations;
+  }
+
   getStartStation() {
     return this.startStation;
   }
@@ -58,10 +62,74 @@ export default class subwayPathModel {
 
   findShortestPath(startStation, endStation) {
     console.log(this.dijkstraForShortestPath.findShortestPath(startStation, endStation));
+
+    const shortestPath = this.dijkstraForShortestPath.findShortestPath(startStation, endStation);
+    const minimunTimePath = this.dijkstraForMinimumTimePath.findShortestPath(
+      startStation,
+      endStation,
+    );
+    this.calculateDistanceOfPath(shortestPath);
+    this.calculateTimeOfPath(minimunTimePath);
   }
 
   findMinimumTimePath(startStation, endStation) {
     console.log(this.dijkstraForMinimumTimePath.findShortestPath(startStation, endStation));
+
+    const minimunTimePath = this.dijkstraForMinimumTimePath.findShortestPath(
+      startStation,
+      endStation,
+    );
+  }
+
+  calculateDistanceOfPath(shortestPath) {
+    const endStation = shortestPath[shortestPath.length - 1];
+    let nowStation = shortestPath[0];
+    let nowStationIndex = 0;
+    let costForDistance = 0;
+    let costForTime = 0;
+
+    this.getCosts(
+      endStation,
+      nowStation,
+      nowStationIndex,
+      shortestPath,
+      costForDistance,
+      costForTime,
+    );
+  }
+
+  getCosts(endStation, nowStation, nowStationIndex, minimunTimePath, costForDistance, costForTime) {
+    while (nowStation !== endStation) {
+      for (let i = 0; i < this.courses[nowStation].length; i++) {
+        let [nextStatoin, distance, time] = this.courses[nowStation][i];
+        if (nextStatoin === minimunTimePath[nowStationIndex + 1]) {
+          costForTime += time;
+          costForDistance += distance;
+          nowStationIndex++;
+          nowStation = minimunTimePath[nowStationIndex];
+        }
+      }
+    }
+    console.log(costForDistance, costForTime);
+
+    return [costForDistance, costForTime];
+  }
+
+  calculateTimeOfPath(minimunTimePath) {
+    const endStation = minimunTimePath[minimunTimePath.length - 1];
+    let nowStation = minimunTimePath[0];
+    let nowStationIndex = 0;
+    let costForDistance = 0;
+    let costForTime = 0;
+
+    this.getCosts(
+      endStation,
+      nowStation,
+      nowStationIndex,
+      minimunTimePath,
+      costForDistance,
+      costForTime,
+    );
   }
 
   findsAllKindOfPath(startStation, endStation) {
