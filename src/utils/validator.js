@@ -13,6 +13,7 @@ const setMap = (map, edges) => {
 
 const hasPath = (departure, arrival, sections) => {
   const dijkstra = new Dijkstra();
+
   for (let line in sections) setMap(dijkstra, sections[line]);
   const result = dijkstra.findShortestPath(departure, arrival);
   if (result !== undefined) return true;
@@ -20,6 +21,7 @@ const hasPath = (departure, arrival, sections) => {
 
 export const validator = (departure, arrival, sections) => {
   let validateResult = true;
+
   if (
     departure.length < STATION.NAME_LENGTH_LIMIT ||
     arrival.length < STATION.NAME_LENGTH_LIMIT
@@ -28,5 +30,6 @@ export const validator = (departure, arrival, sections) => {
   if (departure === arrival) validateResult = false;
   if (!isInStation(departure) || !isInStation(arrival)) validateResult = false;
   if (!hasPath(departure, arrival, sections)) validateResult = false;
+
   return validateResult;
 };

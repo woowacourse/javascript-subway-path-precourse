@@ -1,8 +1,3 @@
-const clearTable = () => {
-  const container = document.getElementById("path-result-container");
-  container.innerHTML = "";
-};
-
 const tableDom = (distance, time, path) => `
 <h1>📝 결과</h1>
 <table id="section-list-table">
@@ -18,6 +13,16 @@ const tableDom = (distance, time, path) => `
     <td colspan="2" id="total-path">${path.join("➡")}</td>
   </tr>
 </table>`;
+
+export const clearTable = () => {
+  const container = document.getElementById("path-result-container");
+  container.innerHTML = "";
+};
+
+export const clearInputArea = () => {
+  document.getElementById("departure-station-name-input").value = "";
+  document.getElementById("arrival-station-name-input").value = "";
+};
 
 export const setResultTable = (distance, time, path) => {
   clearTable();
