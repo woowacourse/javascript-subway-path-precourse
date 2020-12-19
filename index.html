@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>지하철 길찾기</title>
+    <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
     <div id="app">
@@ -18,18 +19,20 @@
         </div>
       </div>
       <div class="options">
-        <input type="radio" name="search-type" id="" /><label
+        <input type="radio" name="search-type" checked /><label
           for="min-distance-path-search"
           >최단거리</label
         >
-        <input type="radio" name="search-type" id="" /><label
+        <input type="radio" name="search-type" /><label
           for="min-time-path-search"
           >최소시간</label
         >
       </div>
       <button id="search-button">길찾기</button>
-      <div class="result">
-        <h2>최단거리</h2>
+
+      <div id="result">
+        <h2>결과</h2>
+        <h3>최단거리</h3>
         <table>
           <thead>
             <tr>
@@ -37,17 +40,10 @@
               <th>총 소요 시간</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>4km</td>
-              <td>5분</td>
-            </tr>
-            <tr>
-              <td colspan="2">df</td>
-            </tr>
-          </tbody>
+          <tbody id="result-table-body"></tbody>
         </table>
       </div>
     </div>
+    <script src="src/index.js" type="module"></script>
   </body>
 </html>
