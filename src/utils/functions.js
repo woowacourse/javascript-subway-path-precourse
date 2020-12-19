@@ -1,4 +1,5 @@
 import { setState, state } from "../state.js";
+import Dijkstra from "./Dijkstra.js";
 
 const Functions = function () {
   this.setDepartureStation = () => {
