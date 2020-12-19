@@ -30,11 +30,18 @@ export default class SubWayPath {
   getValues = () => {
     const { value: departureStationName } = this.departureStationNameInput;
     const { value: arrivalStationName } = this.arrivalStationNameInput;
+    const searchType = this.getSearchType();
     return {
       departureStationName,
       arrivalStationName,
+      searchType,
     };
   };
+
+  getSearchType = () =>
+    this.distanceRadioInput.checked
+      ? this.distanceRadioInput.dataset.searchType
+      : this.timeRadioInput.dataset.searchType;
 
   isValid(values) {
     if (
@@ -57,4 +64,10 @@ export default class SubWayPath {
     }
     return true;
   }
+
+  checkSection() {
+    const allSection = this.getAllSections();
+  }
+
+  getAllSections = () => this.lineList.map((line) => line.section);
 }
