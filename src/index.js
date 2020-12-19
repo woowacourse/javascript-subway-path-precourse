@@ -1,15 +1,18 @@
 import { stations, lines, routes } from './data.js';
 import Dijkstra from './utils/Dijkstra.js';
-import { ViewController, DOMStrings, constants } from './view.js';
+import ViewController from './view.js';
 import { isStationNamesValid, isPathValid } from './valid.js';
 
+const SHORTEST_DISTANCE = '최단거리';
+const SHORTEST_TIME = '최소시간';
+const RESULT_ARROW = '→';
 const departureStationNameInput = document.getElementById(
-  DOMStrings.DEPARTURE_STATION_NAME_INPUT
+  'departure-station-name-input'
 );
 const arrivalStationNameInput = document.getElementById(
-  DOMStrings.ARRIVAL_STATION_NAME_INPUT
+  'arrival-station-name-input'
 );
-const searchButton = document.getElementById(DOMStrings.SEARCH_BUTTON);
+const searchButton = document.getElementById('search-button');
 
 export default class SubwayPath {
   constructor() {
@@ -44,31 +47,27 @@ export default class SubwayPath {
   }
 
   clickSearchButton() {
-    const departureStation = departureStationNameInput.value;
-    const arrivalStation = arrivalStationNameInput.value;
-    const searchType = document.querySelector(DOMStrings.CHECKED_RADIO_BUTTON)
-      .value;
-    const path = this.findPathByDijkstra(
-      departureStation,
-      arrivalStation,
-      searchType
-    );
+    const departure = departureStationNameInput.value;
+    const arrival = arrivalStationNameInput.value;
+    const searchType = document.querySelector(
+      'input[name="search-type"]:checked'
+    ).value;
+    const path = this.findPathByDijkstra(departure, arrival, searchType);
     try {
-      isStationNamesValid(this.stations, departureStation, arrivalStation);
+      isStationNamesValid(this.stations, departure, arrival);
       isPathValid(path);
       const result = this.calculatePathResult(path);
       this.viewController.clearResultDiv();
       this.viewController.printSearchResult(result, searchType);
     } catch (error) {
       alert(error);
-      console.log(error);
     }
   }
 
   findPathByDijkstra(departure, arrival, searchType) {
-    if (searchType === constants.SHORTEST_DISTANCE) {
+    if (searchType === SHORTEST_DISTANCE) {
       return this.distanceDijkstra.findShortestPath(departure, arrival);
-    } else if (searchType === constants.SHORTEST_TIME) {
+    } else if (searchType === SHORTEST_TIME) {
       return this.timeDijkstra.findShortestPath(departure, arrival);
     }
   }
@@ -86,7 +85,7 @@ export default class SubwayPath {
       totalTime += this.routes[pathIndex].time;
     }
     return {
-      pathString: path.join(constants.RESULT_ARROW),
+      pathString: path.join(RESULT_ARROW),
       totalDistance,
       totalTime,
     };

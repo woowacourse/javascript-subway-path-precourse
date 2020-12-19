@@ -10,21 +10,14 @@ const isStationNotExists = (stations, station) => !stations.includes(station);
 
 const isDepartureEqualsArrival = (departure, arrival) => departure === arrival;
 
-export const isStationNamesValid = (
-  stations,
-  departureStation,
-  arrivalStation
-) => {
-  if (
-    isUnderMinimumLength(departureStation) ||
-    isUnderMinimumLength(arrivalStation)
-  ) {
+export const isStationNamesValid = (stations, departure, arrival) => {
+  if (isUnderMinimumLength(departure) || isUnderMinimumLength(arrival)) {
     throw Error(ERROR_UNDER_MINIMUM_LENGTH);
-  } else if (isStationNotExists(stations, departureStation)) {
-    throw Error(`${ERROR_STATION_NOT_EXISTS}: ${departureStation}`);
-  } else if (isStationNotExists(stations, arrivalStation)) {
-    throw Error(`${ERROR_STATION_NOT_EXISTS}: ${arrivalStation}`);
-  } else if (isDepartureEqualsArrival(departureStation, arrivalStation)) {
+  } else if (isStationNotExists(stations, departure)) {
+    throw Error(`${ERROR_STATION_NOT_EXISTS}: ${departure}`);
+  } else if (isStationNotExists(stations, arrival)) {
+    throw Error(`${ERROR_STATION_NOT_EXISTS}: ${arrival}`);
+  } else if (isDepartureEqualsArrival(departure, arrival)) {
     throw Error(ERROR_DEPARTURE_EQUALS_ARRIVAL);
   }
 };

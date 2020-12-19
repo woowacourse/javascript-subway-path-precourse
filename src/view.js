@@ -1,20 +1,6 @@
-export const DOMStrings = {
-  DEPARTURE_STATION_NAME_INPUT: 'departure-station-name-input',
-  ARRIVAL_STATION_NAME_INPUT: 'arrival-station-name-input',
-  SEARCH_BUTTON: 'search-button',
-  RESULT_DIV: 'result',
-  CHECKED_RADIO_BUTTON: 'input[name="search-type"]:checked',
-};
+const resultDiv = document.getElementById('result');
 
-export const constants = {
-  SHORTEST_DISTANCE: '최단거리',
-  SHORTEST_TIME: '최소시간',
-  RESULT_ARROW: '→',
-};
-
-const resultDiv = document.getElementById(DOMStrings.RESULT_DIV);
-
-export class ViewController {
+export default class ViewController {
   printSearchResult(result, searchType) {
     resultDiv.innerHTML += `
             ${this.getHeaders(searchType)}

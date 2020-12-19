@@ -20,9 +20,6 @@ export const stations = [
   {
     name: '매봉',
   },
-  {
-    name: '신사',
-  },
 ];
 
 export const lines = [
@@ -79,11 +76,5 @@ export const routes = [
     stations: ['양재', '양재시민의숲'],
     distance: 10,
     time: 3,
-  },
-  {
-    line: '2호선',
-    stations: ['신사', '혜화'],
-    distance: 5,
-    time: 5,
   },
 ];
