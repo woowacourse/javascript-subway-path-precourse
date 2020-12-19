@@ -1,22 +1,39 @@
 import {
   IS_LOWER_THAN_TWO_ALERT,
+  IS_NOT_CONNECTED,
   IS_NOT_INCLUDED_ALERT,
   IS_SAME_ALERT,
   MIN_STATION_LENGTH,
   SUFFIX_ALERT,
 } from '../../constants/constants.js';
-import { STATIONS } from '../../data/subway.js';
+import { SECTION_INFOS, STATIONS } from '../../data/subway.js';
 
 export default class InputValidator {
+  constructor() {
+    this.isConnected = false;
+  }
+
   checkValidInputs(departure, arrival) {
     const stations = [departure.value, arrival.value];
-    if (!this.isValidInputs(stations)) {
-      this.alertByCase(stations);
+    this.checkConnected(stations[0], stations[1]);
+    if (!this.isConnected || !this.isValidInputs(stations)) {
+      this.alertByCase(stations, []);
 
       return false;
     }
 
     return true;
+  }
+
+  checkConnected(departure, arrival) {
+    if (departure === arrival) {
+      this.isConnected = true;
+    }
+    for (const section of SECTION_INFOS) {
+      if (departure === section.departure) {
+        this.checkConnected(section.arrival, arrival);
+      }
+    }
   }
 
   isValidInputs(stations) {
@@ -39,8 +56,10 @@ export default class InputValidator {
     return stations.every(station => STATIONS.includes(station));
   }
 
-  alertByCase(stations) {
-    const cases = [];
+  alertByCase(stations, cases) {
+    if (!this.isConnected) {
+      cases.push(IS_NOT_CONNECTED);
+    }
     if (this.isSameStation(stations)) {
       cases.push(IS_SAME_ALERT);
     }
