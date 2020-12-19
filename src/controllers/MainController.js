@@ -27,7 +27,8 @@ export default class MainController {
   isValidStationName(departureStation, arrivalStation) {
     if (
       this.isDepartureStationName(departureStation) &&
-      this.isArrivalStationName(arrivalStation)
+      this.isArrivalStationName(arrivalStation) &&
+      this.isSameStation(departureStation, arrivalStation)
     ) {
       return true;
     }
@@ -84,6 +85,13 @@ export default class MainController {
   }
 
   isSameStation(start, end) {
-    return true;
+    console.log(this.tag, "isSameStation()", start, end);
+    if (start !== end) {
+      return true;
+    }
+    window.alert(`출발역과 도착역은 서로 달라야 합니다`);
+    return false;
   }
+
+  isConnection(start, end) {}
 }
