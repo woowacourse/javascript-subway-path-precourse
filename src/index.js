@@ -1,34 +1,6 @@
 import { lineTwo, lineThree, lineBoondang } from "./data.js";
 import Dijkstra from "./utils/Dijkstra.js";
-
-
-//Validation
-function isUnderTwoCharacters() { 
-    let departureStation = document.getElementById('departure-station-name-input').value;
-    let arrivalStation = document.getElementById('arrival-station-name-input').value;
-
-    if (departureStation.length < 2 || arrivalStation.length < 2) {
-        console.log(departureStation);
-        alert("두자리 이상의 역 이름을 입력해주세요.");
-    }
-    isNotUsuableDepartureStation(departureStation, arrivalStation);
-    findData(departureStation, arrivalStation)
-}
-
-let stationNameList = ['교대', '강남', '역삼', '남부터미널', '양재', '양재시민의숲', '매봉'];
-function isNotUsuableDepartureStation(departureStation, arrivalStation) {
-    if ((stationNameList.includes(departureStation) === false) || (stationNameList.includes(arrivalStation) === false)) {
-        alert("사용 가능한 역 이름(들)이 아닙니다.");
-    }
-    isSameStations(departureStation, arrivalStation);
-}
-
-function isSameStations(departureStation, arrivalStation) {
-    if (departureStation === arrivalStation) {
-        alert("출발역과 도착역이 같을 수 없습니다.");
-    }
-}
-
+import {isUnderTwoCharacters} from "./validation.js";
 
 let findRouteButton = document.getElementById('search-route');
 findRouteButton.addEventListener('click', showResult);
@@ -39,7 +11,7 @@ function showResult() {
 }
 
 const stationsLineTwo = ['교대', '강남', '역삼'];
-function findData(departureStation, arrivalStation) {
+export function findData(departureStation, arrivalStation) {
     if (stationsLineTwo.includes(departureStation) && stationsLineTwo.includes(arrivalStation)){
         let v1 = '', v2 = '', v3 = '';
         let distance = 0, time = 0;
@@ -62,23 +34,28 @@ function findData(departureStation, arrivalStation) {
                 time += lineTwo[i].time;
             }  
         }
-        getShortestDistance(v1, v2, v3, distance, time);
+        getShortestPath(v1, v2, v3, distance, time);
     }
     
 }
 
-function getShortestDistance(v1, v2, v3, distance, time) {
+function getShortestPath(v1, v2, v3, distance, time) {
     let dijkstra = new Dijkstra();
     dijkstra.addEdge(v1, v2, lineTwo[0].distance);
     dijkstra.addEdge(v2, v3, lineTwo[1].distance);
     dijkstra.addEdge(v1, v3, lineTwo[0].distance + lineTwo[1].distance);
-    const result = dijkstra.findShortestPath(v1,v3);
-    
-    makeTable(distance, time, result);
+    const shortestPathOfDistance = dijkstra.findShortestPath(v1,v3);
+
+    dijkstra.addEdge(v1, v2, lineTwo[0].time);
+    dijkstra.addEdge(v2, v3, lineTwo[1].time);
+    dijkstra.addEdge(v1, v3, lineTwo[0].time + lineTwo[1].time);
+    const shortestPathOfTime = dijkstra.findShortestPath(v1,v3);
+
+    makeTable(distance, time, shortestPathOfDistance, shortestPathOfTime);
 }
 
 
-function makeTable( distance, time, result) {
+function makeTable( distance, time, shortestPathOfDistance) {
     let container = document.getElementById('print-result-container');
     let resultTable = document.createElement('table');
     let headerRow = resultTable.insertRow(0);
@@ -93,7 +70,7 @@ function makeTable( distance, time, result) {
     headerCell2.innerHTML = '총 소요 시간';
     firstRowCell1.innerHTML = `${distance}km`;
     firstRowCell2.innerHTML = `${time}분`;
-    secondRowCell1.innerHTML = `${result}`;
+    secondRowCell1.innerHTML = `${shortestPathOfDistance}`;
     resultTable.border = 1;
     resultTable.id = 'print-result-table';
     container.appendChild(resultTable);
