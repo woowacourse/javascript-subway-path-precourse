@@ -7,6 +7,8 @@ import {
   getCheckedSearchType,
   showElement,
 } from "../utils/domUtils.js";
+import { SEARCH_TYPE } from "../utils/constants.js";
+import { isValidSection } from "../utils/validation.js";
 
 class SubwayManager {
   constructor() {
@@ -72,11 +74,33 @@ class SubwayManager {
     );
 
     const isValidUserState = this.validateSubwayManager.checkNameValidation();
+    if (!isValidUserState) return;
 
-    if (isValidUserState) {
-      showElement(this.$resultContainer);
-      this.searchLineManager.render();
+    this.lineResult = this.getLineResult();
+    if (!isValidSection(this.$arrivalStationInput, this.lineResult)) return;
+
+    showElement(this.$resultContainer);
+  };
+
+  getLineResult = () => {
+    const { departureStation, arrivalStation, searchType } = this.userState;
+    let lineResult;
+
+    if (searchType === SEARCH_TYPE.DISTANCE) {
+      lineResult = this.dijkstraManager.getDistanceResult(
+        departureStation,
+        arrivalStation
+      );
     }
+
+    if (searchType === SEARCH_TYPE.MINUTE) {
+      lineResult = this.dijkstraManager.getMinuteResult(
+        departureStation,
+        arrivalStation
+      );
+    }
+
+    return lineResult;
   };
 
   resetDOMElements = () => {
