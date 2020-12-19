@@ -1,6 +1,5 @@
 import ResultView from '../views/ResultView.js';
 import Dijkstra from '../utils/Dijkstra.js';
-import { lines, stations, paths } from '../data.js';
 import { MINIMUM_INPUT_LENGTH } from '../constants.js';
 import {
   INVALID_NAME_LENGTH_MESSAGE,
@@ -11,7 +10,7 @@ import {
 } from '../messages.js';
 
 export default class AppController {
-  constructor() {
+  constructor(stations, lines, paths) {
     this.stations = stations;
     this.lines = lines;
     this.paths = paths;
