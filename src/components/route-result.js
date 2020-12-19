@@ -9,7 +9,6 @@ class RouteResult extends Component {
   }
 
   mountTemplate() {
-    console.log(this._props.searchResult.value);
     this._$target.innerHTML = `
 			<h1>📝 결과</h1>
 			${this.createSearchTypeH3Template()}
