@@ -5,7 +5,9 @@ export default class Component {
     this.state = {
       start: "",
       end: "",
-      method: null,
+      method: "minimumDistance",
+      route: [],
+      short: [],
     };
   }
 
