@@ -10,23 +10,24 @@ export function findRoads(departure, arrival) {
     num = 1;
     result = addValue(num, this, departure, arrival);
   }
+
   visibleToggle();
   const takes = findTake(result, this);
   printTable(num, result, this, takes);
 }
 
 export const findTake = (result, stations) => {
+  let km = 0;
+  let time = 0;
   let takes = [];
   result.map((name, index) => {
     takes.push(stations.find((s) => s.name === name).nextStations);
   });
-  let km = 0;
-  let time = 0;
+
   for (let i = 0; i < takes.length - 1; i++) {
     const obj = takes[i].find((s) => Object.keys(s)[0] === result[i + 1]);
     km += obj[result[i + 1]][0];
     time += obj[result[i + 1]][1];
-    console.log(km, time);
   }
   return [km, time];
 };
