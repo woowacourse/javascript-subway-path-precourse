@@ -1,9 +1,12 @@
 import { Header, PathInput, PathResult } from './components/index.js';
 import { Dijkstra, isConnectedStation } from './utils/index.js';
 import { stations, lines } from './data.js';
+import { APP, NOT_CONNECTED_STATIONS } from './constants/index.js';
+import { MINIMUM_TIME, SHORTEST_DISTANCE } from './constants/standard.js';
 
 export default function SubwayPath() {
-  this.app = document.getElementById('app');
+  this.app = document.getElementById(APP);
+  this.header = {};
   this.pathInput = {};
   this.PathResult = {};
 
@@ -23,9 +26,9 @@ export default function SubwayPath() {
   };
 
   this.addEdge = (search_type, dijkstra) => {
-    if (search_type === '최단거리') {
+    if (search_type === SHORTEST_DISTANCE) {
       this.addAllDistanceToEdge(dijkstra);
-    } else if (search_type === '최소시간') {
+    } else if (search_type === MINIMUM_TIME) {
       this.addAllTimeToEdge(dijkstra);
     }
   };
@@ -52,7 +55,7 @@ export default function SubwayPath() {
 
   this.isValidRoute = path => {
     if (!isConnectedStation(path)) {
-      alert('출발역과 도착역이 연결되지 않아 경로를 조회할 수 없습니다.');
+      alert(NOT_CONNECTED_STATIONS);
       return false;
     }
 
@@ -90,7 +93,7 @@ export default function SubwayPath() {
     this.delegateEvent({ target });
   };
 
-  new Header();
+  this.header = new Header();
   this.pathInput = new PathInput({ findRoute: this.findRoute });
   this.pathResult = new PathResult();
   this.app.addEventListener('click', this.handleClickApp);

@@ -1,3 +1,5 @@
+import { MINIMUM_STATION_NAME_LENGTH } from '../constants/index.js';
+
 export const isSameDepartureAndArrival = (
   departureStationName,
   arrivalStationName
@@ -9,7 +11,10 @@ export const isValidInputLength = (
   departureStationName,
   arrivalStationName
 ) => {
-  return departureStationName.length >= 2 && arrivalStationName.length >= 2;
+  return (
+    departureStationName.length >= MINIMUM_STATION_NAME_LENGTH &&
+    arrivalStationName.length >= MINIMUM_STATION_NAME_LENGTH
+  );
 };
 
 export const isRegistredStation = (

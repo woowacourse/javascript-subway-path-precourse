@@ -4,6 +4,17 @@ import {
   isValidInputLength,
 } from '../utils/index.js';
 import { stations } from '../data.js';
+import {
+  ARRIVAL_STATION_NAME_INPUT,
+  DEPARTURE_STATION_NAME_INPUT,
+  NOT_REGISTRED_STATION,
+  SAME_DEPARTURE_AND_ARRIVAL,
+  SEARCH_BUTTON,
+  SEARCH_TYPE,
+  SHORTEST_DISTANCE_INPUT,
+  SHORTEST_TIME_INPUT,
+  STATION_NAME_LENGTH_LIMIT,
+} from '../constants/index.js';
 
 export default function PathInput({ findRoute }) {
   this.pathInputConatiner = document.querySelector('.path-input-container');
@@ -18,13 +29,13 @@ export default function PathInput({ findRoute }) {
   };
 
   this.searchEvent = ({ target: { id } }) => {
-    if (id !== 'search-button') {
+    if (id !== SEARCH_BUTTON) {
       return;
     }
-    const departure = document.getElementById('departure-station-name-input')
+    const departure = document.getElementById(DEPARTURE_STATION_NAME_INPUT)
       .value;
-    const arrival = document.getElementById('arrival-station-name-input').value;
-    const radioButtons = document.getElementsByName('search-type');
+    const arrival = document.getElementById(ARRIVAL_STATION_NAME_INPUT).value;
+    const radioButtons = document.getElementsByName(SEARCH_TYPE);
     if (
       this.isValidName(departure, arrival) &&
       this.isValid(departure, arrival)
@@ -35,7 +46,7 @@ export default function PathInput({ findRoute }) {
 
   this.isValid = (departure, arrival) => {
     if (!isRegistredStation(departure, arrival, stations)) {
-      alert('존재하는 역만 출발역 또는 도착역으로 입력가능합니다.');
+      alert(NOT_REGISTRED_STATION);
       return false;
     }
 
@@ -44,12 +55,12 @@ export default function PathInput({ findRoute }) {
 
   this.isValidName = (departure, arrival) => {
     if (isSameDepartureAndArrival(departure, arrival)) {
-      alert('출발역과 도착역은 달라야 합니다');
+      alert(SAME_DEPARTURE_AND_ARRIVAL);
       return false;
     }
 
     if (!isValidInputLength(departure, arrival)) {
-      alert('출발역과 도착역은 2글자 이상이어야 합니다.');
+      alert(STATION_NAME_LENGTH_LIMIT);
       return false;
     }
 
@@ -66,29 +77,29 @@ export default function PathInput({ findRoute }) {
 
   this.departureStationNameInputTemplate = () => {
     return `<div class="departure-station">
-      <label for="departure-station-name-input">출발역</label>
-      <input id="departure-station-name-input">
+      <label for=${DEPARTURE_STATION_NAME_INPUT}>출발역</label>
+      <input id=${DEPARTURE_STATION_NAME_INPUT}>
     </div>`;
   };
 
   this.arrivalStationNameInputTemplate = () => {
     return `<div class="arrival-station">
-    <label for="arrival-station-name-input">도착역</label>
-    <input id="arrival-station-name-input">
+    <label for=${ARRIVAL_STATION_NAME_INPUT}>도착역</label>
+    <input id=${ARRIVAL_STATION_NAME_INPUT}>
   </div>`;
   };
 
   this.searchTypeRadioTemplate = () => {
     return `<div class="search-type">
-      <input type="radio" id="short-distance-input" name="search-type" checked>
-      <label for="short-distance-input">최단거리</label>
-      <input type="radio" id="short-time-input" name="search-type">
-      <label for="short-time-input">최소시간</label>
+      <input type="radio" id=${SHORTEST_DISTANCE_INPUT} name="search-type" checked>
+      <label for=${SHORTEST_DISTANCE_INPUT}>최단거리</label>
+      <input type="radio" id=${SHORTEST_TIME_INPUT} name="search-type">
+      <label for=${SHORTEST_TIME_INPUT}>최소시간</label>
     </div>`;
   };
 
   this.serachButtonTemplate = () => {
-    return `<button id="search-button">길 찾기</button>`;
+    return `<button id=${SEARCH_BUTTON}>길 찾기</button>`;
   };
 
   this.render = () => {
