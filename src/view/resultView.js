@@ -6,11 +6,11 @@ export const makeResultHTML = (distance, time, pathResult, selection) => {
     resultHTML.innerHTML = makeTitle()
         + makeTableTitle(selection)
         + makeTable(distance, time, pathResult);
-}
+};
 
 const makeTitle = () => {
-    return `<h3>📝 결과</h3>`
-}
+    return `<h3>📝 결과</h3>`;
+};
 
 const makeTableTitle = (selection) => {
     if (selection === "time") {
@@ -18,7 +18,7 @@ const makeTableTitle = (selection) => {
     }
 
     return `<h4>최단거리</h4>`;
-}
+};
 
 const makeTable = (distance, time, pathResult) => {
     let tableHTML = `
@@ -26,11 +26,11 @@ const makeTable = (distance, time, pathResult) => {
                     <tr><th>총 거리</th><th>총 소요 시간</th></tr>
                     <tr><td><center>${distance}km</center></td><td><center>${time}분</center></td></tr>
                     <tr><td colspan=2><center>${addArrowTopathResult(pathResult)}</center></td></tr>
-                </table>`
+                </table>`;
 
-    return tableHTML
-}
+    return tableHTML;
+};
 
 const addArrowTopathResult = (pathResult) => {
     return pathResult.join(text.ARROW);
-}
+};

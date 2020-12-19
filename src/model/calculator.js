@@ -1,5 +1,6 @@
 import { stationNodes } from "../components/baseData/stationNodes.js"
 import { text } from "../components/text/text.js"
+
 export const calculateDistance = (resultPath) => {
     const checkLength = resultPath.length - 1;
     let totalDistance = 0;
@@ -9,7 +10,7 @@ export const calculateDistance = (resultPath) => {
     }
 
     return totalDistance;
-}
+};
 
 export const calculateTime = (resultPath) => {
     const checkLength = resultPath.length - 1;
@@ -20,7 +21,7 @@ export const calculateTime = (resultPath) => {
     }
 
     return totalTime;
-}
+};
 
 
 const addDistance = (stationNodes, resultPath, index, totalDistance) => {
@@ -35,7 +36,7 @@ const addDistance = (stationNodes, resultPath, index, totalDistance) => {
             return totalDistance += stationNode.selection[text.DISTANCE];
         }
     }
-}
+};
 
 const addtime = (stationNodes, resultPath, index, totalTime) => {
     for (const stationNode of stationNodes) {
@@ -49,4 +50,4 @@ const addtime = (stationNodes, resultPath, index, totalTime) => {
             return totalTime += stationNode.selection[text.TIME];
         }
     }
-}
+};

@@ -13,7 +13,7 @@ export const addEventToSearchButton = () => {
 
             makeResultHTML(calculateDistance(result), calculateTime(result), result, stationInput[text.SELECTION]);
         } catch (error) {
-            alert(error)
+            alert(error);
         }
-    })
+    });
 }

@@ -11,15 +11,14 @@ export const checkAndReturnInput = () => {
     checkStartEndSame(startStation, endStation);
 
     return [startStation, endStation, selection];
-}
+};
 
 
 const checkStartEndSame = (startStation, endStation) => {
     if (isStartStationSameWithEnd(startStation, endStation)) {
         throw alertText.START_STATION_SAME_WHIT_END;
     }
-
-}
+};
 
 const checkInput = (input) => {
 
@@ -34,23 +33,23 @@ const checkInput = (input) => {
     if (isStationNotExite(input)) {
         throw alertText.STATION_NOT_EXITE;
     }
-}
+};
 
 const isStartStationSameWithEnd = (startStaion, endStation) => {
     return startStaion === endStation;
-}
+};
 
 const isInputEmpty = (input) => {
     return input.trim() === text.EMPTY;
-}
+};
 
 const isInputShorterThanTwo = (input) => {
     return input.length < text.TWO;
-}
+};
 
 const isStationNotExite = (input) => {
     return !Object.keys(stations).includes(input);
-}
+};
 
 const getSeletion = () => {
     const checkBoxs = document.getElementsByName("search-type");
@@ -59,4 +58,4 @@ const getSeletion = () => {
             return checkBox.value;
         }
     }
-}
+};
