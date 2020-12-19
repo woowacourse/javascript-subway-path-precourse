@@ -12,9 +12,9 @@ export default class Controller {
   /**
    * view가 사용하는 메소드
    */
-  getInputFromUser(id, name) {
+  getValueOfId(id, name) {
     const { value } = this.view.rendered.querySelector(id);
-    if(!value) {
+    if (!value) {
       throw new CustomError(`${name}역을 입력해주세요`);
     }
     if (!this.model.includeStation(value)) {
@@ -23,11 +23,21 @@ export default class Controller {
     return value;
   }
 
+  getInputFromUser(){
+    const depart = this.getDepartmentInput();
+    const arrive = this.getArrivalInput();
+    if (depart === arrive) {
+      throw new CustomError('출발역과 도착역은 달라야 합니다');
+    }
+
+    return [depart, arrive];
+  }
+
   getDepartmentInput() {
-    return this.getInputFromUser('#departure-station-name-input', '출발');
+    return this.getValueOfId('#departure-station-name-input', '출발');
   }
 
   getArrivalInput() {
-    return this.getInputFromUser('#arrival-station-name-input', '도착');
+    return this.getValueOfId('#arrival-station-name-input', '도착');
   }
 }

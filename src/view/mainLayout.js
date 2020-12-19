@@ -145,12 +145,7 @@ export default class MainLayout {
    */
   handleInputButton() {
     try {
-      const depart = this.controller.getDepartmentInput();
-      const arrive = this.controller.getArrivalInput();
-
-      if (depart === arrive) {
-        throw new CustomError('출발역과 도착역은 달라야 합니다');
-      }
+      const [depart, arrive] = this.controller.getInputFromUser();
       console.log(`${depart}, ${arrive}`);
     } catch (error) {
       error.alertUser();
