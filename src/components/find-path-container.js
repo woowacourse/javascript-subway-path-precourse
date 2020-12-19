@@ -2,7 +2,10 @@ import {
   makeStringToHTML,
   clearElement,
 } from "../utils/display/display-utils.js";
+import { lines } from "../data.js";
+import Dijkstra from "../utils/Dijkstra.js";
 
+const dijkstra = new Dijkstra();
 const app = document.getElementById("app");
 
 export default function findPath() {
@@ -56,4 +59,18 @@ function resultPathTable(parent) {
     </table>
   `;
   parent.append(makeStringToHTML(subwayPathTableHTML).firstElementChild);
+}
+
+// 최단경로
+for (const line of lines) {
+  for (let i = 0; i < line.stations.length - 2; i++) {
+    dijkstra.addEdge(line.stations[i], line.stations[i + 1], line.distance[i]);
+  }
+}
+
+// 최소시간
+for (const line of lines) {
+  for (let i = 0; i < line.stations.length - 1; i++) {
+    dijkstra.addEdge(line.stations[i], line.stations[i + 1], line.time[i]);
+  }
 }
