@@ -26,7 +26,7 @@
 
 ### Presenter 표시
 
-- [ ] 초기 화면
+- [x] 초기 화면 - `displayInitialResult`
 - [ ] 경로 조회 결과 표시
   - [ ] 최단거리
   - [ ] 최소시간

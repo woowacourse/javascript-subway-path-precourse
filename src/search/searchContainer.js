@@ -15,6 +15,7 @@ const findSelectRadio = () => {
 
 const searchContainer = () => {
   const searchType = findSelectRadio();
+  searchPresenter(searchType);
 };
 
 export default searchContainer;
