@@ -1,3 +1,15 @@
 export const isValidInput = (departureStationName, arrivalStationName) => {
-  return departureStationName.lenght >= 2 && arrivalStationName.lenght >= 2;
+  return departureStationName.length >= 2 && arrivalStationName.length >= 2;
+};
+
+export const isRegistredStation = (
+  departureStationName,
+  arrivalStationName,
+  stations
+) => {
+  const allStationsName = stations.map(({ name }) => name);
+  return (
+    allStationsName.includes(departureStationName) &&
+    allStationsName.includes(arrivalStationName)
+  );
 };
