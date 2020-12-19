@@ -1,3 +1,5 @@
+import { validateStationName } from './controller.js';
+
 export class subwayPathManager {
   static getStations = () => {
     const departureStation = document.getElementById(
@@ -6,6 +8,11 @@ export class subwayPathManager {
     const arrivalStation = document.getElementById('arrival-station-name-input')
       .value;
 
-    console.log(departureStation, arrivalStation);
+    if (
+      validateStationName(departureStation) &&
+      validateStationName(arrivalStation)
+    ) {
+      alert('true');
+    }
   };
 }
