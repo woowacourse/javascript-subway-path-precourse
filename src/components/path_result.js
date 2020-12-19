@@ -29,7 +29,7 @@ export default function PathResult() {
     </tr>`;
   };
 
-  this.render = () => {
-    this.pathResultContainer.innerHTML = this.template();
+  this.render = (distance, time, path) => {
+    this.pathResultContainer.innerHTML = this.template(distance, time, path);
   };
 }

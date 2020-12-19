@@ -17,17 +17,12 @@ export default function SubwayPath() {
     }
     const path = dijkstra.findShortestPath(departure, arrival);
     if (this.isValidRoute(path)) {
-      console.log(path);
+      this.pathResult.render(
+        this.getTotalDistance(path),
+        this.getTotalTime(path),
+        path
+      );
     }
-  };
-
-  this.isValidRoute = path => {
-    if (!isConnectedStation(path)) {
-      alert('출발역과 도착역이 연결되지 않아 경로를 조회할 수 없습니다.');
-      return false;
-    }
-
-    return true;
   };
 
   this.addAllStationToVertex = (stations, dijkstra) => {
@@ -52,6 +47,53 @@ export default function SubwayPath() {
         dijkstra.addEdge(stations[index].name, stations[index + 1].name, time);
       });
     });
+  };
+
+  this.isValidRoute = path => {
+    if (!isConnectedStation(path)) {
+      alert('출발역과 도착역이 연결되지 않아 경로를 조회할 수 없습니다.');
+      return false;
+    }
+
+    return true;
+  };
+
+  this.getTotalDistance = path => {
+    let totalDistance = 0;
+    let start = 0;
+    while (start < path.length - 1) {
+      lines.forEach(({ stations, sections }) => {
+        sections.forEach(({ distance }, index) => {
+          if (
+            stations[index].name === path[start] &&
+            stations[index + 1].name === path[start + 1]
+          ) {
+            totalDistance += Number(distance);
+            start += 1;
+          }
+        });
+      });
+    }
+    return totalDistance;
+  };
+
+  this.getTotalTime = path => {
+    let totalTime = 0;
+    let start = 0;
+    while (start < path.length - 1) {
+      lines.forEach(({ stations, sections }) => {
+        sections.forEach(({ time }, index) => {
+          if (
+            stations[index].name === path[start] &&
+            stations[index + 1].name === path[start + 1]
+          ) {
+            totalTime += Number(time);
+            start += 1;
+          }
+        });
+      });
+    }
+    return totalTime;
   };
 
   this.delegateEvent = ({ target }) => {
