@@ -1,3 +1,5 @@
+import Dijkstra from "./utils/Dijkstra.js";
+
 const State = function () {
   this.state = {
     stations: [
@@ -48,6 +50,8 @@ const State = function () {
     departureStation: "",
     arrivalStation: "",
     searchType: "distance",
+    alreadyGoneStations: [],
+    dijkstra: new Dijkstra(),
   };
   this.setState = (key, value) => (this.state[key] = value);
 };
