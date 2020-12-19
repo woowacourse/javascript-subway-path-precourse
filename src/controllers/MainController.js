@@ -1,14 +1,27 @@
 import { Stations, Lines } from "../models/data.js";
 import FormView from "../views/FormView.js";
+import DepartureStationView from "../views/DepartureStationView.js";
+import ArrivalStationView from "../views/ArrivalStationView.js";
+import { DOM } from "../utils/constants.js";
 
 export default class MainController {
   constructor() {
     this.tag = "[MainController]";
     this.FormView = new FormView();
+    this.DepartureStationView = new DepartureStationView();
+    this.ArrivalStationView = new ArrivalStationView();
   }
+
   init() {
     this.FormView.setup(document.querySelector("#app")).on("@submit", (e) =>
       this.onSubmit(e.detail.stations)
+    );
+
+    this.DepartureStationView.setup(
+      document.querySelector("#" + DOM.DEPARTURE_STATION_NAME_INPUT_ID)
+    );
+    this.ArrivalStationView.setup(
+      document.querySelector("#" + DOM.ARRIVAL_STAION_NAME_INPUT_ID)
     );
   }
 
@@ -16,10 +29,10 @@ export default class MainController {
     console.log(this.tag, "onSubmit", e);
 
     const [departureStation, arrivalStation] = e;
-    // console.log(departureStation, arrivalStation);
-    // console.log(Stations);
+
     if (!this.isValidStationName(departureStation, arrivalStation)) {
-      //   console.log("올바르지 못한 값");
+      this.DepartureStationView.reset();
+      this.ArrivalStationView.reset();
       return;
     }
   }

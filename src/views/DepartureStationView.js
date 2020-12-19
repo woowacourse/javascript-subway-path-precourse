@@ -11,4 +11,8 @@ export default class DepartureStationView extends View {
     this.init(el);
     return this;
   }
+
+  reset() {
+    this.el.value = "";
+  }
 }
