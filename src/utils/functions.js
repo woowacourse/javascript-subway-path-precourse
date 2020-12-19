@@ -24,6 +24,13 @@ const Functions = function () {
       );
 
   this.isSame = (a, b) => a === b;
+
+  this.isValid = () =>
+    this.isBiggerThanOne(state.departureStation.length) &&
+    this.isBiggerThanOne(state.arrivalStation.length) &&
+    this.isExist(state.departureStation) &&
+    this.isExist(state.arrivalStation) &&
+    !this.isSame(state.departureStation, state.arrivalStation);
 };
 
 export const {
