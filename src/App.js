@@ -19,6 +19,13 @@ export default {
 		const arrival = this.query("#arrival-station-name-input").value;
 		const type = this.query("input[name='search-type']:checked").value;
 
+		if(this.validateInput(departure, arrival)) {
+			const result = type === 'distance' ? Path.getShortestDistancePath(departure, arrival) : Path.getShortestTimePath(departure, arrival);
+			this.showResult(result, type);
+		}
+	},
+
+	validateInput(departure, arrival) {
 		if(!departure || !arrival) {
 			return alert('출발역 또는 도착역을 입력해주세요.');
 		}
@@ -35,8 +42,7 @@ export default {
 			return alert(`${arrival}역을 찾을 수 없습니다.`);
 		}
 
-		const result = type === 'distance' ? Path.getShortestDistancePath(departure, arrival) : Path.getShortestTimePath(departure, arrival);
-		this.showResult(result, type);
+		return true;
 	},
 
 	showResult({paths, distance, time}, type) {
