@@ -16,10 +16,6 @@ export default class SearchResult {
   }
 
   getShortestPathString = () => {
-    if (this.searchResult.path.length === 0) {
-      return "검색 결과가 없습니다";
-    }
-
     return this.searchResult.path.join("->");
   };
 
@@ -47,26 +43,29 @@ export default class SearchResult {
   };
 
   render = () => {
-    this.$container.innerHTML = `
-      <h2>${TITLE_TEXT.searchResult}</h2>
-      <h3>${this.getTableTitle()}</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>총 거리</th>
-            <th>총 소요 시간</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>${this.searchResult.distance} ${UNITS.distance}</td>
-            <td>${this.searchResult.time} ${UNITS.time}</td>
-          </tr>
-          <tr >
-            <td colspan="2">${this.getShortestPathString()}</td>
-          </tr>
-        </tbody>
-      </table>
-    `;
+    this.$container.innerHTML =
+      this.searchResult.distance === 0
+        ? ""
+        : `
+          <h2>${TITLE_TEXT.searchResult}</h2>
+          <h3>${this.getTableTitle()}</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>총 거리</th>
+                <th>총 소요 시간</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>${this.searchResult.distance} ${UNITS.distance}</td>
+                <td>${this.searchResult.time} ${UNITS.time}</td>
+              </tr>
+              <tr >
+                <td colspan="2">${this.getShortestPathString()}</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
   };
 }
