@@ -1,0 +1,11 @@
+div {
+  padding-bottom: 15px;
+}
+
+#result-container {
+  display: none;
+}
+
+#result-container.active {
+  display: block;
+}
