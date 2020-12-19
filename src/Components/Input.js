@@ -3,6 +3,10 @@ import {
   isValidStationName,
   isValidRoute
 } from "../utils/InputValidator.js";
+import {
+  findShortestDistanceRoute,
+  findShortestTimeRoute
+} from "../utils/DijkstraImplementation.js";
 import AbstractComponent from "./AbstractComponent.js";
 
 export default class Input extends AbstractComponent {
@@ -130,15 +134,28 @@ export default class Input extends AbstractComponent {
   handleSearchRoute() {
     const departure = this.$departureStationInput.value;
     const arrival = this.$arrivalStationInput.value;
-    const isShortedDistanceChecked = this.$shortestDistanceRadioButton.checked;
 
     if (
       isValidStationName(departure) &&
       isValidStationName(arrival) &&
       isValidRoute(departure, arrival)
     ) {
-      console.log(departure, arrival, isShortedDistanceChecked);
-      // TODO: 최적의 경로를 찾아라!
+      const searchType = this.getSearchType();
+      const shortestRoutes = this.findShortestRoute(departure, arrival);
+      const { handleRoutesChange } = this.props;
+      handleRoutesChange({ searchType, routes: shortestRoutes });
     }
+  }
+
+  getSearchType() {
+    return this.$shortestDistanceRadioButton.checked ?
+      INNER_TEXT.SHORTEST_DISTANCE_RADIO_BUTTON_LABEL :
+      INNER_TEXT.SHORTEST_TIME_RADIO_BUTTON_LABEL;
+  }
+
+  findShortestRoute(departure, arrival) {
+    return this.$shortestDistanceRadioButton.checked ?
+      findShortestDistanceRoute(departure, arrival) :
+      findShortestTimeRoute(departure, arrival);
   }
 }

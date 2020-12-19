@@ -7,8 +7,16 @@ export default class App extends AbstractComponent {
   
   constructor(props) {
     super(props);
+    this.initializeState();
     this.initializeVariables();
     this.render();
+  }
+
+  initializeState() {
+    this.state = {
+      searchType: "",
+      routes: []
+    };
   }
 
   initializeVariables() {
@@ -34,14 +42,22 @@ export default class App extends AbstractComponent {
   renderInput() {
     new Input({
       $parent: this.$component,
-      tagname: "form"
+      tagname: "form",
+      handleRoutesChange: newRoutes => this.handleRoutesChange(newRoutes)
     });      
   }
 
   renderResult() {
+    const { searchType, routes } = this.state;
+
     new Result({
       $parent: this.$component,
-      searchType: "최단거리" // UI테스트용 임시 값. TODO: state의 값으로 할당해줘야 함
+      searchType,
+      routes
     });
+  }
+
+  handleRoutesChange({ searchType, routes }) {
+    this.setState({ searchType, routes });
   }
 }
