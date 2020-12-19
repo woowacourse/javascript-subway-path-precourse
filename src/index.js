@@ -6,12 +6,10 @@ import { isStationsValid, isPathValid } from './valid.js';
 const SHORTEST_DISTANCE = '최단거리';
 const SHORTEST_TIME = '최소시간';
 const RESULT_ARROW = '→';
-const departureStationNameInput = document.getElementById(
-  'departure-station-name-input'
-);
-const arrivalStationNameInput = document.getElementById(
-  'arrival-station-name-input'
-);
+const CHECKED_RADIO_BUTTON = 'input[name="search-type"]:checked';
+
+const departureInput = document.getElementById('departure-station-name-input');
+const arrivalInput = document.getElementById('arrival-station-name-input');
 const searchButton = document.getElementById('search-button');
 
 export default class SubwayPath {
@@ -28,6 +26,7 @@ export default class SubwayPath {
     searchButton.addEventListener('click', this.clickSearchButton.bind(this));
   }
 
+  // 역 이름 문자열만 빼내서 배열로 만듦
   getStationsArray(stations) {
     return stations.map(station => station.name);
   }
@@ -51,11 +50,9 @@ export default class SubwayPath {
   }
 
   clickSearchButton() {
-    const departure = departureStationNameInput.value;
-    const arrival = arrivalStationNameInput.value;
-    const searchType = document.querySelector(
-      'input[name="search-type"]:checked'
-    ).value;
+    const departure = departureInput.value;
+    const arrival = arrivalInput.value;
+    const searchType = document.querySelector(CHECKED_RADIO_BUTTON).value;
     try {
       const path = this.findPath(departure, arrival, searchType);
       isStationsValid(this.stations, departure, arrival);
@@ -80,11 +77,7 @@ export default class SubwayPath {
     let totalDistance = 0;
     let totalTime = 0;
     for (let i = 1; i < path.length; i++) {
-      const pathIndex = this.sections.findIndex(
-        section =>
-          section.stations.includes(path[i]) &&
-          section.stations.includes(path[i - 1])
-      );
+      const pathIndex = this.getSectionIndex(this.sections, path, i);
       totalDistance += this.sections[pathIndex].distance;
       totalTime += this.sections[pathIndex].time;
     }
@@ -93,6 +86,15 @@ export default class SubwayPath {
       totalDistance,
       totalTime,
     };
+  }
+
+  // 데이터에서 원하는 구간을 찾아낸다.
+  getSectionIndex(sections, path, index) {
+    return sections.findIndex(
+      section =>
+        section.stations.includes(path[index]) &&
+        section.stations.includes(path[index - 1])
+    );
   }
 }
 
