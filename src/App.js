@@ -27,11 +27,7 @@ export default {
 		}
 
 		try {
-			const result =
-				type === "distance"
-					? Path.getShortestDistancePath(departure, arrival)
-					: Path.getShortestTimePath(departure, arrival);
-
+			const result = Path.getShortestPath(departure, arrival, type);
 			this.showResult(result, type);
 		} catch (error) {
 			alert(error.message);

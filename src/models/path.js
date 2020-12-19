@@ -18,6 +18,12 @@ export default {
 		return paths.some((path) => path.from === name || path.to === name);
 	},
 
+	getShortestPath(from, to, type) {
+		return type === "distance"
+			? this.getShortestDistancePath(from, to)
+			: this.getShortestTimePath(from, to);
+	},
+
 	getShortestDistancePath(from, to) {
 		const paths = dijkstraForDistance.findShortestPath(from, to) || [];
 		const distance = this.getDistanceFromPaths(paths);
