@@ -17,7 +17,7 @@ class SubwayPathView {
   manageSearchPath = () => {
     const { departure, arrival, option } = this.getSearchPathInput();
     if (this.subwayPath.checkVaild(departure, arrival)) {
-      //const path = searchPath(departure, arrival, option);
+      const path = this.subwayPath.searchPath(departure, arrival, option);
       //renderResult(path, countPathLength(path), countPathTime(path));
     }
   };
