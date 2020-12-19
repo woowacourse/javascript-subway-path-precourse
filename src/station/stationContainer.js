@@ -11,6 +11,7 @@ export default function stationContainer() {
     stationList.push(inputValue);
     setLocalStorage(stationList, "stationList");
     stationInput.value = "";
+    stationListTemplate(stationList);
   };
 
   const init = () => {
