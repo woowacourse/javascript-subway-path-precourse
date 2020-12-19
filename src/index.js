@@ -13,6 +13,14 @@ export default function SubwayPath() {
 
   submitBtn.addEventListener('click', () => {
     const searchType = document.querySelector('input[name="search-type"]:checked').value;
+
+    if (searchType === 'dist') {
+      const result = dijkstraDist.findShortestPath(departStation.value, arriveStation.value);
+      console.log(result);
+    } else if (searchType === 'time') {
+      const result = dijkstraTime.findShortestPath(departStation.value, arriveStation.value);
+      console.log(result);
+    }
   });
 }
 
