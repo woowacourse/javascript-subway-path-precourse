@@ -1,4 +1,5 @@
 import SubwayPath from './controllers/subwayPath.js';
+import SubwayPathController from './controllers/subwayPathController.js';
 import { subwayPathTemplate } from './views/template.js';
 
 export default class App {
@@ -6,7 +7,7 @@ export default class App {
     this.$target = $target;
     this.renderSubwayPathTemplate();
 
-    new SubwayPath();
+    new SubwayPathController();
   }
 
   renderSubwayPathTemplate() {

@@ -1,8 +1,8 @@
-import Stations from '../models/stations.js';
 import { ID, NAME, ALERT } from '../constants/index.js';
 import { isValidNameLength, isNameInStations } from '../utils/userException.js';
 import { addDijkstraEdgeDistance } from '../utils/addDijkstra.js';
 import Dijkstra from '../utils/Dijkstra.js';
+import Stations from '../models/stations.js';
 
 export default class SubwayPath {
   constructor() {
@@ -12,26 +12,12 @@ export default class SubwayPath {
 
     const stations = new Stations();
     this.stations = stations.stations;
-
-    this.search();
-  }
-
-  search() {
-    const searchButton = document.querySelector(`#${ID.SEARCH_BUTTON}`);
-
-    searchButton.addEventListener('click', () => {
-      this.departureStation = this.getStation(ID.DEPARTURE_STATION_NAME_INPUT);
-      this.arrivalStation = this.getStation(ID.ARRIVAL_STATION_NAME_INPUT);
-      this.hasValidInput();
-      this.shortestSelect = this.getShortestSelect();
-      this.getResult();
-    });
   }
 
   getStation(stationName) {
     const stationNameInput = document.querySelector(`#${stationName}`);
 
-    const stationNameInputValue = this.hasValidName(stationNameInput.value);
+    const stationNameInputValue = this.hasValidName(stationNameInput.value, this.stations);
     return stationNameInputValue;
   }
 
@@ -45,30 +31,32 @@ export default class SubwayPath {
     });
   }
 
-  hasValidName(name) {
+  hasValidName(name, stations) {
     if (!isValidNameLength(name)) {
       return null;
-    } else if (!isNameInStations(this.stations, name)) {
+    } else if (!isNameInStations(stations, name)) {
       return null;
     } else {
       return name;
     }
   }
 
-  hasValidInput() {
-    if (this.departureStation === null || this.arrivalStation === null) {
+  hasValidInput(departureStation, arrivalStation) {
+    if (departureStation === null || arrivalStation === null) {
       alert(ALERT.VALIDNAME);
-    } else if (this.departureStation === this.arrivalStation) {
+    } else if (departureStation === arrivalStation) {
       alert(ALERT.DUPLICATEDNAME);
     }
   }
 
-  getResult() {
+  getResult(departureStation, arrivalStation) {
     const dijkstra = new Dijkstra();
     let result = '';
 
     addDijkstraEdgeDistance(dijkstra);
-    result = dijkstra.findShortestPath(this.departureStation, this.arrivalStation);
+    result = dijkstra.findShortestPath(departureStation, arrivalStation);
     console.log(result);
   }
+
+  render() {}
 }
