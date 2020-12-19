@@ -3,7 +3,7 @@ import {stations, lines, sections} from './model/subway.model.js';
 import {isInputValid, isLinkedStation} from './subway.validator.js';
 import {SEARCH_TYPE} from './constants.js';
 
-export default class Subway {
+export default class SubwayAPP {
   constructor() {
     this.stations = stations;
     this.lines = lines;
@@ -63,9 +63,14 @@ export default class Subway {
   findSection(startStation, endStation) {
     for (const [lineName] of Object.entries(this.lines)) {
       const lineStartStation = this.sections[lineName][startStation];
+      const lineEndStation = this.sections[lineName][endStation];
 
       if (lineStartStation && lineStartStation[endStation]) {
         return lineStartStation[endStation];
+      }
+
+      if (lineEndStation && lineEndStation[startStation]) {
+        return lineEndStation[startStation];
       }
     }
   }
