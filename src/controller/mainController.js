@@ -1,7 +1,7 @@
-import { errorMessage, cssText, words } from '../keys.js';
-import { edges } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
+import { errorMessage, cssText, words } from '../keys.js';
+import { edges } from '../data.js';
 import { getSearhType, radioButtonInit } from './radioButtonController.js';
 import {
 	getStartPointValue,
@@ -80,7 +80,7 @@ const resultAppender = (
 		makeElement({
 			tag: 'p',
 			innerText: searchType,
-            style: `font-size: 1.5em; font-weight: 800; ${cssText.marginCSS('bottom', 20)}`,
+            style: `${cssText.fontSizeCSS(1.5)} font-weight: 800; ${cssText.marginCSS('bottom', 20)}`,
         }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
 	]);

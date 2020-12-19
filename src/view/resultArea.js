@@ -6,7 +6,7 @@ const ResultContainer = function () {
 	const resultTitle = makeElement({
 		tag: 'strong',
 		innerText: words.RESULT,
-		style: `${cssText.marginCSS('bottom', 5)} font-size: 2em;`,
+		style: `${cssText.marginCSS('bottom', 5)} ${cssText.fontSizeCSS(2)}`,
 	});
 	this.initializer = () => {
 		appendChilds(resultContainer, [resultTitle]);

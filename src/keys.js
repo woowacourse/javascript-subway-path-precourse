@@ -29,5 +29,6 @@ export const errorMessage = {
 
 export const cssText = {
 	TABLE_BOLD: 'border: 1px solid #444444;',
-	marginCSS: (type, value) => `margin-${type}: ${value}px;`,
+    marginCSS: (type, value) => `margin-${type}: ${value}px;`,
+    fontSizeCSS: (value) => `font-size: ${value}em;`
 };
