@@ -17,16 +17,18 @@ export default class StationPathModel {
     return sections;
   }
 
-  getShortestDistancePath(departure, arrival) {
+  getLineGraph(line) {
     const dijkstra = new Dijkstra();
-    const line = '2호선';
     const sections = this.findSections(line);
     sections.forEach((section) => {
-      console.log(section.start);
-      console.log(section.end);
-      console.log(section.distance);
       dijkstra.addEdge(section.start, section.end, Number(section.distance));
     });
+
+    return dijkstra;
+  }
+
+  getShortestDistancePath(departure, arrival) {
+    const dijkstra = this.getLineGraph(line);
     const result = dijkstra.findShortestPath(departure, arrival)
     return result;
   }
