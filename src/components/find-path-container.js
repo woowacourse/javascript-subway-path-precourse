@@ -14,8 +14,8 @@ export default function findPath() {
     <div id="find-path">
       출발역 <input id="departure-station-name-input" type="text" /> <br />
       도착역 <input id="arrival-station-name-input" type="text" /> <br />
-      <input name="search-type" type="radio" checked="checked" /> 최단거리
-      <input name="search-type" type="radio" /> 최소시간<br /> 
+      <input name="search-type" value="distance" type="radio" checked="checked" />최단거리
+      <input name="search-type" value="time" type="radio" />최소시간<br /> 
       <button id="search-button" >길 찾기</button>
     </div>
   `;
@@ -33,7 +33,6 @@ function newResult() {
   clearElement(result);
   resultPath(result);
   resultPathTable(result);
-  minDistancePath(result);
 }
 
 function resultWrapper() {
@@ -44,6 +43,41 @@ function resultWrapper() {
 function resultPath(parent) {
   const subwayPathTitleHTML = `<h2>📝 결과</h2>`;
   parent.append(makeStringToHTML(subwayPathTitleHTML).firstElementChild);
+}
+
+function resultPathStations(result) {
+  const td = document.createElement("td");
+  let resultStations = "";
+
+  for (let i = 0; i < result.length; i++) {
+    resultStations += result[i];
+    if (result[i + 1]) {
+      resultStations += "➡";
+    }
+  }
+
+  td.textContent = resultStations;
+  td.colSpan = 2;
+
+  return td;
+}
+
+function textInTd(innerText) {
+  const td = document.createElement("td");
+  td.textContent = innerText;
+
+  return td;
+}
+
+function distanceAndTimeRow(...args) {
+  const tr = document.createElement("tr");
+
+  for (const text of [...args]) {
+    const tdWithText = textInTd(text);
+    tr.append(tdWithText);
+  }
+
+  return tr;
 }
 
 function resultPathTable(parent) {
