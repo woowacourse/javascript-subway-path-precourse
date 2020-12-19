@@ -21,3 +21,8 @@ export const ERROR_MESSAGE = Object.freeze({
   SAME_STATION: '출발역과 도착역은 같을 수 없습니다.',
   NOT_CONNECTED: '출발역과 도착역이 이어져 있지 않습니다. ',
 });
+
+export const SEARCH_TYPE = Object.freeze({
+  MIN_DISTANCE: '최단 거리',
+  MIN_TIME: '최소 시간',
+});

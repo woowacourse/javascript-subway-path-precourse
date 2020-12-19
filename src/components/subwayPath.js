@@ -1,14 +1,14 @@
-import { ERROR_MESSAGE, FORM, RESULT } from '../share/constants.js';
+import { ERROR_MESSAGE, SEARCH_TYPE } from '../share/constants.js';
 import { lineList, stationList } from '../share/defaultInformation.js';
 import {
   isInclude,
   isSameStation,
   isValidLength,
   isEmpty,
-  deleteWhiteSpace,
 } from '../share/validator.js';
-import { resultTableTemplate } from '../template/resultTableTemplate.js';
 import Dijkstra from '../utils/Dijkstra.js';
+import Form from './subwayPathForm.js';
+import ResultTable from './subwayPathResult.js';
 
 export default class SubWayPath {
   constructor() {
@@ -17,46 +17,19 @@ export default class SubWayPath {
     this.distanceDijkstra = new Dijkstra();
     this.timeDijkstra = new Dijkstra();
 
-    this.form = document.forms[FORM.CONTAINER];
-    this.departureStationNameInput = this.form[
-      FORM.DEPARTURE_STATION_NAME_INPUT
-    ];
-    this.arrivalStationNameInput = this.form[FORM.ARRIVAL_STATION_NAME_INPUT];
-    this.distanceRadioInput = this.form[FORM.SEARCH_TYPE_DISTANCE_RADIO];
-    this.timeRadioInput = this.form[FORM.SEARCH_TYPE_TIME_RADIO];
+    this.form = new Form();
+    this.resultSection = new ResultTable();
 
-    this.resultContainer = document.querySelector(`#${RESULT.CONTAINER}`);
-    this.resultHeader = document.querySelector(`#${RESULT.RESULT_HEADER}`);
-    this.resultTableBody = document.querySelector(
-      `#${RESULT.RESULT_TABLE_BODY}`,
-    );
-
-    this.form.addEventListener('submit', this.onSubmit);
+    this.form.container.addEventListener('submit', this.onSubmit);
   }
 
   onSubmit = (event) => {
     event.preventDefault();
-    const allValues = this.getValues();
+    const allValues = this.form.getValues();
     if (this.isValid(allValues)) {
-      this.render();
+      this.resultSection.render(this.getResultValues());
     }
   };
-
-  getValues = () => {
-    const { value: departureStationName } = this.departureStationNameInput;
-    const { value: arrivalStationName } = this.arrivalStationNameInput;
-    const searchType = this.getSearchType();
-    return {
-      departureStationName: deleteWhiteSpace(departureStationName),
-      arrivalStationName: deleteWhiteSpace(arrivalStationName),
-      searchType,
-    };
-  };
-
-  getSearchType = () =>
-    this.distanceRadioInput.checked
-      ? this.distanceRadioInput.dataset.searchType
-      : this.timeRadioInput.dataset.searchType;
 
   isValid = (values) =>
     this.checkValidLength(values) &&
@@ -112,9 +85,9 @@ export default class SubWayPath {
   };
 
   getResultValues() {
-    const values = this.getValues();
+    const values = this.form.getValues();
     const finder =
-      values.searchType === '최단 거리'
+      values.searchType === SEARCH_TYPE.MIN_DISTANCE
         ? this.distanceDijkstra
         : this.timeDijkstra;
     const route = finder
@@ -126,11 +99,5 @@ export default class SubWayPath {
       time: 5,
       route,
     };
-  }
-
-  render() {
-    this.resultContainer.innerHTML = resultTableTemplate(
-      this.getResultValues(),
-    );
   }
 }
