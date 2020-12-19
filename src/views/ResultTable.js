@@ -10,7 +10,7 @@ export default class ResultTable extends View {
     return this;
   }
 
-  render(result, header) {
+  render(result, header, totalDistanceTime) {
     const tableContainer = document.createElement("div");
     tableContainer.innerHTML = `
         <h2>📃 결과</h2>
@@ -22,8 +22,8 @@ export default class ResultTable extends View {
             </thead>
             <tbody>
                 <tr>
-                <td></td>
-                <td></td>
+                <td>${totalDistanceTime.distance}km</td>
+                <td>${totalDistanceTime.time}분</td>
                 </tr>
                 <tr>
                 <td colspan='2'>${this.resultListHTML(result)}</td>

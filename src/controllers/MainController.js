@@ -45,11 +45,6 @@ export default class MainController {
 
     this.ResultTable.setup(document.querySelector("#app"));
   }
-  clear() {
-    while (this._app.children.length > 2) {
-      this._app.children[this._app.children.length - 1].remove();
-    }
-  }
 
   onSubmit(e) {
     console.log(this.tag, "onSubmit", e);
@@ -68,9 +63,48 @@ export default class MainController {
       arrivalStation,
       this.radioOption
     );
+
     this.clear();
-    this.ResultTable.render(result, this.radioOptionText(this.radioOption));
+    this.ResultTable.render(
+      [...result],
+      this.radioOptionText(this.radioOption),
+      this.totalDistanceTime(result)
+    );
   }
+
+  totalDistanceTime(result) {
+    console.log(this.tag, "totalDistance()", result);
+    let distance = 0;
+    let time = 0;
+    let count = 0;
+
+    while (result.length) {
+      count++;
+      const nowResult = result[0];
+      Lines.forEach((lineInfo) => {
+        const stations = lineInfo.stations;
+        const stationsLength = stations.length;
+        const stationIndex = stations.indexOf(nowResult);
+
+        if (
+          stationIndex !== -1 &&
+          stationIndex + 1 < stationsLength &&
+          result[1] === stations[stationIndex + 1]
+        ) {
+          result.shift();
+          console.log(result);
+          distance += lineInfo.distance[stationIndex];
+          time += lineInfo.time[stationIndex];
+        }
+      });
+
+      if (count > 30) break;
+    }
+    console.log(distance, time);
+    return { distance, time };
+  }
+
+  totalTime(result) {}
 
   radioOptionText(option) {
     if (option === "distance") return "최단거리";
@@ -195,5 +229,11 @@ export default class MainController {
       `출발역 ${start}역은 도착역 ${end}역과 연결되어 있지 않습니다.`
     );
     return false;
+  }
+
+  clear() {
+    while (this._app.children.length > 2) {
+      this._app.children[this._app.children.length - 1].remove();
+    }
   }
 }
