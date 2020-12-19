@@ -2,7 +2,11 @@ import { errorMessage, ids, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
-import { getValidInput } from './stationInputController.js';
+import {
+	getStartPointValue,
+	getEndPointValue,
+	getValidInput,
+} from './stationInputController.js';
 import {
 	appendChilds,
 	clearAllContents,
@@ -29,10 +33,9 @@ const getEdgeByStations = (start, end) => {
 
 const getTotalTimeAndDistance = (dijkstraResultPath) => {
 	let [totalTime, totalDistance] = [0, 0];
-	console.log(dijkstraResultPath);
-	while (dijkstraResultPath.length > 0) {
+	while (dijkstraResultPath.length > 1) {
 		const currStation = dijkstraResultPath.shift();
-		const nextStation = dijkstraResultPath.shift();
+		const nextStation = dijkstraResultPath[0];
 		const [spentTime, spentDistance] = getEdgeByStations(
 			currStation,
 			nextStation
@@ -43,36 +46,36 @@ const getTotalTimeAndDistance = (dijkstraResultPath) => {
 	return [totalTime, totalDistance];
 };
 
-const applyDijkstra = (type, start, end) => {
-	const key = type === words.SHORTEST_PATH ? 'distance' : 'time';
-	const dijkstra = new Dijkstra();
-	let [totalPath, totalTime, totalDistance] = [[], 0, 0];
-	edges.forEach((edge) => {
-		dijkstra.addEdge(edge.from, edge.to, edge[key]);
-	});
-	totalPath = dijkstra.findShortestPath(start, end);
-	if (!isPathExisted(totalPath)) return [totalPath, totalTime, totalDistance];
-	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
-	return [totalPath, totalTime, totalDistance];
-};
-
 const isPathExisted = (totalPath) => {
-	if (!totalPath) {
+	if (!totalPath || totalPath.length < 2) {
 		alert(errorMessage.CANNOT_FIND);
 		return false;
 	}
 	return true;
 };
 
+const applyDijkstra = (type, start, end) => {
+	const key = type === words.SHORTEST_PATH ? 'distance' : 'time';
+	const dijkstra = new Dijkstra();
+	let totalPath = [];
+	edges.forEach((edge) => {
+		dijkstra.addEdge(edge.from, edge.to, edge[key]);
+	});
+	totalPath = dijkstra.findShortestPath(start, end);
+	if (!isPathExisted(totalPath)) return [];
+	return totalPath;
+};
+
 export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
-	const [start, end] = getValidInput();
+	const [start, end] = [getStartPointValue(), getEndPointValue()];
 	const searchType = getSearhType();
 	let [totalPath, totalTime, totalDistance] = [[], 0, 0];
 	clearAllContents(resultContainer);
-	if (start === 0 && end === 0) return;
-	[totalPath, totalTime, totalDistance] = applyDijkstra(searchType, start, end);
-	if (!totalPath) return;
+	if (!getValidInput(start, end)) return;
+	totalPath = applyDijkstra(searchType, start, end);
+	if (totalPath.length < 2) return;
+	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
 	appendChilds(resultContainer, [
 		makeElement({ tag: 'p', innerText: searchType }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
