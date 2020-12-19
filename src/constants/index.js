@@ -1,5 +1,5 @@
-const users = [];
+const stations = [];
 
 const courses = [];
 
-export { users, courses };
+export { stations, courses };
