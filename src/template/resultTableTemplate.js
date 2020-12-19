@@ -1,6 +1,6 @@
-export default ({ searchTypeText, distance, time, route }) =>
+export const resultTableTemplate = ({ searchType, distance, time, route }) =>
   `<h2 id="result-header">📝 결과</h2>
-  <h3 id="result-type">${searchTypeText}</h3>
+  <h3 id="result-type">${searchType}</h3>
     <table>
       <thead>
         <tr>

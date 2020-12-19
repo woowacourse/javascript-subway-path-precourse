@@ -7,6 +7,7 @@ import {
   isEmpty,
   deleteWhiteSpace,
 } from '../share/validator.js';
+import { resultTableTemplate } from '../template/resultTableTemplate.js';
 import Dijkstra from '../utils/Dijkstra.js';
 
 export default class SubWayPath {
@@ -37,7 +38,7 @@ export default class SubWayPath {
     event.preventDefault();
     const allValues = this.getValues();
     if (this.isValid(allValues)) {
-      console.log('통과');
+      this.render();
     }
   };
 
@@ -57,7 +58,13 @@ export default class SubWayPath {
       ? this.distanceRadioInput.dataset.searchType
       : this.timeRadioInput.dataset.searchType;
 
-  isValid(values) {
+  isValid = (values) =>
+    this.checkValidLength(values) &&
+    this.checkAlreadyIncludes(values) &&
+    this.checkSameStation(values) &&
+    this.checkConnected(values);
+
+  checkValidLength = (values) => {
     if (
       !isValidLength(values.arrivalStationName, 2) ||
       !isValidLength(values.departureStationName, 2)
@@ -65,6 +72,26 @@ export default class SubWayPath {
       alert(ERROR_MESSAGE.MIN_STATION_NAME);
       return false;
     }
+    return true;
+  };
+
+  checkValidSection(values) {
+    const sectionByTime = this.timeDijkstra.findShortestPath(
+      values.departureStationName,
+      values.arrivalStationName,
+    );
+    return !isEmpty(sectionByTime);
+  }
+
+  checkSameStation = (values) => {
+    if (isSameStation(values.departureStationName, values.arrivalStationName)) {
+      alert(ERROR_MESSAGE.SAME_STATION);
+      return false;
+    }
+    return true;
+  };
+
+  checkAlreadyIncludes = (values) => {
     if (!isInclude(values.departureStationName, this.stationList)) {
       alert(ERROR_MESSAGE.NO_DEPARTURE_STATION);
       return false;
@@ -73,22 +100,37 @@ export default class SubWayPath {
       alert(ERROR_MESSAGE.NO_ARRIVAL_STATION);
       return false;
     }
-    if (isSameStation(values.departureStationName, values.arrivalStationName)) {
-      alert(ERROR_MESSAGE.SAME_STATION);
-      return false;
-    }
+    return true;
+  };
+
+  checkConnected = (values) => {
     if (!this.checkValidSection(values)) {
       alert(ERROR_MESSAGE.NOT_CONNECTED);
       return false;
     }
     return true;
+  };
+
+  getResultValues() {
+    const values = this.getValues();
+    const finder =
+      values.searchType === '최단 거리'
+        ? this.distanceDijkstra
+        : this.timeDijkstra;
+    const route = finder
+      .findShortestPath(values.departureStationName, values.arrivalStationName)
+      .join('=>');
+    return {
+      searchType: values.searchType,
+      distance: 5,
+      time: 5,
+      route,
+    };
   }
 
-  checkValidSection(values) {
-    const sectionByTime = this.timeDijkstra.findShortestPath(
-      values.departureStationName,
-      values.arrivalStationName,
+  render() {
+    this.resultContainer.innerHTML = resultTableTemplate(
+      this.getResultValues(),
     );
-    return !isEmpty(sectionByTime);
   }
 }
