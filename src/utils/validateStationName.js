@@ -1,3 +1,5 @@
+import { stationData, stationNameArray } from "../StationData/stationData.js";
+
 export {
   isMoreThanTwoWords,
   existStationName,
