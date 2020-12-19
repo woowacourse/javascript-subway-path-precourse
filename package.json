@@ -1,0 +1,30 @@
+{
+  "name": "javascript-subway-path-precourse",
+  "version": "1.0.0",
+  "description": "최종 코딩테스트",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "live-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowacourse/javascript-subway-path-precourse.git"
+  },
+  "author": "김승원",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woowacourse/javascript-subway-path-precourse/issues"
+  },
+  "homepage": "https://github.com/woowacourse/javascript-subway-path-precourse#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "2.2.1"
+  }
+}
