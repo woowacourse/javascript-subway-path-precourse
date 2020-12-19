@@ -28,16 +28,16 @@ export default class StationPathController {
       alert("두 역이 연결되어 있지 않습니다.")
       return;
     }
-    let path;
-    if (userInput.option === 'distance') {
+    let path = [];
+    if (userInput.option === 'shortest-path') {
       path = stationPathModel.getShortestDistancePath(userInput.departure, userInput.arrival);
     }
-    if (userInput.option === 'time') {
+    if (userInput.option === 'shortest-time') {
       path = stationPathModel.getShortestTimePath(userInput.departure, userInput.arrival);
     }
-      console.log(path)
     const view = new StationPathView();
     const distance = stationPathModel.getDistance(lines[0], path);
     const time = stationPathModel.getTime(lines[0], path);
+    view.resultView(distance, time, path[0]);
   }
 }
