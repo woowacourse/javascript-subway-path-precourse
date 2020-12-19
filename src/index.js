@@ -1,5 +1,6 @@
-import Dijkstra from './utils/Dijkstra.js';
-import { stations, lines } from './consts/data.js';
+import Dijkstra from "./utils/Dijkstra.js";
+import { stations, lines } from "./consts/data.js";
+import { startManager } from "./component/manager.js";
 
 let stationData = [];
 let lineData = [];
@@ -11,7 +12,9 @@ const dijkstra_distance = new Dijkstra();
 const App = () => {
   initializeData();
   constructSTS();
-}
+
+  startManager();
+};
 
 const initializeData = () => {
   stationData = stations;
@@ -20,25 +23,25 @@ const initializeData = () => {
   stationData.map((station) => {
     stationToStation[station] = {};
   });
-}
+};
 
 const constructSTS = () => {
   lineData.map((line) => {
     line.sequence.map((path) => {
       stationToStation[path.deptStation][path.destStation] = {
-        distance: path.distance,
-        time: path.time
-      }
+        dist: path.dist,
+        time: path.time,
+      };
       stationToStation[path.destStation][path.deptStation] = {
-        distance: path.distance,
-        time: path.time
-      }
-      dijkstra_distance.addEdge(path.deptStation, path.destStation, path.distance);
+        dist: path.dist,
+        time: path.time,
+      };
+      dijkstra_distance.addEdge(path.deptStation, path.destStation, path.dist);
       dijkstra_time.addEdge(path.deptStation, path.destStation, path.time);
-    })
+    });
   });
-}
+};
 
 App();
 
-export default { dijkstra_distance, dijkstra_time, stationToStation };
+export { dijkstra_distance, dijkstra_time, stationToStation };
