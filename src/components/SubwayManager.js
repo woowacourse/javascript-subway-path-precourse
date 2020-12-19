@@ -1,5 +1,6 @@
 import ValidateSubwayManager from "./ValidateSubwayManager.js";
 import SearchLineManager from "./SearchLineManager.js";
+import DijkstraManager from "./DijkstraManager.js";
 import { stations, lines } from "../utils/data.js";
 import {
   hideElement,
@@ -39,6 +40,7 @@ class SubwayManager {
       this.getState,
       this.getLines
     );
+    this.dijkstraManager = new DijkstraManager(this.getLines);
   };
 
   resetState = () => {
