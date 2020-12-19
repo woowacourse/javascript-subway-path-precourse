@@ -217,5 +217,9 @@ export default function Dijkstra() {
     WeightedGraph.addVertex(vertex);
   };
 
+  this.callAdjacencyList = () => {
+    return WeightedGraph.adjacencyList;
+  };
+
   WeightedGraph.init();
 }
