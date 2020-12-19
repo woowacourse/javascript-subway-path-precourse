@@ -3,6 +3,7 @@ export default class App {
     this.target = target;
     this.createHeader(target);
     this.createStationInput(target);
+    this.createRadioButton(target);
   }
 
   createHeader(target) {
@@ -33,6 +34,30 @@ export default class App {
           id="arrival-station-name-input"
         />
       </div>
+    `;
+  }
+
+  createRadioButton(target) {
+    const container = document.createElement('div');
+    target.appendChild(container);
+    container.className = 'radio-button';
+
+    container.innerHTML = `
+      <label>
+        <input
+          type="radio"
+          name="search-type"
+          value="shortest-distance"
+          checked
+        /> 최단거리
+      </label>
+      <label>
+        <input 
+          type="radio"
+          name="search-type"
+          value="minimum-time"
+        /> 최소시간
+      </label>
     `;
   }
 }
