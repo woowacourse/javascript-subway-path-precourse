@@ -14,7 +14,7 @@ export default function SubwayPath() {
   this.pathInput = {};
   this.PathResult = {};
 
-  this.findRoute = (departure, arrival, search_type) => {
+  this.findPath = (departure, arrival, search_type) => {
     const dijkstra = new Dijkstra();
     this.addAllStationToVertex(stations, dijkstra);
     this.addEdge(search_type, dijkstra);
@@ -98,7 +98,7 @@ export default function SubwayPath() {
   };
 
   this.header = new Header();
-  this.pathInput = new PathInput({ findRoute: this.findRoute });
+  this.pathInput = new PathInput({ findPath: this.findPath });
   this.pathResult = new PathResult();
   this.app.addEventListener('click', this.handleClickApp);
 }

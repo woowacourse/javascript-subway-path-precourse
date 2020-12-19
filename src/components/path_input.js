@@ -16,7 +16,7 @@ import {
   isValidInputLength,
 } from '../utils/index.js';
 
-export default function PathInput({ findRoute }) {
+export default function PathInput({ findPath }) {
   this.pathInputConatiner = document.querySelector('.path-input-container');
 
   this.template = () => {
@@ -40,7 +40,7 @@ export default function PathInput({ findRoute }) {
       this.isValidName(departure, arrival) &&
       this.isValid(departure, arrival)
     ) {
-      this.findRoute(departure, arrival, radioButtons);
+      this.findPath(departure, arrival, radioButtons);
     }
   };
 
@@ -67,10 +67,10 @@ export default function PathInput({ findRoute }) {
     return true;
   };
 
-  this.findRoute = (departure, arrival, radioButtons) => {
+  this.findPath = (departure, arrival, radioButtons) => {
     for (const radioButton of radioButtons) {
       if (radioButton.checked) {
-        findRoute(departure, arrival, radioButton.labels[0].textContent);
+        findPath(departure, arrival, radioButton.labels[0].textContent);
       }
     }
   };
