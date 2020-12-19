@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>지하철 길찾기</title>
+    <style>
+      .form-input {
+        margin: 1em 0;
+      }
+
+      #result-table, #result-table th, #result-table td {
+        border: 1px solid black;
+        text-align: center;
+      }
+    </style>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+  <h1>🚇지하철 길찾기</h1>
+  <form id="subway-path-finder-form">
+    <div class="form-input">
+      <label for="departure-station-name-input">출발역</label>
+      <input type="text" id="departure-station-name-input" autofocus />
+    </div>
+    <div class="form-input">
+      <label for="arrival-station-name-input">도착역</label>
+      <input type="text" id="arrival-station-name-input" />
+    </div>
+    <div class="form-input">
+      <input type="radio" name="search-type" id="shortest-distance-input" value="shortest-distance" checked="checked" />
+      <label for="shortest-distance-input">최단거리</label>
+      <input type="radio" name="search-type" id="minimum-time-input" value="minimum-time" />
+      <label for="minimum-time-input">최소거리</label>
+    </div>
+    <div class="form-input">
+      <button id="search-button">길 찾기</button>
+    </div>
+  </form>
+  <div class="result-container">
+    <h2>📝결과</h2>
+    <h3>최단거리</h3>
+    <table id="result-table">
+      <thead>
+        <tr>
+          <th>총 거리</th>
+          <th>총 소요 시간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>0km</td>
+          <td>0분</td>
+        </tr>
+        <tr>
+          <td colspan="2">(경로 표시)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 </body>
 </html>
