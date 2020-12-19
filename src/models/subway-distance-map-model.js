@@ -42,24 +42,35 @@ export default class SubwayDistanceMap {
 		return shortestDistancePath;
 	}
 
-	getShortestTotalDistance = shortestDistancePath => {
-		let totalSectionDistance = 0;
+	getShortestTotalDistanceAndTotalTime = shortestDistancePath => {
+		let shortestTotalSectionDistance = 0;
+		let totalSectionTime = 0;
 
 		for (let stationIndex = 1; stationIndex < shortestDistancePath.length; stationIndex++) {
 			let startStation = shortestDistancePath[stationIndex - 1];
 			let endStation = shortestDistancePath[stationIndex];
-			let stationDistance = this.getSectionDistance(sections, startStation, endStation);
-
-			totalSectionDistance += stationDistance;
+			let sectionDistance = this.getSectionDistance(sections, startStation, endStation);
+			let sectionTime = this.getSectionTime(sections, startStation, endStation);
+			
+			shortestTotalSectionDistance += sectionDistance;
+			totalSectionTime += sectionTime;
 		}
 
-		return totalSectionDistance;
+		return [shortestTotalSectionDistance, totalSectionTime];
 	}
 
 	getSectionDistance = (sections, startStation, endStation) => {
 		for (let section of sections) {
 			if (isIncludesBothStations(section.connectedStations, startStation, endStation)) {
 				return section.distance;
+			}
+		}
+	}
+
+	getSectionTime = (sections, startStation, endStation) => {
+		for (let section of sections) {
+			if (isIncludesBothStations(section.connectedStations, startStation, endStation)) {
+				return section.time;
 			}
 		}
 	}
