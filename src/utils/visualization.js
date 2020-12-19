@@ -33,6 +33,17 @@ const Visualization = function () {
   this.clearResultDiv = () =>
     (document.getElementById("result").innerHTML = "");
 
+  this.getTableHeadByTexts = (...texts) => {
+    const thead = document.createElement("thead");
+    const tr = document.createElement("tr");
+    texts.forEach((text) => {
+      const th = this.getAdvancedEle("th", null, text);
+      this.appendChildren(tr, th);
+    });
+    this.appendChildren(thead, tr);
+    return thead;
+  };
+
   this.getTableHavingTableHead = (...texts) => {
     const table = document.createElement("table");
     const thead = this.getTableHeadByTexts(...texts);
