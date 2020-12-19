@@ -20,9 +20,16 @@ export default class App {
     this.createRadioButton(target);
     this.createSearchButton(target);
 
-    this.resultContainer = document.createElement('div');
-    this.resultContainer.className = 'result';
-    target.appendChild(this.resultContainer);
+    this.resultContainer = this.createContainer(target, 'result');
+  }
+
+  createContainer(target, className = '') {
+    const container = document.createElement('div');
+    if(className) {
+      container.className = className
+    }
+    target.appendChild(container);
+    return container;
   }
 
   fetchData() {
@@ -37,10 +44,7 @@ export default class App {
   }
 
   createStationInput(target) {
-    const container = document.createElement('div');
-    target.appendChild(container);
-    container.className = 'station-input';
-
+    const container = this.createContainer(target, 'station-input');
     container.innerHTML = `
       <div>
         <label for="departure">출발역</label>
@@ -62,10 +66,7 @@ export default class App {
   }
 
   createRadioButton(target) {
-    const container = document.createElement('div');
-    target.appendChild(container);
-    container.className = 'radio-button';
-
+    const container = this.createContainer(target, 'radio-button');
     container.innerHTML = `
       <label>
         <input
@@ -86,12 +87,10 @@ export default class App {
   }
 
   createSearchButton(target) {
-    const { setState } = this;
-    const container = document.createElement('div');
-    target.appendChild(container);
-
+    const { setState, createContainer } = this;
+    const container = createContainer(target, 'div');
     container.innerHTML = `<button id="search-button">길찾기</button>`;
-
+    
     const addButton = document.querySelector('#search-button');
     addButton.addEventListener('click', setState.bind(this));
   }
