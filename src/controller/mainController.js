@@ -2,7 +2,11 @@ import { ids, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
-import { appendChilds, makeElement } from '../utils/elementUtils.js';
+import {
+	appendChilds,
+	clearAllContents,
+	makeElement,
+} from '../utils/elementUtils.js';
 
 const getStartPointValue = () =>
 	document.getElementById(ids.STARTPOINT_INPUT_ID).value;
@@ -60,6 +64,7 @@ export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
 	const searchType = getSearhType();
 	const [totalPath, totalTime, totalDistance] = applyDijkstra();
+	clearAllContents(resultContainer);
 	appendChilds(resultContainer, [
 		makeElement({ tag: 'p', innerText: searchType }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
