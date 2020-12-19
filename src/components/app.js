@@ -1,11 +1,19 @@
 import Component from '../core/component.js';
+import State from '../core/state.js';
 import RouteInput from './route-input.js';
 import RouteResult from './route-result.js';
 
 class App extends Component {
+  #searchRequest;
+
   constructor($target) {
     super($target);
+    this.initializeStates();
     this.render();
+  }
+
+  initializeStates() {
+    this.#searchRequest = new State({});
   }
 
   mountTemplate() {
@@ -23,8 +31,9 @@ class App extends Component {
     const $routeResultContainer = document.querySelector(
       '#route-result-container'
     );
-    new RouteInput($RouteInputContainer);
-    new RouteResult($routeResultContainer);
+    const searchRequest = this.#searchRequest;
+    new RouteInput($RouteInputContainer, { searchRequest });
+    new RouteResult($routeResultContainer, { searchRequest });
   }
 }
 
