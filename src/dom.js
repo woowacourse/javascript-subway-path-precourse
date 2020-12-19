@@ -12,3 +12,8 @@ export const getSearchType = () => {
   const $inputSearchType = document.querySelector('input[name="search-type"]:checked');
   return $inputSearchType.value;
 };
+
+export const setBtnGetDirection = (func) => {
+  const $btnGetDirection = document.querySelector("#get-direction");
+  $btnGetDirection.addEventListener("click", (e) => func(e));
+};
