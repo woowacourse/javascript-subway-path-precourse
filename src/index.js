@@ -1,14 +1,11 @@
-import { PathInput } from './components/index.js';
+import { PathInput, PathResult } from './components/index.js';
 import { Dijkstra, isConnectedStation } from './utils/index.js';
 import { stations, lines } from './data.js';
 
 export default function SubwayPath() {
   this.app = document.getElementById('app');
   this.pathInput = {};
-
-  this.render = () => {
-    this.app.innerHTML = this.pathInput.template();
-  };
+  this.PathResult = {};
 
   this.findRoute = (departure, arrival, search_type) => {
     const dijkstra = new Dijkstra();
@@ -66,7 +63,7 @@ export default function SubwayPath() {
   };
 
   this.pathInput = new PathInput({ findRoute: this.findRoute });
-  this.render();
+  this.pathResult = new PathResult();
   this.app.addEventListener('click', this.handleClickApp);
 }
 

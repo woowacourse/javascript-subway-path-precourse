@@ -6,13 +6,15 @@ import {
 import { stations } from '../data.js';
 
 export default function PathInput({ findRoute }) {
+  this.pathInputConatiner = document.querySelector('.path-input-container');
+
   this.template = () => {
-    return `<div>
+    return `
       ${this.departureStationNameInputTemplate()}
       ${this.arrivalStationNameInputTemplate()}
       ${this.searchTypeRadioTemplate()}
       ${this.serachButtonTemplate()}
-    </div>`;
+    `;
   };
 
   this.searchEvent = ({ target: { id } }) => {
@@ -88,4 +90,10 @@ export default function PathInput({ findRoute }) {
   this.serachButtonTemplate = () => {
     return `<button id="search-button">길 찾기</button>`;
   };
+
+  this.render = () => {
+    this.pathInputConatiner.innerHTML = this.template();
+  };
+
+  this.render();
 }
