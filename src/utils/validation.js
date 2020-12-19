@@ -13,3 +13,7 @@ export const isRegistredStation = (
     allStationsName.includes(arrivalStationName)
   );
 };
+
+export const isConnectedStation = path => {
+  return !!path;
+};
