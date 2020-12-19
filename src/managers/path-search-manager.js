@@ -1,5 +1,6 @@
 import {
   validateStationNames,
+  validatePath,
   processException,
 } from './validation-manager.js';
 import Dijkstra from '../utils/Dijkstra.js';
@@ -24,7 +25,11 @@ export const requestToFindShortestPath = (e) => {
 const searchShortestPath = (departureName, arrivalName, option) => {
   const graph = makeSubwayMapGraph(`${option}Interval`);
   const shortestPath = graph.findShortestPath(departureName, arrivalName);
+  const exception = validatePath(shortestPath);
 
+  if (exception) {
+    processException(exception);
+  }
   console.log(graph);
   console.log(shortestPath);
 };

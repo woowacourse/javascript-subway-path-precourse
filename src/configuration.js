@@ -17,6 +17,12 @@ export const LINES = [
     distanceInterval: [2, 10],
     timeInterval: [8, 3],
   },
+  // {
+  //   name: '1호선',
+  //   stations: ['인천', '동인천'],
+  //   distanceInterval: [7],
+  //   timeInterval: [7],
+  // },
 ];
 
 export const STATIONS = Array.from(
@@ -43,5 +49,7 @@ export const ERROR_MESSAGES = {
   BOTH_STAION_NAMES_SAME: `🚨안 내🚨\n
   출발역과 도착역은 같을 수 없습니다.
   출발역과 도착역을 서로 다르게 입력해 주세요.`,
+  STATIONS_NOT_CONNECTED: `🚨안 내🚨\n
+  입력해주신 출발역과 도착역은 서로 연결되있지 않습니다.
+  서로 연결되어 있는 출발역과 도착역으로 입력해주세요.`,
 };
-'BOTH_STAION_NAMES_SAME'

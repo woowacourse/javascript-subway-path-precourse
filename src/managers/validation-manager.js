@@ -35,6 +35,13 @@ const validateRelationshipBetweenStations = (departureName, arrivalName) => {
   return false;
 };
 
+export const validatePath = (path) => {
+  if (!path) {
+    return 'STATIONS_NOT_CONNECTED';
+  }
+  return false;
+};
+
 export const processException = (exception) => {
   alert(ERROR_MESSAGES[exception]);
   updateContainer();
