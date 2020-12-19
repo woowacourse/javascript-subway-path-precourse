@@ -13,9 +13,9 @@ export default class MainController {
     this.FormView = new FormView();
     this.DepartureStationView = new DepartureStationView();
     this.ArrivalStationView = new ArrivalStationView();
-    this.Dijkstra = new Dijkstra();
     this.shortestRadioView = new shortestRadioView();
     this.minimumRadioView = new minimumRadioView();
+    this.Dijkstra = new Dijkstra();
 
     this.radioOption = INITIAL_RADIO_OPTION;
   }
@@ -53,18 +53,21 @@ export default class MainController {
     }
 
     this.selectedOptionRadio();
+    this.dijkstraResult(departureStation, arrivalStation, this.radioOption);
   }
+
+  dijkstraResult(start, end, option) {}
 
   selectedOptionRadio() {
     console.log(this.tag, "selectedOptionRadio", this.radioOption);
     if (this.shortestRadioView.radioInfo()) {
-      this.radioOption = "shortest";
+      this.radioOption = "distance";
       console.log("option----", this.radioOption);
       return;
     }
 
     if (this.minimumRadioView.radioInfo()) {
-      this.radioOption = "minimum";
+      this.radioOption = "time";
       console.log("option----", this.radioOption);
       return;
     }

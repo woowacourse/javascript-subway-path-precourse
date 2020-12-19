@@ -37,7 +37,7 @@ export default class FormView extends View {
             type="radio"
             id=${DOM.SHORTEST_DISTANCE_RADIO_ID}
             name="search-type"
-            value="shortest"
+            value="distance"
             checked="checked"
           />
           <label for=${DOM.SHORTEST_DISTANCE_RADIO_ID}>최단거리</label>
@@ -46,7 +46,7 @@ export default class FormView extends View {
             type="radio"
             id=${DOM.MINIMUM_DISTANCE_RADIO_ID}
             name="search-type"
-            value="minimum"
+            value="time"
           />
           <label for=${DOM.MINIMUM_DISTANCE_RADIO_ID}>최소거리</label>
         </div>
