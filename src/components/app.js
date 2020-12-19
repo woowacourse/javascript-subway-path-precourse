@@ -1,7 +1,9 @@
 import Component from '../core/component.js';
+import ComputedState from '../core/computed-state.js';
 import State from '../core/state.js';
 import { lines } from '../data/lines.js';
 import { stations } from '../data/stations.js';
+import Dijkstra from '../utils/Dijkstra.js';
 import RouteInput from './route-input.js';
 import RouteResult from './route-result.js';
 
@@ -9,6 +11,7 @@ class App extends Component {
   #searchRequest;
   #stations;
   #lines;
+  #searchResult;
 
   constructor($target) {
     super($target);
@@ -17,9 +20,39 @@ class App extends Component {
   }
 
   initializeStates() {
-    this.#searchRequest = new State({});
-    this.#stations = stations;
+    this.#searchRequest = new State(null);
     this.#lines = lines;
+    this.#stations = stations;
+    this.#searchResult = new ComputedState(() => this.searchPath(), [
+      this.#searchRequest,
+    ]);
+  }
+
+  searchPath() {
+    if (!this.#searchRequest.value) {
+      return '';
+    }
+    const {
+      departureStation,
+      arrivalStation,
+      searchType,
+    } = this.#searchRequest?.value;
+    const dijkstra = this.initializeDijkstra(searchType);
+
+    return dijkstra.findShortestPath(departureStation, arrivalStation);
+  }
+
+  initializeDijkstra(searchType) {
+    const dijkstra = new Dijkstra();
+    this.#lines.forEach(line =>
+      line.sections.forEach(section => {
+        const { departureStation, arrivalStation, distance, time } = section;
+        const priority = searchType === 'distance-first' ? distance : time;
+        dijkstra.addEdge(departureStation, arrivalStation, priority);
+      })
+    );
+
+    return dijkstra;
   }
 
   mountTemplate() {
