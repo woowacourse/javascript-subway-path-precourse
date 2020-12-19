@@ -1,5 +1,6 @@
 import StationModel from '../models/StationModel.js';
 import LineModel from '../models/LineModel.js';
+import ResultView from '../views/ResultView.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import { lines, stations, paths } from '../data.js';
 import { MINIMUM_INPUT_LENGTH } from '../constants.js';
@@ -14,6 +15,7 @@ export default class AppController {
   constructor() {
     this.stationModel = new StationModel(stations);
     this.lineModel = new LineModel(lines);
+    this.resultView = new ResultView();
     this.graphs = {
       shortestDistance: new Dijkstra(),
       minimalTime: new Dijkstra(),
@@ -89,8 +91,28 @@ export default class AppController {
     return true;
   }
 
-  findShortestDistancePath() {
-    console.log('findShortestDistancePath');
+  getTotalDistanceTime(path) {
+    let totalDistance = 0;
+    let totalTime = 0;
+
+    for (let i = 1; i < path.length; i++) {
+      const result = paths.find(({ from, to }) => path[i - 1] === from && path[i] === to);
+      totalDistance += result.distance;
+      totalTime += result.time;
+    }
+
+    const total = {
+      distance: totalDistance,
+      time: totalTime,
+    };
+
+    return total;
+  }
+
+  findShortestDistancePath(departureStationName, arrivalStationName) {
+    const path = this.graphs.shortestDistance.findShortestPath(departureStationName, arrivalStationName);
+    const { distance, time } = this.getTotalDistanceTime(path);
+    this.resultView.render(path, distance, time);
   }
 
   findMinimumTimePath() {
@@ -101,16 +123,16 @@ export default class AppController {
     event.preventDefault();
 
     const formData = this.getFormData();
-    const { searchType } = formData;
+    const { departureStationName, arrivalStationName, searchType } = formData;
 
     if (!this.validateFormData(formData)) {
       return;
     }
 
     if (searchType === 'shortest-distance') {
-      this.findShortestDistancePath();
+      this.findShortestDistancePath(departureStationName, arrivalStationName);
     } else if (searchType === 'minimum-time') {
-      this.findMinimumTimePath();
+      this.findMinimumTimePath(departureStationName, arrivalStationName);
     }
   }
 
