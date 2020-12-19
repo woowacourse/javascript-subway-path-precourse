@@ -1,5 +1,5 @@
-import { stationNodes } from "../stationNodes.js"
-import { text } from "../text.js"
+import { stationNodes } from "../components/baseData/stationNodes.js"
+import { text } from "../components/text/text.js"
 export const calculateDistance = (resultPath) => {
     const checkLength = resultPath.length - 1;
     let totalDistance = 0;

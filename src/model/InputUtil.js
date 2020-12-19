@@ -1,5 +1,5 @@
-import { text, alertText } from "../text.js"
-import { stations } from "../stations.js"
+import { text, alertText } from "../components/text/text.js"
+import { stations } from "../components/baseData/stations.js"
 
 export const checkAndReturnInput = () => {
     const startStation = document.getElementById("departure-station-name-input").value;

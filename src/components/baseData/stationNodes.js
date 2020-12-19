@@ -1,4 +1,4 @@
-import { StationNode } from "./stationNode.js"
+import { StationNode } from "../../model/stationNode.js"
 
 export const stationNodes = [
     new StationNode("교대", "강남", { time: 3, distance: 2 }),

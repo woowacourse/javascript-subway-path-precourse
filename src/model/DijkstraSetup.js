@@ -1,4 +1,4 @@
-import { stationNodes } from "../stationNodes.js";
+import { stationNodes } from "../components/baseData/stationNodes.js";
 import Dijkstra from "../utils/Dijkstra.js";
 
 export const dijkstraSetup = (timeOrDistance) => {

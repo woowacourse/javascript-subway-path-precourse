@@ -1,4 +1,4 @@
-import { Station } from "./station.js"
+import { Station } from "../../model/station.js"
 
 export const stations = {
     "교대": new Station("교대", ["강남", "남부터미널"]),

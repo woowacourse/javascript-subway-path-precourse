@@ -2,7 +2,7 @@ import { checkAndReturnInput } from "../model/InputUtil.js"
 import { dijkstraSetup } from "../model/DijkstraSetup.js"
 import { calculateDistance, calculateTime } from "../model/calculator.js"
 import { makeResultHTML } from "../view/resultView.js"
-import { text } from "../text.js"
+import { text } from "../components/text/text.js"
 
 export const addEventToSearchButton = () => {
     document.querySelector("#search-button").addEventListener("click", () => {

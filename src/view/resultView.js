@@ -1,4 +1,4 @@
-import { text } from "../text.js"
+import { text } from "../components/text/text.js"
 
 export const makeResultHTML = (distance, time, pathResult, selection) => {
     let resultHTML = document.getElementById("result-div");
