@@ -36,9 +36,10 @@ export default class SubwayManager {
       .getElementById("arrival-station-name-input")
       .value.replace(/ /g, "");
 
-    if (validator(departure, arrival, this.sections))
+    if (validator(departure, arrival, this.sections)) {
       this.findPath(departure, arrival, this.sections);
-    else {
+      console.log("valid");
+    } else {
       alert(STATION.INPUT_ERROR_MESSAGE);
       clearTable();
       clearInputArea();

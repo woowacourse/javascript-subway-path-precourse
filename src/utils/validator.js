@@ -22,14 +22,14 @@ const hasPath = (departure, arrival, sections) => {
 export const validator = (departure, arrival, sections) => {
   let validateResult = true;
 
+  if (departure === arrival) validateResult = false;
+  if (!isInStation(departure) || !isInStation(arrival)) validateResult = false;
   if (
     departure.length < STATION.NAME_LENGTH_LIMIT ||
     arrival.length < STATION.NAME_LENGTH_LIMIT
   )
     validateResult = false;
-  if (departure === arrival) validateResult = false;
-  if (!isInStation(departure) || !isInStation(arrival)) validateResult = false;
-  if (!hasPath(departure, arrival, sections)) validateResult = false;
+  else if (!hasPath(departure, arrival, sections)) validateResult = false;
 
   return validateResult;
 };
