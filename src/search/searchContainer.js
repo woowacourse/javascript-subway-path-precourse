@@ -47,22 +47,29 @@ const calculatePath = (lineData, startStation, endStation) => {
   return { distance, route };
 };
 
+const calculateInfo = (distance, endStation) => {
+  const result = distance[endStation];
+
+  return result;
+};
+
 const searchContainer = (lineData) => {
   const searchType = findSelectRadio();
   const result = getStations();
 
   if (result && result.departureStation && result.arrivalStation) {
     const CALCULATE_REFRENCE = searchType === "distance" ? "D" : "T";
-    const startStation = departureStation + CALCULATE_REFRENCE;
-    const endStation = arrivalStation + CALCULATE_REFRENCE;
+    const startStation = result.departureStation + CALCULATE_REFRENCE;
+    const endStation = result.arrivalStation + CALCULATE_REFRENCE;
 
     const { distance, route } = calculatePath(
       lineData,
       startStation,
       endStation
     );
+    const shortest = calculateInfo(distance, endStation);
 
-    searchPresenter(searchType, route);
+    searchPresenter(searchType, route, shortest);
   }
 };
 

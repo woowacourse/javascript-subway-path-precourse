@@ -1,4 +1,4 @@
-import { SYMBOL, WORDS } from "../constants/index.js";
+import { SYMBOL, WORDS, UNIT, UNIT_STRING } from "../constants/index.js";
 import { appendChilds, appendTbody, clearChilds } from "../utils/display.js";
 import {
   createHeader,
@@ -46,10 +46,23 @@ const displayPath = (route) => {
   appendTbody(tr);
 };
 
-const searchPresenter = (searchType, route) => {
+// 걸리는 시간혹은 거리 표시
+const displayShortest = (searchType, shortest) => {
+  const isDistance = searchType === "distance" ? true : false;
+  const unit = isDistance ? UNIT.KM : UNIT.MINUTE;
+  const unitString = isDistance ? UNIT_STRING.KM : UNIT_STRING.MINUTE;
+
+  const td = createTableData(unitString + shortest + unit, 2);
+  const tr = createTableRow([td]);
+
+  appendTbody(tr);
+};
+
+const searchPresenter = (searchType, route, shortest) => {
   const isInitialDisplayed = displayInitialResult(searchType);
 
   if (isInitialDisplayed) {
+    displayShortest(searchType, shortest);
     displayPath(route);
   }
 };

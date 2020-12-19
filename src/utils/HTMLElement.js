@@ -35,7 +35,7 @@ export const createTableRow = (tdArray) => {
   return tr;
 };
 
-export const createTableData = (text, colspan = "") => {
+export const createTableData = (text = "", colspan = "") => {
   const td = document.createElement("td");
 
   td.innerText = text;

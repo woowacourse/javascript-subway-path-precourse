@@ -79,3 +79,12 @@ export const MESSAGE = {
   EMPTY: "역을 입력해주세요.",
   EXIST: "현재 존재하지 않는 역을 입력하셨습니다.",
 };
+
+export const UNIT = {
+  KM: "km",
+  MINUTE: "분",
+};
+export const UNIT_STRING = {
+  KM: "걸리는 거리 : ",
+  MINUTE: "걸리는 시간 : ",
+};
