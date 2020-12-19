@@ -1,5 +1,5 @@
 import { STATION, EDGE_INFO } from "../constants.js";
-import { stations, sections } from "../data/subwayInfo.js";
+import { stations } from "../data/subwayInfo.js";
 import Dijkstra from "../utils/Dijkstra.js";
 
 const isInStation = (station) => (stations.includes(station) ? true : false);
@@ -11,14 +11,14 @@ const setMap = (map, edges) => {
   }
 };
 
-const hasPath = (departure, arrival) => {
+const hasPath = (departure, arrival, sections) => {
   const dijkstra = new Dijkstra();
   for (let line in sections) setMap(dijkstra, sections[line]);
   const result = dijkstra.findShortestPath(departure, arrival);
   if (result !== undefined) return true;
 };
 
-export const validator = (departure, arrival) => {
+export const validator = (departure, arrival, sections) => {
   let validateResult = true;
   if (
     departure.length < STATION.NAME_LENGTH_LIMIT ||
@@ -27,6 +27,6 @@ export const validator = (departure, arrival) => {
     validateResult = false;
   if (departure === arrival) validateResult = false;
   if (!isInStation(departure) || !isInStation(arrival)) validateResult = false;
-  if (!hasPath(departure, arrival)) validateResult = false;
+  if (!hasPath(departure, arrival, sections)) validateResult = false;
   return validateResult;
 };

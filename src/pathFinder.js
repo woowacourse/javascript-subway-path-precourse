@@ -1,4 +1,3 @@
-import { sections } from "./data/subwayInfo.js";
 import Dijkstra from "./utils/Dijkstra.js";
 import { EDGE_INFO } from "./constants.js";
 
@@ -20,7 +19,7 @@ const setMapByWeightType = (map, edges, weightType) => {
 const caclTotalDistance = () => {};
 const caclTotalTime = () => {};
 
-export const findShortestPath = (departure, arrival) => {
+export const findShortestPath = (departure, arrival, sections) => {
   const radioElems = document.getElementsByName("search-type");
   const dijkstra = new Dijkstra();
   if (radioElems[0].checked) {
