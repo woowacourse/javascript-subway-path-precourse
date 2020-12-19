@@ -2,9 +2,18 @@ class SubwayHandler {
   handleSearchButton(subway, subwayView) {
     const startStation = subwayView.$startInput.value.trim();
     const endStation = subwayView.$endInput.value.trim();
-    const radio = subwayView.$radio;
+    let searchType;
 
-    subway.search(startStation, endStation, radio);
+    if (subwayView.$radio[0].checked) searchType = subwayView.$radio[0].value;
+    if (subwayView.$radio[1].checked) searchType = subwayView.$radio[1].value;
+
+    const searchResult = subway.search(startStation, endStation, searchType);
+    console.log(searchResult);
+    if (searchResult) {
+      const total = subway.getTotalDistanceAndTime(searchResult);
+
+      subwayView.renderResult(searchType, searchResult, total);
+    }
   }
 }
 
