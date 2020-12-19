@@ -5,16 +5,20 @@ export default class subwayGetDirection {
   constructor() {
     this.stationDistanceMap = stationDistanceKMMap;
     this.stationMinuteMap = stationMinuteMap;
+    this.searchType = null;
     this.init();
   }
   init() {
-    setBtnGetDirection(this.getDirection);
+    setBtnGetDirection(this.getDirection.bind(this));
   }
   getDirection(e) {
     e.preventDefault();
     const startStationName = getDepartureStationName();
     const endStationName = getArrivalStationName();
-    const result = stationNameValidation([startStationName, endStationName]);
+    if (!stationNameValidation([startStationName, endStationName])) {
+      return;
+    }
+    this.searchType = getSearchType();
   }
 }
 
