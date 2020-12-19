@@ -1,10 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>지하철 길찾기</title>
-</head>
-<body>
-<div id="app"></div>
-</body>
+    <style>
+      table,
+      th,
+      tr,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h1>🚇 지하철 길 찾기</h1>
+      <form id="search-form">
+        <div>
+          <p>
+            <label for="departure-station-name-input">출발역</label>
+            <input type="text" / id="departure-station-name-input">
+          </p>
+          <p>
+            <label for="arrival-station-name-input">도착역</label>
+            <input type="text" id="arrival-station-name-input" />
+          </p>
+        </div>
+        <div>
+          <input
+            type="radio"
+            name="search-type"
+            data-search-type="distance"
+            id="search-type-distance"
+            checked
+          />
+          <label for="">최단 거리</label>
+          <input
+            type="radio"
+            name="search-type"
+            data-search-type="time"
+            id="search-type-time"
+          />
+          <label for="">최소 시간</label>
+        </div>
+        <button class="search-button">길 찾기</button>
+      </form>
+      <div id="search-result" style="display: none">
+        <h2 id="result-header">📝 결과</h2>
+        <h3 id="result-type">최단 거리</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>총 거리</th>
+              <th>총 소요시간</th>
+            </tr>
+          </thead>
+          <tbody id="result-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
 </html>
