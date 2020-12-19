@@ -1,10 +1,19 @@
 import { stations, lines } from "./subway-map-data.js";
+import Dijkstra from "./utils/Dijkstra.js";
+
+const WEIGHT_TYPE_DISTANCE = 0;
+const WEIGHT_TYPE_TRAVEL_TIME = 1;
 
 export default class SubwayMap {
   constructor() {
     this.stationsGraph = new Map();
+    this.dijkstraForDistance = new Dijkstra();
+    this.dijkstraForTravelTime = new Dijkstra();
+
     this.fillStationsGraph(stations);
     this.constructStationsGraph(lines);
+    this.constructDijkstraByWeightType(WEIGHT_TYPE_DISTANCE);
+    this.constructDijkstraByWeightType(WEIGHT_TYPE_TRAVEL_TIME);
   }
 
   fillStationsGraph(stationsArray) {
@@ -33,6 +42,34 @@ export default class SubwayMap {
     this.stationsGraph.set(begin, {
       ...this.stationsGraph.get(begin),
       [end]: [distance, travelTime],
+    });
+  }
+
+  constructDijkstraByWeightType(weightType) {
+    this.stationsGraph.forEach((_linkedStations, _currentStation) => {
+      this.addStationsAsEdgeWithSpecifiedWeight(
+        _currentStation,
+        _linkedStations,
+        weightType
+      );
+    });
+  }
+
+  addStationsAsEdgeWithSpecifiedWeight(
+    currentStation,
+    linkedStations,
+    weightType
+  ) {
+    const djikstra =
+      weightType === WEIGHT_TYPE_DISTANCE
+        ? this.dijkstraForDistance
+        : this.dijkstraForTravelTime;
+    Object.entries(linkedStations).forEach((_linkedStation) => {
+      djikstra.addEdge(
+        currentStation,
+        _linkedStation[0],
+        _linkedStation[1][weightType]
+      );
     });
   }
 
