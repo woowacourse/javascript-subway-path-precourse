@@ -12,27 +12,34 @@ export const requestToFindShortestPath = (e) => {
   const arrivalName = arrival.value;
   const option = document.querySelector('input[name="search-type"]:checked').id;
   const exception = validateStationNames(departureName, arrivalName);
+  let shortestPath;
 
   if (exception) {
-    processException(exception);
+    return processException(exception);
   }
-  searchShortestPath(departureName, arrivalName, option);
+  shortestPath = searchShortestPath(departureName, arrivalName, option);
+  //displaySearchResult(shortestPath)
 };
 
 const searchShortestPath = (departureName, arrivalName, option) => {
-  makeSubwayMapGraph(LINES, STATIONS, `${option}Interval`);
+  const graph = makeSubwayMapGraph(`${option}Interval`);
+  const shortestPath = graph.findShortestPath(departureName, arrivalName);
+
+  console.log(graph);
+  console.log(shortestPath);
 };
 
-const makeSubwayMapGraph = (lines, stations, key) => {
-  const dijkstra = new Dijkstra();
+const makeSubwayMapGraph = (option) => {
+  const graph = new Dijkstra();
 
-  stations.forEach((station) => dijkstra.addVertex(station));
-  lines.forEach((line) => {
+  STATIONS.forEach((station) => graph.addVertex(station));
+  LINES.forEach((line) => {
     const stations = line.stations;
-    const intervals = line[key];
+    const intervals = line[option];
 
     for (let i = 0; i < stations.length - 1; i++) {
-      dijkstra.addEdge(stations[i], stations[i + 1], intervals[i]);
+      graph.addEdge(stations[i], stations[i + 1], intervals[i]);
     }
   });
+  return graph;
 };
