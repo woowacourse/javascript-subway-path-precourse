@@ -1,0 +1,25 @@
+{
+  "name": "javascript-subway-path-precourse",
+  "version": "1.0.0",
+  "description": "우아한 테크 코스 최종 미션",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kwakcena/javascript-subway-path-precourse.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kwakcena/javascript-subway-path-precourse/issues"
+  },
+  "homepage": "https://github.com/Kwakcena/javascript-subway-path-precourse#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.16.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
