@@ -1,17 +1,10 @@
 import { stations, sections, distanceDijkstra, timeDijkstra } from "./data.js";
-import { DISTANCE } from "./constants/text.js";
 
 export default class Model {
   stations = stations;
   sections = sections;
   distanceDijkstra = distanceDijkstra;
   timeDijkstra = timeDijkstra;
-
-  findShortest(start, end, type) {
-    return type === DISTANCE
-      ? distanceDijkstra.findShortestPath(start, end)
-      : timeDijkstra.findShortestPath(start, end);
-  }
 
   getTotalTimeAndDistance(sections) {
     let totalDistance = 0;

@@ -3,11 +3,9 @@ import {
   CANT_SAME_START_AND_END,
   MUST_MORE_THAN_2,
 } from "./constants/message.js";
-import {
-  SHORTEST_DISTANCE,
-  SHORTEST_TIME,
-  DISTANCE,
-} from "./constants/text.js";
+import { SHORTEST_DISTANCE, SHORTEST_TIME } from "./constants/text.js";
+
+const DISTANCE = "distance";
 
 export default class Controller {
   constructor(Model, View) {
@@ -18,7 +16,7 @@ export default class Controller {
 
   initialize() {
     this.View.handleException = this.handleException.bind(this);
-    this.View.findShortest = this.findShortest.bind(this);
+    this.View.getResultContent = this.getResultContent.bind(this);
   }
 
   handleException(start, end) {
@@ -37,15 +35,18 @@ export default class Controller {
     return false;
   }
 
-  findShortest(start, end, type) {
-    const shortestSections = this.Model.findShortest(start, end, type);
+  getResultContent(start, end, type) {
+    const isTypeDistance = type === DISTANCE;
+    const shortestPath = this.Model[
+      isTypeDistance ? "distanceDijkstra" : "timeDijkstra"
+    ].findShortestPath(start, end);
     const totalDistanceAndTime = this.Model.getTotalTimeAndDistance(
-      shortestSections
+      shortestPath
     );
     return [
       ...totalDistanceAndTime,
-      shortestSections.join(" ➡"),
-      type === DISTANCE ? SHORTEST_DISTANCE : SHORTEST_TIME,
+      shortestPath.join(" ➡"),
+      isTypeDistance ? SHORTEST_DISTANCE : SHORTEST_TIME,
     ];
   }
 

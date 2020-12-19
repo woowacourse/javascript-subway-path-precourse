@@ -2,7 +2,7 @@ import { INIT, RESULT, RESULT_TABLE_HEADER } from "./constants/skeleton.js";
 
 export default class View {
   handleException = null;
-  findShortest = null;
+  getResultContent = null;
 
   constructor() {
     this.initialize();
@@ -46,7 +46,7 @@ export default class View {
       return;
     }
     this.renderResult(
-      ...this.findShortest(startStationValue, endStationValue, searchType)
+      ...this.getResultContent(startStationValue, endStationValue, searchType)
     );
   }
 

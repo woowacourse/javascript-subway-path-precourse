@@ -10,10 +10,10 @@ export const INIT = `
   </div>
   <form id="search-form">
     <div class="bottom-margin">
-      <input type="radio" name="search-type" value="distance" id="distance" checked>
-      <label for="distance">최단거리</label>
-      <input type="radio" name="search-type" value="time" id="time">
-      <label for="time">최소시간</label>
+      <input type="radio" name="search-type" value="distance" id="shortest-distance-radio" checked>
+      <label for="shortest-distance-radio">최단거리</label>
+      <input type="radio" name="search-type" value="time" id="shortest-time-radio">
+      <label for="shortest-time-radio">최소시간</label>
     </div>
     <button type="submit" id="search-button">길 찾기</button>
   </form>
