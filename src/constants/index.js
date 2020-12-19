@@ -2,6 +2,7 @@ export const ID = {
   DEPARTURE_STATION_NAME_INPUT: 'departure-station-name-input',
   ARRIVAL_STATION_NAME_INPUT: 'arrival-station-name-input',
   SEARCH_BUTTON: 'search-button',
+  RESULT_TABLE: 'result-table',
 };
 
 export const NAME = {

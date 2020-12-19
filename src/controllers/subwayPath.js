@@ -55,8 +55,6 @@ export default class SubwayPath {
 
     addDijkstraEdgeDistance(dijkstra);
     result = dijkstra.findShortestPath(departureStation, arrivalStation);
-    console.log(result);
+    return result;
   }
-
-  render() {}
 }

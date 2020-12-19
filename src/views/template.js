@@ -11,3 +11,18 @@ export const subwayPathTemplate = () => {
     <button id='${ID.SEARCH_BUTTON}'>길 찾기</button>
     `;
 };
+
+export const resultTableTemplate = (selector, result) => {
+  return `<h2>📝 결과</h2>
+    <h3>${selector}</h3>
+    <table border='1'>
+    <th>총 거리</th>
+    <th>총 소요시간</th>
+    <tr><td>거리</td><td>시간</td></tr>
+    <tr><td colspan="2">${showPath(result)}</td></tr>
+    </table>`;
+};
+
+const showPath = (result) => {
+  return result.map((path) => `${path}`).join('▶');
+};
