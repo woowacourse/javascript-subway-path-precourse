@@ -63,3 +63,8 @@ export const DISTANCE = {
   GANGNAM_TO_YANGJAE: 2,
   YANGJAE_TO_YANGJAEF: 10,
 };
+
+export const MESSAGE = {
+  BLANK: "공백없이 입력해주세요.",
+  EMPTY: "역을 입력해주세요.",
+};

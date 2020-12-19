@@ -1,3 +1,4 @@
+import { checkBlank, checkEmpty, checkTheList } from "../utils/validation.js";
 import searchPresenter from "./searchPresenter.js";
 
 const findSelectRadio = () => {
@@ -20,7 +21,14 @@ const getStations = () => {
   const arrivalStation = document.getElementById("arrival-station-name-input")
     .value;
 
-  return { departureStation, arrivalStation };
+  const isEmpty = checkEmpty(departureStation, arrivalStation);
+  const isBlank = checkBlank(departureStation, arrivalStation);
+  const checkList = { isEmpty, isBlank };
+  const isValid = checkTheList(checkList);
+
+  if (isValid) {
+    return { departureStation, arrivalStation };
+  }
 };
 
 // 경로 계산
