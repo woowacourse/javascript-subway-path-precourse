@@ -146,9 +146,12 @@ export default class MainLayout {
   handleInputButton() {
     try {
       const [depart, arrive] = this.controller.getInputFromUser();
+      const result = this.controller.getShortestPath(depart, arrive);
+      console.log(result);
       console.log(`${depart}, ${arrive}`);
     } catch (error) {
-      error.alertUser();
+      console.log(error);
+      // error.alertUser();
     }
   }
 }

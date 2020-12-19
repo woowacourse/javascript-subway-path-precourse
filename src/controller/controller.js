@@ -1,4 +1,3 @@
-import { stations } from '../model/data.js';
 import Model from '../model/model.js';
 import CustomError from '../utils/customError.js';
 import MainLayout from '../view/mainLayout.js';
@@ -23,7 +22,7 @@ export default class Controller {
     return value;
   }
 
-  getInputFromUser(){
+  getInputFromUser() {
     const depart = this.getDepartmentInput();
     const arrive = this.getArrivalInput();
     if (depart === arrive) {
@@ -39,5 +38,10 @@ export default class Controller {
 
   getArrivalInput() {
     return this.getValueOfId('#arrival-station-name-input', '도착');
+  }
+
+  getShortestPath(depart, arrive) {
+    // TODO: 버튼따라서 리턴하기
+    return this.model.getShortestPathByDistance(depart, arrive);
   }
 }
