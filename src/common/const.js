@@ -23,10 +23,14 @@ export const CSS = {
   TABLE_COLSPAN: 2,
 };
 
+export const INPUT_LIMIT = {
+  MIN_STATION_NAME_LENGTH: 2,
+};
+
 export const ERROR_MESSAGE = {
   SAME_DEPARTURE_TO_ARRIVAL: `출발역과 도착역이 같은 역은 입력할 수 없습니다.`,
-  
-}
+  MIN_STATION_NAME_LENGTH: `역 이름은 최소 ${INPUT_LIMIT.MIN_STATION_NAME_LENGTH}이상이어야 합니다.`,
+};
 
 export const TABLE_HEADER = `
 <th>총 거리</th>

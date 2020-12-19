@@ -1,4 +1,10 @@
-import { ERROR_MESSAGE, ID, NAME, VALUE } from "../common/const.js";
+import {
+  ERROR_MESSAGE,
+  ID,
+  INPUT_LIMIT,
+  NAME,
+  VALUE,
+} from "../common/const.js";
 import Controller from "./controller.js";
 
 export default class SubwayPathController extends Controller {
@@ -42,6 +48,12 @@ class NameInputController extends Controller {
   _verifyInputStationNames(departure, arrival) {
     if (departure === arrival) {
       throw ERROR_MESSAGE.SAME_DEPARTURE_TO_ARRIVAL;
+    }
+    if (
+      departure.length < INPUT_LIMIT.MIN_STATION_NAME_LENGTH ||
+      arrival.length < INPUT_LIMIT.MIN_STATION_NAME_LENGTH
+    ) {
+      throw ERROR_MESSAGE.MIN_STATION_NAME_LENGTH;
     }
   }
 }
