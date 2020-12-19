@@ -1,5 +1,5 @@
 import { errorMessage, cssText, words } from '../keys.js';
-import { edges, stations } from '../data.js';
+import { edges } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
 import { getSearhType, radioButtonInit } from './radioButtonController.js';
@@ -12,7 +12,7 @@ import {
 } from './stationInputController.js';
 import {
 	appendChilds,
-	clearAllContents,
+	clearResultTable,
 	makeElement,
 } from '../utils/elementUtils.js';
 
@@ -69,18 +69,41 @@ const applyDijkstra = (type, start, end) => {
 	return totalPath;
 };
 
+const resultAppender = (
+	resultContainer,
+	searchType,
+	totalPath,
+	totalTime,
+	totalDistance
+) => {
+	appendChilds(resultContainer, [
+		makeElement({
+			tag: 'p',
+			innerText: searchType,
+			style: `font-size: 1.5em; font-weight: 800; ${cssText.marginCSS(
+				'bottom',
+				20
+			)}`,
+		}),
+		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
+	]);
+};
+
 export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
 	const [start, end] = [getStartPointValue(), getEndPointValue()];
 	const searchType = getSearhType();
 	let [totalPath, totalTime, totalDistance] = [[], 0, 0];
-	clearAllContents(resultContainer);
+	clearResultTable();
 	if (!getValidInput(start, end)) return;
 	totalPath = applyDijkstra(searchType, start, end);
 	if (totalPath.length < 2) return;
 	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
-	appendChilds(resultContainer, [
-		makeElement({ tag: 'p', innerText: searchType, style: `font-size: 2em; font-weight: 800; ${cssText.marginCSS('bottom', 20)}` }),
-		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
-	]);
+	resultAppender(
+		resultContainer,
+		searchType,
+		totalPath,
+		totalTime,
+		totalDistance
+	);
 };
