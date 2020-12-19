@@ -1,3 +1,4 @@
+import { getDepartureStationName } from './src/index.js'
 import { allLines } from '../line.js'
 
 const isValidLength = (stationName) => {
@@ -14,4 +15,8 @@ const isValidStation = (stationName) => {
   }
 }
 
-export { isValidLength, isValidStation };
+const isDuplicatedStation = (stationName) => {
+  return (getDepartureStationName() === stationName);
+}
+
+export { isValidLength, isValidStation, isDuplicatedStation };
