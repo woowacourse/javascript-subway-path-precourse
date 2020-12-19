@@ -21,15 +21,17 @@
       <input type="radio" name="search-type" value="time" />최소시간<br /><br />
       <button id="search-button">길 찾기</button>
 
-      <h1>🚇 결과</h1>
-      <div><h2>최단거리</h2></div>
-      <table border="1">
-        <tr>
-          <th>총 거리</th>
-          <th>총 소요시간</th>
-        </tr>
-      </table>
+      <div id="result-section" style="display: none">
+        <h1>🚇 결과</h1>
+        <div><h2>최단거리</h2></div>
+        <table border="1">
+          <tr>
+            <th>총 거리</th>
+            <th>총 소요시간</th>
+          </tr>
+        </table>
+      </div>
     </div>
-    <script type="module" src="src/model/dijkstra.js"></script>
+    <script type="module" src="src/index.js"></script>
   </body>
 </html>
