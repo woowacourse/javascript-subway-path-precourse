@@ -1,4 +1,4 @@
-import { validateStationName } from './controller.js';
+import { validateStationName, isDifferentStations } from './controller.js';
 import { Dijkstra } from './utils/Dijkstra.js';
 import { showResult } from './print.js';
 
@@ -10,7 +10,12 @@ export class subwayPathManager {
     const arrivalStation = document.getElementById('arrival-station-name-input').value;
 
     showResult();
-    if (validateStationName(departureStation) && validateStationName(arrivalStation)) {
+
+    if (
+      validateStationName(departureStation) &&
+      validateStationName(arrivalStation) &&
+      isDifferentStations(departureStation, arrivalStation)
+    ) {
       const departStation = departureStation;
       const arriveStation = arrivalStation;
     }
@@ -18,10 +23,10 @@ export class subwayPathManager {
     const selectedSearchType = getSearchType();
 
     if (selectedSearchType === '최단거리') {
-      getDistance();
+      getMinimumDistance();
     }
     if (selectedSearchType === '최소시간') {
-      getTime();
+      getMinimumTime();
     }
   };
 }
@@ -39,12 +44,12 @@ const getSearchType = () => {
   return selectedSearchType;
 };
 
-const getDistance = (departmentStation, arrivalStation) => {
+const getMinimumDistance = (departmentStation, arrivalStation) => {
   alert('거리');
 
-  //Dijkstra.addEdge(departmentStation, arrivalStation, )
+  Dijkstra.addEdge(departmentStation, arrivalStation);
 };
 
-const getTime = (departmentStation, arrivalStation) => {
+const getMinimumTime = (departmentStation, arrivalStation) => {
   alert('시간');
 };

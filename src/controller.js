@@ -23,3 +23,12 @@ const isExistInList = (name) => {
   alert(alertMessage.NO_EXIST_IN_STATION_LIST);
   return false;
 };
+
+export const isDifferentStations = (start, end) => {
+  if (start !== end) {
+    return true;
+  }
+
+  alert(alertMessage.SAME_STATION);
+  return false;
+};
