@@ -3,12 +3,13 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["google", "plugin:prettier/recommended"],
+  "extends": ["google"],
   "plugins": ["prettier"],
   "parserOptions": {
     "sourceType": "module"
   },
   "rules": {
+    "object-curly-spacing": "off",
     "no-new": "off",
     "no-alert": "off",
     "no-console": "off",
