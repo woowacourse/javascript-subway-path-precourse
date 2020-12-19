@@ -1,7 +1,7 @@
-import { notExistAlert } from "../search/alert.js";
+import { notExistAlert, minimunLengthAlert } from "../search/alert.js";
 
 function validateStation(stationName) {
-  let alertMsg = notExistAlert(stationName);
+  let alertMsg = minimunLengthAlert(stationName) || notExistAlert(stationName);
 
   if (alertMsg !== "") {
     alert(alertMsg);
