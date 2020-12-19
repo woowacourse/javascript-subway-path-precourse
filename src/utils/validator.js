@@ -1,14 +1,13 @@
-import { STATION } from "../constants.js";
-import { stations } from "../data/subwayInfo.js";
+import { STATION, EDGE_INFO } from "../constants.js";
+import { stations, sections } from "../data/subwayInfo.js";
 import Dijkstra from "../utils/Dijkstra.js";
-import { sections } from "../data/subwayInfo.js";
 
 const isInStation = (station) => (stations.includes(station) ? true : false);
 
 const setMap = (map, edges) => {
   for (let i = 0; i < edges.length; i++) {
-    map.addEdge(edges[i]["출발역"], edges[i]["도착역"], 1);
-    map.addEdge(edges[i]["도착역"], edges[i]["출발역"], 1);
+    map.addEdge(edges[i][EDGE_INFO.DEPARTURE], edges[i][EDGE_INFO.ARRIVAL], 1);
+    map.addEdge(edges[i][EDGE_INFO.ARRIVAL], edges[i][EDGE_INFO.DEPARTURE], 1);
   }
 };
 
