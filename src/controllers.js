@@ -15,7 +15,7 @@ const arrivalStationNameInput = document.querySelector(
 const serchType = document.getElementsByName('search-type');
 const searchButton = document.querySelector('#search-button');
 
-export const initListener = () => {
+export const initListener = subwayPath => {
   searchButton.addEventListener('click', () => {
     console.log(
       'departure: ',
@@ -25,10 +25,12 @@ export const initListener = () => {
       'serchType: ',
       checkradioValue(serchType)
     );
+    // console.log('subwayPath', subwayPath.stationList);
     const result = stationValidation(
       departureStationNameInput.value,
-      arrivalStationNameInput.value
+      arrivalStationNameInput.value,
+      subwayPath.stationList
     );
-    if (result) alert(result);
+    if (!(result === 'ok')) alert(result);
   });
 };
