@@ -17,6 +17,7 @@ export default {
 	onClickSearch() {
 		const departure = this.query('#departure-station-name-input').value;
 		const arrival = this.query("#arrival-station-name-input").value;
+		const type = this.query("input[name='search-type']:checked").value;
 
 		if(!departure || !arrival) {
 			return alert('출발역 또는 도착역을 입력해주세요.');
@@ -33,5 +34,34 @@ export default {
 		if(!Path.isExistStation(arrival)) {
 			return alert(`${arrival}역을 찾을 수 없습니다.`);
 		}
+
+		const result = type === 'distance' ? Path.getShortestDistancePath(departure, arrival) : Path.getShortestTimePath(departure, arrival);
+		this.showResult(result, type);
 	},
+
+	showResult({paths, distance, time}, type) {
+		const html = `
+			<h3>결과</h3>
+			<h5>${type === 'distance' ? '최단거리' : '최소시간'}</h5>
+			<table>
+				<thead>
+					<tr>
+						<th>총 거리</th>
+						<th>총 소요시간</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>${distance}km</td>
+						<td>${time}분</td>
+					</tr>
+					<tr>
+						<td colspan="2">${paths.join('➞')}</td>
+					</tr>
+				</tbody>
+			</table>
+		`
+
+		this.query('#result').innerHTML = html;
+	}
 }
