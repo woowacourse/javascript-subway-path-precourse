@@ -1,4 +1,4 @@
-import { ids, words } from '../keys.js';
+import { errorMessage, ids, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
@@ -50,18 +50,28 @@ const applyDijkstra = (type, start, end) => {
 		dijkstra.addEdge(edge.from, edge.to, edge[key]);
 	});
 	totalPath = dijkstra.findShortestPath(start, end);
+	if (!isPathExisted(totalPath)) return [totalPath, totalTime, totalDistance];
 	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
 	return [totalPath, totalTime, totalDistance];
+};
+
+const isPathExisted = (totalPath) => {
+	if (!totalPath) {
+		alert(errorMessage.CANNOT_FIND);
+		return false;
+	}
+	return true;
 };
 
 export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
 	const [start, end] = getValidInput();
 	const searchType = getSearhType();
-	let [totalPath, totalTime, totalDistance] = [[], -1, -1];
+	let [totalPath, totalTime, totalDistance] = [[], 0, 0];
 	clearAllContents(resultContainer);
-	if (start === -1 && end === -1) return;
+	if (start === 0 && end === 0) return;
 	[totalPath, totalTime, totalDistance] = applyDijkstra(searchType, start, end);
+	if (!totalPath) return;
 	appendChilds(resultContainer, [
 		makeElement({ tag: 'p', innerText: searchType }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),

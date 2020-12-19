@@ -150,7 +150,7 @@ export default function Dijkstra() {
 		},
 		findShortestRoute: function (start, end) {
 			if (!start || !end) {
-				throw Error('출발지와 도착지를 모두 입력해야 합니다.');
+				return [];
 			}
 			const distance = {};
 			const previous = {};
