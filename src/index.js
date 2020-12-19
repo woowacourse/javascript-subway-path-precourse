@@ -1,13 +1,15 @@
 import { SubwayPathController } from "./controller/subway-path-controller.js";
 import { LineModel } from "./model/Line.js";
 import { Constant } from "./utils/constant.js";
+import { Data } from "./utils/data.js";
 
 const app = () => {
   subwayPathManager();
 };
 
 const subwayPathManager = () => {
-  SubwayPathController.init();
+  Data.initStations();
+  Data.initDistance();
   // console.log(LineModel.list());
   // console.log(LineModel.listAllStationsSet());
 
