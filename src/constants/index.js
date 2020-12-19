@@ -25,4 +25,12 @@ const courses = {
   양재시민의숲: [['양재', 10, 3]],
 };
 
-export { courses, stations };
+const message = {
+  TITLE: '🚇 지하철 길찾기',
+  START_STATION: '출발역',
+  END_STATION: '도착역',
+  SHORTEST_DISTANCE: '최단거리',
+  MINIMUN_TIME: '최소시간',
+};
+
+export { courses, stations, message };
