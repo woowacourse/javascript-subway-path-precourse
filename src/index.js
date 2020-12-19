@@ -1,7 +1,7 @@
 import MainController from './controller/main_controller.js';
 
 export default class SubwayPath {
-  constructor() {    
+  constructor() {
     new MainController();
   }
 }
