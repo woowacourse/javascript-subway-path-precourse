@@ -12,8 +12,10 @@ function onSearchBtnHandler() {
 
   timeTableData.minPath = makeMinPathResult(checkedRadioInput, departure, arrival);
 
-  let totalDistance = makeTotalDistance(timeTableData.minPath);
-  // let totalTime = makeTotalTime(timeTableData.minPath);
+  //   timeTableData.totalDistance = makeTotalDistance(timeTableData.minPath);
+  //   timeTableData.totalTime = makeTotalTime(timeTableData.minPath);
+  timeTableData.totalDistance = calculateTotalCost(timeTableData.minPath, "distance");
+  timeTableData.totalTime = calculateTotalCost(timeTableData.minPath, "time");
 
   // 최단 거리 minPath 를 이용하여 totalDistance, totalTime 계산하고 렌더링
 
@@ -21,39 +23,58 @@ function onSearchBtnHandler() {
   render(app(timeTableData));
 }
 
-function makeTotalDistance(minPath) {
+function calculateTotalCost(minPath, option) {
   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
 
-  let distance = 0;
+  let totalCost = 0;
   for (let i = 0; i < minPath.length - 1; i++) {
     subwayDatas.sections.forEach((section) => {
       let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
       let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
-      if (conditionOne || conditionTwo) {
-        distance += Number(section.distance);
+      if (conditionOne || (conditionTwo && option === "distance")) {
+        totalCost += Number(section.distance);
+      }
+      if (conditionOne || (conditionTwo && option === "time")) {
+        totalCost += Number(section.time);
       }
     });
   }
 
-  return distance;
+  return totalCost;
 }
-
 // function makeTotalDistance(minPath) {
-//     let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
+//   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
 
-//     let distance = 0;
-//     for (let i = 0; i < minPath.length - 1; i++) {
-//       subwayDatas.sections.forEach((section) => {
-//         let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
-//         let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
-//         if (conditionOne || conditionTwo) {
-//           distance += Number(section.distance);
-//         }
-//       });
-//     }
-
-//     return distance;
+//   let distance = 0;
+//   for (let i = 0; i < minPath.length - 1; i++) {
+//     subwayDatas.sections.forEach((section) => {
+//       let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
+//       let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
+//       if (conditionOne || conditionTwo) {
+//         distance += Number(section.distance);
+//       }
+//     });
 //   }
+
+//   return distance;
+// }
+
+// function makeTotalTime(minPath) {
+//   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
+
+//   let time = 0;
+//   for (let i = 0; i < minPath.length - 1; i++) {
+//     subwayDatas.sections.forEach((section) => {
+//       let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
+//       let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
+//       if (conditionOne || conditionTwo) {
+//         time += Number(section.time);
+//       }
+//     });
+//   }
+
+//   return time;
+// }
 
 function checkRadioInput() {
   let checkedRadioInput = "";
