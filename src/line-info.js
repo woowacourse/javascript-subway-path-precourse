@@ -18,3 +18,13 @@ export const lineInfo = [
     timeInfo: [8, 3],
   },
 ];
+
+export const allStation = [
+  "교대",
+  "강남",
+  "역삼",
+  "남부터미널",
+  "양재",
+  "매봉",
+  "양재시민의숲",
+];
