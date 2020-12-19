@@ -4,15 +4,16 @@ import { section } from '../data/section.js';
 import { render } from './render.js';
 
 const getStationDistance = (start, end) => {
-  const index = section.find((station) => {
-    if (station === [start, end] || station === [end, start]) {
-      return true;
+  const result = [];
+  section.forEach((section) => {
+    if (
+      (section.station[0] === start && section.station[1] === end) ||
+      (section.station[1] === start && section.station[0] === end)
+    ) {
+      result.push(section.distance);
     }
   });
-
-  console.log(index);
-  console.log(section[index].station);
-  console.log(start, end);
+  return result[0];
 };
 
 const getDistance = (route) => {
@@ -21,8 +22,9 @@ const getDistance = (route) => {
   while (stations.length > 1) {
     const startStation = stations.shift();
     const endStation = stations[0];
-    result += getStationDistance(startStation, endStation);
+    result += Number(getStationDistance(startStation, endStation));
   }
+
   return result;
 };
 
