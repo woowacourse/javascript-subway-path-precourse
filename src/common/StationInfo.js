@@ -6,6 +6,7 @@ export const stations = [
   { name: "양재" },
   { name: "매봉" },
   { name: "양재시민의숲" },
+  { name: "아현" }, // island node to test none connected stations
 ];
 
 export const lines = [

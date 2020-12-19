@@ -6,14 +6,16 @@ import { isSatisfyLength, isExistStation } from "../common/checkInput.js";
 
 export default function FindRoadEvent() {
   const dijkstra = new Dijkstra();
-  const startStation = document.getElementById("start-station-input").value;
-  const endStation = document.getElementById("end-station-input").value;
+  const startStation = document.getElementById("departure-station-name-input").value;
+  const endStation = document.getElementById("arrival-station-name-input").value;
   const information = whichRadioChecked();
   if (!isValidInput()) {
     return;
   }
   const shortestPath = getShortestPath(startStation, endStation);
-  console.log(shortestPath);
+  if (shortestPath === undefined) {
+    return alert(alertMessage.NOT_CONNECTED_LINE);
+  }
   const totalWeight = getShortestWeight(shortestPath);
   const totalDistance = totalWeight[0];
   const totalTime = totalWeight[1];
@@ -98,6 +100,7 @@ export default function FindRoadEvent() {
 
     return [_distance, _time];
   }
+
   function getShortestWeight(shortestPath) {
     let distance = 0;
     let time = 0;
