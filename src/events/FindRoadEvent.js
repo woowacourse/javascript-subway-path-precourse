@@ -1,5 +1,5 @@
 import Dijkstra from "../utils/Dijkstra.js";
-import RoadResult from "../renders/RoadResult.js";
+import renderRoadResult from "../renders/renderRoadResult.js";
 import { alertMessage } from "../common/alertMessage.js";
 import { stations, lines } from "../common/StationInfo.js";
 import { isSatisfyLength, isExistStation } from "../common/checkInput.js";
@@ -19,7 +19,7 @@ export default function FindRoadEvent() {
   const totalWeight = getShortestWeight(shortestPath);
   const totalDistance = totalWeight[0];
   const totalTime = totalWeight[1];
-  RoadResult(information, shortestPath, totalDistance, totalTime);
+  renderRoadResult(information, shortestPath, totalDistance, totalTime);
 
   function isValidInput() {
     if (!isSatisfyLength(startStation) || !isSatisfyLength(endStation)) {

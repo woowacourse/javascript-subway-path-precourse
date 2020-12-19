@@ -26,7 +26,7 @@
     │      FindRoadEvent.js
     │
     ├─renders
-    │      RoadResult.js
+    │      renderRoadResult.js
     │
     └─utils
             Dijkstra.js

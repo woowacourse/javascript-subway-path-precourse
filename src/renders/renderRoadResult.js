@@ -40,7 +40,7 @@ function initResultList(shortestPath, totalDistance, totalTime) {
   );
 }
 
-export default function RoadResult(information, shortestPath, totalDistance, totalTime) {
+export default function renderRoadResult(information, shortestPath, totalDistance, totalTime) {
   initResultContainer(information);
   initResultList(shortestPath, totalDistance, totalTime);
 }
