@@ -1,4 +1,3 @@
-import SubwayPath from './controllers/subwayPath.js';
 import SubwayPathController from './controllers/subwayPathController.js';
 import { subwayPathTemplate } from './views/template.js';
 import { ID } from './constants/index.js';
