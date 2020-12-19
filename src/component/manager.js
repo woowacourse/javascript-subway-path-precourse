@@ -69,7 +69,7 @@ const runDijkstra = (type, dept, dest) => {
     path = dijkstra_distance.findShortestPath(dept, dest);
   else if (type === "time") path = dijkstra_time.findShortestPath(dept, dest);
 
-  if (!path) return undefined;
+  if (!path) return;
 
   return [...totalPathData(path), path];
 };
