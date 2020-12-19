@@ -1,21 +1,18 @@
 import { stations, lines, routes } from './data.js';
 import Dijkstra from './utils/Dijkstra.js';
+import { ViewController, DOMStrings, constants } from './view.js';
 
-const departureStationNameInput = document.getElementById('departure-station-name-input');
-const arrivalStationNameInput = document.getElementById('arrival-station-name-input');
-const searchButton = document.getElementById('search-button');
-const resultPrint = document.getElementById('result');
-
-const SHORTEST_DISTANCE = '최단거리';
-const SHORTEST_TIME = '최소시간';
+const departureStationNameInput = document.getElementById(DOMStrings.DEPARTURE_STATION_NAME_INPUT);
+const arrivalStationNameInput = document.getElementById(DOMStrings.ARRIVAL_STATION_NAME_INPUT);
+const searchButton = document.getElementById(DOMStrings.SEARCH_BUTTON);
 
 export default class SubwayPath {
     constructor() {
         this.stations = stations;
         this.lines = lines;
         this.routes = routes;
+        this.viewController = new ViewController();
         [this.distanceDijkstra, this.timeDijkstra] = this.createDijkstras();
-        console.log(this.distanceDijkstra, this.timeDijkstra);
         this.setEventListeners();
     }
 
@@ -27,8 +24,8 @@ export default class SubwayPath {
         const distanceDijkstra = new Dijkstra();
         const timeDijkstra = new Dijkstra();
         this.routes.forEach(route => {
-            distanceDijkstra.addEdge(route.departure, route.arrival, route.distance);
-            timeDijkstra.addEdge(route.departure, route.arrival, route.time);
+            distanceDijkstra.addEdge(route.stations[0], route.stations[1], route.distance);
+            timeDijkstra.addEdge(route.stations[0], route.stations[1], route.time);
         });
         return [distanceDijkstra, timeDijkstra];
     }
@@ -36,19 +33,17 @@ export default class SubwayPath {
     clickSearchButton() {
         const departureStation = departureStationNameInput.value;
         const arrivalStation = arrivalStationNameInput.value;
-        const searchType = document.querySelector('input[name="search-type"]:checked').value;
-
-        console.log(departureStation, arrivalStation, searchType);
+        const searchType = document.querySelector(DOMStrings.CHECKED_RADIO_BUTTON).value;
         const path = this.findPathByDijkstra(departureStation, arrivalStation, searchType);
         const result = this.calculatePathResult(path);
-        console.log(result);
-        this.printSearchResult(result);
+        this.viewController.clearResultDiv();
+        this.viewController.printSearchResult(result, searchType);
     }
 
     findPathByDijkstra(departure, arrival, searchType) {
-        if (searchType === '최단거리') {
+        if (searchType === constants.SHORTEST_DISTANCE) {
             return this.distanceDijkstra.findShortestPath(departure, arrival);
-        } else if (searchType === '최소시간') {
+        } else if (searchType === constants.SHORTEST_TIME) {
             return this.timeDijkstra.findShortestPath(departure, arrival);
         }
     }
@@ -57,34 +52,17 @@ export default class SubwayPath {
         let totalDistance = 0;
         let totalTime = 0;
         for (let i = 1; i < path.length; i++) {
-            const pathIndex = this.routes.findIndex(el => el.arrival === path[i] && el.departure === path[i - 1]);
-            console.log(pathIndex);
+            const pathIndex = this.routes.findIndex(route => 
+                route.stations.includes(path[i]) && 
+                route.stations.includes(path[i - 1]));
             totalDistance += this.routes[pathIndex].distance;
             totalTime += this.routes[pathIndex].time;
         }
-
         return {
-            pathString: path.join('→'),
+            pathString: path.join(constants.RESULT_ARROW),
             totalDistance,
             totalTime,
         };
-    }
-
-    printSearchResult(result) {
-        let resultHTML = `
-            <table id="result-table">
-                <th><b>총 거리</b></th>
-                <th><b>총 소요 시간</b></th>
-                <tr>
-                    <td>${result.totalDistance}km</td>
-                    <td>${result.totalTime}분</td>
-                </tr>
-                <tr>
-                    <td colspan="2">${result.pathString}</td>
-                </tr>
-            </table>
-        `;
-        resultPrint.innerHTML = resultHTML;
     }
 }
 
