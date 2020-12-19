@@ -8,8 +8,11 @@ export default function FindRoadEvent(event) {
   const endStation = document.getElementById("end-station-input").value;
   const information = "최단거리"; // 하드코딩
   const shortestPath = getShortestPath("교대", "양재시민의숲");
-  const shortestWeight = getShortestWeight(shortestPath, information);
-  RoadResult(information, shortestPath, shortestWeight);
+  const totalWeight = getShortestWeight(shortestPath);
+  const totalDistance = totalWeight[0];
+  const totalTime = totalWeight[1];
+  console.log(totalDistance, totalTime);
+  RoadResult(information, shortestPath, totalDistance, totalTime);
 
   function _getShortestPath(i, j, index) {
     for (let k = 0; k < lines[j].sections.length; k++) {
@@ -38,38 +41,36 @@ export default function FindRoadEvent(event) {
       }
     }
 
-    return dijkstra.findShortestPath(start, end, information);
+    return dijkstra.findShortestPath(start, end);
   }
 
-  function _getShortestWeight(shortestPath, i, j, index) {
-    let _shortestWeight = 0;
+  function _getShortestWeight(shortestPath, i, j) {
+    let _distance = 0;
+    let _time = 0;
     for (let k = 0; k < lines[j].sections.length; k++) {
       if (
         lines[j].sections[k][0] === shortestPath[i] &&
         lines[j].sections[k][1] === shortestPath[i + 1]
       ) {
-        _shortestWeight += lines[j].sections[k][index];
+        _distance += lines[j].sections[k][2];
+        _time += lines[j].sections[k][3];
       }
     }
 
-    return _shortestWeight;
+    return [_distance, _time];
   }
-  function getShortestWeight(shortestPath, information) {
-    let shortestWeight = 0;
-    let index;
-    if (information == "최단거리") {
-      index = 2;
-    } else if (information == "최소시간") {
-      index = 3;
-    } else {
-      return console.log("잘못된 정보를 입력했습니다.");
-    }
+  function getShortestWeight(shortestPath) {
+    let distance = 0;
+    let time = 0;
+    let temp;
     for (let i = 0; i < shortestPath.length; i++) {
       for (let j = 0; j < lines.length; j++) {
-        shortestWeight += _getShortestWeight(shortestPath, i, j, index);
+        temp = _getShortestWeight(shortestPath, i, j);
+        distance += temp[0];
+        time += temp[1];
       }
     }
 
-    return shortestWeight;
+    return [distance, time];
   }
 }
