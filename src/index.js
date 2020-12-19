@@ -1,5 +1,5 @@
 import { stationDistanceList, stationMinuteList, stationDistanceMap, stationMinuteMap } from "./utils/data.js";
-import { getDepartureStationName, getArrivalStationName, getSearchType, setBtnGetDirection, createTableHeader } from "./dom.js";
+import { getDepartureStationName, getArrivalStationName, getSearchType, setBtnGetDirection, createHeader, createTable } from "./dom.js";
 import { stationNameValidation } from "./validation.js";
 import Dijkstra from "./utils/Dijkstra.js";
 
@@ -38,25 +38,14 @@ export default class subwayGetDirection {
     this.route = dijkstra.findShortestPath(this.startStation, this.endStation);
   }
   drawTable() {
+    const distanceResult = this.getDistanceInRoute();
+    const minuteResult = this.getMinuteInRoute();
+    const routeResult = this.route.join("→");
+    const $table = createTable(distanceResult, minuteResult, routeResult);
     const $divResult = document.querySelector("#result");
-    $divResult.innerHTML = `
-    <h3>${this.searchType}</h3>
-    <table border="1">
-      <tr>
-        <th>총 거리</th>
-        <th>총 소요시간</th>
-      </tr>
-      <tr>
-        <td>${this.getDistanceInRoute()}KM</td>
-        <td>${this.getMinuteInRoute()}분</td>
-      </tr>
-      <tr>
-        <td colspan="2">${this.route.join("→")}</td>
-      </tr>
-    </table>
-    `;
-    const tabelHeader = createTableHeader();
-    $divResult.prepend(tabelHeader);
+    const $headerH1 = createHeader("h1", "📝결과");
+    const $headerH3 = createHeader("h3", this.searchType);
+    $divResult.append($headerH1, $headerH3, $table);
   }
   getDirection(e) {
     e.preventDefault();

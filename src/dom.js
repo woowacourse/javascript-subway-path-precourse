@@ -18,8 +18,26 @@ export const setBtnGetDirection = (func) => {
   $btnGetDirection.addEventListener("click", (e) => func(e));
 };
 
-export const createTableHeader = () => {
-  const $h3TableHeader = document.createElement("h1");
-  $h3TableHeader.innerText = `📝결과`;
-  return $h3TableHeader;
+export const createHeader = (tagName, innerText) => {
+  const $header = document.createElement(tagName);
+  $header.innerText = innerText;
+  return $header;
+};
+
+export const createTable = (distance, time, route) => {
+  const $table = document.createElement("table");
+  $table.innerHTML = `
+      <tr>
+        <th>총 거리</th>
+        <th>총 소요시간</th>
+      </tr>
+      <tr>
+        <td>${distance}KM</td>
+        <td>${time}분</td>
+      </tr>
+      <tr>
+        <td colspan="2">${route}</td>
+      </tr>
+    `;
+  return $table;
 };
