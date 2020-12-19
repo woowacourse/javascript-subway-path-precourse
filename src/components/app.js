@@ -43,9 +43,6 @@ class App extends Component {
   }
 
   searchPath() {
-    if (!this.#searchRequest.value) {
-      return '';
-    }
     const {
       departureStation,
       arrivalStation,
