@@ -17,6 +17,9 @@ const setMapByWeightType = (map, edges, weightType) => {
   }
 };
 
+const caclTotalDistance = () => {};
+const caclTotalTime = () => {};
+
 export const findShortestPath = (departure, arrival) => {
   const radioElems = document.getElementsByName("search-type");
   const dijkstra = new Dijkstra();
@@ -28,5 +31,6 @@ export const findShortestPath = (departure, arrival) => {
     for (let line in sections)
       setMapByWeightType(dijkstra, sections[line], EDGE_INFO.TIME);
   }
+
   console.log(dijkstra.findShortestPath(departure, arrival));
 };
