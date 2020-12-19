@@ -1,13 +1,12 @@
 import {
   getStation,
   getShortestSelect,
-  hasValidName,
   hasValidInput,
   getResultPath,
   getResultDistance,
   getResultTime,
 } from './subwayPath.js';
-import { ID, NAME, ALERT } from '../constants/index.js';
+import { ID } from '../constants/index.js';
 import { resultTableTemplate } from '../views/template.js';
 
 export default class SubwayPathController {
@@ -16,10 +15,10 @@ export default class SubwayPathController {
     this.arrivalStation;
     this.shortestSelect;
 
-    this.search();
+    this.handleSearchButton();
   }
 
-  search() {
+  handleSearchButton() {
     const searchButton = document.querySelector(`#${ID.SEARCH_BUTTON}`);
 
     searchButton.addEventListener('click', () => {

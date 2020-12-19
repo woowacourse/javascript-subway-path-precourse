@@ -1,4 +1,4 @@
-import { ID, NAME, ALERT } from '../constants/index.js';
+import { NAME, ALERT } from '../constants/index.js';
 import { isValidNameLength, isNameInStations } from '../utils/userException.js';
 import { addDijkstraEdgeDistance, addDijkstraEdgeTime } from '../utils/addDijkstra.js';
 import { stationsDistance, stationsTime } from '../models/stationsInitialData.js';
@@ -60,10 +60,8 @@ export const getResultPath = (shortestSelect, departureStation, arrivalStation) 
 export const getResultDistance = (resultPath) => {
   let totalDistance = 0;
   stationsDistance.forEach((station) => {
-    for (let i = 0; i < resultPath.length - 1; i++) {
-      if (station.start === resultPath[i] && station.end === resultPath[i + 1]) {
-        totalDistance += station.distance;
-      }
+    if (resultPath.indexOf(station.start) > -1 && resultPath.indexOf(station.end) > -1) {
+      totalDistance += station.distance;
     }
   });
 
@@ -73,10 +71,8 @@ export const getResultDistance = (resultPath) => {
 export const getResultTime = (resultPath) => {
   let totalTime = 0;
   stationsTime.forEach((station) => {
-    for (let i = 0; i < resultPath.length - 1; i++) {
-      if (station.start === resultPath[i] && station.end === resultPath[i + 1]) {
-        totalTime += station.distance;
-      }
+    if (resultPath.indexOf(station.start) > -1 && resultPath.indexOf(station.end) > -1) {
+      totalTime += station.time;
     }
   });
 

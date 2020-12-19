@@ -8,6 +8,6 @@ export const addDijkstraEdgeDistance = (dijkstra) => {
 
 export const addDijkstraEdgeTime = (dijkstra) => {
   stationsTime.forEach((station) => {
-    dijkstra.addEdge(station.start, station.end, station.distance);
+    dijkstra.addEdge(station.start, station.end, station.time);
   });
 };
