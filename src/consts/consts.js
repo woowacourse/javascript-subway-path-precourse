@@ -1,8 +1,8 @@
 export const DOMTag = {
   FINDING_PATH_BUTTON_QUERY: "#search-button",
   RESULT_CONTAINER_QUERY: "#result-container",
-  DEPARTURE_INPUT_QUERY: "#departure-station-name-input",
-  DESTINATION_INPUT_QUERY: "#arrival-station-name-input",
+  DEPT_INPUT_QUERY: "#departure-station-name-input",
+  DEST_INPUT_QUERY: "#arrival-station-name-input",
 
   RADIO_BUTTON_NAME: "search-type",
 };
@@ -15,6 +15,7 @@ export const ALERT = {
 등록된 역은 다음과 같습니다.
 
 교대, 강남, 역삼, 남부터미널, 양재, 양재시민의숲, 매봉`,
+  NO_PATH: `해당 경로가 존재하지 않습니다!`,
 };
 
 export const STRING = {

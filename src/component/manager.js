@@ -18,13 +18,15 @@ export const startManager = () => {
 const buttonHandler = () => {
   let type = checkedButtonType();
 
-  const deptStation = document.querySelector(DOMTag.DEPARTURE_INPUT_QUERY)
-    .value;
-  const destStation = document.querySelector(DOMTag.DESTINATION_INPUT_QUERY)
-    .value;
+  const deptStation = document.querySelector(DOMTag.DEPT_INPUT_QUERY).value;
+  const destStation = document.querySelector(DOMTag.DEST_INPUT_QUERY).value;
 
   if (buttonValidator(type, deptStation, destStation)) {
     const dijkstraData = runDijkstra(type, deptStation, destStation);
+    if (!dijkstraData) {
+      alert(ALERT.NO_PATH)
+      return;
+    }
     renderer(type, dijkstraData);
   }
 };
@@ -59,6 +61,8 @@ export const runDijkstra = (type, dept, dest) => {
   if (type === "distance")
     path = dijkstra_distance.findShortestPath(dept, dest);
   else if (type === "time") path = dijkstra_time.findShortestPath(dept, dest);
+
+  if (!path) return undefined;
 
   return [...totalPathData(path), path];
 };
