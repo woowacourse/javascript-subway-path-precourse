@@ -23,9 +23,20 @@ class App extends Component {
     this.#searchRequest = new State(null);
     this.#lines = lines;
     this.#stations = stations;
-    this.#searchResult = new ComputedState(() => this.searchPath(), [
+    this.#searchResult = new ComputedState(() => this.getSearchResult(), [
       this.#searchRequest,
     ]);
+  }
+
+  getSearchResult() {
+    if (!this.#searchRequest.value) {
+      return {};
+    }
+    const resultPath = this.searchPath();
+    let { totalTime, totalDistance } = this.getTotalTimeAndDistance(resultPath);
+
+    console.log(totalTime, totalDistance, resultPath);
+    return { resultPath, totalTime, totalDistance };
   }
 
   searchPath() {
@@ -53,6 +64,38 @@ class App extends Component {
     );
 
     return dijkstra;
+  }
+
+  getTotalTimeAndDistance(path) {
+    let totalTime = 0;
+    let totalDistance = 0;
+    let section;
+    for (let i = 0; i < path.length - 1; i++) {
+      section = this.findSection({
+        targetDepartureStation: path[i],
+        targetArrivalStation: path[i + 1],
+      });
+      totalTime += section?.time;
+      totalDistance += section?.distance;
+    }
+
+    return { totalTime, totalDistance };
+  }
+
+  findSection(target) {
+    let section = null;
+    this.#lines.forEach(line => {
+      let foundSection = line.sections.find(
+        section =>
+          section.departureStation === target.targetDepartureStation &&
+          section.arrivalStation === target.targetArrivalStation
+      );
+      if (foundSection) {
+        section = foundSection;
+      }
+    });
+
+    return section;
   }
 
   mountTemplate() {
