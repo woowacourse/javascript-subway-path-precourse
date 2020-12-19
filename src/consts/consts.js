@@ -21,7 +21,7 @@ export const ALERT = {
 export const STRING = {
   TOTAL_DIST: "총 거리",
   TOTAL_TIME: "총 소요 시간",
-  RESULT: "결과",
+  RESULT: "📝 결과",
 
   MIN_DISTANCE: "최단경로",
   MIN_TIME: "최단시간",
