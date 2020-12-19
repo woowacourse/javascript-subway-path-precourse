@@ -1,12 +1,12 @@
 import { ALERT, DOMTag } from "../consts/consts.js";
 import { renderer } from "./renderer.js";
-
 import {
   dijkstra_distance,
   dijkstra_time,
   stationToStation,
   stationData,
 } from "../index.js";
+
 export const startManager = () => {
   const findingPathButton = document.querySelector(
     DOMTag.FINDING_PATH_BUTTON_QUERY
