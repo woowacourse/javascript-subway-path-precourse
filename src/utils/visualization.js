@@ -1,3 +1,22 @@
+import {
+  RESULT_DIV_ID,
+  STRING_TO_CLREA_RESULT_DIV,
+  TABLE,
+  TABLE_TITLE1,
+  TABLE_TITLE2,
+  TD,
+  TH,
+  THEAD,
+  TR,
+  DISTANCE_MEASUREMENT,
+  TIME_MEASUREMENT,
+  RESULT_TITLE_TAG,
+  RESULT_SUBTITLE_TAG,
+  RESULT_TITLE_TEXT,
+  RESULT_SUBTITLE_TEXT,
+  PATH_TD_ID,
+} from "../../constant.js";
+
 const Visualization = function () {
   this.setAttributes = (tag, attributes) => {
     for (let i in attributes) {
@@ -31,13 +50,15 @@ const Visualization = function () {
   };
 
   this.clearResultDiv = () =>
-    (document.getElementById("result").innerHTML = "");
+    (document.getElementById(
+      RESULT_DIV_ID
+    ).innerHTML = STRING_TO_CLREA_RESULT_DIV);
 
   this.getTableHeadByTexts = (...texts) => {
-    const thead = document.createElement("thead");
-    const tr = document.createElement("tr");
+    const thead = document.createElement(THEAD);
+    const tr = document.createElement(TR);
     texts.forEach((text) => {
-      const th = this.getAdvancedEle("th", null, text);
+      const th = this.getAdvancedEle(TH, null, text);
       this.appendChildren(tr, th);
     });
     this.appendChildren(thead, tr);
@@ -45,21 +66,21 @@ const Visualization = function () {
   };
 
   this.getTableHavingTableHead = (...texts) => {
-    const table = document.createElement("table");
+    const table = document.createElement(TABLE);
     const thead = this.getTableHeadByTexts(...texts);
     this.appendChildren(table, thead);
     return table;
   };
 
   this.createTd = (text) =>
-    text ? this.getAdvancedEle("td", null, text) : document.createElement("td");
+    text ? this.getAdvancedEle(TD, null, text) : document.createElement(TD);
 
   this.createTable = (formattedPath, minDistance, minTime) => {
-    const table = this.getTableHavingTableHead("총 거리", "총 소요 시간");
+    const table = this.getTableHavingTableHead(TABLE_TITLE1, TABLE_TITLE2);
     const distanceAndTimeTr = document.createElement("tr");
-    const distanceTd = this.createTd(`${minDistance}km`);
-    const timeTd = this.createTd(`${minTime}분`);
-    const pathTr = this.getAdvancedEle("tr", { id: "path-td" }, formattedPath);
+    const distanceTd = this.createTd(`${minDistance}${DISTANCE_MEASUREMENT}`);
+    const timeTd = this.createTd(`${minTime}${TIME_MEASUREMENT}`);
+    const pathTr = this.getAdvancedEle(TR, { id: PATH_TD_ID }, formattedPath);
     this.appendRecursiveChild(
       table,
       [distanceAndTimeTr, distanceTd, timeTd],
@@ -69,9 +90,17 @@ const Visualization = function () {
   };
 
   this.renderResult = (formattedPath, minDistance, minTime) => {
-    const resultDiv = document.getElementById("result");
-    const resultTitle = this.getAdvancedEle("h2", null, "📑 결과");
-    const resultSubTitle = this.getAdvancedEle("h3", null, "최단거리");
+    const resultDiv = document.getElementById(RESULT_DIV_ID);
+    const resultTitle = this.getAdvancedEle(
+      RESULT_TITLE_TAG,
+      null,
+      RESULT_TITLE_TEXT
+    );
+    const resultSubTitle = this.getAdvancedEle(
+      RESULT_SUBTITLE_TAG,
+      null,
+      RESULT_SUBTITLE_TEXT
+    );
     const table = this.createTable(formattedPath, minDistance, minTime);
     this.appendChildren(resultDiv, resultTitle, resultSubTitle, table);
   };
