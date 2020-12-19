@@ -15,10 +15,10 @@ export default function PathInput({ findRoute }) {
 
     const departureStationName = document.getElementById(
       'departure-station-name-input'
-    );
+    ).value;
     const arrivalStationName = document.getElementById(
       'arrival-station-name-input'
-    );
+    ).value;
     const radioButtons = document.getElementsByName('search-type');
     for (const radioButton of radioButtons) {
       if (radioButton.checked) {
