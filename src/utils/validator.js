@@ -1,4 +1,7 @@
 import { STATION } from "../constants.js";
+import { stations } from "../data/subwayInfo.js";
+
+const isInStation = (station) => (stations.includes(station) ? true : false);
 
 export const validator = (departure, arrival) => {
   let validateResult = true;
@@ -8,5 +11,6 @@ export const validator = (departure, arrival) => {
   )
     validateResult = false;
   if (departure === arrival) validateResult = false;
+  if (!isInStation(departure) || !isInStation(arrival)) validateResult = false;
   return validateResult;
 };
