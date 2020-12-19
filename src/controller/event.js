@@ -1,4 +1,5 @@
 import {$departureName, $arrivalName} from '../view/element.js';
+import {addResultScreen} from '../view/add-screen.js';
 import {isInputValid} from './valid.js';
 import {subway} from '../index.js';
 
@@ -9,11 +10,11 @@ export const onFindRoute = () => {
     const checkedValue = checkSelectedRadio();
     if (checkedValue === '최단거리') {
       const shortDistance = subway.findShortDistance(departure, arrival);
-      return addResultScreen(shortDistance);
+      return addResultScreen(checkedValue, shortDistance);
     }
     const shortTime = subway.findShortTime(departure, arrival);
 
-    return addResultScreen(shortTime);
+    return addResultScreen(checkedValue, shortTime);
   }
 };
 
