@@ -6,6 +6,7 @@ export default class MainLayout {
     this.controller = controller;
     this.elements = this.createAllElements();
     this.rendered = Render.$render(this.elements.root);
+    this.tableDataTemplate = this.createTableDataTemplate();
   }
 
   createAllElements() {
@@ -133,32 +134,42 @@ export default class MainLayout {
     });
   }
 
-  createTableTemplate() {
-    return this.createElement({
+  createTableDataTemplate() {
+    return Render.createElement({
       tag: 'template',
       id: 'table-row',
       innerHTML: '<tr><td></td><td></td></tr><tr><td colspan="2"></td></tr>',
     });
   }
 
-  /**
-   * 이벤트 핸들러
-   */
   handleInputButton() {
     try {
       const [depart, arrive] = this.controller.getInputFromUser();
       const searchType = this.controller.getCheckedSearchType();
-      const result = this.controller.getShortestPath(
-        depart,
-        arrive,
-        searchType,
-      );
-
-      console.log(result);
-      console.log(`${depart}, ${arrive}`);
+      this.refreshTable(depart, arrive, searchType);
     } catch (error) {
-      console.log(error);
-      // error.alertUser();
+      error.alertUser();
     }
+  }
+
+  buildTable(dist, time, route) {
+    const tbody = Render.createElement({ tag: 'tbody' });
+    const clone = this.tableDataTemplate.content.cloneNode(true);
+    const td = clone.querySelectorAll('td');
+
+    td[0].textContent = dist;
+    td[1].textContent = time;
+    td[2].textContent = route.join('→');
+    tbody.append(clone);
+
+    return tbody;
+  }
+
+  refreshTable(depart, arrive, searchType) {
+    const route = this.controller.getShortestPath(depart, arrive, searchType);
+    const [time, dist] = this.controller.getShortestPathCost(route);
+    const oldBody = this.rendered.querySelector('tbody');
+    const newBody = this.buildTable(dist, time, route);
+    oldBody.replaceWith(newBody);
   }
 }

@@ -1,3 +1,11 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-continue */
+/* eslint-disable consistent-return */
+/* eslint-disable prefer-const */
+/* eslint-disable no-loop-func */
+/* eslint-disable no-inner-declarations */
+/* eslint-disable object-shorthand */
 export default function Dijkstra() {
   const Node = {
     init: function (val, priority) {
@@ -202,6 +210,9 @@ export default function Dijkstra() {
 
       return route;
     },
+    getWeight: function (vertex1, vertex2) {
+      return this.adjacencyList[vertex1][vertex2];
+    },
   };
 
   this.addEdge = (source, target, weight) => {
@@ -214,6 +225,10 @@ export default function Dijkstra() {
 
   this.addVertex = (vertex) => {
     WeightedGraph.addVertex(vertex);
+  };
+
+  this.getWeight = (source, target) => {
+    return WeightedGraph.getWeight(source, target);
   };
 
   WeightedGraph.init();

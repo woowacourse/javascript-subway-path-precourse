@@ -37,6 +37,30 @@ export default class Model {
     return this.timeDijkstra.findShortestPath(begin, end);
   }
 
+  getShotestPathCost(route) {
+    let time = 0;
+    let dist = 0;
+    for (let i = 0; i < route.length - 1; i++) {
+      const [t, d] = this.getCost(route[i], route[i + 1]);
+      time += t;
+      dist += d;
+    }
+    return [time, dist];
+  }
+
+  getCost(begin, end) {
+    const { lines } = this;
+    for (let line of lines) {
+      const { station, distance, time } = line;
+      const idx1 = station.findIndex(item => item === begin);
+      const idx2 = station.findIndex(item => item === end);
+      if (idx1 === undefined || idx2 === undefined) continue;
+      if (idx2 - idx1 === 1) {
+        return [time[idx1], distance[idx1]];
+      }
+    }
+  }
+
   includeStation(station) {
     return this.stations.includes(station);
   }

@@ -54,4 +54,8 @@ export default class Controller {
 
     return searchType.value;
   }
+
+  getShortestPathCost(route){
+    return this.model.getShotestPathCost(route);
+  }
 }
