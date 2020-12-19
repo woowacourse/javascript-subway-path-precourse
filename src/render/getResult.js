@@ -28,8 +28,29 @@ const getDistance = (route) => {
   return result;
 };
 
-const getTime = () => {
-  //
+const getStationTime = (start, end) => {
+  const result = [];
+  section.forEach((section) => {
+    if (
+      (section.station[0] === start && section.station[1] === end) ||
+      (section.station[1] === start && section.station[0] === end)
+    ) {
+      result.push(section.time);
+    }
+  });
+  return result[0];
+};
+
+const getTime = (route) => {
+  let result = 0;
+  const stations = [...route];
+  while (stations.length > 1) {
+    const startStation = stations.shift();
+    const endStation = stations[0];
+    result += Number(getStationTime(startStation, endStation));
+  }
+
+  return result;
 };
 
 const getDistanceResult = (inputStations) => {
