@@ -14,10 +14,10 @@ const makeTitle = () => {
 
 const makeTableTitle = (selection) => {
     if (selection === "time") {
-        return `<h4>최단거리</h4>`;
+        return `<h4>최소시간</h4>`;
     }
 
-    return `<h4>최소시간</h4>`;
+    return `<h4>최단거리</h4>`;
 }
 
 const makeTable = (distance, time, pathResult) => {
