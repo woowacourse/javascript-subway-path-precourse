@@ -12,9 +12,10 @@ export default class Subway {
   findShortDistance(departure, arrival) {
     const dijkstra = new Dijkstra();
     this.splitedSection.forEach((station) => {
-      const {names, distance} = station;
-      for (let i = 0; i < distance.length; i++) {
-        dijkstra.addEdge(names[i], names[i + 1], distance[i]);
+      for (let i = 0; i < station.length; i++) {
+        const departure = station[i].section[0];
+        const arrival = station[i].section[1];
+        dijkstra.addEdge(departure, arrival, station[i].distance);
       }
     });
     const result = dijkstra.findShortestPath(departure, arrival);
@@ -25,9 +26,10 @@ export default class Subway {
   findShortTime(departure, arrival) {
     const dijkstra = new Dijkstra();
     this.splitedSection.forEach((station) => {
-      const {names, time} = station;
-      for (let i = 0; i < time.length; i++) {
-        dijkstra.addEdge(names[i], names[i + 1], time[i]);
+      for (let i = 0; i < station.length; i++) {
+        const departure = station[i].section[0];
+        const arrival = station[i].section[1];
+        dijkstra.addEdge(departure, arrival, station[i].time);
       }
     });
     const result = dijkstra.findShortestPath(departure, arrival);
