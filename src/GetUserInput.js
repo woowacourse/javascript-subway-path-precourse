@@ -21,11 +21,14 @@ export default class GetUserInput {
   }
 
   isValid() {
-    if (!(this.isValidLength(this.departure) && this.isInStations(this.departure))) {
+    if (!(this.isValidLength(this.departure))) {
       return DepartureError;
     }
-    if (!(this.isValidLength(this.arrival) && this.isInStations(this.arrival))) {
+    if (!(this.isValidLength(this.arrival))) {
       return ArrivalError;
+    }
+    if (!(this.isInStations(this.departure) && this.isInStations(this.arrival))) {
+      return NoStationError;
     }
     if (this.isSameStation(this.departure, this.arrival)) {
       return SameStationError;
