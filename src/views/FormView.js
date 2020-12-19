@@ -10,6 +10,7 @@ export default class FormView extends View {
   setup(el) {
     this.init(el);
     this.el.innerHTML = this.render();
+    this.bindEvents();
     return this;
   }
 
@@ -37,7 +38,7 @@ export default class FormView extends View {
             id=${DOM.SHORTEST_DISTANCE_RADIO_ID}
             name="search-type"
             value="shortest"
-            checked
+            checked="checked"
           />
           <label for=${DOM.SHORTEST_DISTANCE_RADIO_ID}>최단거리</label>
   
@@ -53,5 +54,21 @@ export default class FormView extends View {
         <button id=${DOM.SEARCH_BUTTON_ID}>길 찾기</button>
       </form>
       `;
+  }
+
+  bindEvents() {
+    this.on("submit", (e) => this.onSubmit(e));
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    // console.log(e.target[0].value); //DepartureStationView
+    // console.log(e.target[1].value); //ArrivalStationView
+    // console.log(e.target[2].checked);
+    // console.log(e.target[2].value);
+    // console.log(e.target[3]);
+    // console.log(e.target[4]);
+
+    this.emit("@submit", { stations: [e.target[0].value, e.target[1].value] });
   }
 }
