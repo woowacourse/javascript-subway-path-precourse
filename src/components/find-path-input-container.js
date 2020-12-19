@@ -30,7 +30,8 @@ export default function findPath() {
     const endStation = document.getElementById("arrival-station-name-input")
       .value;
     newResult();
-    if (startStation && endStation) {
+
+    if (!startStation && !endStation) {
       return checkIfStartAndEndSame(startStation, endStation);
     }
 
