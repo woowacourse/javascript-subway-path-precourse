@@ -1,22 +1,32 @@
 import render from "../../managers/render.js";
 import app from "../app.js";
 import Dijkstra from "../../utils/Dijkstra.js";
-import { validateStation } from "../search/validation.js";
+import { validateStation, validateRadioInput } from "../search/validation.js";
 
 function onSearchBtnHandler() {
   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
-  let departure = validateStation(document.getElementById("departure-station-name-input").value);
-  let arrival = validateStation(document.getElementById("arrival-station-name-input").value);
-  let checkedRadioInput = checkRadioInput();
+  //   let departure = validateStation(document.getElementById("departure-station-name-input").value);
+  //   let arrival = validateStation(document.getElementById("arrival-station-name-input").value);
+  let [departure, arrival] = validateStation([
+    document.getElementById("departure-station-name-input").value,
+    document.getElementById("arrival-station-name-input").value,
+  ]);
+  //   let arrival = validateStation(document.getElementById("arrival-station-name-input").value);
 
-  let timeTableData = { totalTime: 0, totalDistance: 0, minPath: [] };
+  let checkedRadioInput = validateRadioInput(document.all("search-type"));
 
-  timeTableData.minPath = makeMinPathResult(checkedRadioInput, departure, arrival);
-  timeTableData.totalDistance = calculateTotalCost(timeTableData.minPath, "distance");
-  timeTableData.totalTime = calculateTotalCost(timeTableData.minPath, "time");
+  if (departure && arrival && checkedRadioInput) {
+    let timeTableData = { totalTime: 0, totalDistance: 0, minPath: [] };
 
-  console.log(timeTableData);
-  render(app(timeTableData, checkedRadioInput));
+    timeTableData.minPath = makeMinPathResult(checkedRadioInput, departure, arrival);
+    timeTableData.totalDistance = calculateTotalCost(timeTableData.minPath, "distance");
+    timeTableData.totalTime = calculateTotalCost(timeTableData.minPath, "time");
+
+    console.log(timeTableData);
+    render(app(timeTableData, checkedRadioInput));
+  } else {
+    render(app());
+  }
 }
 
 function calculateTotalCost(minPath, option) {
@@ -71,18 +81,6 @@ function calculateTotalCost(minPath, option) {
 
 //   return time;
 // }
-
-function checkRadioInput() {
-  let checkedRadioInput = "";
-
-  if (document.all("search-type")[0].checked) {
-    checkedRadioInput = "최단거리";
-  } else if (document.all("search-type")[1].checked) {
-    checkedRadioInput = "최소시간";
-  }
-
-  return checkedRadioInput;
-}
 
 function makeMinPathResult(checkRadioInput, departure, arrival) {
   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));

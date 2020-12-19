@@ -1,7 +1,7 @@
-import { notExistAlert, minimunLengthAlert } from "../search/alert.js";
+import { notExistAlert, minimunLengthAlert, sameDepartArrivalAlert } from "../search/alert.js";
 
-function validateStation(stationName) {
-  let alertMsg = minimunLengthAlert(stationName) || notExistAlert(stationName);
+function validateStation(stationNames) {
+  let alertMsg = minimunLengthAlert(stationNames) || notExistAlert(stationNames) || sameDepartArrivalAlert(stationNames);
 
   if (alertMsg !== "") {
     alert(alertMsg);
@@ -9,7 +9,19 @@ function validateStation(stationName) {
     return "";
   }
 
-  return stationName;
+  return stationNames;
 }
 
-export { validateStation };
+function validateRadioInput(radioInputs) {
+  let checkedRadioInput = "";
+
+  if (radioInputs[0].checked) {
+    checkedRadioInput = "최단거리";
+  } else if (radioInputs[1].checked) {
+    checkedRadioInput = "최소시간";
+  }
+
+  return checkedRadioInput;
+}
+
+export { validateStation, validateRadioInput };
