@@ -48,7 +48,22 @@ export default class StationPathModel {
       const dijkstra = this.getLineGraph(line);
       result.push(dijkstra.findShortestPath(departure, arrival));
     })
-    console.log(result);
     return result;
+  }
+
+  getTime(line, path) {
+    const sections = this.findSections(line);
+    let time = 0;
+    for (let i = 0; i < path[0].length - 1; i++) {
+      const start = path[0][i];
+      const end = path[0][i + 1]
+      sections.forEach((section) => {
+        if ((section.start === start && section.end === end)
+            || (section.start === end && section.end === start)) {
+              time += section.time;
+            }
+      })
+    }
+    return time;
   }
 }
