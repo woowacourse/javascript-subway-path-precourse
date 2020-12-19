@@ -1,3 +1,4 @@
+import { lines, sections, stations } from "../Data/data.js";
 import AbstractComponent from "./AbstractComponent.js";
 import Input from "./Input.js";
 import Result from "./Result.js";
@@ -6,9 +7,16 @@ export default class App extends AbstractComponent {
   
   constructor(props) {
     super(props);
+    this.initializeVariables();
     this.render();
   }
 
+  initializeVariables() {
+    this.stations = stations;
+    this.lines = lines;
+    this.sections = sections;
+  }
+  
   render() {
     super.render();
     this.renderHeader();
