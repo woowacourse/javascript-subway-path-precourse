@@ -36,4 +36,7 @@ const Visualization = function () {
     this.appendChildren(table, thead);
     return table;
   };
+
+  this.createTd = (text) =>
+    text ? this.getAdvancedEle("td", null, text) : document.createElement("td");
 };
