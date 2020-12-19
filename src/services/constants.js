@@ -1,0 +1,2 @@
+export const MINIMUM_STATION_NAME_LENGTH = 2;
+export const MINIMUM_STATION_NAME_LENGTH_ALERT = `${MINIMUM_STATION_NAME_LENGTH}자 이상의 이름을 입려해주세요.`;

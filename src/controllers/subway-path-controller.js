@@ -2,6 +2,7 @@ import SubwayDistanceMap from '../models/subway-distance-map-model.js';
 import SubwayTimeMap from '../models/subway-time-map-model.js';
 import SubwayPathInput from '../views/subway-path-input.js';
 import SubwayPathOutput from '../views/Subway-path-output.js';
+import {isNotValidInput} from '../services/validation.js';
 
 const RADIO_SHORTEST_DISTANCE_VALUE = 'shortest-distance';
 const RADIO_SHORTEST_TIME_VALUE = 'shortest-time';
@@ -29,12 +30,19 @@ export default class SubwayPathController {
 
 		[departureStationName, arrivalStationName, radioSelect] = [...searchInputs];
 
+		if (isNotValidInput(departureStationName, arrivalStationName)) {
+			return;
+		}
+
+		this.getSelectedRadioData(radioSelect, departureStationName, arrivalStationName);
+	}
+
+	getSelectedRadioData = (radioSelect, departureStationName, arrivalStationName) => {
 		if (radioSelect == RADIO_SHORTEST_DISTANCE_VALUE) {
 			this.getShortestDistanceData(departureStationName, arrivalStationName)
 		} else if (radioSelect == RADIO_SHORTEST_TIME_VALUE) {
 			this.getShortestTimeData(departureStationName, arrivalStationName);
 		}
-		
 	}
 
 	getShortestDistanceData = (departureStationName, arrivalStationName) => {
@@ -42,10 +50,13 @@ export default class SubwayPathController {
 		const shortestDistancePath = this.subwayDistanceMap.getShortestDistancePath(departureStationName, arrivalStationName);
 		let shortestTotalDistance;
 		let totalTime;
+
 		[shortestTotalDistance, totalTime] = this.subwayDistanceMap.getShortestTotalDistanceAndTotalTime(shortestDistancePath);
 		
-		console.log(shortestTotalDistance, totalTime);
-		const resultTableData = [radioSelect, shortestTotalDistance, totalTime, shortestDistancePath];
+		this.renderShortestDistanceResult([radioSelect, shortestTotalDistance, totalTime, shortestDistancePath]);
+	}
+
+	renderShortestDistanceResult = resultTableData => {
 		this.subwayPathOutput.renderResult(resultTableData);
 	}
 
@@ -54,9 +65,13 @@ export default class SubwayPathController {
 		const shortestTimePath = this.subwayTimeMap.getShortestTimePath(departureStationName, arrivalStationName);
 		let shortestTotalTime;
 		let totalDistance;
+
 		[shortestTotalTime, totalDistance] = this.subwayTimeMap.getShortestTotalTimeAndTotalDistance(shortestTimePath);
 		
-		const resultTableData = [radioSelect, totalDistance, shortestTotalTime, shortestTimePath];
+		this.renderShortestDistanceResult([radioSelect, totalDistance, shortestTotalTime, shortestTimePath]);
+	}
+
+	renderShortestTimeResult = resultTableData => {
 		this.subwayPathOutput.renderResult(resultTableData);
 	}
 }
