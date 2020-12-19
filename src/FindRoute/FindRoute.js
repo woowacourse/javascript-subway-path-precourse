@@ -24,7 +24,8 @@ export default class FindRoute extends Component {
       start: "",
       end: "",
       method: "minimumDistance",
-      total: [],
+      route: [],
+      short: [],
     };
 
     this.handleDepartureStation = (departure) => {
@@ -66,19 +67,21 @@ export default class FindRoute extends Component {
 
     this.findRouteButtonClick = () => {
       if (this.state.method === "minimumDistance") {
-        const result = dijkstraDistance.findShortestPath(
+        const routeResult = dijkstraDistance.findShortestPath(
           this.state.start,
           this.state.end
         );
-        console.log(result);
-        this.setState({ ...this.state, total: [...result] });
+        const path = calculateShort(routeResult);
+        console.log(path);
+        this.setState({ ...this.state, route: [...routeResult], short: path });
       } else {
-        const result = dijkstraTime.findShortestPath(
+        const routeResult = dijkstraTime.findShortestPath(
           this.state.start,
           this.state.end
         );
-        console.log(result);
-        this.setState({ ...this.state, total: [...result] });
+        const path = calculateShort(routeResult);
+        console.log(path);
+        this.setState({ ...this.state, route: [...routeResult], short: path });
       }
     };
   }
@@ -131,7 +134,7 @@ export default class FindRoute extends Component {
   }
 
   render() {
-    const { start, end, method, total } = this.state;
+    const { start, end, method, route, short } = this.state;
     return `
           <h2>🚇 지하철 길찾기</h2>
           <div>
@@ -152,7 +155,7 @@ export default class FindRoute extends Component {
           </div>
           <button id="search-button">길 찾기</button>
           ${
-            total.length === 0
+            route.length === 0
               ? ""
               : `<div>
           <h3>📝 결과</h3>
@@ -166,11 +169,11 @@ export default class FindRoute extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>5km</td>
-                <td>4분</td>
+                <td>${short[1]}km</td>
+                <td>${short[0]}분</td>
               </tr>
               <tr>
-                <td colspan="2">${total.join("→")}</td>
+                <td colspan="2">${route.join("→")}</td>
               </tr>
             </tbody>
           </table>
@@ -178,4 +181,21 @@ export default class FindRoute extends Component {
           }
           `;
   }
+}
+
+function calculateShort(result) {
+  let time = 0;
+  let distance = 0;
+  for (let i = 0; i < result.length - 1; i++) {
+    const v1 = result[i];
+    const v2 = result[i + 1];
+
+    stationData.forEach((station) => {
+      if (station.V1 === v1 && station.V2 === v2) {
+        time += station.time;
+        distance += station.distance;
+      }
+    });
+  }
+  return [time, distance];
 }
