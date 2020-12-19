@@ -2,12 +2,12 @@ import Dijkstra from "./utils/Dijkstra.js";
 import { stations, lines } from "./consts/data.js";
 import { startManager } from "./component/manager.js";
 
-let stationData = [];
+export let stationData = [];
 let lineData = [];
-let stationToStation = {};
+export let stationToStation = {};
 
-const dijkstra_time = new Dijkstra();
-const dijkstra_distance = new Dijkstra();
+export const dijkstra_time = new Dijkstra();
+export const dijkstra_distance = new Dijkstra();
 
 const App = () => {
   initializeData();
@@ -43,5 +43,3 @@ const constructSTS = () => {
 };
 
 App();
-
-export { dijkstra_distance, dijkstra_time, stationToStation };

@@ -5,8 +5,8 @@ import {
   dijkstra_distance,
   dijkstra_time,
   stationToStation,
+  stationData,
 } from "../index.js";
-
 export const startManager = () => {
   const findingPathButton = document.querySelector(
     DOMTag.FINDING_PATH_BUTTON_QUERY
@@ -42,9 +42,16 @@ const checkedButtonType = () => {
 
 const buttonValidator = (value, dept, dest) => {
   if (!value) alert(ALERT.SELECT_RADIO_BUTTON);
+  else if (dept === dest) alert(ALERT.DEPT_DEST_EQUAL);
+  else if (dept.length < 2 || dest.length < 2) alert(ALERT.MINIMUM_LENGTH);
+  else if (!(findStation(dept) && findStation(dest))) alert(ALERT.NO_STATION);
   else return true;
 
   return false;
+};
+
+const findStation = (station) => {
+  return stationData.includes(station);
 };
 
 export const runDijkstra = (type, dept, dest) => {
