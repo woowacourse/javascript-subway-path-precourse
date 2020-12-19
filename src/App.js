@@ -22,7 +22,7 @@ export default {
 		const arrival = this.query("#arrival-station-name-input").value;
 		const type = this.query("input[name='search-type']:checked").value;
 
-		if (this.validateInput(departure, arrival)) {
+		if (this.isValidInput(departure, arrival)) {
 			const result =
 				type === "distance"
 					? Path.getShortestDistancePath(departure, arrival)
@@ -31,7 +31,7 @@ export default {
 		}
 	},
 
-	validateInput(departure, arrival) {
+	isValidInput(departure, arrival) {
 		if (!departure || !arrival) {
 			return alert("출발역 또는 도착역을 입력해주세요.");
 		}
