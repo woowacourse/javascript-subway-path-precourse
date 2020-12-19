@@ -57,7 +57,8 @@ class RouteInput extends Component {
     const MINIMUM_INPUT_LENGTH = 2;
     return (
       departureStation.length >= MINIMUM_INPUT_LENGTH &&
-      arrivalStation.length >= MINIMUM_INPUT_LENGTH
+      arrivalStation.length >= MINIMUM_INPUT_LENGTH &&
+      arrivalStation !== departureStation
     );
   }
 
