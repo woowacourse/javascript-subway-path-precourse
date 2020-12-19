@@ -1,4 +1,4 @@
-import { stations, lines } from './data/data.js';
+import { lines } from './data/data.js';
 import { FindPathInputs } from './components/FindPathInputs.js';
 import Dijkstra from './utils/Dijkstra.js';
 import { VALUE } from './constants/constants.js';
@@ -11,7 +11,6 @@ export class SubwayFindPath {
     };
     this.initializeData();
     this.initializeComponents();
-    this.dijkstra = new Dijkstra();
   }
 
   initializeComponents = () => {
@@ -19,7 +18,9 @@ export class SubwayFindPath {
     this.findPathResult = new FindPathResult();
   };
 
-  initializeData = () => {};
+  initializeData = () => {
+    this.dijkstra = new Dijkstra();
+  };
 
   renderResult = (departure, arrival, weight, dijkstra) => {
     this.findPathResult.render({

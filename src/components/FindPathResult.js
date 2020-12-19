@@ -12,15 +12,20 @@ export class FindPathResult {
 
   render = (props) => {
     this.dijkstra = props.dijkstra;
-    this.resultHTML = getResultHeader(props.weight);
-    this.resultContainer.innerHTML = this.resultHTML;
+    this.renderHeader(props.weight);
 
     const path = this.dijkstra.findShortestPath(props.departure, props.arrival);
     this.makeTable(path, props.departure, props.arrival);
   };
 
+  renderHeader = () => {
+    this.resultHTML = getResultHeader(weight);
+    this.resultContainer.innerHTML = this.resultHTML;
+  };
+
   makeTable = (path) => {
     let { time, distance } = this.getTimeAndDistanceOfPath(path);
+
     this.table = document.querySelector('#result-table');
     this.table.innerHTML = resultTableTemplate(time, distance, path);
   };

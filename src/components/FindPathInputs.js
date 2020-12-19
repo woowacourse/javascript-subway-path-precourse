@@ -46,6 +46,7 @@ export class FindPathInputs {
 
   getNameCheckedWeight = () => {
     let time = this.timeRadioButton.checked;
+
     return time ? VALUE.TIME_VALUE : VALUE.DISTANCE_VALUE;
   };
 }

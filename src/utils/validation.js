@@ -10,6 +10,7 @@ export const checkStationNameisValid = (departure, arrival) => {
 
 export const checkTargetStationIncludedInStation = (departure, arrival) => {
   let errors = getErrorOfTargetStationIncludedInStation(departure, arrival);
+
   return judgeErrors(errors);
 };
 
