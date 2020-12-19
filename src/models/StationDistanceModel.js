@@ -15,7 +15,7 @@ export default class StationDistanceModel {
 
   getShortestDistancePath(departureStation, endStation) {
     this.setDistance();
-    // todo 연결되지 않은 곳일 때 예외처
+    // todo 연결되지 않은 곳일 때 예외처리
     return this.dijkstra.findShortestPath(departureStation, endStation);
   }
 

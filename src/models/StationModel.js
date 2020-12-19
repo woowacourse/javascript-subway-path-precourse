@@ -22,8 +22,4 @@ export default class StationModel {
   addLIne(stationName, stationLine) {
     this.getStationByName(stationName).setLine(stationLine);
   }
-
-  getStations() {
-    return this.stations;
-  }
 }

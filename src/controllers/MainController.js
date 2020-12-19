@@ -9,10 +9,8 @@ import { Lines2, Lines3, LineSinbundang } from '../utils/data.js';
 import { SEARCH_PATH_TYPE } from '../utils/constants.js';
 import stationInputValidator from '../utils/stationInputValidator.js';
 
-const tag = `[MainController]`;
 export default class MainController {
   init() {
-    console.log(`${tag} init`);
     this.initStation();
 
     this.searchPathInputForm = new SearchPathInputFormView()
@@ -102,7 +100,6 @@ export default class MainController {
   }
 
   onChangeSelectorHandler(targetId) {
-    console.log(`${tag} onChangeSelectorHandler`);
     this.selectPathType = targetId;
     this.findPath(this.departureStationName, this.arrivalStationName);
   }

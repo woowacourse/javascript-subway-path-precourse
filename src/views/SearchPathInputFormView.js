@@ -1,31 +1,27 @@
 import View from './View.js';
 import { SEARCH_PATH_TYPE } from '../utils/constants.js';
 
-const tag = `[StationInputForm]`;
 export default class SearchPathInputFormView extends View {
   setup($element) {
-    console.log(`${tag} init`);
     this.init($element);
     this.renderSearchInputForm();
     return this;
   }
 
   renderSearchInputForm() {
-    console.log(`${tag} renderSearchInputForm`);
     this.$element.innerHTML =
       this.getInputStationFormHTML() + this.getSelectSearchTypeBtnHTML() + this.getSubmitBtnHTML();
 
     this.$departureStationInput = this.$element.querySelector('#departure-station-name-input');
     this.$ArrivalStationInput = this.$element.querySelector('#arrival-station-name-input');
     this.$pathSelectorContainer = this.$element.querySelector('.path-selectors');
-    // this.$pathSelector = document.getElementsByName('search-type');
+
     this.bindInputEvent();
     this.bindClickEvent();
     return this;
   }
 
   getInputStationFormHTML() {
-    console.log(`${tag} getInputStationFormHTML`);
     return `<div class="station-input-form-container">
         <label>출발역</label>
         <input id="departure-station-name-input" type="text" placeholder="">
@@ -36,7 +32,6 @@ export default class SearchPathInputFormView extends View {
   }
 
   getSelectSearchTypeBtnHTML() {
-    console.log(`${tag} getSelectSearchTypeBtnHTML`);
     return `<div class="path-selectors">
         <input type="radio" id=${SEARCH_PATH_TYPE.MIN_DISTANCE} name="search-type" checked> <label id="min_distance_selector_label" for=${SEARCH_PATH_TYPE.MIN_DISTANCE}>최단거리</label>
         <input type="radio" id=${SEARCH_PATH_TYPE.MIN_TIME} name="search-type"> <label for=${SEARCH_PATH_TYPE.MIN_TIME}>최소시간</label>
@@ -44,7 +39,6 @@ export default class SearchPathInputFormView extends View {
   }
 
   getSubmitBtnHTML() {
-    console.log(`${tag} getSubmitBtnHTML`);
     return `<button id="search-button">길 찾기</button>`;
   }
 
@@ -54,7 +48,6 @@ export default class SearchPathInputFormView extends View {
   }
 
   bindInputEvent() {
-    console.log(`${tag} bindInputEvent`);
     this.$element
       .querySelector('#search-button')
       .addEventListener('click', () => this.onSubmitSearchPathHandler());
@@ -70,7 +63,6 @@ export default class SearchPathInputFormView extends View {
   }
 
   bindClickEvent() {
-    console.log(`${tag} bindClickEvent`);
     this.$pathSelectorContainer.addEventListener('click', (e) =>
       this.onChangeSearchPathHandler(e.target.id)
     );

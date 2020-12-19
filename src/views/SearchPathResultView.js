@@ -1,17 +1,13 @@
 import View from './View.js';
 import { UNIT } from '../utils/constants.js';
 
-const tag = `[SearchPathInputFormView]`;
 export default class SearchPathInputFormView extends View {
   setup($element) {
-    console.log(`${tag} init`);
     this.init($element);
     return this;
   }
 
   renderSearchPathResult(path, totalDistance, totalTime, searchType) {
-    console.log(path, totalDistance, totalTime, searchType);
-    console.log(`${tag} renderSearchInputForm`);
     this.$element.innerHTML = this.getSearchPathResultHTML(
       path,
       totalDistance,
