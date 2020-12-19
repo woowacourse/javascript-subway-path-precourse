@@ -51,8 +51,8 @@ const checkedButtonType = () => {
 
 const inputValidator = (value, dept, dest) => {
   if (!value) alert(ALERT.SELECT_RADIO_BUTTON);
-  else if (dept === dest) alert(ALERT.DEPT_DEST_EQUAL);
   else if (dept.length < 2 || dest.length < 2) alert(ALERT.MINIMUM_LENGTH);
+  else if (dept === dest) alert(ALERT.DEPT_DEST_EQUAL);
   else if (!(findStation(dept) && findStation(dest))) alert(ALERT.NO_STATION);
   else return true;
 
