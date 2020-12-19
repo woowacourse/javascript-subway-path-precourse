@@ -12,4 +12,10 @@ const showAlertMessage = ($input, message) => {
   $input.focus();
 };
 
-export { showElement, hideElement, showAlertMessage };
+const getCheckedSearchType = $inputs => {
+  const checkedRadio = [...$inputs].filter(radio => radio.checked)[0];
+
+  return checkedRadio.dataset.searchtype;
+};
+
+export { showElement, hideElement, showAlertMessage, getCheckedSearchType };
