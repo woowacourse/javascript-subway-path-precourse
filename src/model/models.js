@@ -7,14 +7,16 @@ export default class Models {
     this._distDijkstra = new Dijkstra();
     this._durationDijkstra = new Dijkstra();
     this.parseInitialInput(initialInput);
-    /*
-    const test = this._distDijkstra.findShortestPath("교대", "양재시민의숲");
-    const test2 = this._durationDijkstra.findShortestPath(
-      "양재",
-      "양재시민의숲"
-    );
-    console.log(test);
-    */
+  }
+  getMinDistance(departure, arrival) {
+    const result = this._distDijkstra.findShortestPath(departure, arrival);
+    const route = result.route;
+    const duration = this._getDurationFromMinPath(route);
+    return {
+      distance: result.costs[arrival],
+      duration: duration,
+      route: result.route,
+    };
   }
   parseInitialInput(lines) {
     lines.forEach((line) => {
@@ -29,6 +31,20 @@ export default class Models {
     });
   }
 
+  _getDurationFromMinPath(route) {
+    let duration = 0;
+    for (let i = 0; i < route.length - 1; i++) {
+      const departure = route[i];
+      const arrival = route[i + 1];
+      const result = this._durationDijkstra.findShortestPath(
+        departure,
+        arrival
+      );
+      duration += result.costs[arrival];
+      console.log(result);
+    }
+    return duration;
+  }
   _parseToDistDijkstra({ stationsOfLine, distanceWeight }) {
     for (let i = 0; i < distanceWeight.length; i++) {
       this._distDijkstra.addEdge(
