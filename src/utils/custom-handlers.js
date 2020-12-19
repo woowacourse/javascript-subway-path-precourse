@@ -12,7 +12,7 @@ export const getChildById = (parent, id) => {
   return null;
 };
 
-export const getDepartureStationNameInput = (appContainer) => {
+export const getDepartureStationNameInputValue = (appContainer) => {
   const $departureStationNameLabel = appContainer.getElementsByTagName(
     "label"
   )[0];
@@ -20,7 +20,7 @@ export const getDepartureStationNameInput = (appContainer) => {
   return getChildById(
     $departureStationNameLabel,
     ID_VALUES.departureStationNameInput
-  );
+  ).value.trim();
 };
 
 export const getArrivalStationNameInput = (appContainer) => {
@@ -31,7 +31,7 @@ export const getArrivalStationNameInput = (appContainer) => {
   return getChildById(
     $arrivalStationNameLabel,
     ID_VALUES.arrivalStationNameInput
-  );
+  ).value.trim();
 };
 
 export const getSearchType = () => {

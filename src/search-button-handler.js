@@ -2,8 +2,8 @@ import SubwayMap from "./subway-map.js";
 import { ID_VALUES } from "./html-constant/html-id-values.js";
 import {
   getChildById,
-  getDepartureStationNameInput,
-  getArrivalStationNameInput,
+  getDepartureStationNameInputValue,
+  getArrivalStationNameInputValue,
   getSearchType,
 } from "./utils/custom-handlers.js";
 
@@ -47,8 +47,8 @@ const isStationsLinked = (departureStationName, arrivalStationName) => {
 };
 
 const isInputsValid = (appContainer) => {
-  const departureStationName = getDepartureStationNameInput(appContainer).value;
-  const arrivalStationName = getArrivalStationNameInput(appContainer).value;
+  const departureStationName = getDepartureStationNameInputValue(appContainer);
+  const arrivalStationName = getArrivalStationNameInputValue(appContainer);
 
   return (
     isInputLengthTwoOrGreater(departureStationName) &&
@@ -110,8 +110,8 @@ const showShortestPathTable = (resultContainer, shortestPath) => {
 
 const showResult = (appContainer) => {
   const shortestPath = getShortestPathBySearchType(
-    getDepartureStationNameInput(appContainer).value,
-    getArrivalStationNameInput(appContainer).value,
+    getDepartureStationNameInputValue(appContainer),
+    getArrivalStationNameInputValue(appContainer),
     getSearchType()
   );
   showShortestPathTable(
