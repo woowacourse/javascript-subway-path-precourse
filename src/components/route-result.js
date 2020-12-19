@@ -1,15 +1,17 @@
 import Component from '../core/component.js';
 
 class RouteResult extends Component {
-  constructor($target) {
-    super($target);
+  constructor($target, props) {
+    super($target, props);
+    props.searchResult.subscribe(this.render);
     this.render();
   }
 
   mountTemplate() {
+    console.log(this._props.searchResult.value);
     this._$target.innerHTML = `
 			<h1>결과</h1>
-			<h3>최단거리<h3>
+			${this.createSearchTypeH3Template()}
 			<table border="1">
 					<tr>
 						<th>총 거리</th>
@@ -20,14 +22,25 @@ class RouteResult extends Component {
     `;
   }
 
+  createSearchTypeH3Template() {
+    const { searchType } = this._props.searchResult.value;
+    return `
+			<h3>
+				${searchType === 'distance-first' ? '최단거리' : '최소시간'}
+			</h3>
+		`;
+  }
+
   createTableBodyTemplate() {
+    const { searchResult } = this._props;
+    const { totalTime, totalDistance, resultPath } = searchResult.value;
     return `
 			<tr>
-				<td>km</td>
-				<td>분</td>
+				<td>${totalDistance}km</td>
+				<td>${totalTime}분</td>
 			</tr>
 			<tr>
-				<td colspan="2">경로</td>
+				<td colspan="2">${resultPath.join('->')}</td>
 			</tr>
 		`;
   }
