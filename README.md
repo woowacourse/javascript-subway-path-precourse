@@ -5,7 +5,7 @@
 
 ### index.js
 - data.js로부터 데이터들을 들고오는 `initializeData`
-- 역과 역 사이의 시간 및 거리 정보를 구해 저장하는 `constructSTS`
+- 역과 역 사이의 시간 및 거리 정보를 구해 저장하고 다익스트라에 추가하는 `constructData`
 
 ### utils/utils.js
 - 태그의 타입과 내용들을 받아 element를 반환하는 `createElement`

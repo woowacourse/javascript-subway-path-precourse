@@ -11,7 +11,7 @@ export const dijkstra_distance = new Dijkstra();
 
 const App = () => {
   initializeData();
-  constructSTS();
+  constructData();
 
   startManager();
 };
@@ -25,7 +25,7 @@ const initializeData = () => {
   });
 };
 
-const constructSTS = () => {
+const constructData = () => {
   lineData.map((line) => {
     line.sequence.map((path) => {
       stationToStation[path.deptStation][path.destStation] = {
