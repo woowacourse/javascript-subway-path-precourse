@@ -11,44 +11,50 @@ export default {
 	},
 
 	bindEvents() {
-		this.query('#search-button').addEventListener('click', this.onClickSearch.bind(this));
+		this.query("#search-button").addEventListener(
+			"click",
+			this.onClickSearch.bind(this)
+		);
 	},
 
 	onClickSearch() {
-		const departure = this.query('#departure-station-name-input').value;
+		const departure = this.query("#departure-station-name-input").value;
 		const arrival = this.query("#arrival-station-name-input").value;
 		const type = this.query("input[name='search-type']:checked").value;
 
-		if(this.validateInput(departure, arrival)) {
-			const result = type === 'distance' ? Path.getShortestDistancePath(departure, arrival) : Path.getShortestTimePath(departure, arrival);
+		if (this.validateInput(departure, arrival)) {
+			const result =
+				type === "distance"
+					? Path.getShortestDistancePath(departure, arrival)
+					: Path.getShortestTimePath(departure, arrival);
 			this.showResult(result, type);
 		}
 	},
 
 	validateInput(departure, arrival) {
-		if(!departure || !arrival) {
-			return alert('출발역 또는 도착역을 입력해주세요.');
+		if (!departure || !arrival) {
+			return alert("출발역 또는 도착역을 입력해주세요.");
 		}
-		if(departure.length < 2 || arrival.length < 2) {
-			return alert('출발역 또는 도착역은 2글자 이상 입력해야 합니다.');
+		if (departure.length < 2 || arrival.length < 2) {
+			return alert("출발역 또는 도착역은 2글자 이상 입력해야 합니다.");
 		}
-		if(departure === arrival) {
-			return alert('출발역과 도착역이 같습니다.');
+		if (departure === arrival) {
+			return alert("출발역과 도착역이 같습니다.");
 		}
-		if(!Path.isExistStation(departure)) {
+		if (!Path.isExistStation(departure)) {
 			return alert(`${departure}역을 찾을 수 없습니다.`);
 		}
-		if(!Path.isExistStation(arrival)) {
+		if (!Path.isExistStation(arrival)) {
 			return alert(`${arrival}역을 찾을 수 없습니다.`);
 		}
 
 		return true;
 	},
 
-	showResult({paths, distance, time}, type) {
+	showResult({ paths, distance, time }, type) {
 		const html = `
 			<h3>결과</h3>
-			<h5>${type === 'distance' ? '최단거리' : '최소시간'}</h5>
+			<h5>${type === "distance" ? "최단거리" : "최소시간"}</h5>
 			<table>
 				<thead>
 					<tr>
@@ -62,12 +68,12 @@ export default {
 						<td>${time}분</td>
 					</tr>
 					<tr>
-						<td colspan="2">${paths.join('➞')}</td>
+						<td colspan="2">${paths.join("➞")}</td>
 					</tr>
 				</tbody>
 			</table>
-		`
+		`;
 
-		this.query('#result').innerHTML = html;
-	}
-}
+		this.query("#result").innerHTML = html;
+	},
+};
