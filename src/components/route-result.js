@@ -8,8 +8,28 @@ class RouteResult extends Component {
 
   mountTemplate() {
     this._$target.innerHTML = `
-		route result
+			<h1>결과</h1>
+			<h3>최단거리<h3>
+			<table border="1">
+					<tr>
+						<th>총 거리</th>
+						<th>총 소요 시간</th>
+					</tr>
+				${this.createTableBodyTemplate()}
+			</table>
     `;
+  }
+
+  createTableBodyTemplate() {
+    return `
+			<tr>
+				<td>km</td>
+				<td>분</td>
+			</tr>
+			<tr>
+				<td colspan="2">경로</td>
+			</tr>
+		`;
   }
 }
 
