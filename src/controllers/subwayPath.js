@@ -1,15 +1,13 @@
 import { NAME, ALERT } from '../constants/index.js';
 import { isValidNameLength, isNameInStations } from '../utils/userException.js';
-import { addDijkstraEdgeDistance, addDijkstraEdgeTime } from '../utils/addDijkstra.js';
-import { stationsDistance, stationsTime } from '../models/stationsInitialData.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import Stations from '../models/stations.js';
 
 export const getStation = (stationName) => {
   const stationNameInput = document.querySelector(`#${stationName}`);
   const stations = new Stations();
-
   const stationNameInputValue = hasValidName(stationNameInput.value, stations.stations);
+
   return stationNameInputValue;
 };
 
@@ -45,12 +43,13 @@ export const hasValidInput = (departureStation, arrivalStation) => {
 
 export const getResultPath = (shortestSelect, departureStation, arrivalStation) => {
   const dijkstra = new Dijkstra();
+  const stations = new Stations();
   let result = '';
 
   if (shortestSelect === NAME.SHORTESTDISTANCE) {
-    addDijkstraEdgeDistance(dijkstra);
+    stations.addDijkstraEdgeDistance(dijkstra);
   } else if (shortestSelect === NAME.SHORTESTTIME) {
-    addDijkstraEdgeTime(dijkstra);
+    stations.addDijkstraEdgeTime(dijkstra);
   }
 
   result = dijkstra.findShortestPath(departureStation, arrivalStation);
@@ -58,8 +57,10 @@ export const getResultPath = (shortestSelect, departureStation, arrivalStation) 
 };
 
 export const getResultDistance = (resultPath) => {
+  const stations = new Stations();
   let totalDistance = 0;
-  stationsDistance.forEach((station) => {
+
+  stations.stationsDistance.forEach((station) => {
     if (resultPath.indexOf(station.start) > -1 && resultPath.indexOf(station.end) > -1) {
       totalDistance += station.distance;
     }
@@ -69,8 +70,10 @@ export const getResultDistance = (resultPath) => {
 };
 
 export const getResultTime = (resultPath) => {
+  const stations = new Stations();
   let totalTime = 0;
-  stationsTime.forEach((station) => {
+
+  stations.stationsTime.forEach((station) => {
     if (resultPath.indexOf(station.start) > -1 && resultPath.indexOf(station.end) > -1) {
       totalTime += station.time;
     }
