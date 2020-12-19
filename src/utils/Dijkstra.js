@@ -53,8 +53,7 @@ export default function Dijkstra() {
         let rightChild = this.values[idxOfRightChild];
 
         function swap(direction) {
-          const idxOfChild =
-            direction == "left" ? idxOfLeftChild : idxOfRightChild;
+          const idxOfChild = direction == "left" ? idxOfLeftChild : idxOfRightChild;
           const child = direction == "left" ? leftChild : rightChild;
           this.values[idxOfChild] = this.values[idxOfTarget];
           this.values[idxOfTarget] = child;
@@ -78,18 +77,12 @@ export default function Dijkstra() {
           continue;
         }
 
-        if (
-          leftChild.priority < rightChild.priority &&
-          leftChild.priority < lastItem.priority
-        ) {
+        if (leftChild.priority < rightChild.priority && leftChild.priority < lastItem.priority) {
           swap.call(this, "left");
           continue;
         }
 
-        if (
-          rightChild.priority < leftChild.priority &&
-          rightChild.priority < lastItem.priority
-        ) {
+        if (rightChild.priority < leftChild.priority && rightChild.priority < lastItem.priority) {
           swap.call(this, "right");
           continue;
         }
@@ -202,6 +195,16 @@ export default function Dijkstra() {
 
       return route;
     },
+    getTotalWeight: function (route) {
+      let totalWeigth = 0;
+
+      for (let i = 0; i < route.length - 1; i++) {
+        const neighbors = this.adjacencyList[route[i]];
+        totalWeigth += neighbors[route[i + 1]];
+      }
+
+      return totalWeigth;
+    },
   };
 
   this.addEdge = (source, target, weight) => {
@@ -210,6 +213,10 @@ export default function Dijkstra() {
 
   this.findShortestPath = (source, target) => {
     return WeightedGraph.findShortestRoute(source, target);
+  };
+
+  this.getTotalWeight = (route) => {
+    return WeightedGraph.getTotalWeight(route);
   };
 
   this.addVertex = (vertex) => {
