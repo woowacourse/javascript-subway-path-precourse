@@ -1,11 +1,12 @@
 import { FORM_ELEMENT, STATION_NAME_MIN_LENGTH, ERROR_MESSAGE } from "../utils/constants.js";
 
 export default class SearchForm {
-  constructor({ $target, stations }) {
+  constructor({ $target, stations, onSubmit }) {
     this.$form = document.createElement("form");
     $target.append(this.$form);
 
     this.stations = stations;
+    this.onSubmit = onSubmit;
 
     this.render();
     this.bindOnSubmit();
@@ -13,16 +14,16 @@ export default class SearchForm {
 
   bindOnSubmit = () => {
     this.$form.addEventListener("submit", (event) => {
-      this.onSubmit();
+      if (this.checkInputs()) {
+        this.onSubmit({
+          nextDepartureStationName: document.querySelector(`#${FORM_ELEMENT.departureStationInput.id}`).value,
+          nextArrivalStationName: document.querySelector(`#${FORM_ELEMENT.arrivalStationInput.id}`).value,
+          nextSearchType: document.querySelector("input[name='search-type']:checked").value,
+        });
+      }
 
       event.preventDefault();
     });
-  };
-
-  onSubmit = () => {
-    if (this.checkInputs()) {
-      // TODO: submit 로직 작성
-    }
   };
 
   checkInputs = () => {
@@ -82,11 +83,11 @@ export default class SearchForm {
         <input id="${FORM_ELEMENT.arrivalStationInput.id}" type="text">
       </label><br>
       <label>
-        <input type="radio" name="search-type" value="최단거리" checked>
+        <input type="radio" name="search-type" value="distance" checked>
         최단거리
       </label>
       <label>
-        <input type="radio" name="search-type" value="최소시간">
+        <input type="radio" name="search-type" value="time">
         최소시간
       </label><br>
       <button type="submit" id="${FORM_ELEMENT.searchButton.id}">${FORM_ELEMENT.searchButton.text}</button>
