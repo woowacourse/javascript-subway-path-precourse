@@ -15,6 +15,7 @@ function isUnderTwoCharacters() {
         alert("두자리 이상의 역 이름을 입력해주세요.");
     }
     isNotUsuableDepartureStation(departureStation, arrivalStation);
+    findData(departureStation, arrivalStation)
 }
 
 let stationNameList = ['교대', '강남', '역삼', '남부터미널', '양재', '양재시민의숲', '매봉'];
@@ -37,20 +38,37 @@ findRouteButton.addEventListener('click', showResult);
 function showResult() {
     isUnderTwoCharacters();
     document.getElementById("result").style.display="block";
-
 }
 
-let stationsLineTwo = ['교대', ]
 
 //입력된 역을 데이터에서 찾기
 //데이터에서 찾으면 해당 역의 distance와 time을 반환하여 array에 push
-// function findData() {
-//     for (let i = 0; i < )
-// }
+function findData(departureStation, arrivalStation) {
+    let dijkstra = new Dijkstra();
+    let v1 ='';
+    let v2 ='';
+    let v3 = 0;
+    for (let i = 0; i < lineTwo.length; i += 1) {
+        if (departureStation === lineTwo[i].station) {
+            v1 = lineTwo[i].station;
+            v3 += lineTwo[i].distance;
+        }
+        if (arrivalStation === lineTwo[i].station) {
+            v2 = lineTwo[i].station;
+            v3 += lineTwo[i].distance;
+        }
+    }
+    console.log(v1,v2,v3);
+    makeTable(v1, v2, v3);
+}
+
+
+
 
 // 2호선 총거리 구하기
 // function getTotalDistancelineTwo() {
 //     const dijkstra = new Dijkstra();
+//     dijkstra.addEdge(lineTwo[0].station, lineTwo[1].station, lineTwo[0].distance);
 //     for (let i = 0; i < lineTwo.length; i += 1) {
 
 //     }
