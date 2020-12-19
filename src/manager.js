@@ -14,5 +14,19 @@ export class subwayPathManager {
     ) {
       alert('true');
     }
+
+    getSearchType();
   };
 }
+
+const getSearchType = () => {
+  const searchType = document.getElementsByName('search-type');
+  let selectedSearchType = '';
+
+  searchType.forEach((type) => {
+    if (type.checked) {
+      selectedSearchType = type.value;
+    }
+  });
+  alert(selectedSearchType);
+};
