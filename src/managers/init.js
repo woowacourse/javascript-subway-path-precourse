@@ -1,3 +1,5 @@
+import { onSearchBtnHandler } from "../views/search/searchManager.js";
+
 function initHTML() {
   const mainBox = document.createElement("div");
 
@@ -8,8 +10,8 @@ function initHTML() {
     도착역<input id="arrival-station-name-input"></input>
     <br />
     <br />
-    <input type="radio" checked="checked" name="search-type">최단거리</input>
-    <input type="radio" name="search-type">최소시간</input>
+    <input type="radio" value="최단거리" checked="checked" name="search-type">최단거리</input>
+    <input type="radio" value="최소시간" name="search-type">최소시간</input>
     <br />
     <br />
     <button id="search-button">길 찾기</button>
@@ -18,4 +20,8 @@ function initHTML() {
   document.body.append(mainBox);
 }
 
-export { initHTML };
+function addEventToMainBtns() {
+  document.getElementById("search-button").addEventListener("click", onSearchBtnHandler);
+}
+
+export { initHTML, addEventToMainBtns };
