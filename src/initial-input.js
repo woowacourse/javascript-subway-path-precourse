@@ -1,14 +1,34 @@
-export const VERTICES = [
-  {
-    STATION_NAME: "교대"
-  }
-
+export const LINES = [
+  makeLine({
+    lineName: "2호선",
+    stationsOfLine: ["교대", "강남", "역삼"],
+    distanceWeight: [2,2],
+    durationWeight: [3,3],
+  }),
+  makeLine({
+    lineName: "3호선",
+    stationsOfLine: ["교대", "남부터미널", "양재", "매봉"],
+    distanceWeight: [3,6,1],
+    durationWeight: [2,5,1],
+  }),
+  makeLine({
+    lineName: "신분당선",
+    stationsOfLine: ["강남", "양재", "양재시민의숲"],
+    distanceWeight: [2,10],
+    durationWeight: [8,3],
+  })
 ];
 
-
-function makeVertex(stationName, lineName) {
+function makeLine({
+  lineName,
+  stationsOfLine: [startStation, ...stations , endStation],
+  distanceWeight: [],
+  durationWeight: [],
+}) {
   return {
-    STATION_NAME: stationName,
     LINE_NAME: lineName,
-  }
+    STATIONS_OF_LINE: [startStation, ...stations, endStation],
+    DISTANCE_WEIGHT: distanceWeight,
+    DURATION_WEIGHT: durationWeight,
+  };
 }
