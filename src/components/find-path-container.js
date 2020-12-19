@@ -4,6 +4,7 @@ import {
 } from "../utils/display/display-utils.js";
 import { lines } from "../data.js";
 import Dijkstra from "../utils/Dijkstra.js";
+import validateInput from "../utils/input-validator.js";
 
 const dijkstraTime = new Dijkstra();
 const dijkstraDistance = new Dijkstra();
@@ -29,12 +30,18 @@ export default function findPath() {
       .value;
     const endStation = document.getElementById("arrival-station-name-input")
       .value;
-    newResult(); //min distance Path
+    newResult();
 
-    if (selected === "distance") {
-      minDistancePath(startStation, endStation);
-    } else if (selected === "time") {
-      minTimePath(startStation, endStation);
+    if (startStation === endStation) {
+      return alert("출발역과 도착역은 같을 수 없습니다.");
+    }
+
+    if (validateInput(startStation) && validateInput(endStation)) {
+      if (selected === "distance") {
+        minDistancePath(startStation, endStation);
+      } else if (selected === "time") {
+        minTimePath(startStation, endStation);
+      }
     }
   });
 }
@@ -84,7 +91,10 @@ function minTimePath(startStation, endStation) {
   );
 
   tbody.append(
-    distanceAndTimeRow("14km", "14분"), //...args
+    distanceAndTimeRow(
+      totalDistance(shortestDistance),
+      totalTime(shortestDistance)
+    ),
 
     resultPathStations(shortestDistance)
   );
