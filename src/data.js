@@ -1,5 +1,15 @@
 import Dijkstra from "./utils/Dijkstra.js";
 
+const stations = [
+  "교대",
+  "강남",
+  "역삼",
+  "남부터미널",
+  "양재",
+  "매봉",
+  "양재시민의숲",
+];
+
 const sections = {
   "교대-강남": {
     distance: 2,
@@ -40,4 +50,4 @@ for (const section in sections) {
   timeDijkstra.addEdge(start, end, sections[section].time);
 }
 
-export { sections, distanceDijkstra, timeDijkstra };
+export { stations, sections, distanceDijkstra, timeDijkstra };
