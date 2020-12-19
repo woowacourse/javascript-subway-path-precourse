@@ -26,8 +26,6 @@ export default class App {
     this.searchResult = new SearchResult({
       $target: this.$main,
       searchType: this.searchType,
-      findShortestPathWithDistance: this.findShortestPathWithDistance,
-      findShortestPathWithTime: this.findShortestPathWithTime,
     });
   }
 
@@ -39,14 +37,26 @@ export default class App {
     return this.subwayMapTime.findShortestPath(this.departureStationName, this.arrivalStationName);
   };
 
-  getShortestPath = () => {
+  getTotalDistance = (path) => {
+    return this.subwayMapDistance.getTotalWeight(path);
+  };
+
+  getSearchResult = () => {
+    let shortestPath;
+
     if (this.searchType === "distance") {
-      return this.findShortestPathWithDistance();
+      shortestPath = this.findShortestPathWithDistance();
     }
 
     if (this.searchType === "time") {
-      return this.findShortestPathWithTime();
+      shortestPath = this.findShortestPathWithTime();
     }
+
+    return {
+      path: shortestPath,
+      distance: this.getTotalDistance(shortestPath),
+      time: 1,
+    };
   };
 
   onSubmit = ({ nextDepartureStationName, nextArrivalStationName, nextSearchType }) => {
@@ -60,6 +70,6 @@ export default class App {
     this.arrivalStationName = nextArrivalStationName;
     this.searchType = nextSearchType;
 
-    this.searchResult.setState({ nextSearchType: this.searchType, nextShortestPath: this.getShortestPath() });
+    this.searchResult.setState({ nextSearchType: this.searchType, nextSearchResult: this.getSearchResult() });
   };
 }

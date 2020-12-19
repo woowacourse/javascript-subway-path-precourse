@@ -1,29 +1,31 @@
 import { TITLE_TEXT, UNITS } from "../utils/constants.js";
 
 export default class SearchResult {
-  constructor({ $target, searchType, findShortestPathWithDistance, findShortestPathWithTime }) {
+  constructor({ $target, searchType }) {
     this.$container = document.createElement("div");
     $target.append(this.$container);
 
     this.searchType = searchType;
-    this.shortestPath = [];
-    this.findShortestPathWithDistance = findShortestPathWithDistance;
-    this.findShortestPathWithTime = findShortestPathWithTime;
+    this.searchResult = {
+      path: [],
+      distance: 0,
+      time: 0,
+    };
 
     this.render();
   }
 
   getShortestPathString = () => {
-    if (this.shortestPath === []) {
+    if (this.searchResult.path === []) {
       return "";
     }
 
-    return this.shortestPath.join("->");
+    return this.searchResult.path.join("->");
   };
 
-  setState = ({ nextSearchType, nextShortestPath }) => {
+  setState = ({ nextSearchType, nextSearchResult }) => {
     this.searchType = nextSearchType;
-    this.shortestPath = nextShortestPath;
+    this.searchResult = nextSearchResult;
 
     this.render();
   };
@@ -57,8 +59,8 @@ export default class SearchResult {
         </thead>
         <tbody>
           <tr>
-            <td>${UNITS.distance}</td>
-            <td>${UNITS.time}</td>
+            <td>${this.searchResult.distance} ${UNITS.distance}</td>
+            <td>${this.searchResult.time} ${UNITS.time}</td>
           </tr>
           <tr >
             <td colspan="2">${this.getShortestPathString()}</td>
