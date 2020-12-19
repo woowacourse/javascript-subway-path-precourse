@@ -1,4 +1,10 @@
 import * as Data from './Data.js';
+import { 
+  NAME_INCLUDE_EMPTY_ERROR,
+  NAME_LESS_THEN_TWO_ERROR,
+  NAME_NOT_EQUAL_ERROR,
+  NAME_NOT_EXIST_ERROR,
+} from './constants/ErrorConstants.js';
 import getDistanceAndTime from './utils/getWeight.js';
 import Result from './Result.js';
 
@@ -90,7 +96,7 @@ export default class App {
     const { setState, createContainer } = this;
     const container = createContainer(target, 'div');
     container.innerHTML = `<button id="search-button">길찾기</button>`;
-    
+
     const addButton = document.querySelector('#search-button');
     addButton.addEventListener('click', setState.bind(this));
   }
@@ -114,16 +120,16 @@ export default class App {
   isPossible(startStation, endStation) {
     const { isIncludeSpace, isLessThenTwo, isIncludeStation, isEqual } = this;
     if(isIncludeSpace(startStation) || isIncludeSpace(endStation)) {
-      return alert('역 이름에 공백이 포함되어 있습니다. 다시 입력해주세요.');
+      return alert(NAME_INCLUDE_EMPTY_ERROR);
     }
     if(!isLessThenTwo(startStation) || !isLessThenTwo(endStation)) {
-      return alert('출발역과 도착역의 이름은 두글자 이상이어야 합니다.');
+      return alert(NAME_LESS_THEN_TWO_ERROR);
     }
     if(isEqual(startStation, endStation)) {
-      return alert('출발역과 도착역의 이름이 같을 수 없습니다.');
+      return alert(NAME_NOT_EQUAL_ERROR);
     }
     if(!isIncludeStation(startStation) || !isIncludeStation(endStation)) {
-      return alert('존재하지 않은 역이 입력되었습니다.');
+      return alert(NAME_NOT_EXIST_ERROR);
     }
     return true;
   }
