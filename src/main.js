@@ -1,4 +1,4 @@
-import { initHTML, addEventToMainBtns } from "./managers/init.js";
+import { addEventToMainBtns } from "./managers/init.js";
 
 export default function main() {
   let subwayDatas = {
@@ -26,6 +26,6 @@ export default function main() {
     ],
   };
 
-  initHTML();
+  //   initHTML();
   addEventToMainBtns();
 }

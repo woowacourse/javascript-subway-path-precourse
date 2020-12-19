@@ -7,6 +7,21 @@
 <body>
 <div id="app"></div>
 <h1>🚇 지하철 길찾기</h1>
+<div id="search-box"> 
+    출발역<input id="departure-station-name-input"></input>
+   <br />
+    도착역<input id="arrival-station-name-input"></input>
+    <br />
+    <br />
+    <input type="radio" value="최단거리" checked="checked" name="search-type">최단거리</input>
+    <input type="radio" value="최소시간" name="search-type">최소시간</input>
+    <br />
+    <br />
+    <button id="search-button">길 찾기</button>
+</div>
+<div id ="main-box">
+
+</div>
 </div>
 <script type="module" src="src/index.js"></script>
 </body>
