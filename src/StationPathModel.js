@@ -53,7 +53,6 @@ export default class StationPathModel {
   getShortestDistancePath(departure, arrival) {
     const lineNames = this.findLines(departure, arrival);
     const dijkstra = this.getLineGraph(lineNames, 'distance');
-    console.log("dij", dijkstra.findShortestPath(departure, arrival));
     return dijkstra.findShortestPath(departure, arrival);
   }
 
@@ -64,10 +63,7 @@ export default class StationPathModel {
   }
 
   getTime(line, path) {
-    console.log("path: ", path)
-    console.log("line: ", line)
     const sections = this.findSections(line);
-    console.log("sections", sections)
     let time = 0;
     sections.forEach((section) => {
       section.forEach((eachSection) => {

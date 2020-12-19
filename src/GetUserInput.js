@@ -15,7 +15,6 @@ export default class GetUserInput {
     const options = document.getElementsByName('search-type');
     options.forEach((option) => {
       if (option.checked) {
-        console.log(option.value)
         this.option = option.value;
       }
     })
