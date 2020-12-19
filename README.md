@@ -7,6 +7,11 @@
 - data.js로부터 데이터들을 들고오는 `initializeData`
 - 역과 역 사이의 시간 및 거리 정보를 구해 저장하는 `constructSTS`
 
+### utils/utils.js
+- 태그의 타입과 내용들을 받아 element를 반환하는 `createElement`
+- 컨테이너에 해당하는 element를 받아 내용을 비워주는 `clearContainer`
+- 테이블과 데이터를 받아 행을 입력해주는 `insertRow`
+
 ### consts/data.js
 - 초기화에 필요한 데이터 정보들을 저장한다.
 
