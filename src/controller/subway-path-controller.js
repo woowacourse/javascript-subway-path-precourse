@@ -22,12 +22,18 @@ class NameInputController extends Controller {
   }
   updateResultPrintView(departure, arrival) {
     const selectedOption = this.getSelectedRadioOptionByName(NAME.SEARCH_TYPE);
-    if (selectedOption === VALUE.DISTANCE) {
-      const result = this._models.getMinDistance(departure, arrival);
-      this._view.setResultPrintView(result, VALUE.DISTANCE);
-    } else if (selectedOption === VALUE.DURATION) {
-      const result = this._models.getMinDuration(departure, arrival);
-      this._view.setResultPrintView(result, VALUE.DURATION);
+    try {
+      this._verifyInputStationNames(departure, arrival);
+      this._verifyInputStationExist(departure, arrival);
+      if (selectedOption === VALUE.DISTANCE) {
+        const result = this._models.getMinDistance(departure, arrival);
+        this._view.setResultPrintView(result, VALUE.DISTANCE);
+      } else if (selectedOption === VALUE.DURATION) {
+        const result = this._models.getMinDuration(departure, arrival);
+        this._view.setResultPrintView(result, VALUE.DURATION);
+      }
+    } catch (error) {
+      alert(error);
     }
   }
 
@@ -35,13 +41,6 @@ class NameInputController extends Controller {
     this.addClickEventByID(ID.SEARCH_BUTTON, () => {
       const departure = this.getInputValueByID(ID.DEPARTURE_STATION_NAME_INPUT);
       const arrival = this.getInputValueByID(ID.ARRIVAL_STATION_NAME_INPUT);
-      try {
-        this._verifyInputStationNames(departure, arrival);
-        this._verifyInputStationExist(departure, arrival);
-      } catch (error) {
-        alert(error);
-        return;
-      }
       this.updateResultPrintView(departure, arrival);
     });
   }

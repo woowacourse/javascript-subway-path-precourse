@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from "../common/const.js";
 import Dijkstra from "../utils/Dijkstra.js";
 import LinesModel from "./lines-model.js";
 
@@ -10,6 +11,7 @@ export default class Models {
   }
   getMinDistance(departure, arrival) {
     const result = this.distDijkstra.findShortestPath(departure, arrival);
+    this._verifyPossiblePath(result);
     const route = result.route;
     const duration = this._getDurationFromMinPath(route);
     return {
@@ -20,6 +22,7 @@ export default class Models {
   }
   getMinDuration(departure, arrival) {
     const result = this.durationDijkstra.findShortestPath(departure, arrival);
+    this._verifyPossiblePath(result);
     const route = result.route;
     const distance = this._getDistanceFromMinPath(route);
     return {
@@ -62,6 +65,11 @@ export default class Models {
       console.log(result);
     }
     return distance;
+  }
+  _verifyPossiblePath(result) {
+    if (result === undefined) {
+      throw ERROR_MESSAGE.CANT_REACH_TO_ARRIVAL;
+    }
   }
   _parseToDistDijkstra({ stationsOfLine, distanceWeight }) {
     for (let i = 0; i < distanceWeight.length; i++) {
