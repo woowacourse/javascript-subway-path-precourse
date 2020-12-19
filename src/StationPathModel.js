@@ -7,23 +7,27 @@ export default class StationPathModel {
   }
 
   findSections(name) {
-    const sections = lines.forEach((line) => {
-      if (line === name) {
-        return lines[line].sections;
-      };
+    let sections = []
+    lines.forEach((line) => {
+      if (line.name === name) {
+        sections = line.sections;
+        return;
+      }
     })
     return sections;
   }
 
-  getShortestDistance(departure, arrival) {
-    const distance = 0;
+  getShortestDistancePath(departure, arrival) {
     const dijkstra = new Dijkstra();
     const line = '2호선';
     const sections = this.findSections(line);
-    sections.forEach((stationInfo) => {
-      dijkstra.addEdge()
+    sections.forEach((section) => {
+      console.log(section.start);
+      console.log(section.end);
+      console.log(section.distance);
+      dijkstra.addEdge(section.start, section.end, Number(section.distance));
     });
-
-    return distance;
+    const result = dijkstra.findShortestPath(departure, arrival)
+    return result;
   }
 }
