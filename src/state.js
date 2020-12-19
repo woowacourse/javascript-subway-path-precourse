@@ -4,45 +4,45 @@ const State = function () {
       {
         name: "교대",
         relatedStations: [
-          { name: "강남", km: 2, minute: 3 },
-          { name: "남부터미널", km: 3, minute: 2 },
+          { name: "강남", distance: 2, time: 3 },
+          { name: "남부터미널", distance: 3, time: 2 },
         ],
       },
       {
         name: "강남",
         relatedStations: [
-          { name: "교대", km: 2, minute: 3 },
-          { name: "역삼", km: 2, minute: 3 },
-          { name: "양재", km: 2, minute: 8 },
+          { name: "교대", distance: 2, time: 3 },
+          { name: "역삼", distance: 2, time: 3 },
+          { name: "양재", distance: 2, time: 8 },
         ],
       },
       {
         name: "역삼",
-        relatedStations: [{ name: "강남", km: 2, minute: 3 }],
+        relatedStations: [{ name: "강남", distance: 2, time: 3 }],
       },
       {
         name: "남부터미널",
         relatedStations: [
-          { name: "교대", km: 3, minute: 2 },
-          { name: "양재", km: 6, minute: 5 },
+          { name: "교대", distance: 3, time: 2 },
+          { name: "양재", distance: 6, time: 5 },
         ],
       },
       {
         name: "양재",
         relatedStations: [
-          { name: "남부터미널", km: 6, minute: 5 },
-          { name: "매봉", km: 1, minute: 1 },
-          { name: "강남", km: 2, minute: 8 },
-          { name: "양재시민의숲", km: 10, minute: 3 },
+          { name: "남부터미널", distance: 6, time: 5 },
+          { name: "매봉", distance: 1, time: 1 },
+          { name: "강남", distance: 2, time: 8 },
+          { name: "양재시민의숲", distance: 10, time: 3 },
         ],
       },
       {
         name: "매봉",
-        relatedStations: [{ name: "양재", km: 1, minute: 1 }],
+        relatedStations: [{ name: "양재", distance: 1, time: 1 }],
       },
       {
         name: "양재시민의숲",
-        relatedStations: [{ name: "양재", km: 10, minute: 3 }],
+        relatedStations: [{ name: "양재", distance: 10, time: 3 }],
       },
     ],
     departureStation: "",
