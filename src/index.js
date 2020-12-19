@@ -19,13 +19,25 @@ function clickSearchButton() {
   const departureStation = departureStationNameInput.value;
   const arrivalStation = arrivalStationNameInput.value;
   const radio = document.querySelector('input[name="search-type"]:checked');
-  if (!(subwayPath.includeStation(departureStation) && subwayPath.includeStation(arrivalStation))) {
-    alert('존재하지 않는 역입니다.');
+  if (!checkStation(departureStation, arrivalStation)) {
     return;
   }
   titleH3.textContent = radio.labels[0].textContent;
   const path = findShortestDistancePath(departureStation, arrivalStation, radio.value);
   showResult(path);
+}
+
+function checkStation(departureStation, arrivalStation) {
+  "use strict";
+
+  if (departureStation.length < 2 || arrivalStation.length < 2) {
+    alert('역 이름은 2글자 이상이어야 합니다.');
+    return false;
+  } else if (!(subwayPath.includeStation(departureStation) && subwayPath.includeStation(arrivalStation))) {
+    alert('존재하지 않는 역입니다.');
+    return false;
+  }
+  return true;
 }
 
 function findShortestDistancePath(source, target, type) {
