@@ -26,6 +26,7 @@ export default class SubwayPathController {
       this.arrivalStation = getStation(ID.ARRIVAL_STATION_NAME_INPUT);
       hasValidInput(this.departureStation, this.arrivalStation);
       this.shortestSelect = getShortestSelect();
+
       this.getResult();
     });
   }

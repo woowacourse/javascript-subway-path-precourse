@@ -4,8 +4,8 @@ import Dijkstra from '../utils/Dijkstra.js';
 import Stations from '../models/stations.js';
 
 export const getStation = (stationName) => {
-  const stationNameInput = document.querySelector(`#${stationName}`);
   const stations = new Stations();
+  const stationNameInput = document.querySelector(`#${stationName}`);
   const stationNameInputValue = hasValidName(stationNameInput.value, stations.stations);
 
   return stationNameInputValue;
@@ -30,6 +30,7 @@ export const getShortestSelect = () => {
       selected = selector.defaultValue;
     }
   });
+
   return selected;
 };
 
@@ -51,8 +52,8 @@ export const getResultPath = (shortestSelect, departureStation, arrivalStation) 
   } else if (shortestSelect === NAME.SHORTESTTIME) {
     stations.addDijkstraEdgeTime(dijkstra);
   }
-
   result = dijkstra.findShortestPath(departureStation, arrivalStation);
+
   return result;
 };
 

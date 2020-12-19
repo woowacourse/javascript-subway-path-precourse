@@ -12,7 +12,8 @@ export const NAME = {
 };
 
 export const ALERT = {
-  VALIDNAME: '다시 입력해주세요.',
+  VALIDNAME:
+    '역 이름은 "교대, 강남, 역삼, 남부터미널, 양재, 매봉, 양재시민의숲"이 있습니다. 알맞게 다시 입력해주세요.',
   DUPLICATEDNAME: '중복됩니다. 다시 입력해주세요.',
 };
 
