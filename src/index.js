@@ -1,4 +1,4 @@
-import { PathInput, PathResult } from './components/index.js';
+import { Header, PathInput, PathResult } from './components/index.js';
 import { Dijkstra, isConnectedStation } from './utils/index.js';
 import { stations, lines } from './data.js';
 
@@ -104,6 +104,7 @@ export default function SubwayPath() {
     this.delegateEvent({ target });
   };
 
+  new Header();
   this.pathInput = new PathInput({ findRoute: this.findRoute });
   this.pathResult = new PathResult();
   this.app.addEventListener('click', this.handleClickApp);
