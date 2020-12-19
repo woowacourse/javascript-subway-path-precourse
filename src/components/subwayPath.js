@@ -1,6 +1,6 @@
 import { ERROR_MESSAGE, FORM } from '../share/constants.js';
 import { lineList, stationList } from '../share/defaultInformation.js';
-import { isInclude } from '../share/validator.js';
+import { isInclude, isValidLength } from '../share/validator.js';
 
 export default class SubWayPath {
   constructor() {
@@ -37,6 +37,13 @@ export default class SubWayPath {
   };
 
   isValid(values) {
+    if (
+      !isValidLength(values.arrivalStationName, 2) ||
+      !isValidLength(values.departureStationName, 2)
+    ) {
+      alert(ERROR_MESSAGE.MIN_STATION_NAME);
+      return false;
+    }
     if (!isInclude(values.departureStationName, this.stationList)) {
       alert(ERROR_MESSAGE.NO_DEPARTURE_STATION);
       return false;
