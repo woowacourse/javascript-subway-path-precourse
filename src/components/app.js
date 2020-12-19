@@ -32,11 +32,12 @@ class App extends Component {
     if (!this.#searchRequest.value) {
       return {};
     }
+    const { searchType } = this.#searchRequest.value;
     const resultPath = this.searchPath();
     let { totalTime, totalDistance } = this.getTotalTimeAndDistance(resultPath);
 
     console.log(totalTime, totalDistance, resultPath);
-    return { resultPath, totalTime, totalDistance };
+    return { searchType, resultPath, totalTime, totalDistance };
   }
 
   searchPath() {
@@ -110,14 +111,23 @@ class App extends Component {
     const $RouteInputContainer = document.querySelector(
       '#route-input-container'
     );
+
+    const searchRequest = this.#searchRequest;
+    const stations = this.#stations;
+    new RouteInput($RouteInputContainer, {
+      searchRequest,
+      stations,
+      mountSearchResult: this.mountSearchResult,
+    });
+  }
+
+  mountSearchResult = () => {
     const $routeResultContainer = document.querySelector(
       '#route-result-container'
     );
-    const searchRequest = this.#searchRequest;
-    const stations = this.#stations;
-    new RouteInput($RouteInputContainer, { searchRequest, stations });
-    new RouteResult($routeResultContainer, { searchRequest });
-  }
+    const searchResult = this.#searchResult;
+    new RouteResult($routeResultContainer, { searchResult });
+  };
 }
 
 export default App;

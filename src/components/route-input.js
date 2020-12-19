@@ -51,6 +51,7 @@ class RouteInput extends Component {
       return;
     }
     this.setSearchRequest(departureStation, arrivalStation);
+    this._props.mountSearchResult();
   }
 
   isValidInput(departureStation, arrivalStation) {
