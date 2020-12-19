@@ -43,24 +43,35 @@ export default class SubwayTimeMap {
 		return shortestTimePath;
 	}
 
-	getShortestTotalTime = shortestTimePath => {
-		let totalSectionTime = 0;
+	getShortestTotalTimeAndTotalDistance = shortestTimePath => {
+		let shortestTotalSectionTime = 0;
+		let totalSectionDistance = 0;
 
 		for (let stationIndex = 1; stationIndex < shortestTimePath.length; stationIndex++) {
 			let startStation = shortestTimePath[stationIndex - 1];
 			let endStation = shortestTimePath[stationIndex];
-			let stationTime = this.getSectionTime(sections, startStation, endStation);
-
-			totalSectionTime += stationTime;
+			let sectionTime = this.getSectionTime(sections, startStation, endStation);
+			let sectionDistance = this.getSectionDistance(sections, startStation, endStation);
+			
+			shortestTotalSectionTime += sectionTime;
+			totalSectionDistance += sectionDistance;
 		}
 		
-		return totalSectionTime;
+		return [shortestTotalSectionTime, totalSectionDistance]
 	}
 
 	getSectionTime = (sections, startStation, endStation) => {
 		for (let section of sections) {
 			if (isIncludesBothStations(section.connectedStations, startStation, endStation)) {
 				return section.time;
+			}
+		}
+	}
+
+	getSectionDistance = (sections, startStation, endStation) => {
+		for (let section of sections) {
+			if (isIncludesBothStations(section.connectedStations, startStation, endStation)) {
+				return section.distance;
 			}
 		}
 	}

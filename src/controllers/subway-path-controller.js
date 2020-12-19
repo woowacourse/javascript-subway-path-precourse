@@ -40,8 +40,11 @@ export default class SubwayPathController {
 	getShortestDistanceData = (departureStationName, arrivalStationName) => {
 		const radioSelect = SHORTEST_DISTANCE_KOR;
 		const shortestDistancePath = this.subwayDistanceMap.getShortestDistancePath(departureStationName, arrivalStationName);
-		const shortestTotalDistance = this.subwayDistanceMap.getShortestTotalDistance(shortestDistancePath);
-		const totalTime = 0;
+		let shortestTotalDistance;
+		let totalTime;
+		[shortestTotalDistance, totalTime] = this.subwayDistanceMap.getShortestTotalDistanceAndTotalTime(shortestDistancePath);
+		
+		console.log(shortestTotalDistance, totalTime);
 		const resultTableData = [radioSelect, shortestTotalDistance, totalTime, shortestDistancePath];
 		this.subwayPathOutput.renderResult(resultTableData);
 	}
@@ -49,8 +52,10 @@ export default class SubwayPathController {
 	getShortestTimeData = (departureStationName, arrivalStationName) => {
 		const radioSelect = SHORTEST_TIME_KOR;
 		const shortestTimePath = this.subwayTimeMap.getShortestTimePath(departureStationName, arrivalStationName);
-		const shortestTotalTime = this.subwayTimeMap.getShortestTotalTime(shortestTimePath);
-		const totalDistance = 0;
+		let shortestTotalTime;
+		let totalDistance;
+		[shortestTotalTime, totalDistance] = this.subwayTimeMap.getShortestTotalTimeAndTotalDistance(shortestTimePath);
+		
 		const resultTableData = [radioSelect, totalDistance, shortestTotalTime, shortestTimePath];
 		this.subwayPathOutput.renderResult(resultTableData);
 	}

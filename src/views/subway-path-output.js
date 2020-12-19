@@ -2,7 +2,6 @@ const KILOMETER = 'km';
 const MINUTE = '분';
 const ARROW = '→';
 
-
 export default class SubwayPathOutput {
 	constructor() {
 		this.subwayPathAppContainer = document.getElementById('app')
@@ -53,6 +52,7 @@ export default class SubwayPathOutput {
 	}
 
 	createResultType = radioSelect => {
+		const resultType =
 		`
 		<h2>📝 결과</h2>
 		<h3>${radioSelect}</h3>
