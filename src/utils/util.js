@@ -9,7 +9,6 @@ class util {
       const node = stack.pop();
       if (!visited.includes(node)) {
         visited.push(node);
-        console.log(node, lines[node]);
         lines[node].forEach(line => {
           stack.push(line[0]);
         });
@@ -44,7 +43,6 @@ class util {
   };
 
   isConnected = (departure, arrival) => {
-    console.log(departure);
     const visited = this.linesDfs(departure);
     if (!visited.includes(arrival)) {
       return message.ALERT_NOT_CONNECTED_STATION;

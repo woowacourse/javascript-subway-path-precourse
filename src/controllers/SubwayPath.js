@@ -45,7 +45,6 @@ class SubwayPath {
       const end = path[i + 1];
       this.lines[start].forEach(line => {
         if (line[0] === end) {
-          console.log(start, end, line, pathLength, pathTime);
           pathLength += line[1];
           pathTime += line[2];
         }
