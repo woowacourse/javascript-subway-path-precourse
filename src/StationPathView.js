@@ -62,5 +62,6 @@ export default class StationPathView {
 
   alertError(errorNum) {
     alert(ErrorMsg[errorNum]);
+    this.view();
   }
 }
