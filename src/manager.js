@@ -44,12 +44,15 @@ const getSearchType = () => {
   return selectedSearchType;
 };
 
-const getMinimumDistance = (departmentStation, arrivalStation) => {
-  alert('거리');
+const getDistance = (start, end) => {};
 
+const getMinimumDistance = (departmentStation, arrivalStation) => {
+  getDistance(departmentStation, arrivalStation);
   Dijkstra.addEdge(departmentStation, arrivalStation);
 };
 
+const getTime = (start, end) => {};
+
 const getMinimumTime = (departmentStation, arrivalStation) => {
-  alert('시간');
+  getTime(departmentStation, arrivalStation);
 };
