@@ -1,0 +1,24 @@
+{
+  "name": "javascript-subway-path-precourse",
+  "version": "1.0.0",
+  "description": " 지하철 노선도 경로 조회 미션: 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bigsaigon333/javascript-subway-path-precourse.git"
+  },
+  "keywords": [],
+  "author": "Danny Kim",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bigsaigon333/javascript-subway-path-precourse/issues"
+  },
+  "homepage": "https://github.com/bigsaigon333/javascript-subway-path-precourse#readme",
+  "devDependencies": {
+    "eslint": "^7.16.0"
+  }
+}
