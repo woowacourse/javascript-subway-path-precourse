@@ -1,10 +1,9 @@
-import { MESSAGE } from "../constants/index.js";
+import { INITIAL_STATION, MESSAGE } from "../constants/index.js";
 
 export const checkEmpty = (departureStation, arrivalStation) => {
   const departureIsEmpty = departureStation.trim().length === 0 ? true : false;
   const arrivalIsEmpty = arrivalStation.trim().length === 0 ? true : false;
 
-  console.log(departureIsEmpty || arrivalIsEmpty);
   return departureIsEmpty || arrivalIsEmpty;
 };
 
@@ -17,13 +16,29 @@ export const checkBlank = (departureStation, arrivalStation) => {
   return departureBlack || arrivalBlack;
 };
 
+export const checkStationExist = (departureStation, arrivalStation) => {
+  let isExist = false;
+
+  if (INITIAL_STATION.includes(departureStation)) {
+    isExist = true;
+  } else if (INITIAL_STATION.includes(arrivalStation)) {
+    isExist = true;
+  } else {
+    isExist = false;
+  }
+
+  return isExist;
+};
+
 export const checkTheList = (checkList) => {
-  const { isEmpty, isBlank } = checkList;
+  const { isEmpty, isBlank, isExist } = checkList;
 
   if (isEmpty) {
     alert(MESSAGE.EMPTY);
   } else if (isBlank) {
     alert(MESSAGE.BLANK);
+  } else if (!isExist) {
+    alert(MESSAGE.EXIST);
   } else {
     return true;
   }

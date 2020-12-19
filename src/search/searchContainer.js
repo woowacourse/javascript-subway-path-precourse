@@ -1,4 +1,9 @@
-import { checkBlank, checkEmpty, checkTheList } from "../utils/validation.js";
+import {
+  checkBlank,
+  checkEmpty,
+  checkStationExist,
+  checkTheList,
+} from "../utils/validation.js";
 import searchPresenter from "./searchPresenter.js";
 
 const findSelectRadio = () => {
@@ -23,7 +28,8 @@ const getStations = () => {
 
   const isEmpty = checkEmpty(departureStation, arrivalStation);
   const isBlank = checkBlank(departureStation, arrivalStation);
-  const checkList = { isEmpty, isBlank };
+  const isExist = checkStationExist(departureStation, arrivalStation);
+  const checkList = { isEmpty, isBlank, isExist };
   const isValid = checkTheList(checkList);
 
   if (isValid) {
@@ -32,17 +38,7 @@ const getStations = () => {
 };
 
 // 경로 계산
-const calculatePath = (
-  searchType,
-  lineData,
-  departureStation,
-  arrivalStation
-) => {
-  const CALCULATE_REFRENCE = searchType === "distance" ? "D" : "T";
-
-  const startStation = departureStation + CALCULATE_REFRENCE;
-  const endStation = arrivalStation + CALCULATE_REFRENCE;
-
+const calculatePath = (lineData, startStation, endStation) => {
   const { distance, route } = lineData.findShortestPath(
     startStation,
     endStation
@@ -55,14 +51,19 @@ const searchContainer = (lineData) => {
   const searchType = findSelectRadio();
   const { departureStation, arrivalStation } = getStations();
 
-  const { distance, route } = calculatePath(
-    searchType,
-    lineData,
-    departureStation,
-    arrivalStation
-  );
+  if ((departureStation, arrivalStation)) {
+    const CALCULATE_REFRENCE = searchType === "distance" ? "D" : "T";
+    const startStation = departureStation + CALCULATE_REFRENCE;
+    const endStation = arrivalStation + CALCULATE_REFRENCE;
 
-  searchPresenter(searchType, route);
+    const { distance, route } = calculatePath(
+      lineData,
+      startStation,
+      endStation
+    );
+
+    searchPresenter(searchType, route);
+  }
 };
 
 export default searchContainer;

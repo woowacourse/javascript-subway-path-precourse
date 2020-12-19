@@ -20,6 +20,16 @@ export const LINE = {
   NEW_BUNDANG: "신분당선",
 };
 
+export const INITIAL_STATION = [
+  "교대",
+  "강남",
+  "역삼",
+  "남부터미널",
+  "양재",
+  "양재시민의숲",
+  "매봉",
+];
+
 export const STATION = {
   // 시간
   EDUCATION_T: "교대T",
@@ -67,4 +77,5 @@ export const DISTANCE = {
 export const MESSAGE = {
   BLANK: "공백없이 입력해주세요.",
   EMPTY: "역을 입력해주세요.",
+  EXIST: "현재 존재하지 않는 역을 입력하셨습니다.",
 };
