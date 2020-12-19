@@ -91,5 +91,6 @@ btnSearch.onclick = () => {
     arrivalStation,
     dijkstra
   );
+  document.getElementById("result").innerHTML = "";
   makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
 };
