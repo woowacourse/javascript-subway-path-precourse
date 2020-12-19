@@ -80,18 +80,15 @@ const resultAppender = (
 		makeElement({
 			tag: 'p',
 			innerText: searchType,
-			style: `font-size: 1.5em; font-weight: 800; ${cssText.marginCSS(
-				'bottom',
-				20
-			)}`,
-		}),
+            style: `font-size: 1.5em; font-weight: 800; ${cssText.marginCSS('bottom', 20)}`,
+        }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
 	]);
 };
 
 export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
-	const [start, end] = [getStartPointValue(), getEndPointValue()];
+	const [start, end] = [getStartPointValue().trim(), getEndPointValue().trim()];
 	const searchType = getSearhType();
 	let [totalPath, totalTime, totalDistance] = [[], 0, 0];
 	clearResultTable();
@@ -99,11 +96,5 @@ export const findPathButtonHandler = () => {
 	totalPath = applyDijkstra(searchType, start, end);
 	if (totalPath.length < 2) return;
 	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
-	resultAppender(
-		resultContainer,
-		searchType,
-		totalPath,
-		totalTime,
-		totalDistance
-	);
+	resultAppender(resultContainer, searchType, totalPath, totalTime, totalDistance);
 };

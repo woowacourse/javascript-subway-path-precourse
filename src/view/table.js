@@ -1,5 +1,6 @@
 import { cssText, words } from '../keys.js';
 import { appendChilds, makeElement } from '../utils/elementUtils.js';
+
 const TableContainer = function ({ totalTime, totalDistance, totalPath }) {
 	const tableContainer = makeElement({
 		tag: 'table',

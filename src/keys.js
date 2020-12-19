@@ -23,6 +23,8 @@ export const errorMessage = {
 		'❌ 존재하지 않는 역을 출발/도착역으로 입력할 수 없습니다.',
 	SAME_START_END_POINT: '❌ 출발역과 도착역은 같을 수 없습니다.',
 	CANNOT_FIND: '❌ 갈 수 있는 경로가 없습니다.',
+	CANNOT_INPUT_ONLY_SPACE_STRING:
+		'❌ 공백으로 이루어진 입력값은 허용되지 않습니다.',
 };
 
 export const cssText = {

@@ -15,6 +15,16 @@ const isLessThanTwoLetter = (start, end) => {
 	return false;
 };
 
+const isOnlySpaceString = (start, end) => {
+	if (start.replace(/\s+/g, '').length === 0) {
+		alert(errorMessage.CANNOT_INPUT_ONLY_SPACE_STRING);
+		clearStartInput();
+	} else if (end.replace(/\s+/g, '').length === 0) {
+		alert(errorMessage.CANNOT_INPUT_ONLY_SPACE_STRING);
+		clearEndInput();
+	}
+};
+
 const isSameStation = (start, end) => {
 	if (start === end) {
 		alert(errorMessage.SAME_START_END_POINT);
@@ -49,6 +59,7 @@ export const getEndPointValue = () =>
 
 export const getValidInput = (start, end) => {
 	if (
+		!isOnlySpaceString(start, end) &&
 		!isLessThanTwoLetter(start, end) &&
 		!isSameStation(start, end) &&
 		isExistedStation(start) &&

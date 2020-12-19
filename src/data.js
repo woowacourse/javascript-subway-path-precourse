@@ -27,10 +27,6 @@ export const stations = [
 		name: '매봉',
 		line: ['3호선'],
 	},
-	// {
-	// 	name: '영등포',
-	// 	line: ['1호선', '3호선'],
-	// },
 ];
 
 // distance (km), time (minute)
