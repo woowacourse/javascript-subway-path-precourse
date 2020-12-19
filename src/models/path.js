@@ -19,17 +19,25 @@ export default {
 	},
 
 	getShortestDistancePath(from, to) {
-		const paths = dijkstraForDistance.findShortestPath(from, to);
+		const paths = dijkstraForDistance.findShortestPath(from, to) || [];
 		const distance = this.getDistanceFromPaths(paths);
 		const time = this.getTimeFromPaths(paths);
+
+		if (paths.length === 0) {
+			throw new Error("경로를 찾을 수 없습니다.");
+		}
 
 		return { paths, distance, time };
 	},
 
 	getShortestTimePath(from, to) {
-		const paths = dijkstraForTime.findShortestPath(from, to);
+		const paths = dijkstraForTime.findShortestPath(from, to) || [];
 		const distance = this.getDistanceFromPaths(paths);
 		const time = this.getTimeFromPaths(paths);
+
+		if (paths.length === 0) {
+			throw new Error("경로를 찾을 수 없습니다.");
+		}
 
 		return { paths, distance, time };
 	},

@@ -22,12 +22,19 @@ export default {
 		const arrival = this.query("#arrival-station-name-input").value;
 		const type = this.query("input[name='search-type']:checked").value;
 
-		if (this.isValidInput(departure, arrival)) {
+		if (!this.isValidInput(departure, arrival)) {
+			return false;
+		}
+
+		try {
 			const result =
 				type === "distance"
 					? Path.getShortestDistancePath(departure, arrival)
 					: Path.getShortestTimePath(departure, arrival);
+
 			this.showResult(result, type);
+		} catch (error) {
+			alert(error.message);
 		}
 	},
 
