@@ -125,6 +125,7 @@ export default class MainLayout {
       table: Render.$createElementNode(table),
     });
   }
+
   createResultTable() {
     return Render.createElement({
       tag: 'table',
@@ -146,7 +147,13 @@ export default class MainLayout {
   handleInputButton() {
     try {
       const [depart, arrive] = this.controller.getInputFromUser();
-      const result = this.controller.getShortestPath(depart, arrive);
+      const searchType = this.controller.getCheckedSearchType();
+      const result = this.controller.getShortestPath(
+        depart,
+        arrive,
+        searchType,
+      );
+
       console.log(result);
       console.log(`${depart}, ${arrive}`);
     } catch (error) {

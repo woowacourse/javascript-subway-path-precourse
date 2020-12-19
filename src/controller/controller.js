@@ -40,8 +40,18 @@ export default class Controller {
     return this.getValueOfId('#arrival-station-name-input', '도착');
   }
 
-  getShortestPath(depart, arrive) {
-    // TODO: 버튼따라서 리턴하기
-    return this.model.getShortestPathByDistance(depart, arrive);
+  getShortestPath(depart, arrive, searchType) {
+    // TODO: searchType 상수로 빼야겠다
+    return searchType === 'distance'
+      ? this.model.getShortestPathByDistance(depart, arrive)
+      : this.model.getShortestPathByTime(depart, arrive);
+  }
+
+  getCheckedSearchType() {
+    const searchType = this.view.rendered.querySelector(
+      'input[name=search-type]:checked',
+    );
+
+    return searchType.value;
   }
 }
