@@ -30,10 +30,10 @@ class App {
       sections: this.sections,
       minDistanceStore: this.minDistanceStore,
       minTimeStore: this.minTimeStore,
-      getTotalInfo: this.getTotalInfo,
+      getTotalInfo: this.getTotalInfo.bind(this),
     });
 
-    new SubwayResult(this.$resultContainer, {
+    this.subwayResult = new SubwayResult(this.$resultContainer, {
       sections: this.sections,
     });
   }
@@ -55,6 +55,7 @@ class App {
       totalDistance += section.distance;
     }
 
+    this.subwayResult.render({ totalTime, totalDistance, path });
     return { totalTime, totalDistance, path };
   }
 }

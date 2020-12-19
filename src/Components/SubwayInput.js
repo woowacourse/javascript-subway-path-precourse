@@ -42,7 +42,7 @@ class SubwayInput {
     }
 
     const path = this.calculateResult(departure, arrival, option);
-    console.log(getTotalInfo(sections, path));
+    getTotalInfo(sections, path);
   }
 
   getInputValues() {
