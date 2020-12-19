@@ -8,6 +8,7 @@ export default class SubwayPath {
     this.subwayMap = new SubwayMap();
     this.edgeHash = this.initEdge(edge);
     this.distanceDijkstra = this.initDistance(edge);
+    this.timeDijkstra = this.initTime(edge);
 
     const data = {
       station: station,
@@ -36,9 +37,23 @@ export default class SubwayPath {
     return dijkstra;
   }
 
+  // 최소시간 Dijkstra 세팅
+  initTime(data) {
+    const dijkstra = new Dijkstra();
+    for (const obj of data) {
+      dijkstra.addEdge(obj.source, obj.target, obj.time);
+    }
+    return dijkstra;
+  }
+
   // 최단거리 구하기
   findShortestDistancePath(source, target) {
     return this.distanceDijkstra.findShortestPath(source, target);
+  }
+
+  // 최소시간 구하기
+  findShortestTimePath(source, target) {
+    return this.timeDijkstra.findShortestPath(source, target);
   }
 
   // 경로의 총 거리와 총 소요시간 구하기
