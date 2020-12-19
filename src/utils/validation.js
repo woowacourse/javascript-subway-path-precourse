@@ -1,5 +1,5 @@
-import { NUMBER, ALERT } from "../@shared/constants.js";
-import { showAlertMessage } from "../@shared/domUtils.js";
+import { NUMBER, ALERT } from "./constants.js";
+import { showAlertMessage } from "./domUtils.js";
 
 const isValidStationName = ($input, stationName, stationList) => {
   const name = stationName.trim();

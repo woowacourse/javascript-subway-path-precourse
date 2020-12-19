@@ -1,11 +1,11 @@
 import ValidateSubwayManager from "./ValidateSubwayManager.js";
 import SearchLineManager from "./SearchLineManager.js";
-import { stations, lines } from "../@shared/data.js";
+import { stations, lines } from "../utils/data.js";
 import {
   hideElement,
   getCheckedSearchType,
   showElement,
-} from "../@shared/domUtils.js";
+} from "../utils/domUtils.js";
 
 class SubwayManager {
   constructor() {
