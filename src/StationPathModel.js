@@ -31,11 +31,16 @@ export default class StationPathModel {
     return sections;
   }
 
-  getLineGraph(line) {
+  getLineGraph(line, option) {
     const dijkstra = new Dijkstra();
     const sections = this.findSections(line);
     sections.forEach((section) => {
-      dijkstra.addEdge(section.start, section.end, Number(section.distance));
+      if (option === 'distance') {
+        dijkstra.addEdge(section.start, section.end, section.distance);
+      }
+      if (option === 'time') {
+        dijkstra.addEdge(section.start, section.end, section.time);
+      }
     });
 
     return dijkstra;
@@ -45,7 +50,17 @@ export default class StationPathModel {
     const result = []
     const lineNames = this.findLines(departure, arrival);
     lineNames.forEach((line) => {
-      const dijkstra = this.getLineGraph(line);
+      const dijkstra = this.getLineGraph(line, 'distance');
+      result.push(dijkstra.findShortestPath(departure, arrival));
+    })
+    return result;
+  }
+
+  getShortestTimePath(departure, arrival) {
+    const result = []
+    const lineNames = this.findLines(departure, arrival);
+    lineNames.forEach((line) => {
+      const dijkstra = this.getLineGraph(line, 'time');
       result.push(dijkstra.findShortestPath(departure, arrival));
     })
     return result;
