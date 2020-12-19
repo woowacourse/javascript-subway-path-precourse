@@ -15,10 +15,16 @@ const isInputLengthTwoOrGreater = (input) => {
 };
 
 const isInputStationExist = (station, stationIdentifier) => {
-  console.log(station);
-  console.log(subwayMap.hasStation(station));
   if (!subwayMap.hasStation(station)) {
     alert(`존재하지 않는 역입니다. ${stationIdentifier}역을 확인해주세요`);
+    return false;
+  }
+  return true;
+};
+
+const isStationsDistinct = (departureStationName, arrivalStationName) => {
+  if (departureStationName === arrivalStationName) {
+    alert("출발역과 도착역이 같을 수 없습니다.");
     return false;
   }
   return true;
@@ -32,7 +38,8 @@ const isInputsValid = (appContainer) => {
     isInputLengthTwoOrGreater(departureStationName) &&
     isInputLengthTwoOrGreater(arrivalStationName) &&
     isInputStationExist(departureStationName, "출발") &&
-    isInputStationExist(arrivalStationName, "도착")
+    isInputStationExist(arrivalStationName, "도착") &&
+    isStationsDistinct(departureStationName, arrivalStationName)
   );
 };
 
