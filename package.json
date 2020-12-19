@@ -1,0 +1,27 @@
+{
+  "name": "javascript-subway-path-precourse",
+  "version": "1.0.0",
+  "description": "- 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "prettier": "^2.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowacourse/javascript-subway-path-precourse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/woowacourse/javascript-subway-path-precourse/issues"
+  },
+  "homepage": "https://github.com/woowacourse/javascript-subway-path-precourse#readme"
+}
