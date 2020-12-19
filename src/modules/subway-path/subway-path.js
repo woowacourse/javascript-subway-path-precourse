@@ -13,29 +13,25 @@ export default class SubwayPath {
   }
 
   initializeEventListener() {
-    const targetNode = document.querySelector('#submit-container');
+    const targetNode = document.querySelector('#search-button');
     targetNode.addEventListener('click', this.onClickSearchButton.bind(this));
   }
 
-  onClickSearchButton(event) {
-    const target = event.target;
+  onClickSearchButton() {
     const validator = new InputValidator();
     const departure = document.querySelector('#departure-station-name-input');
     const arrival = document.querySelector('#arrival-station-name-input');
-    if (
-      target.id !== 'search-button' ||
-      !validator.checkValidInputs(departure, arrival)
-    ) {
-      return;
+    if (validator.checkValidInputs(departure, arrival)) {
+      this.setPath(departure.value, arrival.value);
+      this.setTotals();
+      this.renderResult();
     }
-    this.setResult(departure.value, arrival.value);
-    this.renderResult();
+    this.clear(departure, arrival);
   }
 
-  setResult(departure, arrival) {
+  setPath(departure, arrival) {
     this.initializeFinder();
     this._path = this._shortestPathFinder.findShortestPath(departure, arrival);
-    this.setTotal();
   }
 
   initializeFinder() {
@@ -50,7 +46,7 @@ export default class SubwayPath {
     }
   }
 
-  setTotal() {
+  setTotals() {
     let distance = 0;
     let time = 0;
     for (let i = 0; i < this._path.length - 1; i++) {
@@ -113,5 +109,11 @@ export default class SubwayPath {
                             <td colspan="2">${this._path.join('⮕')}</td>
                           </tr>
                         </tbody>`;
+  }
+
+  clear(departure, arrival) {
+    departure.value = '';
+    arrival.value = '';
+    departure.focus();
   }
 }

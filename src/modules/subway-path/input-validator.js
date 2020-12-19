@@ -10,18 +10,21 @@ import { STATIONS } from '../../data/subway.js';
 export default class InputValidator {
   checkValidInputs(departure, arrival) {
     const stations = [departure.value, arrival.value];
-    if (
-      this.isSameStation(stations) ||
-      !this.isMoreThanTwoLength(stations) ||
-      !this.isIncludedStation(stations)
-    ) {
-      this.clear(departure, arrival);
+    if (!this.isValidInputs(stations)) {
       this.alertByCase(stations);
 
       return false;
     }
 
     return true;
+  }
+
+  isValidInputs(stations) {
+    return (
+      !this.isSameStation(stations) &&
+      this.isMoreThanTwoLength(stations) &&
+      this.isIncludedStation(stations)
+    );
   }
 
   isSameStation(stations) {
@@ -34,12 +37,6 @@ export default class InputValidator {
 
   isIncludedStation(stations) {
     return stations.every(station => STATIONS.includes(station));
-  }
-
-  clear(departure, arrival) {
-    departure.value = '';
-    arrival.value = '';
-    departure.focus();
   }
 
   alertByCase(stations) {
