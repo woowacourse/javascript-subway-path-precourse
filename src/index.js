@@ -1,10 +1,10 @@
 import { lines } from "./data/line.js";
-import { stations } from "./data/station.js";
+import StationService from "./service/station.service.js";
 
 export default class App {
   constructor() {
     this.lines = lines;
-    this.stations = stations;
+    this.stationService = new StationService();
   }
 
   getDepartureStationInput() {
