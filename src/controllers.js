@@ -1,4 +1,4 @@
-import { SubwayDistancePath, SubwayTimePath } from './models.js';
+import { showResult } from './views.js';
 import stationValidation from './utils/validation.js';
 
 const checkradioValue = lst => {
@@ -14,6 +14,7 @@ const arrivalStationNameInput = document.querySelector(
 );
 const searchType = document.getElementsByName('search-type');
 const searchButton = document.querySelector('#search-button');
+const resultDiv = document.querySelector('#result');
 
 export const initListener = subwayPath => {
   searchButton.addEventListener('click', () => {
@@ -40,6 +41,7 @@ const clickButton = subwayPath => {
   if (validationResult.success) {
     if (!findPathResult.error) {
       console.log(findPathResult);
+      showResult(findPathResult, resultDiv);
     } else {
       alert(findPathResult.error);
     }
