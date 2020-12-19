@@ -19,7 +19,7 @@ export const isExistingStation = (departureStation, arrivalStation) => {
   return false;
 };
 export const isExistingRoute = () => {};
-export const getOneDistance = (startStation, endStation) => {
+export const getOneDistanceAndTime = (startStation, endStation) => {
   for (let i in lineInfo) {
     const line = lineInfo[i];
     for (let idx = 0; idx < line.stationList.length - 1; idx++) {
@@ -27,24 +27,26 @@ export const getOneDistance = (startStation, endStation) => {
         startStation === line.stationList[idx] &&
         endStation === line.stationList[idx + 1]
       ) {
-        return line.distanceInfo[idx];
+        return [line.distanceInfo[idx], line.timeInfo[idx]];
       }
     }
   }
 };
-export const getTotalDistance = (route) => {
+export const getTotalDistanceAndTime = (route) => {
   let totalDistance = 0;
+  let totalTime = 0;
   for (let i = 0; i < route.length - 1; i++) {
-    totalDistance += getOneDistance(route[i], route[i + 1]);
+    totalDistance += getOneDistanceAndTime(route[i], route[i + 1])[0];
+    totalTime += getOneDistanceAndTime(route[i], route[i + 1])[1];
   }
-  return totalDistance;
+  return [totalDistance, totalTime];
 };
+
 export const getResultInfo = (departureStation, arrivalStation, dijkstra) => {
   const route = dijkstra.findShortestPath(departureStation, arrivalStation);
-  const totalDistance = getTotalDistance(route);
-  const totalTime = getTotalTime(route);
+  const [totalDistance, totalTime] = getTotalDistanceAndTime(route);
   const shortestRoute = route.join(" => ");
-
+  console.log(totalDistance, totalTime, shortestRoute);
   return [totalDistance, totalTime, shortestRoute];
 };
 export const makeResultUI = () => {
