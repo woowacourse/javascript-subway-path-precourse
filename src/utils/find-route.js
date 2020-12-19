@@ -19,8 +19,15 @@ export function FindRoute(departureStation, arrivalStation, dijkstra) {
           return [line.distanceInfo[idx], line.timeInfo[idx]];
         }
       }
+      for (let idx = 1; idx < line.stationList.length; idx++) {
+        if (
+          startStation === line.stationList[idx] &&
+          endStation === line.stationList[idx - 1]
+        ) {
+          return [line.distanceInfo[idx - 1], line.timeInfo[idx - 1]];
+        }
+      }
     }
-    return [0, 0];
   };
   this.getTotalDistance = () => {
     let totalDistance = 0;
