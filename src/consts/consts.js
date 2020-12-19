@@ -26,6 +26,6 @@ export const STRING = {
   TOTAL_TIME: "총 소요 시간",
   RESULT: "📝 결과",
 
-  MIN_DISTANCE: "최단경로",
-  MIN_TIME: "최단시간",
+  MIN_DISTANCE: "최단거리",
+  MIN_TIME: "최소시간",
 };
