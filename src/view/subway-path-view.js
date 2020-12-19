@@ -1,9 +1,17 @@
+import { Constant } from "../utils/constant.js";
+
 export const SubwayPathView = {
   renderDistance(result) {
-    console.log(result);
+    let content = "";
+
+    content = `<td colspan="2">${result.join("➡️")}</td>`;
+    document.querySelector(Constant.ROUTE).innerHTML = content;
   },
 
   renderTime(result) {
-    console.log(result);
+    let content = "";
+
+    content = `<td colspan="2">${result.join("➡️")}</td>`;
+    document.querySelector(Constant.ROUTE).innerHTML = content;
   },
 };
