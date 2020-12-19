@@ -39,7 +39,7 @@ const State = function () {
     ],
     departureStation: "",
     arrivalStation: "",
-    orderBy: "distance",
+    searchType: "distance",
   };
   this.setState = (key, value) => (this.state[key] = value);
 };
