@@ -19,7 +19,6 @@ class SubwayResult {
           <td colspan="2">${path.join("->")}</td>
         </tr>
     </table>
-    
     `;
   };
 }

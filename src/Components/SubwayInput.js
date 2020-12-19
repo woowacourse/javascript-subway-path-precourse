@@ -1,8 +1,9 @@
-import { clearInput } from "../utils/domUtils.js";
 import {
   isSameStation,
   isVaildStationName,
 } from "../utils/validations/subwayInputVaildation.js";
+
+import { ID, OPTION, TYPE } from "../utils/constants/dom.js";
 
 class SubwayInput {
   constructor($target, props) {
@@ -14,14 +15,10 @@ class SubwayInput {
   }
 
   mountDOMs() {
-    this.$departureInput = this.$target.querySelector(
-      `#departure-station-name-input`,
-    );
-    this.$arrivalInput = this.$target.querySelector(
-      `#arrival-station-name-input`,
-    );
-    this.$radioContainer = this.$target.querySelector(`#radio-container`);
-    this.$searchButton = this.$target.querySelector(`#search-button`);
+    this.$departureInput = this.$target.querySelector(`#${ID.DEPARTURE_INPUT}`);
+    this.$arrivalInput = this.$target.querySelector(`#${ID.ARRIVAL_INPUT}`);
+    this.$radioContainer = this.$target.querySelector(`#${ID.RADIO_CONTAINER}`);
+    this.$searchButton = this.$target.querySelector(`#${ID.SEARCH_BUTTON}`);
   }
 
   bindEvents() {
@@ -29,7 +26,7 @@ class SubwayInput {
   }
 
   onClick({ target }) {
-    if (target.id !== `search-button`) return;
+    if (target.id !== ID.SEARCH_BUTTON) return;
     const { stations, sections, getTotalInfo } = this.props;
     const [departure, arrival, option] = this.getInputValues();
 
@@ -49,7 +46,7 @@ class SubwayInput {
     const departureStation = this.$departureInput.value.trim();
     const arrivalStation = this.$arrivalInput.value.trim();
     const option = this.$radioContainer.querySelector(
-      `input[name=search-type]:checked`,
+      `input[name=${TYPE.SEARCH_TYPE}]:checked`,
     ).value;
 
     return [departureStation, arrivalStation, option];
@@ -57,9 +54,9 @@ class SubwayInput {
 
   calculateResult(departure, arrival, option) {
     const { minDistanceStore, minTimeStore } = this.props;
-    if (option == "최단거리") {
+    if (option === OPTION.MIN_DIST) {
       return minDistanceStore.findShortestPath(departure, arrival);
-    } else if (option == "최소시간") {
+    } else if (option === OPTION.MIN_TIME) {
       return minTimeStore.findShortestPath(departure, arrival);
     }
   }
