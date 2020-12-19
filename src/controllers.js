@@ -1,4 +1,5 @@
 import { SubwayDistancePath, SubwayTimePath } from './models.js';
+import stationValidation from './utils/validation.js';
 
 const checkradioValue = lst => {
   for (let l of lst) {
@@ -15,7 +16,7 @@ const serchType = document.getElementsByName('search-type');
 const searchButton = document.querySelector('#search-button');
 
 export const initListener = () => {
-  searchButton.addEventListener('click', () =>
+  searchButton.addEventListener('click', () => {
     console.log(
       'departure: ',
       departureStationNameInput.value,
@@ -23,6 +24,11 @@ export const initListener = () => {
       arrivalStationNameInput.value,
       'serchType: ',
       checkradioValue(serchType)
-    )
-  );
+    );
+    const result = stationValidation(
+      departureStationNameInput.value,
+      arrivalStationNameInput.value
+    );
+    if (result) alert(result);
+  });
 };
