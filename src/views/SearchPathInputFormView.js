@@ -1,4 +1,5 @@
 import View from './View.js';
+import { SEARCH_PATH } from '../utils/constants.js';
 
 const tag = `[StationInputForm]`;
 export default class SearchPathInputFormView extends View {
@@ -35,8 +36,8 @@ export default class SearchPathInputFormView extends View {
   getSelectSearchTypeBtnHTML() {
     console.log(`${tag} getSelectSearchTypeBtnHTML`);
     return `<div class="path-selectors">
-        <input type="radio" id="min_distance" name="search-type" checked> <label for="min_distance">최단거리</label>
-        <input type="radio" id="min_time" name="search-type"> <label for="min_time">최소시간</label>
+        <input type="radio" id=${SEARCH_PATH.MIN_DISTANCE} name="search-type" checked> <label for=${SEARCH_PATH.MIN_DISTANCE}>최단거리</label>
+        <input type="radio" id=${SEARCH_PATH.MIN_TIME} name="search-type"> <label for=${SEARCH_PATH.MIN_TIME}>최소시간</label>
       </div>`;
   }
 

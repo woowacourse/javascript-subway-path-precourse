@@ -13,4 +13,14 @@ const ERROR_MESSAGE = {
   IS_NOT_EXIST: '존재하지 않는 역입니다',
 };
 
-export { MIN_LENGTH_OF_NAME, ERROR_MESSAGE, LINE_NUMBER };
+const SEARCH_PATH = {
+  MIN_TIME: '최소시간',
+  MIN_DISTANCE: '최단거리',
+};
+
+const UNIT = {
+  DISTANCE: 'km',
+  TIME: '분',
+};
+
+export { MIN_LENGTH_OF_NAME, ERROR_MESSAGE, LINE_NUMBER, SEARCH_PATH, UNIT };
