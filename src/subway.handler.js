@@ -8,7 +8,7 @@ class SubwayHandler {
     if (subwayView.$radio[1].checked) searchType = subwayView.$radio[1].value;
 
     const searchResult = subway.search(startStation, endStation, searchType);
-    console.log(searchResult);
+
     if (searchResult) {
       const total = subway.getTotalDistanceAndTime(searchResult);
 
