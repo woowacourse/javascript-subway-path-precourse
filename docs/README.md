@@ -16,3 +16,4 @@
 
 2. 구현할 기능 목록
    - [x] Input섹션에서 사용할 상수들(HTMLElements의 id, name 등)을 정의한다.
+   - [x] Result섹션에서 사용할 상수들(HTMLElements의 id, name 등)을 정의한다.
