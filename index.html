@@ -10,12 +10,12 @@
     <h1>🚇지하철 길찾기</h1>
     출발역<input id="departure-station-name-input" /><br><br>
     도착역<input id="arrival-station-name-input" /><br><br>
-    <input type="radio" name="search-type" value="min-path">최단거리
+    <input type="radio" name="search-type" value="min-path" checked="checked">최단거리
     <input type="radio" name="search-type" value="min-time">최소시간<br><br>
     <button id="search-button">길 찾기</button>
-    <div id="result" style="display: block;">
+    <div id="result" style="display: none;">
         <h3>결과</h3>
-        <strong id="result-type"></strong>
+        <strong id="result-type"></strong><br>
         <table border="1">
             <tr>
                 <th>총 거리</th>
