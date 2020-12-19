@@ -1,7 +1,6 @@
 import { getDepartureStationName } from './src/index.js'
 import { line2, line3, lineNew, allLines } from '../line.js'
 import { getOptionValue } from './src/index.js'
-// import Dijkstra from "./src/utils/Dijkstra.js"
 
 const isValidLength = (stationName) => {
   return (stationName.length >= 2);

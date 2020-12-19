@@ -1,10 +1,22 @@
 import { isValidLength, isValidStation, isDuplicatedStation, isConnected } from "../check.js";
+import Dijkstra from "../src/utils/Dijkstra.js"
+
+const getMinimumDistance = (line, departureStationIndex, arrivalStationIndex, departureStationName, arrivalStationName) => {
+  const dijkstra = new Dijkstra();
+  let i;
+  for (i = departureStationIndex; i < (arrivalStationIndex); i++) {
+    dijkstra.addEdge(line[i].name, line[i+1].name, line[i], line[i].distance);
+    console.log(line[i].name, line[i+1].name)
+  }
+}
 
 const getIndex = (optionValue, line, departureStationName, arrivalStationName) => {
   const arrayLine = line.map((station) => station.name)
   const departureStationIndex = arrayLine.indexOf(departureStationName);
   const arrivalStationIndex = arrayLine.indexOf(arrivalStationName);
-  console.log(departureStationIndex, arrivalStationIndex);
+  if (optionValue === "minimum-distance") {
+    getMinimumDistance(line, departureStationIndex, arrivalStationIndex, departureStationName, arrivalStationName);
+  }
 }
 
 const getOptionValue = (line, departureStationName, arrivalStationName) => {
