@@ -13,7 +13,7 @@ const loadSubwayMapDataToLocalStorage = () => {
 
 const makeSubwayMapGraphAll = () => {
   makeSubwayMapGraph(lines, stations, 'distanceInterval');
-  //makeSubwayMapGraph(lines, stations, 'timeInterval');
+  makeSubwayMapGraph(lines, stations, 'timeInterval');
 };
 
 const makeSubwayMapGraph = (lines, stations, key) => {
