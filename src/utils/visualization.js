@@ -77,7 +77,7 @@ const Visualization = function () {
 
   this.createTable = (formattedPath, minDistance, minTime) => {
     const table = this.getTableHavingTableHead(TABLE_TITLE1, TABLE_TITLE2);
-    const distanceAndTimeTr = document.createElement("tr");
+    const distanceAndTimeTr = document.createElement(TR);
     const distanceTd = this.createTd(`${minDistance}${DISTANCE_MEASUREMENT}`);
     const timeTd = this.createTd(`${minTime}${TIME_MEASUREMENT}`);
     const pathTr = this.getAdvancedEle(TR, { id: PATH_TD_ID }, formattedPath);
