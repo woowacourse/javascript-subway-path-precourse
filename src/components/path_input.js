@@ -1,4 +1,4 @@
-export default function PathInput() {
+export default function PathInput({ findRoute }) {
   this.template = () => {
     return `<div>
       ${this.departureStationNameInputTemplate()}
@@ -6,6 +6,29 @@ export default function PathInput() {
       ${this.searchTypeRadioTemplate()}
       ${this.serachButtonTemplate()}
     </div>`;
+  };
+
+  this.searchEvent = ({ target: { id } }) => {
+    if (id !== 'search-button') {
+      return;
+    }
+
+    const departureStationName = document.getElementById(
+      'departure-station-name-input'
+    );
+    const arrivalStationName = document.getElementById(
+      'arrival-station-name-input'
+    );
+    const radioButtons = document.getElementsByName('search-type');
+    for (const radioButton of radioButtons) {
+      if (radioButton.checked) {
+        findRoute(
+          departureStationName,
+          arrivalStationName,
+          radioButton.labels[0].textContent
+        );
+      }
+    }
   };
 
   this.departureStationNameInputTemplate = () => {
