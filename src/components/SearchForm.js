@@ -1,9 +1,11 @@
 import { FORM_ELEMENT, STATION_NAME_MIN_LENGTH, ERROR_MESSAGE } from "../utils/constants.js";
 
 export default class SearchForm {
-  constructor({ $target }) {
+  constructor({ $target, stations }) {
     this.$form = document.createElement("form");
     $target.append(this.$form);
+
+    this.stations = stations;
 
     this.render();
     this.bindOnSubmit();
@@ -35,14 +37,28 @@ export default class SearchForm {
   };
 
   checkStationName = ($stationNameInput) => {
+    let result = true;
+
     if (!this.isTextOverMinLength($stationNameInput.value, STATION_NAME_MIN_LENGTH)) {
       alert(ERROR_MESSAGE.shortStationName);
       $stationNameInput.value = "";
-
-      return false;
+      result = false;
     }
 
-    return true;
+    if (result && !this.isExistStation($stationNameInput.value, STATION_NAME_MIN_LENGTH)) {
+      alert(ERROR_MESSAGE.invalidStationName($stationNameInput.value));
+      result = false;
+    }
+
+    return result;
+  };
+
+  isTextOverMinLength = (text, minLength) => {
+    return text.length < minLength ? false : true;
+  };
+
+  isExistStation = (stationName) => {
+    return this.stations.includes(stationName);
   };
 
   checkStationNamesIsSame = (departureStationName, arrivalStationName) => {
@@ -53,10 +69,6 @@ export default class SearchForm {
     }
 
     return true;
-  };
-
-  isTextOverMinLength = (text, minLength) => {
-    return text.length < minLength ? false : true;
   };
 
   render = () => {

@@ -13,7 +13,10 @@ export default class App {
     this.stations = STATIONS;
 
     this.header = new Header({ $target: this.$app });
-    this.searchForm = new SearchForm({ $target: this.$main });
+    this.searchForm = new SearchForm({
+      $target: this.$main,
+      stations: this.stations,
+    });
     this.searchResult = new SearchResult({ $target: this.$main });
   }
 }
