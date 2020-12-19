@@ -1,3 +1,4 @@
+import ValidateSubwayManager from "./ValidateSubwayManager.js";
 import { stations, lines } from "../@shared/data.js";
 import { hideElement, showElement } from "../@shared/domUtils.js";
 class SubwayManager {
@@ -22,12 +23,27 @@ class SubwayManager {
     this.$resultContainer = document.querySelector("#result-container");
   };
 
+  setComponents = () => {
+    this.validateSubwayManager = new ValidateSubwayManager(
+      this.getState,
+      this.getStations
+    );
+  };
+
   resetState = () => {
     this.userState = {
       departureStation: "",
       arrivalStation: "",
       searchType: "",
     };
+  };
+
+  getState = () => {
+    return this.userState;
+  };
+
+  getStations = () => {
+    return this.stations;
   };
 
   handleSearchButton = event => {
@@ -41,6 +57,8 @@ class SubwayManager {
   render = () => {
     this.setDOMElements();
     this.resetDOMElements();
+    this.resetState();
+    this.setComponents();
 
     this.$searchButton.addEventListener("click", this.handleSearchButton);
   };
