@@ -65,7 +65,7 @@ const getShortestPathBySearchType = (
   arrivalStationName,
   searchType
 ) => {
-  if (searchType === 0) {
+  if (searchType === "0") {
     return subwayMap.getShortestPathForDistance(
       departureStationName,
       arrivalStationName
