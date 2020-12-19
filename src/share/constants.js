@@ -18,4 +18,5 @@ export const ERROR_MESSAGE = Object.freeze({
   NO_DEPARTURE_STATION: '노선에 출발역이 포함되어 있지 않습니다.',
   NO_ARRIVAL_STATION: '노선에 도착역이 포함되어 있지 않습니다.',
   MIN_STATION_NAME: '역 이름은 최소 두글자 이상이어야 합니다. ',
+  SAME_STATION: '출발역과 도착역은 같을 수 없습니다.',
 });
