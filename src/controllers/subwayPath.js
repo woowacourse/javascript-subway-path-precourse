@@ -1,6 +1,8 @@
 import Stations from '../models/stations.js';
 import { ID, NAME, ALERT } from '../constants/index.js';
 import { isValidNameLength, isNameInStations } from '../utils/userException.js';
+import { addDijkstraEdgeDistance } from '../utils/addDijkstra.js';
+import Dijkstra from '../utils/Dijkstra.js';
 
 export default class SubwayPath {
   constructor() {
@@ -22,6 +24,7 @@ export default class SubwayPath {
       this.arrivalStation = this.getStation(ID.ARRIVAL_STATION_NAME_INPUT);
       this.hasValidInput();
       this.shortestSelect = this.getShortestSelect();
+      this.getResult();
     });
   }
 
@@ -58,5 +61,14 @@ export default class SubwayPath {
     } else if (this.departureStation === this.arrivalStation) {
       alert(ALERT.DUPLICATEDNAME);
     }
+  }
+
+  getResult() {
+    const dijkstra = new Dijkstra();
+    let result = '';
+
+    addDijkstraEdgeDistance(dijkstra);
+    result = dijkstra.findShortestPath(this.departureStation, this.arrivalStation);
+    console.log(result);
   }
 }
