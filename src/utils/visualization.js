@@ -30,6 +30,9 @@ const Visualization = function () {
     return parent;
   };
 
+  this.clearResultDiv = () =>
+    (document.getElementById("result").innerHTML = "");
+
   this.getTableHavingTableHead = (...texts) => {
     const table = document.createElement("table");
     const thead = this.getTableHeadByTexts(...texts);
@@ -55,3 +58,5 @@ const Visualization = function () {
     return table;
   };
 };
+
+export const { clearResultDiv } = new Visualization();
