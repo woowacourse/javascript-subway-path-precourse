@@ -31,6 +31,10 @@ const Functions = function () {
     this.isExist(state.departureStation) &&
     this.isExist(state.arrivalStation) &&
     !this.isSame(state.departureStation, state.arrivalStation);
+
+  this.IsAlreadyGoneMatch = (station1, station2) =>
+    state.alreadyGoneStations.indexOf(`${station1},${station2}`) !== -1 ||
+    state.alreadyGoneStations.indexOf(`${station2},${station1}`) !== -1;
 };
 
 export const {
