@@ -23,7 +23,19 @@ export default function findPath() {
 
   const searchButton = document.getElementById("search-button");
   searchButton.addEventListener("click", () => {
+    const selected = document.querySelector('input[name="search-type"]:checked')
+      .value;
+    const startStation = document.getElementById("departure-station-name-input")
+      .value;
+    const endStation = document.getElementById("arrival-station-name-input")
+      .value;
     newResult(); //min distance Path
+
+    if (selected === "distance") {
+      minDistancePath(startStation, endStation);
+    } else if (selected === "time") {
+      minTimePath(startStation, endStation);
+    }
   });
 }
 
@@ -43,6 +55,35 @@ function resultWrapper() {
 function resultPath(parent) {
   const subwayPathTitleHTML = `<h2>📝 결과</h2>`;
   parent.append(makeStringToHTML(subwayPathTitleHTML).firstElementChild);
+}
+
+// 최단 경로
+function minDistancePath(startStation, endStation) {
+  const tbody = document.getElementsByTagName("tbody")[0];
+  const shortestDistance = dijkstraDistance.findShortestPath(
+    startStation,
+    endStation
+  );
+
+  tbody.append(
+    distanceAndTimeRow("14km", "14분"), //...args
+
+    resultPathStations(shortestDistance)
+  );
+}
+
+function minTimePath(startStation, endStation) {
+  const tbody = document.getElementsByTagName("tbody")[0];
+  const shortestDistance = dijkstraTime.findShortestPath(
+    startStation,
+    endStation
+  );
+
+  tbody.append(
+    distanceAndTimeRow("14km", "14분"), //...args
+
+    resultPathStations(shortestDistance)
+  );
 }
 
 function resultPathStations(result) {
