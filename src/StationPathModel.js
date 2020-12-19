@@ -6,6 +6,20 @@ export default class StationPathModel {
     this.option = 'shortest-distance';
   }
 
+  findLines(departure, arrival) {
+    let lineNames = [];
+    lines.forEach((line) => {
+      const lineStations = []
+      line.sections.forEach((section) => {
+        lineStations.push(section.start, section.end)
+      })
+      if (lineStations.includes(departure) && lineStations.includes(arrival)) {
+        lineNames.push(line.name);
+      }
+    })
+    return lineNames;
+  }
+  
   findSections(name) {
     let sections = []
     lines.forEach((line) => {
@@ -28,6 +42,8 @@ export default class StationPathModel {
   }
 
   getShortestDistancePath(departure, arrival) {
+    const line = this.findLines(departure, arrival);
+    console.log(line);
     const dijkstra = this.getLineGraph(line);
     const result = dijkstra.findShortestPath(departure, arrival)
     return result;
