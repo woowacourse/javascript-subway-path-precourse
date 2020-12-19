@@ -10,3 +10,5 @@ export const BUTTON_HELPER_TEXT = "길 찾기";
 
 export const SHORTEST_PATH_TEXT = "최단거리";
 export const FASTEST_PATH_TEXT = "최소시간";
+
+export const MIN_LENGTH_STATION = 2;
