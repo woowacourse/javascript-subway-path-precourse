@@ -8,7 +8,7 @@ import {
 export const appendView = () => {
   const appDiv = document.getElementById('app');
 
-  appendNew('h2', appDiv, '🚇지하철 길찾기');
+  appendNew('h2', appDiv, '🚇 지하철 길찾기');
   appendNew('div', appDiv, '', 'container');
   appendContainer();
 };
@@ -44,3 +44,14 @@ const appendRadioButtons = (container) => {
 const setDefaultOption = (option) => {
   document.getElementById(option).checked = true;
 };
+
+export const appendSearchResult = (path) => {
+  const container = document.getElementById('container');
+  const resultDiv = appendNew('div', container, '', 'search-result');
+
+  appendNew('h3', resultDiv, '📝 결과');
+  appendNew('h4', resultDiv, '최단거리');
+  appendTable(path);
+};
+
+const appendTable = (path, totalDistance, totalTime) => {};

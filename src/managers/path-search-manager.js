@@ -3,6 +3,8 @@ import {
   validatePath,
   processException,
 } from './validation-manager.js';
+import { appendSearchResult } from './view-manager.js';
+import { calculateTotalRequired } from './total-calculator.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import { LINES, STATIONS } from '../configuration.js';
 
@@ -19,7 +21,7 @@ export const requestToFindShortestPath = (e) => {
     return processException(exception);
   }
   shortestPath = searchShortestPath(departureName, arrivalName, option);
-  //displaySearchResult(shortestPath)
+  requestToAppendResult(shortestPath);
 };
 
 const searchShortestPath = (departureName, arrivalName, option) => {
@@ -30,8 +32,7 @@ const searchShortestPath = (departureName, arrivalName, option) => {
   if (exception) {
     processException(exception);
   }
-  console.log(graph);
-  console.log(shortestPath);
+  return shortestPath;
 };
 
 const makeSubwayMapGraph = (option) => {
@@ -47,4 +48,14 @@ const makeSubwayMapGraph = (option) => {
     }
   });
   return graph;
+};
+
+const requestToAppendResult = (shortestPath) => {
+  const totalDistance = calculateTotalRequired(
+    shortestPath,
+    'distanceInterval'
+  );
+  const totalTime = calculateTotalRequired(shortestPath, 'timeInterval');
+
+  appendSearchResult(shortestPath, totalDistance, totalTime);
 };
