@@ -5,10 +5,13 @@ export default class ResultView {
     };
   }
 
-  render(path, distance, time) {
+  render(path, distance, time, searchType) {
     this.elements.resultContainer.innerHTML = `
       <h2>📝결과</h2>
-      <h3>최단거리</h3>
+      <h3>
+        ${searchType === 'shortest-distance' ? '최단거리' : ''}
+        ${searchType === 'minimum-time' ? '최소시간' : ''}
+      </h3>
       <table id="result-table">
         <thead>
           <tr>

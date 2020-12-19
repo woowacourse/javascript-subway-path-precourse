@@ -109,33 +109,30 @@ export default class AppController {
     return total;
   }
 
-  findShortestDistancePath(departureStationName, arrivalStationName) {
-    const path = this.graphs.shortestDistance.findShortestPath(departureStationName, arrivalStationName);
-    const { distance, time } = this.getTotalDistanceTime(path);
-    this.resultView.render(path, distance, time);
-  }
+  findPath(formData) {
+    const { departureStationName, arrivalStationName, searchType } = formData;
+    let path = null;
 
-  findMinimumTimePath(departureStationName, arrivalStationName) {
-    const path = this.graphs.minimumTime.findShortestPath(departureStationName, arrivalStationName);
+    if (searchType === 'shortest-distance') {
+      path = this.graphs.shortestDistance.findShortestPath(departureStationName, arrivalStationName);
+    } else if (searchType === 'minimum-time') {
+      path = this.graphs.minimumTime.findShortestPath(departureStationName, arrivalStationName);
+    }
+
     const { distance, time } = this.getTotalDistanceTime(path);
-    this.resultView.render(path, distance, time);
+    this.resultView.render(path, distance, time, searchType);
   }
 
   handleSubmit(event) {
     event.preventDefault();
 
     const formData = this.getFormData();
-    const { departureStationName, arrivalStationName, searchType } = formData;
 
     if (!this.validateFormData(formData)) {
       return;
     }
 
-    if (searchType === 'shortest-distance') {
-      this.findShortestDistancePath(departureStationName, arrivalStationName);
-    } else if (searchType === 'minimum-time') {
-      this.findMinimumTimePath(departureStationName, arrivalStationName);
-    }
+    this.findPath(formData);
   }
 
   setEventListener() {
