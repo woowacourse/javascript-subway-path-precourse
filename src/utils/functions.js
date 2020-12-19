@@ -40,6 +40,9 @@ const Functions = function () {
     state.stations.findIndex(
       (stationInState) => stationInState.name === station
     );
+
+  this.generateNextGoneStations = (station1, station2) =>
+    state.alreadyGoneStations.concat(`${station1.name},${station2.name}`);
 };
 
 export const {
