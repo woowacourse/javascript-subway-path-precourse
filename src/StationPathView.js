@@ -6,7 +6,6 @@ export default class StationPathView {
   view() {
     this.headerView();
     this.inputView();
-    this.resultView();
   }
 
   headerView() {
@@ -52,7 +51,7 @@ export default class StationPathView {
       </tr>
       <tr>
         <td align="center" colspan="2">
-        ${path}
+        ${String(path).split(',').join('->')}
         </td>
       </tr>
     </table>
