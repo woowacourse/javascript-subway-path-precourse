@@ -32,3 +32,35 @@
 - [X] 경로에 맞는 총 소요 시간을 구해야 한다.
 - [X] 총 소요시간을 화면에 보여줘야 한다.
 
+## 🗂 디렉토리 구조
+
+```plaintext
+├── LICENSE
+├── README.md
+├── package.json
+├── package-lock.json
+├── .gitignore
+├── .prettierrc
+├── .eslintrc.json
+├── images
+│   ├── result.gif
+│   └── result.jpg
+├── docs
+│   └── README.md // 구현할 기능 목록, 디렉토리 구조를 적은 markdown 문서
+├── index.html // 화면에 보여줄 HTML 템플릿을 작성한 파일
+└── src
+    ├── index.js // 지하철 노선도 조회 기능을 호출하는 메인 모듈
+    ├── render // 화면을 보여주는 기능을 하는 모듈을 가진 폴더
+    │   └── render.js // 화면을 구성하는데 필요한 모듈들을 한번에 호출하는 모듈
+    ├── controller // 노선도 조회에 필요한 모듈들을 모아놓은 폴더
+    │   ├── input.js // 노선을 조회할 역을 입력받는 기능을 제공하는모듈
+    │   └── select.js // 최단거리와 최소시간을 선택하는 기능을 제공하는 모듈
+    ├── utils // 노선도 결과를 구하는데 필요한 모듈들을 모아놓은 폴더
+    │   ├── getResult.js // 총 경로, 총 거리, 총 소요시간을 구해주는 모듈
+    │   └── Dijkstra.js // 최단거리, 최소시간을 구해주는 모듈
+    └── data // 지하철 역, 노선, 구간에 관한 모듈들을 모아놓은 폴더
+        ├── station.js // 역 정보를 모아놓은 모듈
+        ├── line.js // 노선 정보를 모아놓은 모듈
+        └── section.js // 구간 정보를 모아놓은 모듈
+    
+```
