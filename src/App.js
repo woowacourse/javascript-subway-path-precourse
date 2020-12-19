@@ -134,14 +134,7 @@ export default class App {
     return true;
   }
 
-  setState() {
-    const startStation = document.querySelector('#departure-station-name-input').value;
-    const endStation = document.querySelector('#arrival-station-name-input').value;
-    const searchType = document.querySelector('input[name="search-type"]:checked').value;
-    if(!this.isPossible(startStation, endStation)) {
-      return;
-    }
-
+  getShortestPath(searchType, startStation, endStation) {
     let shortestPath;
     if(searchType === '최단거리') {
       shortestPath = this.shortestDistanceDijkstra.findShortestPath(startStation, endStation);
@@ -149,6 +142,17 @@ export default class App {
     else {
       shortestPath = this.shortestTimeDijkstra.findShortestPath(startStation, endStation);
     }
+    return shortestPath;
+  }
+
+  setState() {
+    const startStation = document.querySelector('#departure-station-name-input').value;
+    const endStation = document.querySelector('#arrival-station-name-input').value;
+    const searchType = document.querySelector('input[name="search-type"]:checked').value;
+    if(!this.isPossible(startStation, endStation)) {
+      return;
+    }
+    const shortestPath = this.getShortestPath(searchType, startStation, endStation);
     const { totalDistance, totalTime } = getDistanceAndTime(shortestPath);
     this.state = { searchType, shortestPath, totalDistance, totalTime }
     this.renderResult();
