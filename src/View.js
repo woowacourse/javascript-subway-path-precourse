@@ -31,6 +31,7 @@ export default class View {
     for (const entry of form) {
       searchType = entry[1];
     }
+
     return searchType;
   }
 
@@ -54,8 +55,8 @@ export default class View {
     const resultContainer = document.getElementById("result-container");
     resultContainer.innerHTML = RESULT;
     const typeTitle = document.getElementById("type-title");
-    typeTitle.innerText = searchTypeText;
     const resultTableBody = document.getElementById("result-table-body");
+    typeTitle.innerText = searchTypeText;
     resultTableBody.innerHTML =
       RESULT_TABLE_HEADER +
       `<tr>

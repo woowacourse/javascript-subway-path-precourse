@@ -32,6 +32,7 @@ export default class Controller {
       alert(CANT_SAME_START_AND_END);
       return true;
     }
+
     return false;
   }
 
@@ -43,6 +44,7 @@ export default class Controller {
     const totalDistanceAndTime = this.Model.getTotalTimeAndDistance(
       shortestPath
     );
+
     return [
       ...totalDistanceAndTime,
       shortestPath.join(" ➡"),
