@@ -1,0 +1,11 @@
+#result-table {
+    border: 1px solid black;
+}
+
+#result-table th, td {
+    border: 1px solid black;
+}
+
+#result-table td {
+    text-align: center;
+}
