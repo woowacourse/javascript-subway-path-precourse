@@ -2,6 +2,16 @@ import { LineModel } from "../model/Line.js";
 import { Constant, ErrorMessage } from "./constant.js";
 
 export const StationValidation = {
+  isNotSameDepartureArrival(departure, arrival) {
+    if (departure === arrival) {
+      alert(ErrorMessage.SAME_DAPARTURE_ARRIVAL);
+
+      return;
+    }
+
+    return true;
+  },
+
   isValidDepartureStation(station) {
     // if (!this.isThereStation(station)) {
     //   return;

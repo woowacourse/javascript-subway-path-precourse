@@ -41,19 +41,23 @@ export const SubwayPathController = {
   },
 
   onClickSearchButton() {
-    const departureStation = document.querySelector(
+    const departure = document.querySelector(
       Constant.DEPARTURE_STATION_NAME_INPUT_ID
     ).value;
-    const arrivalStation = document.querySelector(
+    const arrival = document.querySelector(
       Constant.ARRIVVAL_STATION_NAME_INPUT_ID
     ).value;
 
-    if (StationValidation.isValidDepartureStation(departureStation)) {
-      console.log("valid departure");
+    if (
+      StationValidation.isNotSameDepartureArrival(departure, arrival) &&
+      StationValidation.isValidDepartureStation(departure) &&
+      StationValidation.isValidArrivalStation(arrival)
+    ) {
+      console.log("valid departure arrival");
     }
 
-    if (StationValidation.isValidArrivalStation(arrivalStation)) {
-      console.log("valid arrival");
-    }
+    // if (StationValidation.isValidArrivalStation(arrivalStation)) {
+    //   console.log("valid arrival");
+    // }
   },
 };
