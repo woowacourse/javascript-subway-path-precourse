@@ -27,8 +27,13 @@ export const STATIONS = Array.from(
   )
 );
 
+export const STATION_NAME_LEN_LIMIT = 2;
+
 export const ERROR_MESSAGES = {
   STAION_NAME_ONLY_SPACE: `🚨안 내🚨\n
   공백만으로는 지하철역을 검색할 수 없습니다.
   유효한 지하철 역 이름으로 다시 입력해주세요.`,
+  STAION_NAME_TOO_SHORT: `🚨안 내🚨\n
+  입력된 지하철역 이름이 너무 짧습니다.
+  ${STATION_NAME_LEN_LIMIT}글자 이상의 지하철 역 이름으로 다시 입력해주세요.`,
 };

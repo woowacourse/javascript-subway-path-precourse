@@ -1,4 +1,4 @@
-import { ERROR_MESSAGES } from './../configuration.js';
+import { ERROR_MESSAGES, STATION_NAME_LEN_LIMIT } from './../configuration.js';
 
 export const requestToFindShortestPath = (e) => {
   const departure = document.getElementById('departure-station-name-input');
@@ -23,6 +23,9 @@ const validateStationNames = (departureName, arrivalName) => {
 const validateOneStation = (stationName) => {
   if (stationName.replace(' ', '').length === 0) {
     return 'STAION_NAME_ONLY_SPACE';
+  }
+  if (stationName.replace(' ', '').length < STATION_NAME_LEN_LIMIT) {
+    return 'STAION_NAME_TOO_SHORT';
   }
 };
 
