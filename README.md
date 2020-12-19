@@ -1,6 +1,35 @@
 # 🚇 지하철 노선도 경로 조회 미션
 - 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.
 
+## 구현 세부사항
+
+### index.js
+- data.js로부터 데이터들을 들고오는 `initializeData`
+- 역과 역 사이의 시간 및 거리 정보를 구해 저장하고 다익스트라에 추가하는 `constructData`
+
+### utils/utils.js
+- 태그의 타입과 내용들을 받아 element를 반환하는 `createElement`
+- 컨테이너에 해당하는 element를 받아 내용을 비워주는 `clearContainer`
+- 테이블과 데이터를 받아 행을 입력해주는 `insertRow`
+
+### component/renderer.js
+- 종류에 따라 타이틀을 변경시키고, 컨테이너를 비워준 뒤 내용을 채워넣는 `renderer`
+- renderer 내부에서 테이블에 데이터를 채워넣는 `constructTable`
+
+### component/manager.js
+- 길 찾기 버튼에 이벤트리스너를 등록하는 `startManager`
+- 라디오버튼에 체크된 값, 출발역과 도착역을 검증한 뒤 다익스트라를 수행해 renderer에 데이터를 전달해주는 `buttonHandler`
+- 체크되어 있는 라디오 버튼을 찾고 값을 반환하는 `checkedButtonType`
+- 길 찾기 버튼이 눌렸을 때 그 입력값이 적절한지 검증하는 `inputValidator`
+- 해당 역이 존재하는지 검증하는 `findStation`
+- 타입(경로, 시간)에 맞는 다익스트라를 수행하고 결과를 전달하는 `runDijkstra`
+- 경로에 따라 총 거리 및 소요 시간을 계산하고 전달하는 `totalPathData`
+
+### consts/data.js
+- 초기화에 필요한 데이터 정보들을 저장한다.
+
+- 경로가 없는 경우는 테스트를 통해 작동되는지 확인했고, 내부적인 오류가 발생했을 때에 대한 핸들링도 확인함.
+
 ## 🚀 기능 요구사항
 > 프리코스 3주차 미션에서 사용한 코드를 참고해도 무관하다.
 
