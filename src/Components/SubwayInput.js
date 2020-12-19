@@ -1,4 +1,5 @@
 import {
+  isExistPath,
   isSameStation,
   isVaildStationName,
 } from "../utils/validations/subwayInputVaildation.js";
@@ -35,10 +36,11 @@ class SubwayInput {
       !isVaildStationName(this.$arrivalInput, stations, arrival) ||
       isSameStation(departure, arrival)
     ) {
-      return false;
+      return;
     }
 
     const path = this.calculateResult(departure, arrival, option);
+    if (!isExistPath(path)) return;
     getTotalInfo(sections, path);
   }
 
@@ -55,9 +57,11 @@ class SubwayInput {
   calculateResult(departure, arrival, option) {
     const { minDistanceStore, minTimeStore } = this.props;
     if (option === OPTION.MIN_DIST) {
-      return minDistanceStore.findShortestPath(departure, arrival);
+      return minDistanceStore.findShortestPath(departure, arrival) || [];
     } else if (option === OPTION.MIN_TIME) {
-      return minTimeStore.findShortestPath(departure, arrival);
+      return minTimeStore.findShortestPath(departure, arrival) || [];
+    } else {
+      return [];
     }
   }
 }

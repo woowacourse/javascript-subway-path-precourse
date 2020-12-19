@@ -30,3 +30,12 @@ export const isSameStation = (departure, arrival) => {
 
   return false;
 };
+
+export const isExistPath = path => {
+  if (!path.length) {
+    alert(MESSAGE.NOT_FOUND_PATH_ERROR);
+    return false;
+  }
+
+  return true;
+};
