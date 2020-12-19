@@ -6,17 +6,17 @@ const distanceDijkstra = new Dijkstra();
 const timeDijkstra = new Dijkstra();
 
 const setDijkstra = (_line) => {
-  let nowStation = _line.sections[0];
+  let nextStation = _line.sections[0];
   let prevStation = null;
   let section = { distance: "", time: "" };
 
   for (let i = 1; i < _line.sections.length; i++) {
     if (typeof _line.sections[i] === "string") {
-      prevStation = nowStation;
-      nowStation = _line.sections[i];
+      prevStation = nextStation;
+      nextStation = _line.sections[i];
 
-      distanceDijkstra.addEdge(prevStation, nowStation, section.distance);
-      timeDijkstra.addEdge(prevStation, nowStation, section.time);
+      distanceDijkstra.addEdge(prevStation, nextStation, section.distance);
+      timeDijkstra.addEdge(prevStation, nextStation, section.time);
     } else {
       section = _line.sections[i];
     }
@@ -75,13 +75,55 @@ const findPath = (_departureStation, _arrivalStation, _searchType) => {
   }
 };
 
+const isInLine = (_line, _prevStation, _nextStation) => {
+  return (
+    _line.sections.indexOf(_prevStation) !== -1 &&
+    _line.sections.indexOf(_nextStation) !== -1
+  );
+};
+
+const getNowLineSections = (_prevStation, _nextStation) => {
+  return lines.find((x) => isInLine(x, _prevStation, _nextStation)).sections;
+};
+
+const getNowSection = (_nowLineSections) => {
+  return _nowLineSections[
+    (_nowLineSections.indexOf(nextStation) +
+      _nowLineSections.indexOf(prevStation)) /
+      2
+  ];
+};
+
+const getDistanceAndTime = (_path) => {
+  let nextStation = _path[0];
+  let prevStation = null;
+  let section = { distance: 0, time: 0 };
+
+  for (let i = 1; i < _path.length; i++) {
+    prevStation = nextStation;
+    nextStation = _path[i];
+
+    const nowLineSections = getNowLineSections(prevStation, nextStation);
+    const nowSection = getNowSection(nowLineSections);
+
+    section.distance += nowSection.distance;
+    section.time += nowSection.time;
+  }
+
+  return section;
+};
+
 const init = () => {
   const pathFinderInput = getPathFinderInput();
 
   if (pathFinderInput) {
     lines.forEach((x) => setDijkstra(x));
 
-    console.log(findPath(...pathFinderInput));
+    const path = findPath(...pathFinderInput);
+    const section = getDistanceAndTime(path);
+    const searchType = pathFinderInput[2];
+
+    return [path, section.distance, section.time, searchType];
   }
 };
 
