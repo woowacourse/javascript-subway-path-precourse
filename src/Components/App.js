@@ -1,7 +1,9 @@
 import AbstractComponent from "./AbstractComponent.js";
 import Input from "./Input.js";
+import Result from "./Result.js";
 
 export default class App extends AbstractComponent {
+  
   constructor(props) {
     super(props);
     this.render();
@@ -11,7 +13,7 @@ export default class App extends AbstractComponent {
     super.render();
     this.renderHeader();
     this.renderInput();
-    // this.renderResult();
+    this.renderResult();
   }
 
   renderHeader() {
@@ -24,5 +26,11 @@ export default class App extends AbstractComponent {
   renderInput() {
     new Input({ $parent: this.$component });      
   }
-  
+
+  renderResult() {
+    new Result({
+      $parent: this.$component,
+      searchType: "최단거리" // UI테스트용 임시 값. TODO: state의 값으로 할당해줘야 함
+    });
+  }
 }
