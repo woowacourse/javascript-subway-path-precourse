@@ -1,0 +1,11 @@
+const MIN_LENGTH_OF_NAME = 2;
+
+const LINE_NUMBER = {
+  LINE2: 2,
+  LINE3: 3,
+  LINE_SINBUNDANG: 4,
+};
+
+const ERROR_MESSAGE = {};
+
+export { MIN_LENGTH_OF_NAME, ERROR_MESSAGE, LINE_NUMBER };
