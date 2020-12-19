@@ -1,7 +1,10 @@
 import { stationDistanceList, stationMinuteList, stationDistanceMap, stationMinuteMap } from "./utils/data.js";
 import { getDepartureStationName, getArrivalStationName, getSearchType, setBtnGetDirection, createHeader, createTable } from "./dom.js";
 import { stationNameValidation } from "./validation.js";
+import { constant } from "./utils/const.js";
 import Dijkstra from "./utils/Dijkstra.js";
+
+const { HEADER_RESULT, MIN_DISTANCE, MIN_TIME } = constant;
 
 export default class subwayGetDirection {
   constructor() {
@@ -44,7 +47,7 @@ export default class subwayGetDirection {
     const minuteResult = this.getMinuteInRoute();
     const routeResult = this.route;
     const $table = createTable(distanceResult, minuteResult, routeResult);
-    const $headerH1 = createHeader("h1", "📝결과");
+    const $headerH1 = createHeader("h1", HEADER_RESULT);
     const $headerH3 = createHeader("h3", this.searchType);
     $divResult.append($headerH1, $headerH3, $table);
   }
@@ -56,13 +59,13 @@ export default class subwayGetDirection {
       return;
     }
     this.searchType = getSearchType();
-    if (this.searchType === "최단거리") {
+    if (this.searchType === MIN_DISTANCE) {
       this.startDijkstra(this.stationDistanceList);
     }
-    if (this.searchType === "최단시간") {
+    if (this.searchType === MIN_TIME) {
       this.startDijkstra(this.stationMinuteList);
     }
-    this.getDistanceInRoute();
+
     this.drawTable();
   }
 }

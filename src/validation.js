@@ -1,9 +1,11 @@
 import { stationList } from "./utils/data.js";
-import { errorMessage } from "./utils/const.js";
+import { errorMessage, constant } from "./utils/const.js";
 const { ERROR_SHORT_STATION, ERROR_NONEXIST_STATION, ERROR_EQUAL_STATION_NAME } = errorMessage;
-const validateNameLength = (name) => name.trim().length > 1;
+const { NAME_LENGTH, NAME_INDEX } = constant;
 
-const existStationName = (name) => stationList.indexOf(name) > -1;
+const validateNameLength = (name) => name.trim().length > NAME_LENGTH;
+
+const existStationName = (name) => stationList.indexOf(name) > NAME_INDEX;
 
 const equalStationName = (firstName, secondName) => firstName === secondName;
 

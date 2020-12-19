@@ -8,3 +8,9 @@ th {
 td {
   border: 1px solid;
 }
+input{
+  margin: 0.2rem;
+}
+button{
+  margin: 0.2rem;
+}
