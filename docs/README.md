@@ -18,9 +18,9 @@
 
 - [x] 최단거리, 최소시간 선택값 얻는 기능 - `findSelectRadio`
 - [x] 경로 입력 기능 - `getStations`
-- [ ] 경로 조회
-  - [ ] 최단거리 경로
-  - [ ] 최소시간 경로
+- [x] 경로 조회 - `calculatePath`
+  - [x] 최단거리 경로
+  - [x] 최소시간 경로
 
 ### Presenter 표시
 

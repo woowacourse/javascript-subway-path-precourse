@@ -23,11 +23,33 @@ const getStations = () => {
   return { departureStation, arrivalStation };
 };
 
+// 경로 계산
+const calculatePath = (
+  searchType,
+  lineData,
+  departureStation,
+  arrivalStation
+) => {
+  const CALCULATE_REFRENCE = searchType === "distance" ? "D" : "T";
+
+  const startStation = departureStation + CALCULATE_REFRENCE;
+  const endStation = arrivalStation + CALCULATE_REFRENCE;
+
+  const path = lineData.findShortestPath(startStation, endStation);
+
+  return path;
+};
+
 const searchContainer = (lineData) => {
   const searchType = findSelectRadio();
-
   const { departureStation, arrivalStation } = getStations();
-  console.log(departureStation, arrivalStation);
+
+  const path = calculatePath(
+    searchType,
+    lineData,
+    departureStation,
+    arrivalStation
+  );
 
   searchPresenter(searchType);
 };
