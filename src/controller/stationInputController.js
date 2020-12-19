@@ -20,9 +20,19 @@ const isLessThanTwoLetter = (start, end) => {
 	return false;
 };
 
+const isSameStation = (start, end) => {
+	if (start === end) {
+		alert(errorMessage.SAME_START_END_POINT);
+		document.getElementById(ids.STARTPOINT_INPUT_ID).value = '';
+		document.getElementById(ids.ENDPOINT_INPUT_ID).value = '';
+		return true;
+	}
+	return false;
+};
+
 export const getValidInput = () => {
 	const [start, end] = [getStartPointValue(), getEndPointValue()];
-	if (!isLessThanTwoLetter(start, end)) {
+	if (!isLessThanTwoLetter(start, end) && !isSameStation(start, end)) {
 		return [start, end];
 	}
 	return [-1, -1];

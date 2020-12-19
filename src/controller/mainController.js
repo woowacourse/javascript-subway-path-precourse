@@ -61,7 +61,7 @@ export const findPathButtonHandler = () => {
 	let [totalPath, totalTime, totalDistance] = [[], -1, -1];
 	clearAllContents(resultContainer);
 	if (start === -1 && end === -1) return;
-	[totalPath, totalTime, totalDistance] = applyDijkstra(searchType);
+	[totalPath, totalTime, totalDistance] = applyDijkstra(searchType, start, end);
 	appendChilds(resultContainer, [
 		makeElement({ tag: 'p', innerText: searchType }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
