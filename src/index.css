@@ -1,7 +1,10 @@
 table {
   border: 1px solid grey;
+  width: 400px;
 }
 th,
 td {
+  text-align: center;
+  vertical-align: middle;
   border: 1px solid grey;
 }

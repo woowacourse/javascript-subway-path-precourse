@@ -1,5 +1,6 @@
 import Dijkstra from "./utils/Dijkstra.js";
 import { EDGE_INFO } from "./constants.js";
+import { setResultTable } from "./views/dom.js";
 
 const setMapByWeightType = (map, edges, weightType) => {
   for (let i = 0; i < edges.length; i++) {
@@ -32,7 +33,7 @@ const caclTotal = (path, sections) => {
       }
     }
   }
-  console.log(totalDistance, totalTime);
+  setResultTable(totalDistance, totalTime);
 };
 
 export const findShortestPath = (departure, arrival, sections) => {
