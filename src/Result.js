@@ -7,6 +7,7 @@ export default class Result {
     this.createHeader(target);
     this.createSubTitle(target);
     this.createResultTable(target);
+    this.render();
   }
 
   createHeader(target) {
@@ -26,5 +27,24 @@ export default class Result {
     const headers = ['총 거리', '총 소요시간'];
     this.resultTable = new Table({ target });
     this.resultTable.createTableHeader(headers);
+  }
+
+  render() {
+    const { shortestPath, totalDistance, totalTime } = this.props;
+    const path = shortestPath.join(' -> ')
+    const renderer = `
+      <tr>
+        <td>${totalDistance}km</td>
+        <td>${totalTime}분</td>
+      </tr>
+      <tr>
+        <td colspan="2">${path}</td>
+      </tr>
+    `;
+
+    this.resultTable.renderTable({
+      data: shortestPath,
+      renderer,
+    })
   }
 }

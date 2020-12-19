@@ -1,8 +1,20 @@
+import * as Data from './Data.js';
+import getDistanceAndTime from './utils/getWeight.js';
 import Result from './Result.js';
 
 export default class App {
+  initialState = {
+    searchType: '최단거리',
+    shortestPath: [],
+    totalDistance: '',
+    totalTime: '',
+  }
+
   constructor(target) {
     this.target = target;
+    this.state = this.initialState;
+    this.fetchData();
+
     this.createHeader(target);
     this.createStationInput(target);
     this.createRadioButton(target);
@@ -11,6 +23,11 @@ export default class App {
     this.resultContainer = document.createElement('div');
     this.resultContainer.className = 'result';
     target.appendChild(this.resultContainer);
+  }
+
+  fetchData() {
+    this.shortestDistanceDijkstra = Data.fetchShortestDistanceDijkstra();
+    this.shortestTimeDijkstra = Data.fetchShortestTimeDijkstra();
   }
 
   createHeader(target) {
@@ -69,23 +86,42 @@ export default class App {
   }
 
   createSearchButton(target) {
-    const { renderResult } = this;
+    const { setState } = this;
     const container = document.createElement('div');
     target.appendChild(container);
 
     container.innerHTML = `<button id="search-button">길찾기</button>`;
 
     const addButton = document.querySelector('#search-button');
-    addButton.addEventListener('click', renderResult.bind(this));
+    addButton.addEventListener('click', setState.bind(this));
   }
 
+  setState() {
+    const startStation = document.querySelector('#departure-station-name-input').value;
+    const endStation = document.querySelector('#arrival-station-name-input').value;
+    const searchType = document.querySelector('input[name="search-type"]:checked').value;
+
+    let shortestPath;
+    if(searchType === '최단거리') {
+      shortestPath = this.shortestDistanceDijkstra.findShortestPath(startStation, endStation);
+    }
+    else {
+      shortestPath = this.shortestTimeDijkstra.findShortestPath(startStation, endStation);
+    }
+    const { totalDistance, totalTime } = getDistanceAndTime(shortestPath);
+    this.state = { searchType, shortestPath, totalDistance, totalTime }
+    this.renderResult();
+  }
 
   renderResult() {
-    const searchType = document
-      .querySelector('input[name="search-type"]:checked').value;
+    const { searchType, shortestPath, totalDistance, totalTime } = this.state;
     this.resultContainer.innerHTML = ``;
-    this.result = new Result(this.resultContainer, {
+
+    return new Result(this.resultContainer, {
       searchType,
-    });
+      shortestPath,
+      totalDistance,
+      totalTime,
+    })
   }
 }

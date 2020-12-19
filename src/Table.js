@@ -21,18 +21,11 @@ export default class Table {
     `;
   }
 
-  renderTable({ data, callbackRender, onClickDelete, className }) {
+  renderTable({ data, renderer }) {
     if (data.length === 0) {
       this.tbody.innerHTML = '';
       return;
     }
-    this.tbody.innerHTML = data.map(callbackRender).join('');
-
-    if (onClickDelete) {
-      const deleteButtons = this.tbody.querySelectorAll(className);
-      deleteButtons.forEach((button, index) => {
-        button.addEventListener('click', () => onClickDelete(data[index]));
-      });
-    }
+    this.tbody.innerHTML = renderer;
   }
 }
