@@ -1,17 +1,25 @@
+import {
+  ALREADY_GONE_STATIONS,
+  ARRIVAL_STATION,
+  DEPARTURE_STATION,
+  DIJKSTRA,
+  DEPARTURE_STATION_INPUT_ID,
+  ARRIVAL_STATION_INPUT_ID,
+  RIGHT_ARROW_EXPRESSION,
+} from "../../constant.js";
 import { setState, state } from "../state.js";
 import Dijkstra from "./Dijkstra.js";
 
 const Functions = function () {
   this.setDepartureStation = () => {
-    const departureStation = document.getElementById(
-      "departure-station-name-input"
-    ).value;
-    setState("departureStation", departureStation);
+    const departureStation = document.getElementById(DEPARTURE_STATION_INPUT_ID)
+      .value;
+    setState(DEPARTURE_STATION, departureStation);
   };
   this.setArrivalStation = () => {
-    const arrivalStation = document.getElementById("arrival-station-name-input")
+    const arrivalStation = document.getElementById(ARRIVAL_STATION_INPUT_ID)
       .value;
-    setState("arrivalStation", arrivalStation);
+    setState(ARRIVAL_STATION, arrivalStation);
   };
 
   this.isBiggerThanOne = (a) => a > 1;
@@ -50,14 +58,14 @@ const Functions = function () {
       if (this.IsAlreadyGoneMatch(currentStation.name, station.name)) return;
       state.dijkstra.addEdge(currentStation.name,station.name,station[state.searchType]);
       const nestGoneStations = this.generateNextGoneStations(currentStation,station);
-      setState("alreadyGoneStations", nestGoneStations);
+      setState(ALREADY_GONE_STATIONS, nestGoneStations);
       setEdges(state.stations[this.getStationIndex(station.name)]);
     });
   };
 
   this.getMinimumPath = () => {
-    setState("dijkstra", new Dijkstra());
-    setState("alreadyGoneStations", []);
+    setState(DIJKSTRA, new Dijkstra());
+    setState(ALREADY_GONE_STATIONS, []);
     const station =
       state.stations[this.getStationIndex(state.departureStation)];
     setEdges(station);
@@ -80,7 +88,7 @@ const Functions = function () {
     return result;
   };
 
-  this.getFormattedPath = (path) => path.join("➨");
+  this.getFormattedPath = (path) => path.join(RIGHT_ARROW_EXPRESSION);
 };
 
 export const {

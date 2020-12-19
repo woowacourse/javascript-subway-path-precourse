@@ -1,3 +1,4 @@
+import { DISTANCE, TIME } from "../constant.js";
 import {
   getMinimumPath,
   isValid,
@@ -17,8 +18,8 @@ const onSearchButtonClick = function () {
   }
   clearResultDiv();
   const formattedMinPath = getFormattedPath(getMinimumPath());
-  const minDistance = getMinimumCost("distance");
-  const minTime = getMinimumCost("time");
+  const minDistance = getMinimumCost(DISTANCE);
+  const minTime = getMinimumCost(TIME);
   renderResult(formattedMinPath, minDistance, minTime);
 };
 export default onSearchButtonClick;
