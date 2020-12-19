@@ -31,6 +31,9 @@ export const initListener = subwayPath => {
       arrivalStationNameInput.value,
       subwayPath.stationList
     );
-    if (!(result === 'ok')) alert(result);
+    if (result === 'ok') {
+    } else {
+      alert(result);
+    }
   });
 };
