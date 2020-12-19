@@ -1,4 +1,4 @@
-import { distanceDijkstra } from './dijkstra.js';
+import { distanceDijkstra } from '../index.js';
 import { distances, sections } from '../database/data.js';
 
 export default class Distance {

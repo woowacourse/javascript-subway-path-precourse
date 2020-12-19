@@ -1,4 +1,4 @@
-import { timeDijkstra } from './dijkstra.js';
+import { timeDijkstra } from '../index.js';
 import { times, sections } from '../database/data.js';
 
 export default class Time {
