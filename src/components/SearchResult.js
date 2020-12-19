@@ -22,7 +22,7 @@ export default class SearchResult {
         <tbody>
           <tr>
             <td>${UNITS.distance}</td>
-            <td>${UNITS.tiem}</td>
+            <td>${UNITS.time}</td>
           </tr>
           <tr >
             <td colspan="2">경로</td>
