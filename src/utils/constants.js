@@ -27,4 +27,5 @@ export const STATION_NAME_MIN_LENGTH = 2;
 
 export const ERROR_MESSAGE = {
   shortStationName: `⚠ ${STATION_NAME_MIN_LENGTH}자 이상의 지하철역 이름을 입력해주세요.`,
+  sameDepartureArrivalStationName: `⚠ 출발역과 도착역이 서로 같습니다.`,
 };

@@ -18,18 +18,41 @@ export default class SearchForm {
   };
 
   onSubmit = () => {
+    if (this.checkInputs()) {
+      // TODO: submit 로직 작성
+    }
+  };
+
+  checkInputs = () => {
     const $departureStationInput = document.querySelector(`#${FORM_ELEMENT.departureStationInput.id}`);
     const $arrivalStationInput = document.querySelector(`#${FORM_ELEMENT.arrivalStationInput.id}`);
 
-    this.checkStationName($departureStationInput);
-    this.checkStationName($arrivalStationInput);
+    return (
+      this.checkStationName($departureStationInput) &&
+      this.checkStationName($arrivalStationInput) &&
+      this.checkStationNamesIsSame($departureStationInput.value, $arrivalStationInput.value)
+    );
   };
 
   checkStationName = ($stationNameInput) => {
     if (!this.isTextOverMinLength($stationNameInput.value, STATION_NAME_MIN_LENGTH)) {
       alert(ERROR_MESSAGE.shortStationName);
       $stationNameInput.value = "";
+
+      return false;
     }
+
+    return true;
+  };
+
+  checkStationNamesIsSame = (departureStationName, arrivalStationName) => {
+    if (departureStationName === arrivalStationName) {
+      alert(ERROR_MESSAGE.sameDepartureArrivalStationName);
+
+      return false;
+    }
+
+    return true;
   };
 
   isTextOverMinLength = (text, minLength) => {
