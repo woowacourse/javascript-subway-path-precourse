@@ -12,8 +12,13 @@
 - 컨테이너에 해당하는 element를 받아 내용을 비워주는 `clearContainer`
 - 테이블과 데이터를 받아 행을 입력해주는 `insertRow`
 
+### component/renderer.js
+- 종류에 따라 타이틀을 변경시키고, 컨테이너를 비워준 뒤 내용을 채워넣는 `renderer`
+- renderer 내부에서 테이블에 데이터를 채워넣는 `constructTable`
+
 ### consts/data.js
 - 초기화에 필요한 데이터 정보들을 저장한다.
+
 
 
 ## 🚀 기능 요구사항
