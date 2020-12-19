@@ -25,7 +25,7 @@ export default function PathResult() {
 
   this.pathTemplate = path => {
     return `<tr>
-      <td>${path}</td>
+      <td>${path.join('→')}</td>
     </tr>`;
   };
 
