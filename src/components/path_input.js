@@ -65,21 +65,21 @@ export default function PathInput({ findRoute }) {
   };
 
   this.departureStationNameInputTemplate = () => {
-    return `<div>
+    return `<div class="departure-station">
       <label for="departure-station-name-input">출발역</label>
       <input id="departure-station-name-input">
     </div>`;
   };
 
   this.arrivalStationNameInputTemplate = () => {
-    return `<div>
+    return `<div class="arrival-station">
     <label for="arrival-station-name-input">도착역</label>
     <input id="arrival-station-name-input">
   </div>`;
   };
 
   this.searchTypeRadioTemplate = () => {
-    return `<div>
+    return `<div class="search-type">
       <input type="radio" id="short-distance-input" name="search-type" checked>
       <label for="short-distance-input">최단거리</label>
       <input type="radio" id="short-time-input" name="search-type">

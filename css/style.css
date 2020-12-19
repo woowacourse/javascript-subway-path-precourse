@@ -4,3 +4,9 @@ td {
   border: 1px solid black;
   text-align: center;
 }
+
+.departure-station,
+.arrival-station,
+.search-type {
+  margin-bottom: 20px;
+}
