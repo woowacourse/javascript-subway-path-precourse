@@ -6,6 +6,7 @@ import DepartureStationView from "../views/DepartureStationView.js";
 import ArrivalStationView from "../views/ArrivalStationView.js";
 import shortestRadioView from "../views/shortestRadioView.js";
 import minimumRadioView from "../views/minimumRadioView.js";
+import ResultTable from "../views/ResultTable.js";
 
 export default class MainController {
   constructor() {
@@ -16,6 +17,7 @@ export default class MainController {
     this.shortestRadioView = new shortestRadioView();
     this.minimumRadioView = new minimumRadioView();
     this.Dijkstra = new Dijkstra();
+    this.ResultTable = new ResultTable();
 
     this.radioOption = INITIAL_RADIO_OPTION;
   }
@@ -39,6 +41,8 @@ export default class MainController {
       document.querySelector("#" + DOM.MINIMUM_DISTANCE_RADIO_ID)
     );
     this.selectedOptionRadio();
+
+    this.ResultTable.setup(document.querySelector("#app"));
   }
 
   onSubmit(e) {
@@ -53,7 +57,19 @@ export default class MainController {
     }
 
     this.selectedOptionRadio();
-    this.dijkstraResult(departureStation, arrivalStation, this.radioOption);
+    const result = this.dijkstraResult(
+      departureStation,
+      arrivalStation,
+      this.radioOption
+    );
+    console.log(result, this.radioOptionText(this.radioOption));
+
+    this.ResultTable.render();
+  }
+
+  radioOptionText(option) {
+    if ((option = "distance")) return "최단거리";
+    if ((option = "time")) return "최소거리";
   }
 
   dijkstraResult(start, end, option) {
@@ -72,7 +88,7 @@ export default class MainController {
       }
     });
 
-    const result = this.Dijkstra.findShortestPath(start, end);
+    return this.Dijkstra.findShortestPath(start, end);
   }
 
   selectedOptionRadio() {
