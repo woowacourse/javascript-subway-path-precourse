@@ -48,78 +48,6 @@
 - 길찾기 버튼은 `search-button` id 속성값을 가진다.
 - 📝 결과는 `table`을 이용하여 보여준다.
 
-## ❗️힌트
-## 데이터 초기화
-자바스크립트에서 데이터를 초기화하는 방법 중에 하나는 아래와 같이 data를 `export`하고, `import`하는 것이다.
-
-```javascript
-export const users = [
-  {
-    name: 'Alt'
-  },
-  {
-    name: 'Jamie'
-  },
-  {
-    name: 'Sony'
-  }
-]
-
-export const courses = [
-  {
-    name: 'frontend',
-  },
-  {
-    name: 'backend',
-  },
-  {
-    name: 'iOS',
-  },
-  {
-    name: 'Android',
-  }
-]
-
-```
-위와 같이 데이터를 `export`하면 아래와 같이 데이터를 `import` 하여 사용할 수 있다.
-```javascript
-import { users, courses } from './data.js'
-
-function App() {
-  this.users = users
-  this.courses = courses
-}
-```
-
-## 최단 경로 라이브러리
-- `utils/Dijkstra.js` 라이브러리를 활용하면 간편하게 최단거리를 조회할 수 있다.
-- 정점(Vertex)과 간선(Edge), 그리고 가중치 개념을 이용
-  - 정점: 지하철역
-  - 간선: 지하철역 연결정보
-  - 가중치: 거리 or 소요 시간
-- 최단 거리 기준 조회 시 가중치를 거리로 설정
-- 최소 시간 기준 조회 시 가중치를 시간으로 설정
-
-```javascript
-import Dijkstra from "./utils/Dijkstra.js";
-const dijkstra = new Dijkstra()
-
-//dijkstra.addEdge("출발역", "도착역", 거리 또는 시간);
-dijkstra.addEdge("V1", "V2", 2);
-dijkstra.addEdge("V2", "V3", 2);
-dijkstra.addEdge("V1", "V3", 100);
-
-const result = dijkstra.findShortestPath("V1", "V3");
-// result = ["V1", "V2", "V3"] 
-```
-
-#### 테스트설명
-<img src="/images/dijkstra_example.png" width="400">
-
-- 역 사이의 거리를 고려하지 않는 경우 V1->V3 경로가 최단 경로
-- 역 사이의 거리를 고려할 경우 V1->V3 경로의 거리는 100km, V1->V2->V3 경로의 거리는 4km이므로 최단 경로는 V1->V2->V3
-
-<br>
 
 ### 요구사항
 - 사용자가 잘못된 입력 값을 작성한 경우 `alert`을 이용해 메시지를 보여주고, 재입력할 수 있게 한다.
@@ -144,3 +72,20 @@ const result = dijkstra.findShortestPath("V1", "V3");
 - **기능을 구현하기 전에 javascript-subway-path-precourse/docs/README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
 - **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
 - [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
+
+## 구현할 기능 목록 단위
+
+ - 교대~매봉역 정보를 사전 등록하고 export 한다.
+ - 교대~매봉역 정보를 import 한다.
+ - 지하철 노선으로 2호선, 3호선, 신분당선을 사전 등록하고 export한다.
+ - 각 노선을 import한다.
+ - 각 역 사이의 거리를 설정하고 export한다.
+ - 각 역 사이의 소요시간을 설정하고 export한다.
+ - 각 역 사이의 거리와 소요시간을 import 한다.
+ - 브라우저에 출발역과 도착역을 입력할 수 있다.
+ - 검색시 최단거리와 최소시간중 하나를 선택할 수 있다.
+   - 둘중 default 값은 최단거리로 설정한다.
+ - 출발역과 도착역의 거리를 계산한다.
+ - 출발역에서 도착역까지의 소요시간을 계산한다.
+ - 길 찾기 버튼을 누르면 결과가 출력된다.
+ - 결과는 총 거리, 총 소요시간, 총 노선을 테이블로 표시한다.
