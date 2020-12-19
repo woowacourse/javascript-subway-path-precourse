@@ -13,6 +13,12 @@ export const checkTargetStationIncludedInStation = (departure, arrival) => {
   return judgeErrors(errors);
 };
 
+export const checkIsSame = (departure, arrival) => {
+  let errors = getErrorsOfSameProblem(departure, arrival);
+
+  return judgeErrors(errors);
+};
+
 const judgeErrors = (errors) => {
   if (errors) {
     showAlert(errors);
@@ -47,10 +53,24 @@ const getErrorOfTargetStationIncludedInStation = (departure, arrival) => {
   return errors;
 };
 
+const getErrorsOfSameProblem = (departure, arrival) => {
+  let errors = '';
+
+  if (isSame(departure, arrival)) {
+    errors += MESSAGE.DEPART_ARRIVAL_SAME_ERROR;
+  }
+
+  return errors;
+};
+
 const isLengthUnderTwo = (name) => {
   return name.length < LENGTH.NAME_LENGTH_LIMIT;
 };
 
 const isIncludedInStations = (name) => {
   return stations.includes(name);
+};
+
+const isSame = (departure, arrival) => {
+  return departure === arrival;
 };

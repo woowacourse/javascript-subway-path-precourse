@@ -1,6 +1,7 @@
 import {
   checkStationNameisValid,
   checkTargetStationIncludedInStation,
+  checkIsSame,
 } from '../utils/validation.js';
 export class FindPathInputs {
   constructor() {
@@ -32,7 +33,8 @@ export class FindPathInputs {
   checkIsValidStations = (departure, arrival) => {
     if (
       !checkStationNameisValid(departure, arrival) ||
-      !checkTargetStationIncludedInStation(departure, arrival)
+      !checkTargetStationIncludedInStation(departure, arrival) ||
+      !checkIsSame(departure, arrival)
     ) {
       return;
     }
