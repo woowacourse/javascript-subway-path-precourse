@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>지하철 길찾기</title>
-</head>
-<body>
-<div id="app"></div>
-</body>
+  </head>
+  <body>
+    <div id="app">
+      <div id="input-container">
+        <h1>🚇 지하철 길찾기</h1>
+        <div id="input-start-container">
+          출발역
+          <input id="departure-station-name-input" />
+        </div>
+        <br />
+        <div id="input-end-container">
+          도착역
+          <input id="arrival-station-name-input" />
+        </div>
+        <br />
+        <div>
+          <input
+            type="radio"
+            name="search-type"
+            id="shortest-distance"
+            checked
+          /><label>최단거리</label>
+          <input type="radio" name="search-type" id="minimum-time" /><label
+            >최소시간</label
+          >
+        </div>
+        <br />
+        <div>
+          <button id="search-button">길 찾기</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./src/index.js"></script>
+  </body>
 </html>
