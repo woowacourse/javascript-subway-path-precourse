@@ -1,9 +1,12 @@
+import Table from './Table.js';
+
 export default class Result {
   constructor(target, props) {
     this.target = target;
     this.props = props;
     this.createHeader(target);
     this.createSubTitle(target);
+    this.createResultTable(target);
   }
 
   createHeader(target) {
@@ -17,5 +20,11 @@ export default class Result {
     const h3 = document.createElement('h3');
     h3.innerHTML = `${searchType}`
     target.appendChild(h3);
+  }
+
+  createResultTable(target) {
+    const headers = ['총 거리', '총 소요시간'];
+    this.resultTable = new Table({ target });
+    this.resultTable.createTableHeader(headers);
   }
 }
