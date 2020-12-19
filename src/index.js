@@ -21,6 +21,15 @@ export default class App {
     const searchTypeInputField = document.querySelector('input[name="search-type"]:checked');
     return searchTypeInputField.value;
   }
+
+  validateStationExist(departureStationName, arrivalStationName) {
+    const isDepartureStationExist = this.stationService.findByName(departureStationName).length;
+    const isArrivalStationExist = this.stationService.findByName(arrivalStationName).length;
+
+    if (!isDepartureStationExist || !isArrivalStationExist) {
+      throw new Error("존재하지 않는 역입니다.");
+    }
+  }
 }
 
 const app = new App();
