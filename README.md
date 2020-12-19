@@ -19,7 +19,7 @@
 ```
 
 ### 경로 조회 기능
-<img src="/images/path_result.jpg" width="100%">
+<img src="./images/path_result.jpg" width="100%">
 
 - 출발역과 도착역을 입력받아 경로를 조회한다.
 - 경로 조회 시 총 거리, 총 소요 시간을 함께 출력한다.
@@ -36,7 +36,7 @@
 
 ## 💻 프로그래밍 실행 결과
 ### 경로 조회
-<img src="/images/path_result.gif" width="100%">
+<img src="./images/path_result.gif" width="100%">
 
 
 ## ✅ 프로그래밍 요구사항
@@ -114,7 +114,7 @@ const result = dijkstra.findShortestPath("V1", "V3");
 ```
 
 #### 테스트설명
-<img src="/images/dijkstra_example.png" width="400">
+<img src="./images/dijkstra_example.png" width="400">
 
 - 역 사이의 거리를 고려하지 않는 경우 V1->V3 경로가 최단 경로
 - 역 사이의 거리를 고려할 경우 V1->V3 경로의 거리는 100km, V1->V2->V3 경로의 거리는 4km이므로 최단 경로는 V1->V2->V3
