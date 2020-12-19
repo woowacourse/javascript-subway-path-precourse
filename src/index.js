@@ -2,9 +2,6 @@ import { lineTwo, lineThree, lineBoondang } from "./data.js";
 import Dijkstra from "./utils/Dijkstra.js";
 
 
-console.log(lineTwo[1]); // lineTwo 리스트의 첫번째 딕셔너리 출력
-
-
 //Validation
 function isUnderTwoCharacters() { 
     let departureStation = document.getElementById('departure-station-name-input').value;
@@ -32,6 +29,7 @@ function isSameStations(departureStation, arrivalStation) {
     }
 }
 
+
 let findRouteButton = document.getElementById('search-route');
 findRouteButton.addEventListener('click', showResult);
 
@@ -40,52 +38,64 @@ function showResult() {
     document.getElementById("result").style.display="block";
 }
 
-
-//입력된 역을 데이터에서 찾기
-//데이터에서 찾으면 해당 역의 distance와 time을 반환하여 array에 push
+const stationsLineTwo = ['교대', '강남', '역삼'];
 function findData(departureStation, arrivalStation) {
-    let dijkstra = new Dijkstra();
-    let v1 ='';
-    let v2 ='';
-    let v3 = 0;
-    for (let i = 0; i < lineTwo.length; i += 1) {
-        if (departureStation === lineTwo[i].station) {
-            v1 = lineTwo[i].station;
-            v3 += lineTwo[i].distance;
+    if (stationsLineTwo.includes(departureStation) && stationsLineTwo.includes(arrivalStation)){
+        let v1 = '', v2 = '', v3 = '';
+        let distance = 0, time = 0;
+        let indexOfDeparture = 0;
+        let indexOfArrival = 0;
+        for (let i = 0; i < lineTwo.length; i += 1) {
+            if (departureStation === lineTwo[i].station) {
+                v1 = lineTwo[i].station;
+                distance += lineTwo[i].distance;
+                time += lineTwo[i].time;
+                indexOfDeparture = lineTwo.indexOf(lineTwo[i]);
+            }
+            if (arrivalStation === lineTwo[i].station) {
+                v3 = lineTwo[i].station;
+                indexOfArrival = lineTwo.indexOf(lineTwo[i]);
+            }
+            if (indexOfDeparture - indexOfArrival > 1) {
+                v2 = lineTwo[i-1].station;
+                distance += lineTwo[i].distance;
+                time += lineTwo[i].time;
+            }  
         }
-        if (arrivalStation === lineTwo[i].station) {
-            v2 = lineTwo[i].station;
-            v3 += lineTwo[i].distance;
-        }
+        getShortestDistance(v1, v2, v3, distance, time);
     }
-    console.log(v1,v2,v3);
-    makeTable(v1, v2, v3);
+    
+}
+
+function getShortestDistance(v1, v2, v3, distance, time) {
+    let dijkstra = new Dijkstra();
+    dijkstra.addEdge(v1, v2, lineTwo[0].distance);
+    dijkstra.addEdge(v2, v3, lineTwo[1].distance);
+    dijkstra.addEdge(v1, v3, lineTwo[0].distance + lineTwo[1].distance);
+    const result = dijkstra.findShortestPath(v1,v3);
+    
+    makeTable(distance, time, result);
 }
 
 
-
-
-// 2호선 총거리 구하기
-// function getTotalDistancelineTwo() {
-//     const dijkstra = new Dijkstra();
-//     dijkstra.addEdge(lineTwo[0].station, lineTwo[1].station, lineTwo[0].distance);
-//     for (let i = 0; i < lineTwo.length; i += 1) {
-
-//     }
-// }
-
-function getTotalTime() {
-
+function makeTable( distance, time, result) {
+    let container = document.getElementById('print-result-container');
+    let resultTable = document.createElement('table');
+    let headerRow = resultTable.insertRow(0);
+    let firstRow = resultTable.insertRow(1);
+    let secondRow = resultTable.insertRow(2);
+    let headerCell1 = headerRow.insertCell(0);
+    let headerCell2 = headerRow.insertCell(1);
+    let firstRowCell1 = firstRow.insertCell(0);
+    let firstRowCell2 = firstRow.insertCell(1);
+    let secondRowCell1 = secondRow.insertCell(0);
+    headerCell1.innerHTML = '총 거리';
+    headerCell2.innerHTML = '총 소요 시간';
+    firstRowCell1.innerHTML = `${distance}km`;
+    firstRowCell2.innerHTML = `${time}분`;
+    secondRowCell1.innerHTML = `${result}`;
+    resultTable.border = 1;
+    resultTable.id = 'print-result-table';
+    container.appendChild(resultTable);
 }
-
-
-
-
-// const dijkstra = new Dijkstra()
-// dijkstra.addEdge(lineTwo[0].station, lineTwo[1].station, lineTwo[0].distance);
-// dijkstra.addEdge(lineTwo[1].station, lineTwo[2].station, lineTwo[1].distance);
-// dijkstra.addEdge(lineTwo[0].station, lineTwo[2].station, lineTwo[0].distance + lineTwo[1].distance);
-
-// const result = dijkstra.findShortestPath(lineTwo[0].station, lineTwo[2].station);
-// console.log(result);
 
