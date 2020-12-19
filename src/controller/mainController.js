@@ -2,17 +2,12 @@ import { ids, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
+import { getValidInput } from './stationInputController.js';
 import {
 	appendChilds,
 	clearAllContents,
 	makeElement,
 } from '../utils/elementUtils.js';
-
-const getStartPointValue = () =>
-	document.getElementById(ids.STARTPOINT_INPUT_ID).value;
-
-const getEndPointValue = () =>
-	document.getElementById(ids.ENDPOINT_INPUT_ID).value;
 
 const getSearhType = () => {
 	const radioButtons = document.getElementsByName(ids.RADIO_BUTTON_NAME);
@@ -47,9 +42,8 @@ const getTotalTimeAndDistance = (dijkstraResultPath) => {
 	return [totalTime, totalDistance];
 };
 
-const applyDijkstra = (type) => {
+const applyDijkstra = (type, start, end) => {
 	const key = type === words.SHORTEST_PATH ? 'distance' : 'time';
-	const [start, end] = [getStartPointValue(), getEndPointValue()];
 	const dijkstra = new Dijkstra();
 	let [totalPath, totalTime, totalDistance] = [[], 0, 0];
 	edges.forEach((edge) => {
@@ -62,9 +56,12 @@ const applyDijkstra = (type) => {
 
 export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
+	const [start, end] = getValidInput();
 	const searchType = getSearhType();
-	const [totalPath, totalTime, totalDistance] = applyDijkstra(searchType);
+	let [totalPath, totalTime, totalDistance] = [[], -1, -1];
 	clearAllContents(resultContainer);
+	if (start === -1 && end === -1) return;
+	[totalPath, totalTime, totalDistance] = applyDijkstra(searchType);
 	appendChilds(resultContainer, [
 		makeElement({ tag: 'p', innerText: searchType }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
