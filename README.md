@@ -146,7 +146,7 @@ const result = dijkstra.findShortestPath("V1", "V3");
 - [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
 
 ## 구현 목록
-- [] 지하철 길찾기 제목을 보여준다.
+- [X] 지하철 길찾기 제목을 보여준다.
 - [] 출발역과 도착역을 입력할 수 있는 화면을 보여준다.
   - [] 출발역과 도착역은 2글자 이상이어야 한다.
   - [] 존재하지 않는 역을 입력할 수 없다.
