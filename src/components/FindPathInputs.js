@@ -1,3 +1,4 @@
+import { checkStationNameisValid } from '../utils/validation.js';
 export class FindPathInputs {
   constructor() {
     this.initializeDOM();
@@ -20,8 +21,13 @@ export class FindPathInputs {
   handleInputValues = () => {
     const departure = this.departureStationInput.value;
     const arrival = this.arrivalStationInput.value;
-    console.log(departure, arrival);
+
+    this.checkStationNameisValid(departure, arrival);
   };
 
-  checkStationNameisValid = () => {};
+  checkStationNameisValid = (departure, arrival) => {
+    if (!checkStationNameisValid(departure, arrival)) {
+      return;
+    }
+  };
 }
