@@ -21,6 +21,8 @@ export default class Subway {
     const result = this.dijkstra.findShortestPath(startStation, endStation);
 
     if (!isLinkedStation(result)) return null;
+
+    return result;
   }
 
   setEdge(lines, sections, searchType) {
@@ -42,6 +44,29 @@ export default class Subway {
       }
 
       this.dijkstra.addEdge(startStation, endStation, weight);
+    }
+  }
+
+  getTotalDistanceAndTime(searchResult) {
+    const total = {distance: 0, time: 0};
+
+    for (let i = 0; i < searchResult.length - 1; ++i) {
+      const section = this.findSection(searchResult[i], searchResult[i+1]);
+
+      total.distance += section.distance;
+      total.time += section.time;
+    }
+
+    return total;
+  }
+
+  findSection(startStation, endStation) {
+    for (const [lineName] of Object.entries(this.lines)) {
+      const lineStartStation = this.sections[lineName][startStation];
+
+      if (lineStartStation && lineStartStation[endStation]) {
+        return lineStartStation[endStation];
+      }
     }
   }
 }
