@@ -4,6 +4,7 @@ import Dijkstra from './utils/Dijkstra.js';
 const departureStationNameInput = document.getElementById('departure-station-name-input');
 const arrivalStationNameInput = document.getElementById('arrival-station-name-input');
 const searchButton = document.getElementById('search-button');
+const searchTypeRadioButton = document.querySelector('input[name="search-type"]');
 
 export default class SubwayPath {
     constructor() {
@@ -11,11 +12,12 @@ export default class SubwayPath {
         this.lines = lines;
         this.routes = routes;
         [this.distanceDijkstra, this.timeDijkstra] = this.createDijkstras();
-
+        
         this.setEventListeners();
     }
 
     setEventListeners() {
+        searchButton.addEventListener('click', this.clickSearchButton);
     }
 
     createDijkstras() {
@@ -28,6 +30,13 @@ export default class SubwayPath {
         return [distanceDijkstra, timeDijkstra];
     }
 
+    clickSearchButton() {
+        const departureStation = departureStationNameInput.value;
+        const arrivalStation = arrivalStationNameInput.value;
+        const searchType = searchTypeRadioButton.value;
+
+        console.log(departureStation, arrivalStation, searchType);
+    }
 }
 
 new SubwayPath();
