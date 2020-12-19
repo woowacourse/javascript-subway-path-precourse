@@ -8,13 +8,22 @@ import {
   haveSpaceInName,
 } from "../utils/validateStationName.js";
 import { ERROR } from "../utils/error.js";
+
+const dijkstraDistance = new Dijkstra();
+const dijkstraTime = new Dijkstra();
+
+stationData.forEach((station) => {
+  dijkstraDistance.addEdge(station.V1, station.V2, station.distance);
+  dijkstraTime.addEdge(station.V1, station.V2, station.time);
+});
+
 export default class FindRoute extends Component {
   constructor() {
     super();
     this.state = {
       start: "",
       end: "",
-      method: "min-distance",
+      method: "minimumDistance",
       total: [],
     };
 
@@ -56,7 +65,21 @@ export default class FindRoute extends Component {
     };
 
     this.findRouteButtonClick = () => {
-      this.setState({ ...this.state, total: [{ ...this.state }] });
+      if (this.state.method === "minimumDistance") {
+        const result = dijkstraDistance.findShortestPath(
+          this.state.start,
+          this.state.end
+        );
+        console.log(result);
+        this.setState({ ...this.state, total: [...result] });
+      } else {
+        const result = dijkstraTime.findShortestPath(
+          this.state.start,
+          this.state.end
+        );
+        console.log(result);
+        this.setState({ ...this.state, total: [...result] });
+      }
     };
   }
 
@@ -102,11 +125,11 @@ export default class FindRoute extends Component {
             <input type="text" id="arrival-station-name-input" value=${end}>
           </div>
           <div>
-            <input type="radio" name="search-type" id="min-distance" value="min-distance"
-            ${method === "min-distance" ? "checked" : ""}>
+            <input type="radio" name="search-type" id="min-distance" value="minimumDistance"
+            ${method === "minimumDistance" ? "checked" : ""}>
             <label for="min-distance">최단거리</label>
-            <input type="radio" name="search-type" id="min-time" value="min-time"
-            ${method === "min-time" ? "checked" : ""}>
+            <input type="radio" name="search-type" id="min-time" value="minimumTime"
+            ${method === "minimumTime" ? "checked" : ""}>
             <label for="min-time">최소시간</label>
           </div>
           <button id="search-button">길 찾기</button>
@@ -114,7 +137,7 @@ export default class FindRoute extends Component {
             total.length === 0
               ? ""
               : `<div>
-          <h3>결과</h3>
+          <h3>📝 결과</h3>
           <h4>최소시간</h4>
           <table>
             <thead>
@@ -129,7 +152,7 @@ export default class FindRoute extends Component {
                 <td>4분</td>
               </tr>
               <tr>
-                <td colspan="2">교대 → 강남</td>
+                <td colspan="2">${total.join("→")}</td>
               </tr>
             </tbody>
           </table>
