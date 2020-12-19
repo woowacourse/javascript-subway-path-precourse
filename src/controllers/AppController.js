@@ -18,7 +18,7 @@ export default class AppController {
     this.resultView = new ResultView();
     this.graphs = {
       shortestDistance: new Dijkstra(),
-      minimalTime: new Dijkstra(),
+      minimumTime: new Dijkstra(),
     };
     this.elements = {
       subwayPathFinderForm: document.querySelector('#subway-path-finder-form'),
@@ -33,7 +33,7 @@ export default class AppController {
       const { from, to, distance, time } = path;
 
       this.graphs.shortestDistance.addEdge(from, to, distance);
-      this.graphs.minimalTime.addEdge(from, to, time);
+      this.graphs.minimumTime.addEdge(from, to, time);
     });
   }
 
@@ -115,8 +115,10 @@ export default class AppController {
     this.resultView.render(path, distance, time);
   }
 
-  findMinimumTimePath() {
-    console.log('findMinimumTimePath');
+  findMinimumTimePath(departureStationName, arrivalStationName) {
+    const path = this.graphs.minimumTime.findShortestPath(departureStationName, arrivalStationName);
+    const { distance, time } = this.getTotalDistanceTime(path);
+    this.resultView.render(path, distance, time);
   }
 
   handleSubmit(event) {
