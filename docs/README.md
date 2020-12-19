@@ -42,9 +42,9 @@
 
 #### 길찾기 관련 기능
 
+* 길찾기 버튼은 `search-button` id 속성값을 가진다.
 * 경로 조회 시 `최단 거리` 또는 `최소 시간` 옵션을 선택할 수 있다.
   * 최단거리, 최소시간을 선택하는 radio는 `search-type` name 속성값을 가진다.
   * radio option의 default 값은 최단거리이다.
 
-* 길찾기 버튼은 `search-button` id 속성값을 가진다.
 * 결과는 `table`을 이용하여 보여준다.
