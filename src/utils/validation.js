@@ -27,4 +27,39 @@ const isDuplicatedStations = ($input, departureStation, arrivalStation) => {
   return isDuplicated;
 };
 
-export { isValidStationName, isDuplicatedStations };
+const isValidStationsInSection = (
+  stationList,
+  departureStation,
+  arrivalStation
+) => {
+  const isIncludeBothStation =
+    stationList.includes(departureStation) &&
+    stationList.includes(arrivalStation);
+
+  if (!isIncludeBothStation) {
+    return false;
+  }
+  const departureStationIndex = stationList.indexOf(departureStation);
+  const arrivalStationIndex = stationList.indexOf(arrivalStation);
+
+  return departureStationIndex < arrivalStationIndex;
+};
+
+const isValidSection = ($input, departureStation, arrivalStation, lineList) => {
+  const isValidList = lineList.map(line => {
+    return isValidStationsInSection(
+      line.station,
+      departureStation,
+      arrivalStation
+    );
+  });
+  const hasValidSection = isValidList.includes(true);
+
+  if (!hasValidSection) {
+    showAlertMessage($input, ALERT.FAILED_TO_FIND_SECTION);
+  }
+
+  return hasValidSection;
+};
+
+export { isValidStationName, isDuplicatedStations, isValidSection };
