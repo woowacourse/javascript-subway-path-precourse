@@ -45,8 +45,8 @@ export default class AppController {
     };
 
     const formData = {
-      departureStationName: formElements.departureStationNameInput.value,
-      arrivalStationName: formElements.arrivalStationNameInput.value,
+      departureStationName: formElements.departureStationNameInput.value.trim(),
+      arrivalStationName: formElements.arrivalStationNameInput.value.trim(),
       searchType: formElements.searchTypeInput.value,
     };
 
