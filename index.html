@@ -6,48 +6,48 @@
     <title>지하철 길찾기</title>
 </head>
 <body>
-<div id="app"></div>
-<h1>🚇 지하철 길찾기</h1>
-<div>
-    <p>
-      <label for="departure-station-name-input">출발역</label>
-      <input id="departure-station-name-input">
-    </p>
-    <p>
-      <label for="arrival-station-name-input">도착역</label>
-      <input id="arrival-station-name-input">
-    </p>
-    <p>
-        <input type="radio" name="search-type" value="최단거리" checked="checked">최단거리
-        <input type="radio" name="search-type" value="최소기간">최소시간
-    </p>
-    <button id="search-button">길 찾기</button>
-    <div id="result-container">
-        <h1>📝 결과</h1>
-        <div id="result-container-title">
-            <!-- 테스트 데이터 -->
-            <h2>최단거리</h2>
+    <div id="app">
+        <h1>🚇 지하철 길찾기</h1>
+        <p>
+        <label for="departure-station-name-input">출발역</label>
+        <input id="departure-station-name-input">
+        </p>
+        <p>
+        <label for="arrival-station-name-input">도착역</label>
+        <input id="arrival-station-name-input">
+        </p>
+        <p>
+            <input type="radio" name="search-type" value="최단거리" checked="checked">최단거리
+            <input type="radio" name="search-type" value="최소기간">최소시간
+        </p>
+        <button id="search-button">길 찾기</button>
+        <div id="result-container">
+            <h1>📝 결과</h1>
+            <div id="result-container-title">
+                <!-- 테스트 데이터 -->
+                <h2>최단거리</h2>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>총 거리</th>
+                        <th>총 소요 시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 테스트 데이터 -->
+                    <tr>
+                        <td>4km</td>
+                        <td>5분</td>
+                    </tr>
+                    <!-- 테스트 데이터 -->
+                    <tr>
+                        <td colspan="2">합치기</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>총 거리</th>
-                    <th>총 소요 시간</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 테스트 데이터 -->
-                <tr>
-                    <td>4km</td>
-                    <td>5분</td>
-                </tr>
-                <!-- 테스트 데이터 -->
-                <tr>
-                    <td colspan="2">합치기</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-</div>
+    <script type="module" src="src/index.js"></script>
 </body>
 </html>
