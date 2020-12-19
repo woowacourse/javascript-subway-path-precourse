@@ -24,7 +24,7 @@ export default class StationPathModel {
     let sections = []
     lines.forEach((line) => {
       if (name.includes(line.name)) {
-        sections.push(line.sections);
+        sections = sections.concat(line.sections);
         return;
       }
     })
@@ -36,18 +36,25 @@ export default class StationPathModel {
     line.forEach ((eachline) => {
       const sections = this.findSections(eachline)
       sections.forEach((section) => {
-        section.forEach((eachSection) => {
           if (option === 'distance') {
-            dijkstra.addEdge(eachSection.start, eachSection.end, eachSection.distance);
+            dijkstra.addEdge(section.start, section.end, section.distance);
           }
           if (option === 'time') {
-            dijkstra.addEdge(eachSection.start, eachSection.end, eachSection.time);
+            dijkstra.addEdge(section.start, section.end, section.time);
           }
-        })
       });
     })
 
     return dijkstra;
+  }
+
+  getShortestPath(option, departure, arrival) {
+    if (option === 'shortest-path') {
+      return this.getShortestDistancePath(departure, arrival);
+    }
+    if (option === 'shortest-time') {
+      return this.getShortestTimePath(departure, arrival);
+    }
   }
 
   getShortestDistancePath(departure, arrival) {
@@ -66,17 +73,15 @@ export default class StationPathModel {
     const sections = this.findSections(line);
     let time = 0;
     sections.forEach((section) => {
-      section.forEach((eachSection) => {
         for (let i = 0; i < path.length - 1; i++) {
           const start = path[i];
           const end = path[i + 1]
-          if ((eachSection.start === start && eachSection.end === end)
-              || (eachSection.start === end && eachSection.end === start)) {
-                time += eachSection.time;
+          if ((section.start === start && section.end === end)
+              || (section.start === end && section.end === start)) {
+                time += section.time;
                 return;
           }
         }
-      })
     })
 
     return time;
@@ -86,17 +91,15 @@ export default class StationPathModel {
     const sections = this.findSections(line);
     let distance = 0;
     sections.forEach((section) => {
-      section.forEach((eachSection) => {
         for (let i = 0; i < path.length - 1; i++) {
           const start = path[i];
           const end = path[i + 1]
-          if ((eachSection.start === start && eachSection.end === end)
-              || (eachSection.start === end && eachSection.end === start)) {
-                distance += eachSection.distance;
+          if ((section.start === start && section.end === end)
+              || (section.start === end && section.end === start)) {
+                distance += section.distance;
                 return;
           }
         }
-      })
     })
     return distance;
   } 
