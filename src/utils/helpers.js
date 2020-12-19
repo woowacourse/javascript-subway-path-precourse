@@ -91,3 +91,27 @@ const clearTable = () => {
     table.remove();
   }
 };
+
+export const validateInput = (depart, arrive, stations) => {
+  if (depart.length < 2 || arrive.length < 2) {
+    return alertMessage('역 이름을 2자 이상으로 입력해주세요.');
+  } else if (
+    !stations.find(station => station.name === depart) ||
+    !stations.find(station => station.name === arrive)
+  ) {
+    return alertMessage('입력하신 역이 존재하지 않습니다.');
+  } else if (depart === arrive) {
+    return alertMessage('출발역과 도착역이 같습니다.');
+  }
+  return true;
+};
+
+const alertMessage = msg => {
+  alert(msg);
+  return false;
+};
+
+export const alertNoRoute = () => {
+  alert('해당하는 경로가 존재하지 않습니다.');
+  return;
+};
