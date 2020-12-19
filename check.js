@@ -1,11 +1,11 @@
 import { allLines } from '../line.js'
 
-const isValidLength = (departureStationName) => {
-  return (departureStationName.length >= 2);
+const isValidLength = (stationName) => {
+  return (stationName.length >= 2);
 }
 
-const isDuplicated = (departureStationName) => {
-  const result = allLines.map((line) => line.name === departureStationName);
+const isValidStation = (stationName) => {
+  const result = allLines.map((line) => line.name === stationName);
   let i;
   for (i = 0; i < result.length; i++) {
     if (result[i] === true) {
@@ -14,4 +14,4 @@ const isDuplicated = (departureStationName) => {
   }
 }
 
-export { isValidLength, isDuplicated };
+export { isValidLength, isValidStation };

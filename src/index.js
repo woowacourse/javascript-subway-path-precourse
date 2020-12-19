@@ -1,4 +1,4 @@
-import { isValidLength, isDuplicated } from "../check.js";
+import { isValidLength, isValidStation } from "../check.js";
 
 export default function Search() { 
 
@@ -12,7 +12,7 @@ export default function Search() {
   const getDepartureStationName = () => {
     const departureStationName = document.querySelector("#departure-station-name-input");
     departureStationName.addEventListener("change", () => {
-      if (isValidLength(departureStationName.value) && isDuplicated(departureStationName.value)) {
+      if (isValidLength(departureStationName.value) && isValidStation(departureStationName.value)) {
         console.log(departureStationName.value)
       }
       else {
