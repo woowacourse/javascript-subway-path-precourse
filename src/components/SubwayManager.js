@@ -22,6 +22,14 @@ class SubwayManager {
     this.$resultContainer = document.querySelector("#result-container");
   };
 
+  resetState = () => {
+    this.userState = {
+      departureStation: "",
+      arrivalStation: "",
+      searchType: "",
+    };
+  };
+
   handleSearchButton = event => {
     event.preventDefault();
   };
