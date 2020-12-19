@@ -19,6 +19,14 @@ export const isExistingStation = (departureStation, arrivalStation) => {
   return false;
 };
 export const isExistingRoute = () => {};
+export const getResultInfo = (departureStation, arrivalStation, dijkstra) => {
+  const totalDistance = getTotalDistance();
+  const totalTime = getTotalTime();
+  const route = dijkstra.findShortestPath(departureStation, arrivalStation);
+  const shortestRoute = route.join(" => ");
+
+  return [totalDistance, totalTime, shortestRoute];
+};
 export const makeResultUI = () => {
   const totalDistance = "1";
   const totalTime = "20";
@@ -52,8 +60,11 @@ btnSearch.onclick = () => {
   const searchType = getSearchType();
   if (searchType === "minimum-distance") {
     const dijkstra = dijkstraByDistance;
+    getResultInfo(departureStation, arrivalStation, dijkstra);
     makeResultUI();
   } else {
-    const dijkstra = dijkstraByDistance;
+    const dijkstra = dijkstraByTime;
+    getResultInfo(dijkstra);
+    makeResultUI();
   }
 };
