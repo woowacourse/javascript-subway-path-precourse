@@ -1,4 +1,4 @@
-import { words } from '../keys.js';
+import { ids, words } from '../keys.js';
 import { appendChilds, makeElement } from '../utils/elementUtils.js';
 
 const StationInputContainer = function () {
@@ -7,12 +7,18 @@ const StationInputContainer = function () {
 		tag: 'span',
 		innerText: words.START_POINT,
 	});
-	const startPointInput = makeElement({ tag: 'input' });
+	const startPointInput = makeElement({
+		tag: 'input',
+		id: ids.STARTPOINT_INPUT_ID,
+	});
 	const endPointLabel = makeElement({
 		tag: 'span',
 		innerText: words.END_POINT,
 	});
-	const endtPointInput = makeElement({ tag: 'input' });
+	const endtPointInput = makeElement({
+		tag: 'input',
+		id: ids.ENDPOINT_INPUT_ID,
+	});
 
 	this.initializer = () => {
 		appendChilds(stationInputContainer, [
@@ -32,7 +38,7 @@ const RadioButtonContainer = function () {
 		type: 'radio',
 		checked: 'checked',
 		value: words.SHORTEST_PATH,
-		name: 'findMethod',
+		name: ids.RADIO_BUTTON_NAME,
 	});
 	const shortestPahtText = makeElement({
 		tag: 'span',
@@ -42,7 +48,7 @@ const RadioButtonContainer = function () {
 		tag: 'input',
 		type: 'radio',
 		value: words.SHORTEST_TIME,
-		name: 'findMethod',
+		name: ids.RADIO_BUTTON_NAME,
 	});
 	const shortestTimeText = makeElement({
 		tag: 'span',
@@ -68,6 +74,7 @@ const MainView = function (container) {
 	const findPathButton = makeElement({
 		tag: 'button',
 		innerText: words.FINDPATH_BUTTON,
+		id: ids.FINDPAHT_BUTTON_ID,
 	});
 	const resultTitle = makeElement({ tag: 'strong', innerText: words.RESULT });
 

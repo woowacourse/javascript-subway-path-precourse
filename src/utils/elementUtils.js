@@ -10,6 +10,7 @@ export const makeElement = ({
 	style,
 	checked,
 	name,
+	clickEvent,
 }) => {
 	let element = document.createElement(tag);
 	if (innerText) element.innerText = innerText;
@@ -22,6 +23,7 @@ export const makeElement = ({
 	if (style) element.style.cssText = style;
 	if (checked) element.checked = 'checked';
 	if (name) element.name = name;
+	if (clickEvent) element.addEventListener('click', clickEvent);
 	return element;
 };
 

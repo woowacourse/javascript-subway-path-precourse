@@ -7,3 +7,10 @@ export const words = {
 	SHORTEST_TIME: '최소시간',
 	RESULT: '📝 결과',
 };
+
+export const ids = {
+	STARTPOINT_INPUT_ID: 'departure-station-name-input',
+	ENDPOINT_INPUT_ID: 'arrival-station-name-input',
+	RADIO_BUTTON_NAME: 'search-type',
+	FINDPAHT_BUTTON_ID: 'search-button',
+};
