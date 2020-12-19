@@ -54,10 +54,24 @@ export default class App {
       this.validateStationExist(departureStation, arrivalStation);
 
       const paths = this.sectionService.findShortestPath(departureStation, arrivalStation);
-      // this.renderPathTable(paths);
+      this.renderPathTable(paths);
     } catch (error) {
       alert(error);
     }
+  }
+
+  renderPathTable(paths) {
+    const pathRowHTML = `
+      <tr>
+        <td> ${paths.length}</td>
+        <td> </td>
+      </tr>
+      <tr>
+       <td colspan="2">${paths.join("->")} </td>
+      </tr>
+    `;
+    const table = document.getElementById("result-table").querySelector("tbody");
+    table.innerHTML = pathRowHTML;
   }
 
   addClickEvent() {
