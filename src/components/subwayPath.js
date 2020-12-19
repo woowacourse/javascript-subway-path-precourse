@@ -5,6 +5,7 @@ import {
   isSameStation,
   isValidLength,
   isEmpty,
+  deleteWhiteSpace,
 } from '../share/validator.js';
 import Dijkstra from '../utils/Dijkstra.js';
 
@@ -45,8 +46,8 @@ export default class SubWayPath {
     const { value: arrivalStationName } = this.arrivalStationNameInput;
     const searchType = this.getSearchType();
     return {
-      departureStationName,
-      arrivalStationName,
+      departureStationName: deleteWhiteSpace(departureStationName),
+      arrivalStationName: deleteWhiteSpace(arrivalStationName),
       searchType,
     };
   };
@@ -76,7 +77,7 @@ export default class SubWayPath {
       alert(ERROR_MESSAGE.SAME_STATION);
       return false;
     }
-    if (!this.checkValidSection()) {
+    if (!this.checkValidSection(values)) {
       alert(ERROR_MESSAGE.NOT_CONNECTED);
       return false;
     }
@@ -89,11 +90,5 @@ export default class SubWayPath {
       values.arrivalStationName,
     );
     return !isEmpty(sectionByTime);
-  }
-
-  getAllSections = () => this.lineList.map((line) => line.section);
-
-  showResult() {
-    this.resultContainer.style.display = 'block';
   }
 }
