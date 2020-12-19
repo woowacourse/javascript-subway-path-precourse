@@ -16,21 +16,19 @@ export class FindPathResult {
     this.resultContainer.innerHTML = this.resultHTML;
 
     const path = this.dijkstra.findShortestPath(props.departure, props.arrival);
-    console.log(path);
     this.makeTable(path, props.departure, props.arrival);
   };
 
   makeTable = (path) => {
-    console.log(path);
-    let { time, distance } = this.getTimeAndDistance(path);
-    console.log(time, distance);
+    let { time, distance } = this.getTimeAndDistanceOfPath(path);
     this.table = document.querySelector('#result-table');
     this.table.innerHTML = resultTableTemplate(time, distance, path);
   };
 
-  getTimeAndDistance = (path) => {
+  getTimeAndDistanceOfPath = (path) => {
     let time = 0;
     let distance = 0;
+
     for (let i = 0; i < path.length - 1; i++) {
       let depart = path[i];
       let arrival = path[i + 1];
