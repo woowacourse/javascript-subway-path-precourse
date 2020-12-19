@@ -13,7 +13,7 @@ class SubwayPath {
     this.lines = lines;
   }
 
-  createDijkstra(departure, arrival, option) {
+  createDijkstra = (departure, arrival, option) => {
     const dijkstra = new Dijkstra();
 
     for (let start in lines) {
@@ -25,7 +25,7 @@ class SubwayPath {
     }
 
     return dijkstra.findShortestPath(departure, arrival);
-  }
+  };
 
   searchPath = (departure, arrival, option) => {
     let route = [];

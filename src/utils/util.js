@@ -2,7 +2,7 @@ import { stations, lines } from "../datas/data.js";
 import { message, value } from "../constants/constant.js";
 
 class util {
-  linesDfs = startNode => {
+  linesDFS = startNode => {
     let visited = [];
     let stack = [startNode];
     while (stack.length > 0) {
@@ -46,7 +46,7 @@ class util {
   };
 
   isConnected = (departure, arrival) => {
-    const visited = this.linesDfs(departure);
+    const visited = this.linesDFS(departure);
     if (!visited.includes(arrival)) {
       return message.ALERT_NOT_CONNECTED_STATION;
     }
