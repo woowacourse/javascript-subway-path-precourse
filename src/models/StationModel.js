@@ -15,6 +15,10 @@ export default class StationModel {
     return this.stations.find((station) => station.name === stationName);
   }
 
+  getStationNames() {
+    return this.stations.map((station) => station.name);
+  }
+
   addLIne(stationName, stationLine) {
     this.getStationByName(stationName).setLine(stationLine);
   }

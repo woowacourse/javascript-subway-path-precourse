@@ -45,6 +45,11 @@ export default class SearchPathInputForm extends View {
     return `<button id="search-button">길 찾기</button>`;
   }
 
+  resetInputForm() {
+    this.$departureStationInput.value = '';
+    this.$ArrivalStationInput.value = '';
+  }
+
   bindEvent() {
     console.log(`${tag} bindEvent`);
     this.$element
@@ -55,7 +60,7 @@ export default class SearchPathInputForm extends View {
   onSubmitSearchPathHandler() {
     const searchInputValue = {
       departureStationName: this.$departureStationInput.value,
-      ArrivalStationName: this.$ArrivalStationInput.value,
+      arrivalStationName: this.$ArrivalStationInput.value,
       searchType: this.$pathSelector[0].checked
         ? this.$pathSelector[0].id
         : this.$pathSelector[1].id,

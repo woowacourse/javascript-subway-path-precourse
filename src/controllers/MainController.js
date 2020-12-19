@@ -1,7 +1,8 @@
 import SearchPathInputForm from '../views/SearchPathInputForm.js';
+import StationModel from '../models/StationModel.js';
 
 import { Lines2, Lines3, LineSinbundang } from '../utils/data.js';
-import StationModel from '../models/StationModel.js';
+import stationInputValidator from '../utils/stationInputValidator.js';
 
 const tag = `[MainController]`;
 export default class MainController {
@@ -12,7 +13,7 @@ export default class MainController {
     this.createStation(Lines3);
     this.createStation(LineSinbundang);
 
-    new SearchPathInputForm()
+    this.searchPathInputForm = new SearchPathInputForm()
       .setup(document.querySelector('#input-search-station-container'))
       .on('submitSearchInputValue', (e) => this.onSubmitSearchInputHandler(e.detail));
   }
@@ -27,7 +28,21 @@ export default class MainController {
     });
   }
 
-  onSubmitSearchInputHandler(inputValue) {
-    console.log(inputValue);
+  isValidStation(departureStationName, arrivalStationName) {
+    this.departureStationName = departureStationName.trim();
+    this.arrivalStationName = arrivalStationName.trim();
+
+    stationInputValidator(
+      this.departureStationName,
+      this.arrivalStationName,
+      this.stationmodel.getStationNames()
+    )
+      ? console.log('통과')
+      : this.searchPathInputForm.resetInputForm();
+  }
+
+  onSubmitSearchInputHandler({ departureStationName, arrivalStationName, searchType }) {
+    this.isValidStation(departureStationName, arrivalStationName);
+    console.log(searchType);
   }
 }
