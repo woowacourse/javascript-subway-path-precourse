@@ -67,6 +67,15 @@ const RadioButtonContainer = function () {
 	};
 };
 
+const ResultContainer = function () {
+	const resultContainer = makeElement({ tag: 'div' });
+	const resultTitle = makeElement({ tag: 'strong', innerText: words.RESULT });
+	this.initializer = () => {
+		appendChilds(resultContainer, [resultTitle]);
+		return resultContainer;
+	};
+};
+
 const MainView = function (container) {
 	const titleElement = makeElement({
 		tag: 'strong',
@@ -79,15 +88,13 @@ const MainView = function (container) {
 		clickEvent: findPathButtonHandler,
 	});
 
-	const resultTitle = makeElement({ tag: 'strong', innerText: words.RESULT });
-
 	this.initializer = () => {
 		appendChilds(container, [
 			titleElement,
 			new StationInputContainer().initializer(),
 			new RadioButtonContainer().initializer(),
 			findPathButton,
-			resultTitle,
+			new ResultContainer().initializer(),
 		]);
 	};
 };

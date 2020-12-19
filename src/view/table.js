@@ -15,6 +15,7 @@ const TableContainer = function ({ totalTime, totalDistance, totalPath }) {
 
 	this.initializer = () => {
 		appendChilds(tableHead, tableHeadRows);
+		appendChilds(tableBody, tableBodyRows);
 		appendChilds(tableBodyRows[0], [
 			makeElement({ tag: 'td', innerText: totalDistance + 'km' }),
 			makeElement({ tag: 'td', innerText: totalTime + '분' }),

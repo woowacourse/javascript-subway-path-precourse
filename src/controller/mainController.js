@@ -1,6 +1,8 @@
 import { ids, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
+import TableContainer from '../view/table.js';
+import { appendChilds, makeElement } from '../utils/elementUtils.js';
 
 const getStartPointValue = () =>
 	document.getElementById(ids.STARTPOINT_INPUT_ID).value;
@@ -50,10 +52,16 @@ const applyDijkstra = (type) => {
 		dijkstra.addEdge(edge.from, edge.to, edge[key]);
 	});
 	totalPath = dijkstra.findShortestPath(start, end);
-	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath);
+	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
 	return [totalPath, totalTime, totalDistance];
 };
 
 export const findPathButtonHandler = () => {
-	const [totalPath, totalTime, totalDistance] = applyDijkstra(getSearhType());
+	const resultContainer = document.querySelector('button + div');
+	const searchType = getSearhType();
+	const [totalPath, totalTime, totalDistance] = applyDijkstra();
+	appendChilds(resultContainer, [
+		makeElement({ tag: 'p', innerText: searchType }),
+		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
+	]);
 };
