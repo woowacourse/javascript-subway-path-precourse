@@ -42,10 +42,13 @@ export default class StationPathModel {
   }
 
   getShortestDistancePath(departure, arrival) {
-    const line = this.findLines(departure, arrival);
-    console.log(line);
-    const dijkstra = this.getLineGraph(line);
-    const result = dijkstra.findShortestPath(departure, arrival)
+    const result = []
+    const lineNames = this.findLines(departure, arrival);
+    lineNames.forEach((line) => {
+      const dijkstra = this.getLineGraph(line);
+      result.push(dijkstra.findShortestPath(departure, arrival));
+    })
+    console.log(result);
     return result;
   }
 }
