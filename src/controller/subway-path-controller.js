@@ -49,7 +49,11 @@ export const SubwayPathController = {
     ).value;
 
     if (StationValidation.isValidDepartureStation(departureStation)) {
-      console.log("valid");
+      console.log("valid departure");
+    }
+
+    if (StationValidation.isValidArrivalStation(arrivalStation)) {
+      console.log("valid arrival");
     }
   },
 };

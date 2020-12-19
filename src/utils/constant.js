@@ -9,6 +9,9 @@ export const Constant = {
 
   REGEX_CATCHING_KOREAN_ALPHABET: /^[ㄱ-힣]+$/,
   MINIMUM_NAME_LENGTH: 2,
+
+  // DEPARTURE: "출발",
+  // ARRIVAL: "도착",
 };
 
 export const StationLine = {
@@ -29,6 +32,6 @@ export const StationName = {
 
 export const ErrorMessage = {
   ONLY_KOREAN_ALPHABET: "역 이름은 한글만 가능합니다.",
-  MINIMUM_LENGTH: "역 이름은 2글자 이상이어야 합니다.",
-  STATION_IS_NOT_THERE: "해당 역이 존재하지 않습니다.",
+  MINIMUM_NAME_LENGTH: "역 이름은 2글자 이상이어야 합니다.",
+  STATION_IS_NOT_THERE: "역이 존재하지 않습니다.",
 };

@@ -3,10 +3,14 @@ import { Constant, ErrorMessage } from "./constant.js";
 
 export const StationValidation = {
   isValidDepartureStation(station) {
-    if (!this.isThereStation(station)) {
-      return;
-    }
+    // if (!this.isThereStation(station)) {
+    //   return;
+    // }
 
+    return this.hasValidName(station) && this.isThereStation(station);
+  },
+
+  isValidArrivalStation(station) {
     return this.hasValidName(station);
   },
 
@@ -18,7 +22,7 @@ export const StationValidation = {
     }
 
     if (!this.hasMinimumLength(name)) {
-      alert(ErrorMessage.MINIMUM_LENGTH);
+      alert(ErrorMessage.MINIMUM_NAME_LENGTH);
 
       return;
     }
