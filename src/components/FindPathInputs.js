@@ -4,15 +4,21 @@ import {
   checkIsSame,
 } from '../utils/validation.js';
 export class FindPathInputs {
-  constructor() {
+  constructor({ findPath }) {
+    this.findPath = findPath;
     this.initializeDOM();
     this.initializeEvent();
   }
 
   initializeDOM = () => {
-    this.departureStationInput = document.getElementById('departure-station-name-input');
-    this.arrivalStationInput = document.getElementById('arrival-station-name-input');
-    this.radioButtonInput = document.getElementById('radio_container');
+    this.departureStationInput = document.getElementById(
+      'departure-station-name-input',
+    );
+    this.arrivalStationInput = document.getElementById(
+      'arrival-station-name-input',
+    );
+    this.timeRadioButton = document.getElementById('by-time');
+    this.distanceRadioButton = document.getElementById('by-distance');
     this.searchButton = document.getElementById('search-button');
   };
 
@@ -38,6 +44,16 @@ export class FindPathInputs {
     ) {
       return;
     }
+
+    let checkedWeight = this.getNameCheckedWeight();
+    this.findPath(checkedWeight);
+  };
+
+  getNameCheckedWeight = () => {
+    let time = this.timeRadioButton.value;
+    let distance = this.distanceRadioButton.value;
+
+    return time ? time : distance;
   };
 
   initStationInput = () => {

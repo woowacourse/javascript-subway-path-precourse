@@ -9,3 +9,8 @@ export const MESSAGE = {
   ARRIVAL_NAME_INCLUDE_ERROR: '도착역이 존재하지 않습니다. \n',
   DEPART_ARRIVAL_SAME_ERROR: '출발역과 도착역은 같을 수 없습니다. \n',
 };
+
+export const VALUE = {
+  TIME_VALUE: '최소시간',
+  DISTANCE_VALUE: '최단거리',
+};
