@@ -1,7 +1,13 @@
 class SearchLineManager {
-  constructor() {}
+  constructor(getState, getLines) {
+    this.getState = getState;
+    this.getLines = getLines;
+  }
 
-  print = () => {};
+  render = () => {
+    this.userState = this.getState();
+    this.lines = this.getLines();
+  };
 }
 
 export default SearchLineManager;

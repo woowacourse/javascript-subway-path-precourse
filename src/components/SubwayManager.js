@@ -35,7 +35,10 @@ class SubwayManager {
       this.getStations,
       this.getLines
     );
-    this.searchLineManager = new SearchLineManager();
+    this.searchLineManager = new SearchLineManager(
+      this.getState,
+      this.getLines
+    );
   };
 
   resetState = () => {
@@ -70,7 +73,7 @@ class SubwayManager {
 
     if (isValidUserState) {
       showElement(this.$resultContainer);
-      this.searchLineManager.print();
+      this.searchLineManager.render();
     }
   };
 
