@@ -1,0 +1,25 @@
+{
+  "name": "javascript-subway-path-precourse",
+  "version": "1.0.0",
+  "description": "- 역이름 예외사항   - 역이 존재하지 않는 경우   - 출발역과 도착역이 다른 경우   - 출발역과 도착역이 연결되지 않은 경우 (아래 두가지 모두 만족하지 않는 경우)     - 출발역과 도착역이 같은 노선에 없음     - 출발역과 같은 노선의 역이 도착역과 같은 노선의 역에 없음 - 사용자가 선택한 거리/시간 기억",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kirrikirri42/javascript-subway-path-precourse.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kirrikirri42/javascript-subway-path-precourse/issues"
+  },
+  "homepage": "https://github.com/kirrikirri42/javascript-subway-path-precourse#readme",
+  "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "^2.2.1"
+  }
+}
