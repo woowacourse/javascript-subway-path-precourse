@@ -45,7 +45,10 @@ export class FindPathResult {
     let time = 0;
 
     sections.forEach((section) => {
-      if (section.start === depart && section.end === arrival) {
+      if (
+        (section.start === depart && section.end === arrival) ||
+        (section.end === depart && section.start === arrival)
+      ) {
         time = section.time;
       }
     });
@@ -57,7 +60,10 @@ export class FindPathResult {
     let distance = 0;
 
     sections.forEach((section) => {
-      if (section.start === depart && section.end === arrival) {
+      if (
+        (section.start === depart && section.end === arrival) ||
+        (section.end === depart && section.start === arrival)
+      ) {
         distance = section.distance;
       }
     });
