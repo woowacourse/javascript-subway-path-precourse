@@ -6,4 +6,10 @@ const hideElement = $element => {
   $element.classList.remove("active");
 };
 
-export { showElement, hideElement };
+const showAlertMessage = ($input, message) => {
+  alert(message);
+  $input.value = "";
+  $input.focus();
+};
+
+export { showElement, hideElement, showAlertMessage };
