@@ -66,10 +66,14 @@ function minDistancePath(startStation, endStation) {
   );
 
   tbody.append(
-    distanceAndTimeRow("14km", "14분"), //...args
-
+    distanceAndTimeRow(
+      totalDistance(shortestDistance),
+      totalTime(shortestDistance)
+    ),
     resultPathStations(shortestDistance)
   );
+
+  return shortestDistance;
 }
 
 function minTimePath(startStation, endStation) {
@@ -84,6 +88,8 @@ function minTimePath(startStation, endStation) {
 
     resultPathStations(shortestDistance)
   );
+
+  return shortestDistance;
 }
 
 function resultPathStations(result) {
@@ -149,4 +155,43 @@ for (const line of lines) {
       dijkstraTime.addEdge(station.name, station.nextStation, station.time);
     }
   }
+}
+
+// add distance
+function totalDistance(result) {
+  let totalDistances = 0;
+
+  for (const line of lines) {
+    for (const station of line.stations) {
+      for (let i = 0; i < result.length - 1; i++) {
+        if (
+          result[i] === station.name &&
+          result[i + 1] === station.nextStation
+        ) {
+          totalDistances += station.distance;
+        }
+      }
+    }
+  }
+
+  return totalDistances + "km";
+}
+
+function totalTime(result) {
+  let totalTimes = 0;
+
+  for (const line of lines) {
+    for (const station of line.stations) {
+      for (let i = 0; i < result.length - 1; i++) {
+        if (
+          result[i] === station.name &&
+          result[i + 1] === station.nextStation
+        ) {
+          totalTimes += station.time;
+        }
+      }
+    }
+  }
+
+  return totalTimes + "분";
 }
