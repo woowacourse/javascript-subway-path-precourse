@@ -18,11 +18,18 @@ export const isIncludesBothStations = (connectedStations, startStation, endStati
 
 const isNotInStations = (departureStationName, arrivalStationName) => {
 	for (let station of stations) {
-		if (station.name !== departureStationName || station.name !== arrivalStationName) {
-			alert(NOT_ON_LINE_ALERT);
-			return true;
+		if (station.name === departureStationName) {
+			return;
 		}
 	}
+
+	for (let station of stations) {
+		if (station.name === arrivalStationName) {
+			return;
+		}
+	}
+	alert(NOT_ON_LINE_ALERT);
+	return true;
 }
 
 const isSameDepartureNameAndArrivalName = (departureStationName, arrivalStationName) => {

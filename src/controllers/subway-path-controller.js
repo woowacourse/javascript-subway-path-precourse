@@ -3,11 +3,12 @@ import SubwayTimeMap from '../models/subway-time-map-model.js';
 import SubwayPathInput from '../views/subway-path-input.js';
 import SubwayPathOutput from '../views/Subway-path-output.js';
 import {isNotValidInput} from '../services/validation.js';
-
-const RADIO_SHORTEST_DISTANCE_VALUE = 'shortest-distance';
-const RADIO_SHORTEST_TIME_VALUE = 'shortest-time';
-const SHORTEST_DISTANCE_KOR = '최단거리';
-const SHORTEST_TIME_KOR = '최소시간';
+import {
+	RADIO_SHORTEST_DISTANCE_VALUE, 
+	RADIO_SHORTEST_TIME_VALUE,
+	SHORTEST_TIME_KOR,
+	SHORTEST_DISTANCE_KOR
+ } from './constants.js';
 
 export default class SubwayPathController {
 	constructor() {

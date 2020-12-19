@@ -1,5 +1,4 @@
-const FIRST_RADIO = 0;
-const SECOND_RADIO = 1;
+import {FIRST_RADIO, SECOND_RADIO} from './constants.js';
 
 export default class SubwayPathInput {
 	bindSearchButton = searchButtonHandler => {

@@ -1,6 +1,4 @@
-const KILOMETER = 'km';
-const MINUTE = '분';
-const ARROW = '→';
+import {KILOMETER, MINUTE, ARROW} from './constants.js';
 
 export default class SubwayPathOutput {
 	constructor() {
@@ -33,11 +31,19 @@ export default class SubwayPathOutput {
 	}
 
 	renderResult = resultTableData => {
+		this.clearTableContainer();
 		const resultTableContainer = document.createElement('div');
 		resultTableContainer.setAttribute('id', 'result-table-container');
 		this.subwayPathAppContainer.appendChild(resultTableContainer);
 
 		this.renderResultTable(resultTableContainer, resultTableData);
+	}
+
+	clearTableContainer = () => {
+		const tableContainer = document.getElementById('result-table-container');
+		if (tableContainer !== null) {
+			tableContainer.remove();
+		}
 	}
 
 	renderResultTable = (resultTableContainer, resultTableData) => {
