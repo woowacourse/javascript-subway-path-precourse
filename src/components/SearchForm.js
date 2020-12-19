@@ -1,4 +1,4 @@
-import { FORM_ELEMENT } from "../utils/constants.js";
+import { FORM_ELEMENT, STATION_NAME_MIN_LENGTH, ERROR_MESSAGE } from "../utils/constants.js";
 
 export default class SearchForm {
   constructor({ $target }) {
@@ -6,7 +6,35 @@ export default class SearchForm {
     $target.append(this.$form);
 
     this.render();
+    this.bindOnSubmit();
   }
+
+  bindOnSubmit = () => {
+    this.$form.addEventListener("submit", (event) => {
+      this.onSubmit();
+
+      event.preventDefault();
+    });
+  };
+
+  onSubmit = () => {
+    const $departureStationInput = document.querySelector(`#${FORM_ELEMENT.departureStationInput.id}`);
+    const $arrivalStationInput = document.querySelector(`#${FORM_ELEMENT.arrivalStationInput.id}`);
+
+    this.checkStationName($departureStationInput);
+    this.checkStationName($arrivalStationInput);
+  };
+
+  checkStationName = ($stationNameInput) => {
+    if (!this.isTextOverMinLength($stationNameInput.value, STATION_NAME_MIN_LENGTH)) {
+      alert(ERROR_MESSAGE.shortStationName);
+      $stationNameInput.value = "";
+    }
+  };
+
+  isTextOverMinLength = (text, minLength) => {
+    return text.length < minLength ? false : true;
+  };
 
   render = () => {
     this.$form.innerHTML = `
@@ -26,7 +54,7 @@ export default class SearchForm {
         <input type="radio" name="search-type" value="최소시간">
         최소시간
       </label><br>
-      <button id="${FORM_ELEMENT.searchButton.id}">${FORM_ELEMENT.searchButton.text}</button>
+      <button type="submit" id="${FORM_ELEMENT.searchButton.id}">${FORM_ELEMENT.searchButton.text}</button>
     `;
   };
 }

@@ -22,3 +22,9 @@ export const UNITS = {
   distance: "km",
   time: "분",
 };
+
+export const STATION_NAME_MIN_LENGTH = 2;
+
+export const ERROR_MESSAGE = {
+  shortStationName: `⚠ ${STATION_NAME_MIN_LENGTH}자 이상의 지하철역 이름을 입력해주세요.`,
+};
