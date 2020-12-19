@@ -9,8 +9,8 @@ const a = `
 </tbody>
 `;
 
-export const addResultScreen = (text, result) => {
-  addResultWrapper(text);
+export const renderResultScreen = (text, result) => {
+  renderResultWrapper(text);
   const $table = document.createElement('table');
   $table.innerHTML = a;
   $table.querySelector('tbody').innerHTML += `
@@ -25,7 +25,7 @@ export const addResultScreen = (text, result) => {
   $resultWrapper.appendChild($table);
 };
 
-const addResultWrapper = (text) => {
+const renderResultWrapper = (text) => {
   const $title = document.createElement('h1');
   const $resultText = document.createElement('h3');
 
