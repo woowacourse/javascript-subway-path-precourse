@@ -1,18 +1,39 @@
 import Dijkstra from "../utils/Dijkstra.js";
 import RoadResult from "../renders/RoadResult.js";
+import { alertMessage } from "../common/alertMessage.js";
 import { stations, lines } from "../common/StationInfo.js";
+import { isSatisfyLength, isExistStation } from "../common/checkInput.js";
 
-export default function FindRoadEvent(event) {
+export default function FindRoadEvent() {
   const dijkstra = new Dijkstra();
   const startStation = document.getElementById("start-station-input").value;
   const endStation = document.getElementById("end-station-input").value;
   const information = whichRadioChecked();
+  if (!isValidInput()) {
+    return;
+  }
   const shortestPath = getShortestPath(startStation, endStation);
   const totalWeight = getShortestWeight(shortestPath);
   const totalDistance = totalWeight[0];
   const totalTime = totalWeight[1];
-  console.log(totalDistance, totalTime);
   RoadResult(information, shortestPath, totalDistance, totalTime);
+
+  function isValidInput() {
+    if (!isSatisfyLength(startStation) || !isSatisfyLength(endStation)) {
+      alert(alertMessage.SHORT_LENGTH_ERROR);
+      return false;
+    } else if (startStation === endStation) {
+      alert(alertMessage.SAME_DESTINATION_ERROR);
+      return false;
+    } else if (!isExistStation(stations, startStation) || !isExistStation(stations, endStation)) {
+      alert(alertMessage.NOT_EXIST_STATION);
+      return false;
+    } else if (information === undefined) {
+      alert(alertMessage.NONE_SELECTED_RADIO);
+      return false;
+    }
+    return true;
+  }
 
   function whichRadioChecked() {
     const shortestPathRadio = document.getElementById("shortest-path-radio");
@@ -23,7 +44,7 @@ export default function FindRoadEvent(event) {
     } else if (minTimeRadio.checked) {
       return minTimeRadio.value;
     } else {
-      return alert("최단거리와 최소시간 중 하나를 선택해주세요!");
+      return undefined;
     }
   }
 
