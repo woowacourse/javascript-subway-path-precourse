@@ -1,9 +1,9 @@
-import { isValidLength, isValidStation, isDuplicatedStation, checkOptionValue } from "../check.js";
+import { isValidLength, isValidStation, isDuplicatedStation, isConnected } from "../check.js";
 
 const onClickSearchButton = (departureStationName, arrivalStationName) => {
   const searchButton = document.querySelector("#search-button");
   searchButton.addEventListener("click", () => {
-    console.log(departureStationName, arrivalStationName);
+    isConnected(departureStationName, arrivalStationName);
   })
 }
 

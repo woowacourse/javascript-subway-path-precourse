@@ -7,7 +7,11 @@ export const line2 = [
   {
     name: "강남",
     distance: 2,
-    time: 3
+    time: 3,
+    node: {
+      lineName: "lineNew",
+      order: 0
+    }
   },
   {
     name: "역삼"
@@ -28,7 +32,11 @@ export const line3 = [
   {
     name: "양재",
     distance: 1,
-    time: 1
+    time: 1,
+    node: {
+      lineName: "lineNew",
+      order: 1
+    }
   },
   {
     name: "매봉" 
@@ -39,7 +47,7 @@ export const lineNew = [
   {
     name: "강남",
     distance: 2,
-    time: 8
+    time: 8,
   },
   {
     name: "양재",

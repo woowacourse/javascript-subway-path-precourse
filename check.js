@@ -1,5 +1,5 @@
 import { getDepartureStationName } from './src/index.js'
-import { allLines } from '../line.js'
+import { line2, line3, lineNew, allLines } from '../line.js'
 
 const isValidLength = (stationName) => {
   return (stationName.length >= 2);
@@ -19,4 +19,20 @@ const isDuplicatedStation = (stationName) => {
   return (getDepartureStationName() === stationName);
 }
 
-export { isValidLength, isValidStation, isDuplicatedStation };
+const isSameLine = (line, arrivalStationName) => {
+  const result = line.filter((station) => station.name === arrivalStationName)
+  console.log(result)
+}
+
+const isConnected = (departureStationName, arrivalStationName) => {
+  const LINE_LENGTH = 3;
+  const lines = [line2, line3, lineNew];
+  let i;
+  for (i = 0; i < LINE_LENGTH; i++) {
+    if (lines[i].find((line) => line.name === departureStationName)) {
+      isSameLine(lines[i], arrivalStationName)
+    }
+  }
+}
+
+export { isValidLength, isValidStation, isDuplicatedStation, isConnected };
