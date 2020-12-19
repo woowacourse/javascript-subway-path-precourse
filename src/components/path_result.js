@@ -1,10 +1,10 @@
 export default function PathResult() {
   this.pathResultContainer = document.querySelector('.path-result-container');
 
-  this.template = (distance, time, path) => {
+  this.template = (searchType, distance, time, path) => {
     return `
       <h2>📝결과</h2>
-      <h3>최단거리</h3>
+      <h3>${searchType}</h3>
       <table>
         <tr>
           <th>총 거리</th>
@@ -29,7 +29,12 @@ export default function PathResult() {
     </tr>`;
   };
 
-  this.render = (distance, time, path) => {
-    this.pathResultContainer.innerHTML = this.template(distance, time, path);
+  this.render = (search_type, distance, time, path) => {
+    this.pathResultContainer.innerHTML = this.template(
+      search_type,
+      distance,
+      time,
+      path
+    );
   };
 }

@@ -18,6 +18,7 @@ export default function SubwayPath() {
     const path = dijkstra.findShortestPath(departure, arrival);
     if (this.isValidRoute(path)) {
       this.pathResult.render(
+        search_type,
         this.getTotalDistance(path),
         this.getTotalTime(path),
         path
