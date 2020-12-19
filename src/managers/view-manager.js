@@ -20,7 +20,7 @@ export const appendContainer = () => {
   emptyElement(container);
   appendStationNameInputs(container);
   appendRadioButtons(container);
-  setDefaultOption('shortest-distance');
+  setDefaultOption('distance');
   searchButton = appendNew('button', container, '길 찾기', 'search-button');
   searchButton.addEventListener('click', (e) => requestToFindShortestPath(e));
 };
@@ -37,8 +37,8 @@ const appendStationNameInputs = (container) => {
 const appendRadioButtons = (container) => {
   const form = appendNew('form', container);
 
-  appendNewRadioButton(form, '최단거리', 'shortest-distance', 'search-type');
-  appendNewRadioButton(form, '최소시간', 'shortest-time', 'search-type');
+  appendNewRadioButton(form, '최단거리', 'distance', 'search-type');
+  appendNewRadioButton(form, '최소시간', 'time', 'search-type');
 };
 
 const setDefaultOption = (option) => {
