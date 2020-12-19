@@ -3,23 +3,25 @@ import Render from './render.js';
 export default class MainLayout {
   constructor(controller) {
     this.controller = controller;
-    this.elements = this.createElements();
+    this.elements = this.createAllElements();
     this.rendered = Render.$render(this.elements.root);
   }
 
-  createElements() {
+  createAllElements() {
     // override
     const elements = {
       root: {
         $el: this.createRoot(),
         $children: {
-          title: { $el: this.createTitle(), $children: {} },
-          inputContainer: this.createInputContainer(),
+          title: {
+            $el: this.createTitle('h1', '🚇지하철 길찾기'),
+            $children: {},
+          },
+          inputContainer: this.$createInputContainer(),
+          resultContainer: this.$createResultContainer(),
         },
       },
     };
-    console.log(this.createTitle());
-    console.log(this.createInputContainer());
 
     return elements;
   }
@@ -27,10 +29,10 @@ export default class MainLayout {
   /**
    * 화면에 보여지는 엘리먼트들을 만드는 함수 모음
    */
-  createTitle() {
+  createTitle(tag, text) {
     return Render.createElement({
-      tag: 'h1',
-      innerHTML: '🚇지하철 길찾기',
+      tag,
+      innerHTML: text,
     });
   }
 
@@ -41,7 +43,7 @@ export default class MainLayout {
     });
   }
 
-  createInputContainer() {
+  $createInputContainer() {
     const container = Render.createElement({ tag: 'div' });
     const department = this.$createStationInputContainer(
       '출발역',
@@ -66,7 +68,6 @@ export default class MainLayout {
       timeLabel: Render.$createElementNode(timeLabel),
       button: Render.$createElementNode(button),
     });
-
   }
 
   $createStationInputContainer(text, id) {
@@ -107,6 +108,33 @@ export default class MainLayout {
       tag: 'button',
       id: 'search-button',
       innerHTML: '길 찾기',
+    });
+  }
+
+  $createResultContainer() {
+    const container = Render.createElement({ tag: 'div' });
+    const title = Render.createElement({ tag: 'h2', innerHTML: '📝결과' });
+    const searchType = Render.createElement({ tag: 'h3', innerHTML: '임시' });
+    const table = this.createResultTable();
+
+    return Render.$createElementNode(container, {
+      title: Render.$createElementNode(title),
+      searchType: Render.$createElementNode(searchType),
+      table: Render.$createElementNode(table),
+    });
+  }
+  createResultTable() {
+    return Render.createElement({
+      tag: 'table',
+      innerHTML: `<thead><tr><th>총 거리</th><th>총 소요시간</th></tr></thead><tbody></tbody>`,
+    });
+  }
+
+  createTableTemplate() {
+    return this.createElement({
+      tag: 'template',
+      id: 'table-row',
+      innerHTML: '<tr><td></td><td></td></tr><tr><td colspan="2"></td></tr>',
     });
   }
 }
