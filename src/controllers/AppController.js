@@ -9,6 +9,7 @@ import {
   NO_STATION_DATA_MESSAGE,
   SAME_STATION_MESSAGE,
   INVALID_SEARCH_TYPE,
+  NO_PATH_MESSAGE,
 } from '../messages.js';
 
 export default class AppController {
@@ -116,6 +117,11 @@ export default class AppController {
       path = this.graphs.shortestDistance.findShortestPath(departureStationName, arrivalStationName);
     } else if (searchType === 'minimum-time') {
       path = this.graphs.minimumTime.findShortestPath(departureStationName, arrivalStationName);
+    }
+
+    if (!path) {
+      alert(NO_PATH_MESSAGE);
+      return;
     }
 
     const { distance, time } = this.getTotalDistanceTime(path);

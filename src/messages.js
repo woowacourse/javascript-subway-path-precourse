@@ -4,3 +4,4 @@ export const INVALID_NAME_LENGTH_MESSAGE = `역 이름은 ${MINIMUM_INPUT_LENGTH
 export const NO_STATION_DATA_MESSAGE = '존재하지 않는 역입니다';
 export const SAME_STATION_MESSAGE = '출발역과 도착역을 서로 다르게 입력해주세요';
 export const INVALID_SEARCH_TYPE = '검색 타입을 선택해주세요';
+export const NO_PATH_MESSAGE = '출발역과 도착역이 연결되어 있지 않아 경로를 탐색할 수 없습니다';
