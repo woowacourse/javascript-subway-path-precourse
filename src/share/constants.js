@@ -13,3 +13,8 @@ export const RESULT = Object.freeze({
   RESULT_TYPE: 'result-type',
   RESULT_TABLE_BODY: 'result-table-body',
 });
+
+export const ERROR_MESSAGE = Object.freeze({
+  NO_DEPARTURE_STATION: '노선에 출발역이 포함되어 있지 않습니다.',
+  NO_ARRIVAL_STATION: '노선에 도착역이 포함되어 있지 않습니다.',
+});

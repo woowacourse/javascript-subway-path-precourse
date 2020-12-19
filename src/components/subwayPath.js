@@ -1,5 +1,6 @@
-import { FORM } from '../share/constants.js';
+import { ERROR_MESSAGE, FORM } from '../share/constants.js';
 import { lineList, stationList } from '../share/defaultInformation.js';
+import { isInclude } from '../share/validator.js';
 
 export default class SubWayPath {
   constructor() {
@@ -21,6 +22,9 @@ export default class SubWayPath {
   onSubmit = (event) => {
     event.preventDefault();
     const allValues = this.getValues();
+    if (this.isValid(allValues)) {
+      console.log('통과');
+    }
   };
 
   getValues = () => {
@@ -31,4 +35,16 @@ export default class SubWayPath {
       arrivalStationName,
     };
   };
+
+  isValid(values) {
+    if (!isInclude(values.departureStationName, this.stationList)) {
+      alert(ERROR_MESSAGE.NO_DEPARTURE_STATION);
+      return false;
+    }
+    if (!isInclude(values.arrivalStationName, this.stationList)) {
+      alert(ERROR_MESSAGE.NO_ARRIVAL_STATION);
+      return false;
+    }
+    return true;
+  }
 }
