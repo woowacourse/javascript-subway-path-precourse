@@ -1,10 +1,10 @@
-import { stationDistanceKMMap, stationMinuteMap } from "./utils/data.js";
+import { stationDistanceList, stationMinuteList } from "./utils/data.js";
 import { getDepartureStationName, getArrivalStationName, getSearchType, setBtnGetDirection } from "./dom.js";
 import { stationNameValidation } from "./validation.js";
 export default class subwayGetDirection {
   constructor() {
-    this.stationDistanceMap = stationDistanceKMMap;
-    this.stationMinuteMap = stationMinuteMap;
+    this.stationDistanceList = stationDistanceList;
+    this.stationMinuteList = stationMinuteList;
     this.searchType = null;
     this.init();
   }

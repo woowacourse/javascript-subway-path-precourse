@@ -1,9 +1,9 @@
-import { stationDistanceKMMap } from "./utils/data.js";
+import { stationList } from "./utils/data.js";
 import { errorMessage } from "./utils/const.js";
 const { ERROR_SHORT_STATION, ERROR_NONEXIST_STATION, ERROR_EQUAL_STATION_NAME } = errorMessage;
 const validateNameLength = (name) => name.trim().length > 1;
 
-const existStationName = (name) => stationDistanceKMMap[name];
+const existStationName = (name) => stationList.indexOf(name) > -1;
 
 const equalStationName = (firstName, secondName) => firstName === secondName;
 
