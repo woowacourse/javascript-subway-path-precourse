@@ -21,5 +21,8 @@ export const error_message = {
 };
 
 export const TIME = '분';
-export const DISTANCE = 'k';
+export const DISTANCE = 'km';
 export const SHORT_DISTANCE = '최단거리';
+export const RESULT_TEXT = '📑결과';
+export const TH_DISTANCE = '총 거리';
+export const TH_TIME = '총 소요 시간';

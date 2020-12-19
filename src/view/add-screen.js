@@ -1,4 +1,11 @@
 import {$resultWrapper} from './element.js';
+import {
+  TIME,
+  DISTANCE,
+  RESULT_TEXT,
+  TH_DISTANCE,
+  TH_TIME,
+} from '../constant/constant.js';
 
 export const renderResultScreen = (text, {result, total}) => {
   renderResultWrapper(text);
@@ -6,8 +13,8 @@ export const renderResultScreen = (text, {result, total}) => {
   $table.innerHTML = tableContainer;
   $table.querySelector('tbody').innerHTML += `
     <tr>
-      <td>${total.distance}km</td>
-      <td>${total.time}분</td>
+      <td>${total.distance}${DISTANCE}</td>
+      <td>${total.time}${TIME}</td>
     </tr>
     <tr>
       <td colspan="2">${result.join(' -> ')}</td>
@@ -20,7 +27,7 @@ const renderResultWrapper = (text) => {
   const $title = document.createElement('h1');
   const $resultText = document.createElement('h3');
 
-  $title.textContent = '📑결과';
+  $title.textContent = RESULT_TEXT;
   $resultText.textContent = text;
 
   $resultWrapper.appendChild($title);
@@ -30,8 +37,8 @@ const renderResultWrapper = (text) => {
 const tableContainer = `
 <tbody>
   <tr>
-    <th>총 거리</th>
-    <th>총 소요 시간</th>
+    <th>${TH_DISTANCE}</th>
+    <th>${TH_TIME}</th>
   </tr>
 </tbody>
 `;
