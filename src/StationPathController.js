@@ -5,7 +5,8 @@ import { NotLinkedError } from "./data/Error.js";
 
 export default class StationPathController {
   constructor () {
-
+    this.stationPathView = new StationPathView();
+    this.stationPathModel = new StationPathModel();
   }
 
   eventHandler() {
@@ -18,27 +19,19 @@ export default class StationPathController {
   }
 
   searchButtonClick() {
-    const view = new StationPathView();
     const userInput = new GetUserInput();
     if (userInput.isValid() !== 1) {
-      view.alertError(userInput.isValid());
+      this.stationPathView.alertError(userInput.isValid());
       return;
     }
-    const stationPathModel = new StationPathModel();
-    const lines = stationPathModel.findLines(userInput.departure, userInput.arrival);
+    const lines = this.stationPathModel.findLines(userInput.departure, userInput.arrival);
     let path = [];
-    if (userInput.option === 'shortest-path') {
-      path = stationPathModel.getShortestDistancePath(userInput.departure, userInput.arrival);
-    }
-    if (userInput.option === 'shortest-time') {
-      path = stationPathModel.getShortestTimePath(userInput.departure, userInput.arrival);
-    }
+    path = this.stationPathModel.getShortestPath(userInput.option, userInput.departure, userInput.arrival);
     if (path === undefined) {
-      view.alertError(NotLinkedError)
+      this.stationPathView.alertError(NotLinkedError)
       return;
     }
-    const distance = stationPathModel.getDistance(lines, path);
-    const time = stationPathModel.getTime(lines, path);
-    view.resultView(distance, time, path);
+    this.stationPathView.resultView(this.stationPathModel.getDistance(lines, path),
+      this.stationPathModel.getTime(lines, path), path);
   }
 }
