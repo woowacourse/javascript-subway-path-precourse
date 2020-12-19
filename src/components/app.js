@@ -34,9 +34,13 @@ class App extends Component {
     }
     const { searchType } = this.#searchRequest.value;
     const resultPath = this.searchPath();
-    let { totalTime, totalDistance } = this.getTotalTimeAndDistance(resultPath);
+    const { totalTime, totalDistance } = this.getTotalTimeAndDistance(
+      resultPath
+    );
 
-    console.log(totalTime, totalDistance, resultPath);
+    console.log(
+      `time: ${totalTime}, distance: ${totalDistance}, path:${resultPath}`
+    );
     return { searchType, resultPath, totalTime, totalDistance };
   }
 
@@ -61,6 +65,7 @@ class App extends Component {
         const { departureStation, arrivalStation, distance, time } = section;
         const priority = searchType === 'distance-first' ? distance : time;
         dijkstra.addEdge(departureStation, arrivalStation, priority);
+        dijkstra.addEdge(arrivalStation, departureStation, priority);
       })
     );
 
@@ -86,10 +91,8 @@ class App extends Component {
   findSection(target) {
     let section = null;
     this.#lines.forEach(line => {
-      let foundSection = line.sections.find(
-        section =>
-          section.departureStation === target.targetDepartureStation &&
-          section.arrivalStation === target.targetArrivalStation
+      let foundSection = line.sections.find(section =>
+        this.isTargetSection(section, target)
       );
       if (foundSection) {
         section = foundSection;
@@ -97,6 +100,15 @@ class App extends Component {
     });
 
     return section;
+  }
+
+  isTargetSection(section, target) {
+    return (
+      (section.departureStation === target.targetDepartureStation &&
+        section.arrivalStation === target.targetArrivalStation) ||
+      (section.departureStation === target.targetArrivalStation &&
+        section.arrivalStation === target.targetDepartureStation)
+    );
   }
 
   mountTemplate() {
