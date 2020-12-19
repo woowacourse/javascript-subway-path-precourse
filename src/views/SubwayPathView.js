@@ -8,3 +8,5 @@ class SubwayPathView {
     searchBtn.addEventListener("click", this.manageSearchPath);
   };
 }
+
+export default SubwayPathView;
