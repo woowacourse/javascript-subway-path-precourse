@@ -39,4 +39,19 @@ const Visualization = function () {
 
   this.createTd = (text) =>
     text ? this.getAdvancedEle("td", null, text) : document.createElement("td");
+
+  this.createTable = (formattedPath, minDistance, minTime) => {
+    const table = this.getTableHavingTableHead("총 거리", "총 소요 시간");
+    const distanceAndTimeTr = document.createElement("tr");
+    const distanceTd = this.createTd(`${minDistance}km`);
+    const timeTd = this.createTd(`${minTime}분`);
+    const pathTr = document.createElement("tr");
+    const pathTd = this.createTd(formattedPath);
+    this.appendRecursiveChild(
+      table,
+      [distanceAndTimeTr, distanceTd, timeTd],
+      [pathTr, pathTd]
+    );
+    return table;
+  };
 };
