@@ -10,8 +10,8 @@ export const resultTableTemplate = ({ searchType, distance, time, route }) =>
       </thead>
   <tbody id="result-table-body">
       <tr>
-        <th>${distance}</th>
-        <th>${time}</th>
+        <th>${distance}km</th>
+        <th>${time}분</th>
       </tr>
       <tr>
         <th colspan="2">
