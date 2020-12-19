@@ -1,5 +1,5 @@
-import processStationNames from "./process-station-names.js";
-import processSubwayDirection from "./process-subway-direction.js";
+import processStationNames from "./process-station-names.js?ver=31";
+import processSubwayDirection from "./process-subway-direction.js?ver=51";
 
 export default class Index {
     constructor() {
@@ -9,8 +9,25 @@ export default class Index {
         this.searchButton.addEventListener("click", () => {this.printResult()});
     }
 
+    checkRadioButton() {
+        const radioButton = document.getElementsByName("search-type");
+        let radioValue;
+        radioButton.forEach(button => {
+            if(button.checked == true) {
+                radioValue = button.value;
+            }
+        });
+        return radioValue;
+    }
+
     printResult() {
-        this.processStationNames.getStationNames();
+        const stationNames = this.processStationNames.getStationNames();
+        const radioValue = this.checkRadioButton();
+        let result;
+        if(stationNames !== []) {
+            result = radioValue === "distance" ? this.processSubwayDirection.getMinDistance(stationNames) : this.processSubwayDirection.getMinTime(stationNames);
+        }
+        console.log(result);
     }
 }
 

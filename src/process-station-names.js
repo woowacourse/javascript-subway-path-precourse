@@ -1,9 +1,9 @@
-import {stations} from "./utils/data.js";
+import {stations} from "./utils/data.js?ver=30";
 import {
     removeWhiteSpaceValue,
     isEmpty,
     isRightLength
-} from "./utils/common.js";
+} from "./utils/common.js?ver=30";
 
 export default class processStationNames {
     constructor() {
