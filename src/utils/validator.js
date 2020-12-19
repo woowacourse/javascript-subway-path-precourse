@@ -7,5 +7,6 @@ export const validator = (departure, arrival) => {
     arrival.length < STATION.NAME_LENGTH_LIMIT
   )
     validateResult = false;
+  if (departure === arrival) validateResult = false;
   return validateResult;
 };
