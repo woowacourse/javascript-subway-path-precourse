@@ -1,1 +1,3 @@
-console.log("hello world");
+import App from "./lib/App.js";
+
+App();
