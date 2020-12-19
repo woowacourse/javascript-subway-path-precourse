@@ -1,75 +1,35 @@
+import Dijkstra from "./Dijkstra.js";
+
 export const STATIONS = ["교대", "강남", "역삼", "남부터미널", "양재", "양재시민의숲", "매봉"];
 
-export const LINES = [
-  {
-    name: "2호선",
-    sections: [
-      {
-        name: "교대",
-        transferStation: "3호선",
-        distanceToNext: 2,
-        timeToNext: 3,
-      },
-      {
-        name: "강남",
-        transferStation: "신분당선",
-        distanceToNext: 2,
-        timeToNext: 3,
-      },
-      {
-        name: "역삼",
-        distanceToNext: 0,
-        timeToNext: 0,
-      },
-    ],
-  },
-  {
-    name: "3호선",
-    sections: [
-      {
-        name: "교대",
-        transferStation: "2호선",
-        distanceToNext: 2,
-        timeToNext: 8,
-      },
-      {
-        name: "남부터미널",
-        distanceToNext: 6,
-        timeToNext: 5,
-      },
-      {
-        name: "양재",
-        transferStation: "신분당선",
-        distanceToNext: 1,
-        timeToNext: 1,
-      },
-      {
-        name: "매봉",
-        distanceToNext: 0,
-        timeToNext: 0,
-      },
-    ],
-  },
-  {
-    name: "신분당선",
-    sections: [
-      {
-        name: "강남",
-        transferStation: "신분당선",
-        distanceToNext: 2,
-        timeToNext: 8,
-      },
-      {
-        name: "양재",
-        transferStation: "3호선",
-        distanceToNext: 10,
-        timeToNext: 3,
-      },
-      {
-        name: "양재시만의숲",
-        distanceToNext: 0,
-        timeToNext: 0,
-      },
-    ],
-  },
-];
+const initSubwayMapWithTime = () => {
+  const dijkstra = new Dijkstra();
+
+  dijkstra.addEdge("교대", "강남", 3);
+  dijkstra.addEdge("강남", "역삼", 3);
+  dijkstra.addEdge("교대", "남부터미널", 2);
+  dijkstra.addEdge("남부터미널", "양재", 5);
+  dijkstra.addEdge("양재", "매봉", 1);
+  dijkstra.addEdge("강남", "양재", 8);
+  dijkstra.addEdge("양재", "양재시민의숲", 3);
+
+  return dijkstra;
+};
+
+export const SUBWAY_MAP_TIME = initSubwayMapWithTime();
+
+const initSubwayMapWithDistance = () => {
+  const dijkstra = new Dijkstra();
+
+  dijkstra.addEdge("교대", "강남", 2);
+  dijkstra.addEdge("강남", "역삼", 2);
+  dijkstra.addEdge("교대", "남부터미널", 3);
+  dijkstra.addEdge("남부터미널", "양재", 6);
+  dijkstra.addEdge("양재", "매봉", 1);
+  dijkstra.addEdge("강남", "양재", 2);
+  dijkstra.addEdge("양재", "양재시민의숲", 10);
+
+  return dijkstra;
+};
+
+export const SUBWAY_MAP_DISTANCE = initSubwayMapWithDistance();
