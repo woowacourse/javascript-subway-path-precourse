@@ -1,0 +1,22 @@
+#subway-path-input > div {
+  padding-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border: 0;
+}
+#subway-path-input span {
+  font-weight: bold;
+}
+
+#subway-path-input span,
+#subway-path-input label {
+  padding: 0 5px;
+}
+
+#subway-path-input input[type="text"] {
+  padding: 2px;
+}
+
+#subway-path-output table {
+  text-align: center;
+}

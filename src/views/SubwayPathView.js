@@ -10,7 +10,7 @@ class SubwayPathView {
     return `
     <h1>📝 결과</h1>
     <h2>${option}</h2>
-    <table border=2 style="text-align: center;">
+    <table border="2">
         <th>총 거리</th>
         <th>총 소요 시간</th>
         <tr>
