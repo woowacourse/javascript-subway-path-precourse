@@ -63,7 +63,7 @@ const applyDijkstra = (type) => {
 export const findPathButtonHandler = () => {
 	const resultContainer = document.querySelector('button + div');
 	const searchType = getSearhType();
-	const [totalPath, totalTime, totalDistance] = applyDijkstra();
+	const [totalPath, totalTime, totalDistance] = applyDijkstra(searchType);
 	clearAllContents(resultContainer);
 	appendChilds(resultContainer, [
 		makeElement({ tag: 'p', innerText: searchType }),
