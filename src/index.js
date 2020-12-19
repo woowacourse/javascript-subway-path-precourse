@@ -7,17 +7,38 @@ export const getSearchType = () => {
   }
   return "최소시간";
 };
+export const resetInput = () => {
+  document.getElementById("departure-station-name-input").value = "";
+  document.getElementById("arrival-station-name-input").value = "";
+  document.getElementsByName("search-type")[0].checked = true;
+};
+export const isCorrectStationName = (station) => {
+  if (station.length >= 2) {
+    return true;
+  }
+  alert("지하철 역 이름을 두 글자 이상 입력하세요.");
+  resetInput();
+};
 export const isExistingStation = (departureStation, arrivalStation) => {
   const stationInAllLine = allStation;
   if (
     stationInAllLine.includes(departureStation) &&
     stationInAllLine.includes(arrivalStation)
   ) {
-    return true;
+    if (departureStation !== arrivalStation) {
+      return true;
+    }
+    alert("출발역과 동일한 도착역을 입력할 수 없습니다.");
+    resetInput();
+
+    return false;
   }
   alert("존재하지 않는 역입니다.");
+  resetInput();
+
   return false;
 };
+
 export const getOneDistanceAndTime = (startStation, endStation) => {
   for (let i in lineInfo) {
     const line = lineInfo[i];
@@ -78,9 +99,7 @@ export const makeResultUI = (searchType, distance, time, shortestRoute) => {
 };
 export const notExistingRoute = () => {
   alert("존재하지 않는 노선입니다.");
-  document.getElementById("departure-station-name-input").value = "";
-  document.getElementById("arrival-station-name-input").value = "";
-  document.getElementsByName("search-type")[0].checked = true;
+  resetInput();
 };
 const btnSearch = document.getElementById("search-button");
 btnSearch.onclick = () => {
@@ -90,17 +109,23 @@ btnSearch.onclick = () => {
   const arrivalStation = document.getElementById("arrival-station-name-input")
     .value;
   const searchType = getSearchType();
-  const dijkstra =
-    searchType === "최단거리" ? dijkstraByDistance : dijkstraByTime;
-  const [totalDistance, totalTime, shortestRoute] = getResultInfo(
-    departureStation,
-    arrivalStation,
-    dijkstra
-  );
-  if (totalDistance !== 0 && totalTime !== 0) {
-    document.getElementById("result").innerHTML = "";
-    makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
-  } else {
-    notExistingRoute();
+  if (
+    isExistingStation(departureStation, arrivalStation) &&
+    isCorrectStationName(departureStation) &&
+    isCorrectStationName(arrivalStation)
+  ) {
+    const dijkstra =
+      searchType === "최단거리" ? dijkstraByDistance : dijkstraByTime;
+    const [totalDistance, totalTime, shortestRoute] = getResultInfo(
+      departureStation,
+      arrivalStation,
+      dijkstra
+    );
+    if (totalDistance !== 0 && totalTime !== 0) {
+      document.getElementById("result").innerHTML = "";
+      makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
+    } else {
+      notExistingRoute();
+    }
   }
 };
