@@ -47,6 +47,6 @@ export const lineNew = [
     time: 3
   },
   {
-    name: "양재시민의숲" 
+    name: "양재시민의숲"
   }
 ]

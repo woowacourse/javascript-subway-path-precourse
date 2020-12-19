@@ -1,6 +1,6 @@
-import { isValidLength } from "../check.js";
+import { isValidLength, isDuplicated } from "../check.js";
 
-export default function Search() {  
+export default function Search() { 
 
   const getArrivalStationName = () => {
     const arrivalStationName = document.querySelector("#arrival-station-name-input");
@@ -12,11 +12,11 @@ export default function Search() {
   const getDepartureStationName = () => {
     const departureStationName = document.querySelector("#departure-station-name-input");
     departureStationName.addEventListener("change", () => {
-      if (isValidLength(departureStationName.value)) {
-        return departureStationName.value
+      if (isValidLength(departureStationName.value) && isDuplicated(departureStationName.value)) {
+        console.log(departureStationName.value)
       }
       else {
-        const ALERT_MESSAGE = "2글자 이상의 역 이름을 입력해 주세요.";
+        const ALERT_MESSAGE = "노선에 존재하는 2글자 이상의 역 이름을 입력해 주세요.";
         alert(ALERT_MESSAGE);
       }
     })
