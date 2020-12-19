@@ -28,7 +28,7 @@ export default class StationPathView {
         <input type="text" id="arrival-station-name-input"></input>
       </div>
       <div style="margin-bottom: 20px">
-        <input type="radio" name="seach-type" value="shortest-path"></input>
+        <input type="radio" name="seach-type" value="shortest-path" checked></input>
         <label for="shortest-path">최단거리</label>
         <input type="radio" name="seach-type" value="shortest-time"></input>
         <label for="shortest-time">최소시간</label>
