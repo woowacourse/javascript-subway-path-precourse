@@ -118,7 +118,6 @@ class App extends Component {
     const $RouteInputContainer = document.querySelector(
       '#route-input-container'
     );
-
     const searchRequest = this.#searchRequest;
     const stations = this.#stations;
     new RouteInput($RouteInputContainer, {
