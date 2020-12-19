@@ -2,7 +2,20 @@ import { sections } from "./data/subwayInfo.js";
 import Dijkstra from "./utils/Dijkstra.js";
 import { EDGE_INFO } from "./constants.js";
 
-const setMapByWeightType = (map, edges, weightType) => {};
+const setMapByWeightType = (map, edges, weightType) => {
+  for (let i = 0; i < edges.length; i++) {
+    map.addEdge(
+      edges[i][EDGE_INFO.DEPARTURE],
+      edges[i][EDGE_INFO.ARRIVAL],
+      edges[i][weightType]
+    );
+    map.addEdge(
+      edges[i][EDGE_INFO.ARRIVAL],
+      edges[i][EDGE_INFO.DEPARTURE],
+      edges[i][weightType]
+    );
+  }
+};
 
 export const findShortestPath = (departure, arrival) => {
   const radioElems = document.getElementsByName("search-type");
