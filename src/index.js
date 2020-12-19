@@ -1,9 +1,9 @@
 import { input } from './controller/input.js';
 import { select } from './controller/select.js';
 
-export default function App() {
+export default function SubwayRouteCheckApp() {
   input();
   select();
 }
 
-new App();
+new SubwayRouteCheckApp();
