@@ -1,6 +1,5 @@
 import Component from "../Core/Component.js";
-import Dijkstra from "../utils/Dijkstra.js";
-import { stationData, stationNameArray } from "../StationData/stationData.js";
+import { stationData } from "../StationData/stationData.js";
 import {
   isMoreThanTwoWords,
   existStationName,
@@ -8,14 +7,10 @@ import {
   haveSpaceInName,
 } from "../utils/validateStationName.js";
 import { ERROR } from "../utils/error.js";
-
-const dijkstraDistance = new Dijkstra();
-const dijkstraTime = new Dijkstra();
-
-stationData.forEach((station) => {
-  dijkstraDistance.addEdge(station.V1, station.V2, station.distance);
-  dijkstraTime.addEdge(station.V1, station.V2, station.time);
-});
+import {
+  dijkstraDistance,
+  dijkstraTime,
+} from "../utils/dijkstraTimeDistance.js";
 
 export default class FindRoute extends Component {
   constructor() {
@@ -35,7 +30,6 @@ export default class FindRoute extends Component {
         haveSpaceInName(departure)
       ) {
         this.setState({ ...this.state, start: departure });
-        console.log(this.state);
       } else {
         alert(ERROR.MESSAGE);
       }
@@ -49,7 +43,6 @@ export default class FindRoute extends Component {
         isDiffrentStationName(this.state.start, arrival)
       ) {
         this.setState({ ...this.state, end: arrival });
-        console.log(this.state);
       } else {
         alert(ERROR.MESSAGE);
       }
@@ -57,12 +50,10 @@ export default class FindRoute extends Component {
 
     this.handleDistanceInput = (distance) => {
       this.setState({ ...this.state, method: distance });
-      console.log(this.state);
     };
 
     this.handleTimeInput = (time) => {
       this.setState({ ...this.state, method: time });
-      console.log(this.state);
     };
 
     this.findRouteButtonClick = () => {
@@ -72,7 +63,6 @@ export default class FindRoute extends Component {
           this.state.end
         );
         const path = calculateShort(routeResult);
-        console.log(path);
         this.setState({ ...this.state, route: [...routeResult], short: path });
       } else {
         const routeResult = dijkstraTime.findShortestPath(
@@ -80,7 +70,6 @@ export default class FindRoute extends Component {
           this.state.end
         );
         const path = calculateShort(routeResult);
-        console.log(path);
         this.setState({ ...this.state, route: [...routeResult], short: path });
       }
     };
@@ -99,7 +88,6 @@ export default class FindRoute extends Component {
       "#departure-station-name-input"
     );
     departureStationInput?.addEventListener("blur", (event) => {
-      console.log(event.target.value);
       this.handleDepartureStation(event.target.value);
     });
   }
@@ -116,7 +104,6 @@ export default class FindRoute extends Component {
   mountMinimumDistanceInput() {
     const minimumDistanceInput = document.querySelector("#min-distance");
     minimumDistanceInput?.addEventListener("change", (event) => {
-      console.log(event.target.value);
       this.handleDistanceInput(event.target.value);
     });
   }
