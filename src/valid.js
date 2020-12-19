@@ -10,20 +10,27 @@ const isStationNotExists = (stations, station) => !stations.includes(station);
 
 const isDepartureEqualsArrival = (departure, arrival) => departure === arrival;
 
-export const isStationNamesValid = (stations, departureStation, arrivalStation) => {
-    if (isUnderMinimumLength(departureStation) || isUnderMinimumLength(arrivalStation)) {
-        throw Error(ERROR_UNDER_MINIMUM_LENGTH);
-    } else if (isStationNotExists(stations, departureStation)) {
-        throw Error(`${ERROR_STATION_NOT_EXISTS}: ${departureStation}`);
-    } else if (isStationNotExists(stations, arrivalStation)) {
-        throw Error(`${ERROR_STATION_NOT_EXISTS}: ${arrivalStation}`);
-    } else if (isDepartureEqualsArrival(departureStation, arrivalStation)) {
-        throw Error(ERROR_DEPARTURE_EQUALS_ARRIVAL);
-    }
+export const isStationNamesValid = (
+  stations,
+  departureStation,
+  arrivalStation
+) => {
+  if (
+    isUnderMinimumLength(departureStation) ||
+    isUnderMinimumLength(arrivalStation)
+  ) {
+    throw Error(ERROR_UNDER_MINIMUM_LENGTH);
+  } else if (isStationNotExists(stations, departureStation)) {
+    throw Error(`${ERROR_STATION_NOT_EXISTS}: ${departureStation}`);
+  } else if (isStationNotExists(stations, arrivalStation)) {
+    throw Error(`${ERROR_STATION_NOT_EXISTS}: ${arrivalStation}`);
+  } else if (isDepartureEqualsArrival(departureStation, arrivalStation)) {
+    throw Error(ERROR_DEPARTURE_EQUALS_ARRIVAL);
+  }
 };
 
 export const isPathValid = path => {
-    if (!path) {
-        throw Error(ERROR_PATH_NOT_EXISTS);
-    }
+  if (!path) {
+    throw Error(ERROR_PATH_NOT_EXISTS);
+  }
 };
