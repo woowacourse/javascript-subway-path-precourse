@@ -1,5 +1,4 @@
 import Div from "../../subComponents/Div.js";
-import Typography from "../../subComponents/Typography.js";
 import Input from "../../subComponents/Input.js";
 import {
   SELECT_TYPE_CONTAINER_ID,

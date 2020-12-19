@@ -1,16 +1,16 @@
 export default function Dijkstra() {
   const Node = {
-    init: function (val, priority) {
+    init(val, priority) {
       this.val = val;
       this.priority = priority;
     },
   };
 
   const PriorityQueue = {
-    init: function () {
+    init() {
       this.values = [];
     },
-    enqueue: function (val, priority) {
+    enqueue(val, priority) {
       const newNode = Object.create(Node);
       newNode.init(val, priority);
 
@@ -33,7 +33,7 @@ export default function Dijkstra() {
       }
       return this.values;
     },
-    dequeue: function () {
+    dequeue() {
       if (this.values.length == 0) {
         return;
       }
@@ -47,10 +47,10 @@ export default function Dijkstra() {
       let idxOfTarget = 0;
 
       while (true) {
-        let idxOfLeftChild = idxOfTarget * 2 + 1;
-        let idxOfRightChild = idxOfTarget * 2 + 2;
-        let leftChild = this.values[idxOfLeftChild];
-        let rightChild = this.values[idxOfRightChild];
+        const idxOfLeftChild = idxOfTarget * 2 + 1;
+        const idxOfRightChild = idxOfTarget * 2 + 2;
+        const leftChild = this.values[idxOfLeftChild];
+        const rightChild = this.values[idxOfRightChild];
 
         function swap(direction) {
           const idxOfChild =
@@ -98,24 +98,24 @@ export default function Dijkstra() {
   };
 
   const WeightedGraph = {
-    init: function () {
+    init() {
       this.adjacencyList = {};
       this.length = 0;
     },
-    addVertex: function (vertex) {
+    addVertex(vertex) {
       if (!this.adjacencyList.hasOwnProperty(vertex)) {
         this.adjacencyList[vertex] = {};
         this.length++;
       }
     },
-    addEdge: function (vertex1, vertex2, weight) {
+    addEdge(vertex1, vertex2, weight) {
       this.addVertex(vertex1);
       this.addVertex(vertex2);
       this.adjacencyList[vertex1][vertex2] = weight;
       this.adjacencyList[vertex2][vertex1] = weight;
       return this.adjacencyList;
     },
-    removeEdge: function (vertex1, vertex2) {
+    removeEdge(vertex1, vertex2) {
       if (!this.adjacencyList.hasOwnProperty(vertex1)) {
         return `There's no ${vertex1}`;
       }
@@ -138,7 +138,7 @@ export default function Dijkstra() {
 
       return this.adjacencyList;
     },
-    removeVertex: function (vertex) {
+    removeVertex(vertex) {
       if (!this.adjacencyList.hasOwnProperty(vertex)) {
         return `There's no ${vertex}`;
       }
@@ -148,7 +148,7 @@ export default function Dijkstra() {
       }
       return this.adjacencyList;
     },
-    findShortestRoute: function (start, end) {
+    findShortestRoute(start, end) {
       if (!start || !end) {
         throw Error("출발지와 도착지를 모두 입력해야 합니다.");
       }
