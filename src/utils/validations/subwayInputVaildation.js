@@ -25,8 +25,8 @@ export const isVaildStationName = ($input, nameList, name) => {
 export const isSameStation = (departure, arrival) => {
   if (departure === arrival) {
     alert(MESSAGE.SAME_STATION_SELECT_ERROR);
-    return false;
+    return true;
   }
 
-  return true;
+  return false;
 };
