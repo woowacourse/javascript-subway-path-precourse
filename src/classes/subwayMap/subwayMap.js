@@ -4,8 +4,7 @@ export default class SubwayMap {
   #allLines;
   #allStations;
   #pathInfo = { totalDistance: 0, totalTime: 0 };
-  #path;
-  constructor() {
+  #path;  constructor() {
     this.#allStations = initalStationData;
     this.#allLines = initalLineData;
   }
