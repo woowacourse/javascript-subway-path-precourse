@@ -30,6 +30,19 @@ const isStationsDistinct = (departureStationName, arrivalStationName) => {
   return true;
 };
 
+const isStationsLinked = (departureStationName, arrivalStationName) => {
+  if (
+    subwayMap.getShortestPathForDistance(
+      departureStationName,
+      arrivalStationName
+    ) === undefined
+  ) {
+    alert("경로가 존재하지 않습니다.");
+    return false;
+  }
+  return true;
+};
+
 const isInputsValid = (appContainer) => {
   const departureStationName = getDepartureStationNameInput(appContainer).value;
   const arrivalStationName = getArrivalStationNameInput(appContainer).value;
@@ -39,7 +52,8 @@ const isInputsValid = (appContainer) => {
     isInputLengthTwoOrGreater(arrivalStationName) &&
     isInputStationExist(departureStationName, "출발") &&
     isInputStationExist(arrivalStationName, "도착") &&
-    isStationsDistinct(departureStationName, arrivalStationName)
+    isStationsDistinct(departureStationName, arrivalStationName) &&
+    isStationsLinked(departureStationName, arrivalStationName)
   );
 };
 

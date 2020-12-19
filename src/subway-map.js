@@ -73,6 +73,20 @@ export default class SubwayMap {
     });
   }
 
+  getShortestPathForDistance(departureStation, arrivalStation) {
+    return this.dijkstraForDistance.findShortestPath(
+      departureStation,
+      arrivalStation
+    );
+  }
+
+  getShortestPathForTrevelTime(departureStation, arrivalStation) {
+    return this.dijkstraForTravelTime.findShortestPath(
+      departureStation,
+      arrivalStation
+    );
+  }
+
   hasStation(station) {
     return this.stationsGraph.has(station);
   }
