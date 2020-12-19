@@ -1,3 +1,8 @@
+export const commonConsts = {
+  IS_TRUE: 1,
+  IS_FALSE: 0,
+}
+
 export const inputConsts = {
   MAIN_TITLE_TEXT: '<h1>🚇 지하철 길찾기</h1>',
   MAIN_IDNAME: 'app',
@@ -21,6 +26,10 @@ export const inputConsts = {
   SEARCH_BUTTON_IDNAME: 'search-button',
   SEARCH_BUTTON_TEXT: '길 찾기',
   BUTTON_MARGIN: '0 2px 0 2px',
+  DEPARTURE_DOES_NOT_EXIST_ERROR_MESSAGE: '존재하지 않는 출발역입니다. 존재하는 출발역을 입력해주세요',
+  ARRIVAL_DOES_NOT_EXIST_ERROR_MESSAGE: '존재하지 않는 도착역입니다. 존재하는 도착역을 입력해주세요',
+  SAME_DEPARTURE_ARRIVAL_ERROR_MESSAGE: '출발역과 도착역이 같습니다. 다르게 입력해주세요',
+  NOT_CONNECTED_ERROR_MESSAGE: '출발역과 도착역이 연결되어 있지 않아 경로를 구할 수 없습니다.',
 }
 
 export const resultConsts = {
