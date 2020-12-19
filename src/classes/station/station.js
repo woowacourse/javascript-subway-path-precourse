@@ -1,3 +1,1 @@
-export default class Station {
-
-}
+export default class Station {}
