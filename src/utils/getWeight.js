@@ -10,7 +10,8 @@ export default function getDistanceAndTime(path) {
     const startStation = path[i];
     const endStation = path[i + 1];
     const findValue = sections.find(({ start, end }) => {
-      return start === startStation && end === endStation;
+      return (start === startStation && end === endStation) ||
+        (start === endStation && end === startStation );
     })
 
     distanceAndTime.totalDistance += findValue.distance;
