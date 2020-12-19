@@ -22,7 +22,39 @@
 
 ### 에러 출력
 
-- [ ] alert 에러 출력
+- [x] alert 에러 출력
+
+## 프로젝트 구조
+
+```sh
+.
+├── docs
+│   └── README.md
+├── images
+│   ├── dijkstra_example.png
+│   ├── path_result.gif
+│   └── path_result.jpg
+├── index.html
+└── src
+    ├── app.js
+    ├── controllers
+    │   └── MainController.js
+    ├── models
+    │   └── data.js
+    ├── styles
+    │   └── global.css
+    ├── utils
+    │   ├── Dijkstra.js
+    │   └── constants.js
+    └── views
+        ├── ArrivalStationView.js
+        ├── DepartureStationView.js
+        ├── FormView.js
+        ├── ResultTable.js
+        ├── View.js
+        ├── minimumRadioView.js
+        └── shortestRadioView.js
+```
 
 # 🚇 지하철 노선도 경로 조회 미션
 
