@@ -23,6 +23,9 @@ function clickSearchButton() {
     case 'distance':
       showDistanceResult(departureStation, arrivalStation);
       break;
+    case 'time':
+      showTimeResult(departureStation, arrivalStation);
+      break;
   }
   titleH3.textContent = radio.labels[0].textContent;
 }
@@ -31,6 +34,17 @@ function showDistanceResult(source, target) {
   "use strict";
 
   const path = subwayPath.findShortestDistancePath(source, target);
+  const totalDistanceAndTime = subwayPath.getTotalDistanceAndTime(path);
+  totalDistanceTd.textContent = `${totalDistanceAndTime.distance}km`;
+  totalTimeTd.textContent = `${totalDistanceAndTime.time}분`;
+  stepTd.textContent = path.join('→');
+  resultDiv.classList.remove('d-none');
+}
+
+function showTimeResult(source, target) {
+  "use strict";
+
+  const path = subwayPath.findShortestTimePath(source, target);
   const totalDistanceAndTime = subwayPath.getTotalDistanceAndTime(path);
   totalDistanceTd.textContent = `${totalDistanceAndTime.distance}km`;
   totalTimeTd.textContent = `${totalDistanceAndTime.time}분`;
