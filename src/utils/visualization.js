@@ -29,4 +29,11 @@ const Visualization = function () {
     this.appendChildren(parent, ...children);
     return parent;
   };
+
+  this.getTableHavingTableHead = (...texts) => {
+    const table = document.createElement("table");
+    const thead = this.getTableHeadByTexts(...texts);
+    this.appendChildren(table, thead);
+    return table;
+  };
 };
