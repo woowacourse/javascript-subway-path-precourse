@@ -31,8 +31,13 @@ export default class Result extends AbstractComponent {
   }
 
   renderResultTable() {
+    const { routes } = this.props;
     this.$resultTable = document.createElement("table");
-    this.resultTable = new ResultTable({ $parent: this.$resultTable, tagname: "tbody" });
+    this.resultTable = new ResultTable({
+      $parent: this.$resultTable,
+      tagname: "tbody",
+      routes
+    });
 
     this.$component.append(this.$resultTable);
   }

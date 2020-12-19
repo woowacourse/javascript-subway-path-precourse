@@ -50,11 +50,13 @@ export default class App extends AbstractComponent {
   renderResult() {
     const { searchType, routes } = this.state;
 
-    new Result({
-      $parent: this.$component,
-      searchType,
-      routes
-    });
+    if (searchType && routes) { 
+      new Result({
+        $parent: this.$component,
+        searchType,
+        routes
+      });
+    }
   }
 
   handleRoutesChange({ searchType, routes }) {

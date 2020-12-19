@@ -38,15 +38,15 @@ export default class ResultTable extends AbstractComponent {
   }
 
   renderBestRoute() {
+    const { routes } = this.props;
     const $tr = document.createElement("tr");
     const $td = document.createElement("td");
     $tr.append($td);
     $td.setAttribute("colspan", 2);
-    $td.innerText = "Best Route"; // TODO: 최적 경로로 교체하여야 함
+    $td.innerText = routes.join("➡");
 
     this.$component.append($tr);
   }
-
 
   createThElement(innerText) {
     const $th = document.createElement("th");
