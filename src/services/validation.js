@@ -2,7 +2,9 @@ import {
 	MINIMUM_STATION_NAME_LENGTH,
 	MINIMUM_STATION_NAME_LENGTH_ALERT,
 	SAME_STATION_ALERT,
+	NOT_ON_LINE_ALERT,
 } from './constants.js';
+import {stations} from '../data/station-data.js';
 
 const includesBothStations = (connectedStations, startStation, endStation) => {
 	if (connectedStations.includes(startStation) && connectedStations.includes(endStation)) {
@@ -14,8 +16,16 @@ export const isIncludesBothStations = (connectedStations, startStation, endStati
 	return includesBothStations(connectedStations, startStation, endStation);
 }
 
+const isNotInStations = (departureStationName, arrivalStationName) => {
+	for (let station of stations) {
+		if (station.name !== departureStationName || station.name !== arrivalStationName) {
+			alert(NOT_ON_LINE_ALERT);
+			return true;
+		}
+	}
+}
+
 const isSameDepartureNameAndArrivalName = (departureStationName, arrivalStationName) => {
-	console.log(1);
 	if (departureStationName === arrivalStationName) {
 		alert(SAME_STATION_ALERT);
 		return true;
@@ -33,7 +43,8 @@ const isInputLengthTooShort = (departureStationName, arrivalStationName) => {
 const notValidInput = (departureStationName, arrivalStationName) => {
 	if (
 		isInputLengthTooShort(departureStationName, arrivalStationName) ||
-		isSameDepartureNameAndArrivalName(departureStationName, arrivalStationName)
+		isSameDepartureNameAndArrivalName(departureStationName, arrivalStationName) ||
+		isNotInStations(departureStationName, arrivalStationName)
 		) {
 		return true;
 	}
