@@ -10,12 +10,16 @@ export default function SubwayPath() {
     this.app.innerHTML = this.pathInput.template();
   };
 
-  this.findRoute = (departure, arrival) => {
+  this.findRoute = (departure, arrival, search_type) => {
     const dijkstra = new Dijkstra();
     this.addAllStationToVertex(stations, dijkstra);
-    // this.addAllDistanceToEdge(dijkstra);
-    this.addAllTimeToEdge(dijkstra);
+    if (search_type === '최단거리') {
+      this.addAllDistanceToEdge(dijkstra);
+    } else if (search_type === '최소시간') {
+      this.addAllTimeToEdge(dijkstra);
+    }
     const path = dijkstra.findShortestPath(departure, arrival);
+    console.log(path);
   };
 
   this.addAllStationToVertex = (stations, dijkstra) => {
