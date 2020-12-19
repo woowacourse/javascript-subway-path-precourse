@@ -4,8 +4,8 @@ import Dijkstra from "./utils/Dijkstra.js";
 
 console.log(lineTwo[1]); // lineTwo 리스트의 첫번째 딕셔너리 출력
 
-let departureStation = document.getElementById.length('departure-station-name-input').value;
-let arrivalStation = document.getElementById.length('arrival-station-name-input').value;
+let departureStation = document.getElementById('departure-station-name-input').value;
+let arrivalStation = document.getElementById('arrival-station-name-input').value;
 //Validation
 
 function isUpperTwoCharactersDeparture() { 
@@ -27,7 +27,12 @@ function isNotUsuableDepartureStation () {
     }
 }
 
+let findRouteButton = document.getElementById('search-route')
+findRouteButton.addEventListener('click', showResult);
 
+function showResult () {
+    document.getElementById("result").style.display="block";
+}
 
 
 
