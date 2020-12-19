@@ -15,6 +15,20 @@ class DijkstraManager {
     }
   };
 
+  getDistanceResult = (departureStation, arrivalStation) => {
+    return this.distanceManager.findShortestPath(
+      departureStation,
+      arrivalStation
+    );
+  };
+
+  getMinuteResult = (departureStation, arrivalStation) => {
+    return this.minuteManager.findShortestPath(
+      departureStation,
+      arrivalStation
+    );
+  };
+
   render = () => {
     this.distanceManager = new Dijkstra();
     this.minuteManager = new Dijkstra();
