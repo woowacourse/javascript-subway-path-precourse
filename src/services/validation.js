@@ -1,6 +1,7 @@
 import {
 	MINIMUM_STATION_NAME_LENGTH,
-	MINIMUM_STATION_NAME_LENGTH_ALERT
+	MINIMUM_STATION_NAME_LENGTH_ALERT,
+	SAME_STATION_ALERT,
 } from './constants.js';
 
 const includesBothStations = (connectedStations, startStation, endStation) => {
@@ -13,17 +14,26 @@ export const isIncludesBothStations = (connectedStations, startStation, endStati
 	return includesBothStations(connectedStations, startStation, endStation);
 }
 
+const isSameDepartureNameAndArrivalName = (departureStationName, arrivalStationName) => {
+	console.log(1);
+	if (departureStationName === arrivalStationName) {
+		alert(SAME_STATION_ALERT);
+		return true;
+	}
+}
+
 const isInputLengthTooShort = (departureStationName, arrivalStationName) => {
 	if (departureStationName.length < MINIMUM_STATION_NAME_LENGTH ||
 		arrivalStationName.length < MINIMUM_STATION_NAME_LENGTH) {
 			alert(MINIMUM_STATION_NAME_LENGTH_ALERT);
+			return true;
 		}
-		return true;
 }
 
 const notValidInput = (departureStationName, arrivalStationName) => {
 	if (
-		isInputLengthTooShort(departureStationName, arrivalStationName)
+		isInputLengthTooShort(departureStationName, arrivalStationName) ||
+		isSameDepartureNameAndArrivalName(departureStationName, arrivalStationName)
 		) {
 		return true;
 	}
