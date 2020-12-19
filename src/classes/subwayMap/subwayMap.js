@@ -24,4 +24,19 @@ export default class SubwayMap {
 
     return isExist;
   }
+
+  static isStationsConnected(fromStationName, toStationName) {
+    let isConnected = false;
+    const allLineNames = Object.keys(this.#allLines);
+    const found = allLineNames.findIndex((lineName) => {
+      const line = this.#allLines[lineName];
+      return fromStationName in line && toStationName in line;
+    });
+
+    if (found !== -1) {
+      isConnected = true;
+    }
+
+    return isConnected;
+  }
 }
