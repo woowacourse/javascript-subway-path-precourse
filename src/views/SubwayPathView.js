@@ -1,5 +1,6 @@
 class SubwayPathView {
-  constructor() {
+  constructor({ subwayPath }) {
+    this.subwayPath = subwayPath;
     this.handleButtonClick();
   }
 
@@ -15,9 +16,9 @@ class SubwayPathView {
 
   manageSearchPath = () => {
     const { departure, arrival, option } = this.getSearchPathInput();
-    if (checkVaild(departure, arrival)) {
-      const path = searchPath(departure, arrival, option);
-      renderResult(path, countPathLength(path), countPathTime(path));
+    if (this.subwayPath.checkVaild(departure, arrival)) {
+      //const path = searchPath(departure, arrival, option);
+      //renderResult(path, countPathLength(path), countPathTime(path));
     }
   };
 

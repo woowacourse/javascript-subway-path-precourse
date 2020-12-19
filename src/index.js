@@ -1,3 +1,5 @@
+import SubwayPath from "./controllers/SubwayPath.js";
 import SubwayPathView from "./views/SubwayPathView.js";
 
-new SubwayPathView();
+const subwayPath = new SubwayPath();
+new SubwayPathView({ subwayPath });
