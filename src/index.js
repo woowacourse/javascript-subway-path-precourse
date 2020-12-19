@@ -1,4 +1,4 @@
-import onSearchButtonClick from "./on-search-button-click";
+import onSearchButtonClick from "./on-search-button-click.js";
 
 document
   .getElementById("search-button")
