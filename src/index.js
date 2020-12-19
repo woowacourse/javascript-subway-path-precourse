@@ -15,9 +15,9 @@ const appendUI = () => {
   appendNew('h2', appDiv, '🚇지하철 길찾기');
   container = appendNew('div', appDiv, '', 'container');
   appendStationNameInputs(container);
-  //appendRadioButtons(container);
-  //setDefaultOption('shortest-distance');
-  //appendNew('button', container, '길 찾기', 'search-button');
+  appendRadioButtons(container);
+  setDefaultOption('shortest-distance');
+  appendNew('button', container, '길 찾기', 'search-button');
   //appendTable();
 };
 
@@ -28,6 +28,17 @@ const appendStationNameInputs = (container) => {
   appendNew('label', container, '도착역');
   appendNew('input', container, '', 'arrival-station-name-input');
   appendNew('br', container);
+};
+
+const appendRadioButtons = (container) => {
+  const form = appendNew('form', container);
+
+  appendNewRadioButton(form, '최단거리', 'shortest-distance', 'search-type');
+  appendNewRadioButton(form, '최소시간', 'shortest-time', 'search-type');
+};
+
+const setDefaultOption = (option) => {
+  document.getElementById(option).checked = true;
 };
 
 const loadSubwayMapDataToLocalStorage = () => {
