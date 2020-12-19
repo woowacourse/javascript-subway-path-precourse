@@ -1,0 +1,5 @@
+git-commit-template.txt
+node_modules
+package.json
+package-lock.json
+.eslintrc.js
