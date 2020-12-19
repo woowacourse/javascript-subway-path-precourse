@@ -10,22 +10,23 @@ export default function main() {
     ],
     sections: [
       { depart: "교대", end: "강남", time: 3, distance: 2 },
-      { depart: "강남", end: "교대", time: 3, distance: 2 },
+      //   { depart: "강남", end: "교대", time: 3, distance: 2 },
       { depart: "강남", end: "역삼", time: 3, distance: 2 },
-      { depart: "역삼", end: "강남", time: 3, distance: 2 },
+      //   { depart: "역삼", end: "강남", time: 3, distance: 2 },
       { depart: "교대", end: "남부터미널", time: 2, distance: 3 },
-      { depart: "남부터미널", end: "교대", time: 2, distance: 3 },
+      //   { depart: "남부터미널", end: "교대", time: 2, distance: 3 },
       { depart: "남부터미널", end: "양재", time: 5, distance: 6 },
-      { depart: "양재", end: "남부터미널", time: 5, distance: 6 },
+      //   { depart: "양재", end: "남부터미널", time: 5, distance: 6 },
       { depart: "양재", end: "매봉", time: 1, distance: 1 },
-      { depart: "매봉", end: "양재", time: 1, distance: 1 },
+      //   { depart: "매봉", end: "양재", time: 1, distance: 1 },
       { depart: "강남", end: "양재", time: 8, distance: 2 },
-      { depart: "양재", end: "강남", time: 8, distance: 2 },
+      //   { depart: "양재", end: "강남", time: 8, distance: 2 },
       { depart: "양재", end: "양재시민의숲", time: 3, distance: 10 },
-      { depart: "양재시민의숲", end: "양재", time: 3, distance: 10 },
+      //   { depart: "양재시민의숲", end: "양재", time: 3, distance: 10 },
     ],
   };
 
   //   initHTML();
   addEventToMainBtns();
+  localStorage.setItem("subwayDatas", JSON.stringify(subwayDatas));
 }
