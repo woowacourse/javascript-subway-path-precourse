@@ -6,8 +6,8 @@ export const words = {
 	SHORTEST_PATH: '최단거리',
 	SHORTEST_TIME: '최소시간',
 	RESULT: '📝 결과',
-	TOTAL_TIME: '총 거리',
-	TOTAL_DISTANCE: '총 소요 시간',
+	TOTAL_TIME: '총 소요 시간',
+	TOTAL_DISTANCE: '총 거리',
 };
 
 export const ids = {
@@ -23,4 +23,9 @@ export const errorMessage = {
 		'❌ 존재하지 않는 역을 출발/도착역으로 입력할 수 없습니다.',
 	SAME_START_END_POINT: '❌ 출발역과 도착역은 같을 수 없습니다.',
 	CANNOT_FIND: '❌ 갈 수 있는 경로가 없습니다.',
+};
+
+export const cssText = {
+	TABLE_BOLD: 'border: 1px solid #444444;',
+	marginCSS: (type, value) => `margin-${type}: ${value}px;`,
 };

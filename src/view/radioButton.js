@@ -1,8 +1,11 @@
 import { appendChilds, makeElement } from '../utils/elementUtils.js';
-import { ids, words } from '../keys.js';
+import { ids, words, cssText } from '../keys.js';
 
 const RadioButtonContainer = function () {
-	const radioButtonContainer = makeElement({ tag: 'div' });
+	const radioButtonContainer = makeElement({
+		tag: 'div',
+		style: cssText.marginCSS('bottom', 20),
+	});
 	const shortestPathRadioButton = makeElement({
 		tag: 'input',
 		type: 'radio',

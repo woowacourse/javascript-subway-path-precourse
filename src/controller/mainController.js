@@ -1,4 +1,4 @@
-import { errorMessage, ids, words } from '../keys.js';
+import { errorMessage, cssText, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
@@ -80,7 +80,7 @@ export const findPathButtonHandler = () => {
 	if (totalPath.length < 2) return;
 	[totalTime, totalDistance] = getTotalTimeAndDistance(totalPath.slice());
 	appendChilds(resultContainer, [
-		makeElement({ tag: 'p', innerText: searchType }),
+		makeElement({ tag: 'p', innerText: searchType, style: `font-size: 2em; font-weight: 800; ${cssText.marginCSS('bottom', 20)}` }),
 		new TableContainer({ totalTime, totalDistance, totalPath }).initializer(),
 	]);
 };

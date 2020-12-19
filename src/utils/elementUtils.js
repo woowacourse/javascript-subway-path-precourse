@@ -12,7 +12,7 @@ export const makeElement = ({
 	name,
 	clickEvent,
 }) => {
-	let element = document.createElement(tag);
+	const element = document.createElement(tag);
 	if (innerText) element.innerText = innerText;
 	if (id) element.id = id;
 	if (classes) element.classList.add(...classes);

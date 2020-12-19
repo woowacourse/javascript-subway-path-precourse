@@ -9,12 +9,14 @@ const MainView = function (container) {
 	const titleElement = makeElement({
 		tag: 'strong',
 		innerText: words.MAIN_TITLE,
+		style: 'font-size: 3em;',
 	});
 	const findPathButton = makeElement({
 		tag: 'button',
 		innerText: words.FINDPATH_BUTTON,
 		id: ids.FINDPAHT_BUTTON_ID,
 		clickEvent: findPathButtonHandler,
+		style: 'margin-bottom: 20px;',
 	});
 
 	this.initializer = () => {
