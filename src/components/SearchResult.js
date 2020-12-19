@@ -16,6 +16,10 @@ export default class SearchResult {
   }
 
   getShortestPathString = () => {
+    if (this.searchResult.path.length === 0) {
+      return "검색 결과가 없습니다";
+    }
+
     return this.searchResult.path.join("->");
   };
 
