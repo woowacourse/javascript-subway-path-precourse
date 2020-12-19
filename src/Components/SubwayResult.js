@@ -1,9 +1,8 @@
 import { createPathResult } from "../utils/util.js";
 
 class SubwayResult {
-  constructor($target, props) {
+  constructor($target) {
     this.$target = $target;
-    this.props = props;
   }
 
   render = ({ totalDistance, totalTime, path }) => {
