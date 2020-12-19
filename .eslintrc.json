@@ -12,7 +12,6 @@
     "object-curly-spacing": "off",
     "no-new": "off",
     "no-alert": "off",
-    "no-console": "off",
     "no-plusplus": "off",
     "no-param-reassign": "off",
     "no-return-assign": "off",
