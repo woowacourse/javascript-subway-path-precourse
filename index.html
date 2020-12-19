@@ -11,13 +11,12 @@
         <div id="input-container">
             <span>출발역</span><input id="departure-station-name-input" type="text" /></br>
             <span>도착역</span><input id="arrival-station-name-input" type="text" />
-        </div>
-        <div id="submit-container">
-            <input type="radio" name="search-type" value="최단거리" checked>최단거리</input>
-            <input type="radio" name="search-type" value="최소시간" >최소시간</input>
+            <div id="radio-container">
+                <input type="radio" name="search-type" value="최단거리" checked>최단거리</input>
+                <input type="radio" name="search-type" value="최소시간" >최소시간</input>
+            </div>
             <button id="search-button">길 찾기</button>
         </div>
-
         <div id="result-container">
             <table border="1">
                 <tr>
@@ -29,5 +28,6 @@
     
     </section>
 </div>
+<script type="module" src="./src/index.js"></script>
 </body>
 </html>
