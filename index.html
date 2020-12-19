@@ -33,6 +33,23 @@
         <div>
           <button id="search-button">길 찾기</button>
         </div>
+        <div id="result-container" hidden>
+          <h2>📝 결과</h2>
+          <h3 id="result-text"></h3>
+          <table id="result-table" border="1">
+            <tr>
+              <th>총 거리</th>
+              <th>총 소요 시간</th>
+            </tr>
+            <tr>
+              <td id="distance-table" style="text-align: center">km</td>
+              <td id="time-table" style="text-align: center">분</td>
+            </tr>
+            <tr>
+              <td id="route-table" colspan="2" style="text-align: center"></td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
     <script type="module" src="./src/index.js"></script>

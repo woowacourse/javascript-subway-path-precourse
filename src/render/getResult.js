@@ -3,8 +3,27 @@ import { station } from '../data/station.js';
 import { section } from '../data/section.js';
 import { render } from './render.js';
 
-const getDistance = () => {
-  //
+const getStationDistance = (start, end) => {
+  const index = section.find((station) => {
+    if (station === [start, end] || station === [end, start]) {
+      return true;
+    }
+  });
+
+  console.log(index);
+  console.log(section[index].station);
+  console.log(start, end);
+};
+
+const getDistance = (route) => {
+  let result = 0;
+  const stations = [...route];
+  while (stations.length > 1) {
+    const startStation = stations.shift();
+    const endStation = stations[0];
+    result += getStationDistance(startStation, endStation);
+  }
+  return result;
 };
 
 const getTime = () => {
