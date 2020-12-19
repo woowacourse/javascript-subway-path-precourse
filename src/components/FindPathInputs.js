@@ -3,6 +3,8 @@ import {
   checkTargetStationIncludedInStation,
   checkIsSame,
 } from '../utils/validation.js';
+import { VALUE } from '../constants/constants.js';
+
 export class FindPathInputs {
   constructor({ findPath }) {
     this.findPath = findPath;
@@ -26,8 +28,6 @@ export class FindPathInputs {
     this.searchButton.addEventListener('click', this.handleInputValues);
   };
 
-  render = () => {};
-
   handleInputValues = () => {
     const departure = this.departureStationInput.value;
     const arrival = this.arrivalStationInput.value;
@@ -50,10 +50,8 @@ export class FindPathInputs {
   };
 
   getNameCheckedWeight = () => {
-    let time = this.timeRadioButton.value;
-    let distance = this.distanceRadioButton.value;
-
-    return time ? time : distance;
+    let time = this.timeRadioButton.checked;
+    return time ? VALUE.TIME_VALUE : VALUE.DISTANCE_VALUE;
   };
 
   initStationInput = () => {

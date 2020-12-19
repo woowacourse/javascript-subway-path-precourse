@@ -11,8 +11,7 @@ export class SubwayFindPath {
     };
     this.initializeData();
     this.initializeComponents();
-    this.dijkstraByTime = new Dijkstra();
-    this.dijkstraByDistance = new Dijkstra();
+    this.dijkstra = new Dijkstra();
   }
 
   initializeComponents = () => {
@@ -32,35 +31,24 @@ export class SubwayFindPath {
     });
   };
 
-  onUpdate = () => {};
-
   findPath = (departure, arrival, weight) => {
-    if (weight === VALUE.TIME_VALUE) {
-      this.addEdgesByTimeWeight();
-      this.renderResult(departure, arrival, weight, this.dijkstraByTime);
-    } else if (weight === VALUE.DISTANCE_VALUE) {
-      this.addEdgesByDistanceWeight();
-      this.renderResult(departure, arrival, weight, this.dijkstraByDistance);
-    }
+    this.addEdge(weight);
+    this.renderResult(departure, arrival, weight, this.dijkstra);
   };
 
-  addEdgesByTimeWeight = () => {
+  addEdge = (weight) => {
     lines.forEach((line) => {
-      line.sections.forEach((section) => {
-        this.dijkstraByTime.addEdge(section.start, section.end, section.time);
-      });
+      this.addEdgeByWeight(line, weight);
     });
   };
 
-  addEdgesByDistanceWeight = () => {
-    lines.forEach((line) => {
-      line.sections.forEach((section) => {
-        this.dijkstraByDistance.addEdge(
-          section.start,
-          section.end,
-          section.distance,
-        );
-      });
+  addEdgeByWeight = (line, weight) => {
+    line.sections.forEach((section) => {
+      if (weight === VALUE.DISTANCE_VALUE) {
+        this.dijkstra.addEdge(section.start, section.end, section.distance);
+      } else if (weight === VALUE.TIME_VALUE) {
+        this.dijkstra.addEdge(section.start, section.end, section.time);
+      }
     });
   };
 }
