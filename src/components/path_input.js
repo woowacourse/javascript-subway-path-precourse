@@ -48,9 +48,9 @@ export default function PathInput({ findRoute }) {
   this.searchTypeRadioTemplate = () => {
     return `<div>
       <input type="radio" id="short-distance-input" name="search-type" checked>
-      <label for="short-distance-input">최단거리</lable>
+      <label for="short-distance-input">최단거리</label>
       <input type="radio" id="short-time-input" name="search-type">
-      <label for="short-time-input">최소시간</lable>
+      <label for="short-time-input">최소시간</label>
     </div>`;
   };
 
