@@ -1,7 +1,10 @@
 import SubwayMap from "./subway-map.js";
+import { ID_VALUES } from "./html-constant/html-id-values.js";
 import {
+  getChildById,
   getDepartureStationNameInput,
   getArrivalStationNameInput,
+  getSearchType,
 } from "./utils/custom-handlers.js";
 
 const subwayMap = new SubwayMap();
@@ -57,12 +60,54 @@ const isInputsValid = (appContainer) => {
   );
 };
 
+const getShortestPathBySearchType = (
+  departureStationName,
+  arrivalStationName,
+  searchType
+) => {
+  if (searchType === 0) {
+    return subwayMap.getShortestPathForDistance(
+      departureStationName,
+      arrivalStationName
+    );
+  } else {
+    return subwayMap.getShortestPathForTrevelTime(
+      departureStationName,
+      arrivalStationName
+    );
+  }
+};
+
+const renderShortestPath = ($tbody, shortestPath) => {
+  const $route = $tbody.children[1].children[0];
+  $route.innerHTML = shortestPath.reduce((_result, _station) => {
+    return (_result += `=>${_station}`);
+  });
+};
+
+const showShortestPathTable = (resultContainer, shortestPath) => {
+  const $table = resultContainer.getElementsByTagName("table")[0];
+  const $tbody = $table.getElementsByTagName("tbody")[0];
+  $table.style.display = "";
+  renderShortestPath($tbody, shortestPath);
+};
+
+const showResult = (appContainer) => {
+  const shortestPath = getShortestPathBySearchType(
+    getDepartureStationNameInput(appContainer).value,
+    getArrivalStationNameInput(appContainer).value,
+    getSearchType()
+  );
+  showShortestPathTable(
+    getChildById(appContainer, ID_VALUES.result),
+    shortestPath
+  );
+};
+
 export default function searchButtonHandler(e) {
   console.log("clicked");
   console.log(e.target.parentElement);
   if (isInputsValid(e.target.parentElement)) {
-    console.log("Good");
-  } else {
-    console.log("Bad");
+    showResult(e.target.parentElement);
   }
 }
