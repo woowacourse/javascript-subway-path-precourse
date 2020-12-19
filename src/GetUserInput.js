@@ -28,7 +28,14 @@ export default class GetUserInput {
   }
 
   isInStations(name) {
-    return stations.indexOf(name) > -1;
+    let isIn = 0;
+    stations.forEach((station) => {
+      if (station.name === name) {
+        isIn = 1;
+        return;
+      }
+    })
+    return isIn;
   }
 
   isSameStation(departure, arrival) {
