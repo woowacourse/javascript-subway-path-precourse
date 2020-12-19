@@ -1,5 +1,5 @@
 import { station } from '../data/station.js';
-import { render } from '../render/render.js';
+import { getReuslt } from '../render/getResult.js';
 
 const MIN_STATION_LENGTH = 2;
 
@@ -30,7 +30,7 @@ const checkInputValue = () => {
   if (!checkExistStation(inputStations)) {
     return alert('존재하지 않는 역은 입력할 수 없습니다.');
   }
-  return render(inputStations);
+  return getReuslt(inputStations);
 };
 
 const getInputStations = () => {
