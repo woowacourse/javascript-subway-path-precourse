@@ -2,6 +2,23 @@ import { stations, lines } from "../datas/data.js";
 import { message } from "../constants/constant.js";
 
 class util {
+  linesDfs = startNode => {
+    let visited = [];
+    let stack = [startNode];
+    while (stack.length > 0) {
+      const node = stack.pop();
+      if (!visited.includes(node)) {
+        visited.push(node);
+        console.log(node, lines[node]);
+        lines[node].forEach(line => {
+          stack.push(line[0]);
+        });
+      }
+    }
+
+    return visited;
+  };
+
   isEnoughLength = (departure, arrival) => {
     if (departure.length < 2 || arrival.length < 2) {
       return message.ALERT_NOT_ENOUGH_LENGTH;
@@ -27,24 +44,12 @@ class util {
   };
 
   isConnected = (departure, arrival) => {
-    ```
-    let visited = [];
-    let stack = [departure];
-    while (stack.length > 0) {
-      const node = stack.pop();
-      console.log(node, stack);
-      if (!visited.includes(node)) {
-        visited.push(node);
-        console.log(visited, node, stack, lines[node]);
-        stack.push(lines[node]);
-        console.log(visited, node, stack);
-      }
-    }
-
+    console.log(departure);
+    const visited = this.linesDfs(departure);
     if (!visited.includes(arrival)) {
       return message.ALERT_NOT_CONNECTED_STATION;
     }
-    ```;
+
     return null;
   };
 }
