@@ -1,8 +1,9 @@
 import { Stations, Lines } from "../models/data.js";
+import { DOM } from "../utils/constants.js";
+import Dijkstra from "../utils/Dijkstra.js";
 import FormView from "../views/FormView.js";
 import DepartureStationView from "../views/DepartureStationView.js";
 import ArrivalStationView from "../views/ArrivalStationView.js";
-import { DOM } from "../utils/constants.js";
 
 export default class MainController {
   constructor() {
@@ -10,6 +11,7 @@ export default class MainController {
     this.FormView = new FormView();
     this.DepartureStationView = new DepartureStationView();
     this.ArrivalStationView = new ArrivalStationView();
+    this.Dijkstra = new Dijkstra();
   }
 
   init() {
