@@ -1,0 +1,14 @@
+#app div {
+	margin: 15px 0;
+}
+
+label + input {
+	margin-left: 10px;
+}
+
+table,
+th,
+td {
+	border: 1px solid black;
+	text-align: center;
+}
