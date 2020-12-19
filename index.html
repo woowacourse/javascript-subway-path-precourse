@@ -5,6 +5,20 @@
     <title>지하철 길찾기</title>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+	<h2>🚉 지하철 길찾기</h2>
+	<div><label for="departure-station-name-input">출발역</label><input type="text" id="departure-station-name-input"></div>
+	<div><label for="arrival-station-name-input">도착역</label><input type="text" id="arrival-station-name-input"></div>
+	<div>
+		<input type="radio" name="search-type" id="search-type-distance" value="distance" checked>
+		<label for="search-type-distance">최단거리</label>
+		<input type="radio" name="search-type" id="search-type-time" value="time">
+		<label for="search-type-distance">최소시간</label>
+	</div>
+	<div>
+		<button id="search-button">길 찾기</button>
+	</div>
+	<div id="result"></div>
+</div>
 </body>
 </html>
