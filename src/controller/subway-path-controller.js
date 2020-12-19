@@ -1,5 +1,6 @@
 import { Line, LineModel } from "../model/Line.js";
-import { StationLine, StationName } from "../utils/constant.js";
+import { Constant, StationLine, StationName } from "../utils/constant.js";
+import { StationValidation } from "../utils/validation.js";
 
 export const SubwayPathController = {
   init() {
@@ -27,5 +28,18 @@ export const SubwayPathController = {
         StationName.YANGJAE_CITIZENS_FOREST,
       ])
     );
+  },
+
+  onClickSearchButton() {
+    const departureStation = document.querySelector(
+      Constant.DEPARTURE_STATION_NAME_INPUT_ID
+    ).value;
+    const arrivalStation = document.querySelector(
+      Constant.ARRIVVAL_STATION_NAME_INPUT_ID
+    ).value;
+
+    if (StationValidation.isValidDepartureStation(departureStation)) {
+      console.log("valid");
+    }
   },
 };

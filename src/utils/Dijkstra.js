@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 export default function Dijkstra() {
   const Node = {
     init: function (val, priority) {
@@ -47,10 +48,10 @@ export default function Dijkstra() {
       let idxOfTarget = 0;
 
       while (true) {
-        let idxOfLeftChild = idxOfTarget * 2 + 1;
-        let idxOfRightChild = idxOfTarget * 2 + 2;
-        let leftChild = this.values[idxOfLeftChild];
-        let rightChild = this.values[idxOfRightChild];
+        const idxOfLeftChild = idxOfTarget * 2 + 1;
+        const idxOfRightChild = idxOfTarget * 2 + 2;
+        const leftChild = this.values[idxOfLeftChild];
+        const rightChild = this.values[idxOfRightChild];
 
         function swap(direction) {
           const idxOfChild =
