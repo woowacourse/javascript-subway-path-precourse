@@ -43,10 +43,21 @@ const Functions = function () {
 
   this.generateNextGoneStations = (station1, station2) =>
     state.alreadyGoneStations.concat(`${station1.name},${station2.name}`);
+
+  this.setEdges = (currentStation) => {
+    currentStation.relatedStations.forEach((station) => {
+      if (this.IsAlreadyGoneMatch(currentStation.name, station.name)) return;
+      state.dijkstra.addEdge(currentStation.name,station.name,station[state.searchType]);
+      const nestGoneStations = this.generateNextGoneStations(currentStation,station);
+      setState("alreadyGoneStations", nestGoneStations);
+      setEdges(state.stations[this.getStationIndex(station.name)]);
+    });
+  };
 };
 
 export const {
   setDepartureStation,
   setArrivalStation,
   isValid,
+  setEdges
 } = new Functions();
