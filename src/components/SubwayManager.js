@@ -28,7 +28,8 @@ class SubwayManager {
   setComponents = () => {
     this.validateSubwayManager = new ValidateSubwayManager(
       this.getState,
-      this.getStations
+      this.getStations,
+      this.getLines
     );
     this.printSubwayManager = new PrintSubwayManager();
   };
@@ -47,6 +48,10 @@ class SubwayManager {
 
   getStations = () => {
     return this.stations;
+  };
+
+  getLines = () => {
+    return this.lines;
   };
 
   handleSearchButton = event => {
