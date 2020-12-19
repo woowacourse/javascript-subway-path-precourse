@@ -1,5 +1,5 @@
 import { sections } from "./index.js";
-import Dijkstra from "../utils.js";
+import Dijkstra from "../utils/Dijkstra.js";
 
 export const minDistanceStore = new Dijkstra();
 export const minTimeStore = new Dijkstra();

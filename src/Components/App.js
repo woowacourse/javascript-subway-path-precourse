@@ -1,6 +1,7 @@
 import SubwayInput from "./SubwayInput.js";
 import SubwayResult from "./SubwayResult.js";
-import { stations, lines, sections } from "../data/index.js";
+import { stations } from "../data/index.js";
+import { minDistanceStore, minTimeStore } from "../data/subwayStore.js";
 
 class App {
   constructor($target) {
@@ -9,24 +10,24 @@ class App {
     this.initState();
     this.mountDOMs();
     this.mountComponents();
-    console.log(this);
   }
 
   initState() {
     this.stations = stations;
-    this.lines = lines;
-    this.sections = sections;
+    this.minDistanceStore = minDistanceStore;
+    this.minTimeStore = minTimeStore;
   }
 
   mountDOMs() {
     this.$inputContainer = this.$target.querySelector(`#input-container`);
     this.$resultContainer = this.$target.querySelector(`#result-container`);
   }
+
   mountComponents() {
     new SubwayInput(this.$inputContainer, {
       stations: this.stations,
-      lines: this.lines,
-      sections: this.sections,
+      minDistanceStore: this.minDistanceStore,
+      minTimeStore: this.minTimeStore,
     });
 
     new SubwayResult(this.$resultContainer, {
