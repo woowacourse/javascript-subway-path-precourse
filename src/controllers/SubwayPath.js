@@ -38,12 +38,15 @@ class SubwayPath {
     return route;
   };
 
-  searchNodeInfo = (line, toSearch) => {
-    if (line[value.LINE_NODE_INDEX] === toSearch) {
-      const nodeLength = line[value.LINE_LENGTH_INDEX];
-      const nodeTime = line[value.LINE_WEIGHT_INDEX];
+  searchNodeInfo = (toSearch, toFind) => {
+    for (let i = 0; i < toSearch.length; i++) {
+      const line = toSearch[i];
+      if (line[value.LINE_NODE_INDEX] === toFind) {
+        const nodeLength = line[value.LINE_LENGTH_INDEX];
+        const nodeTime = line[value.LINE_WEIGHT_INDEX];
 
-      return { nodeLength, nodeTime };
+        return { nodeLength, nodeTime };
+      }
     }
   };
 
@@ -53,11 +56,12 @@ class SubwayPath {
     for (let i = 0; i < path.length - 1; i++) {
       const start = path[i];
       const end = path[i + 1];
-      this.lines[start].forEach(line => {
-        const { nodeLength, nodeTime } = this.searchNodeInfo(line, end);
-        pathLength += nodeLength;
-        pathTime += nodeTime;
-      });
+      const { nodeLength, nodeTime } = this.searchNodeInfo(
+        this.lines[start],
+        end
+      );
+      pathLength += nodeLength;
+      pathTime += nodeTime;
     }
 
     return { pathLength, pathTime };
