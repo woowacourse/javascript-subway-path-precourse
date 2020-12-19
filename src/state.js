@@ -36,6 +36,14 @@ const State = function () {
           { name: "양재시민의숲", km: 10, minute: 3 },
         ],
       },
+      {
+        name: "매봉",
+        relatedStations: [{ name: "양재", km: 1, minute: 1 }],
+      },
+      {
+        name: "양재시민의숲",
+        relatedStations: [{ name: "양재", km: 10, minute: 3 }],
+      },
     ],
     departureStation: "",
     arrivalStation: "",
