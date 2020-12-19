@@ -1,13 +1,19 @@
 import { isValidLength, isValidStation, isDuplicatedStation, isConnected } from "./line/check.js";
 import Dijkstra from "../src/utils/Dijkstra.js"
+import { printResult } from "./line/view.js"
 
 const getMinimumDistance = (line, departureStationIndex, arrivalStationIndex, departureStationName, arrivalStationName) => {
   const dijkstra = new Dijkstra();
+  let distance = 0;
+  let time = 0;
   let i;
   for (i = departureStationIndex; i < (arrivalStationIndex); i++) {
     dijkstra.addEdge(line[i].name, line[i+1].name, line[i], line[i].distance);
-    console.log(line[i].name, line[i+1].name)
+    distance += line[i].distance;
+    time += line[i].time;
+    console.log(line[i].name, line[i+1].name, distance, time)
   }
+  printResult(line, departureStationIndex, arrivalStationIndex, distance, time);
 }
 
 const getIndex = (optionValue, line, departureStationName, arrivalStationName) => {
@@ -66,6 +72,8 @@ const getDepartureStationName = () => {
 }
 
 const init = () => {
+  const table = document.querySelector("#table");
+  table.style.display = 'none';
   getDepartureStationName();
 }
 
