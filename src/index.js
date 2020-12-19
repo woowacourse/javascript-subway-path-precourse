@@ -3,9 +3,9 @@ import { dijkstraByDistance, dijkstraByTime } from "./utils/dijkstra-object.js";
 export const getSearchType = () => {
   const type = document.getElementsByName("search-type");
   if (type[0].checked === true) {
-    return "minimum-distance";
+    return "최단거리";
   }
-  return "minimum-time";
+  return "최소시간";
 };
 export const isExistingStation = (departureStation, arrivalStation) => {
   const stationInAllLine = allStation;
@@ -49,11 +49,13 @@ export const getResultInfo = (departureStation, arrivalStation, dijkstra) => {
 
   return [totalDistance, totalTime, shortestRoute];
 };
-export const makeResultUI = (distance, time, shortestRoute) => {
+export const makeResultUI = (searchType, distance, time, shortestRoute) => {
   const totalDistance = distance;
   const totalTime = time;
   const route = shortestRoute;
-  const resultTable = `<table>
+  const resultTitle = `<h2>결과</h2>`;
+  const resultSubTitle = `<h3>${searchType}</h3>`;
+  const resultTable = `<table border="1px" text-align="center">
                         <thead>
                           <tr>
                             <th>총 거리</th>
@@ -70,7 +72,9 @@ export const makeResultUI = (distance, time, shortestRoute) => {
                           </tr>
                         </tbody>
                       </table>`;
-  document.getElementById("result").innerHTML = resultTable;
+  document.getElementById("result").innerHTML += resultTitle;
+  document.getElementById("result").innerHTML += resultSubTitle;
+  document.getElementById("result").innerHTML += resultTable;
 };
 const btnSearch = document.getElementById("search-button");
 btnSearch.onclick = () => {
@@ -81,11 +85,11 @@ btnSearch.onclick = () => {
     .value;
   const searchType = getSearchType();
   const dijkstra =
-    searchType === "minimum-distance" ? dijkstraByDistance : dijkstraByTime;
+    searchType === "최단거리" ? dijkstraByDistance : dijkstraByTime;
   const [totalDistance, totalTime, shortestRoute] = getResultInfo(
     departureStation,
     arrivalStation,
     dijkstra
   );
-  makeResultUI(totalDistance, totalTime, shortestRoute);
+  makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
 };
