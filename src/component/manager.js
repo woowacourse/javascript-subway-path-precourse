@@ -24,7 +24,7 @@ const buttonHandler = () => {
   if (buttonValidator(type, deptStation, destStation)) {
     const dijkstraData = runDijkstra(type, deptStation, destStation);
     if (!dijkstraData) {
-      alert(ALERT.NO_PATH)
+      alert(ALERT.NO_PATH);
       return;
     }
     renderer(type, dijkstraData);
@@ -56,7 +56,7 @@ const findStation = (station) => {
   return stationData.includes(station);
 };
 
-export const runDijkstra = (type, dept, dest) => {
+const runDijkstra = (type, dept, dest) => {
   let path;
   if (type === "distance")
     path = dijkstra_distance.findShortestPath(dept, dest);
