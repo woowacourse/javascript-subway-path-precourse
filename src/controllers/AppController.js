@@ -92,19 +92,18 @@ export default class AppController {
   }
 
   getTotalDistanceTime(path) {
-    let totalDistance = 0;
-    let totalTime = 0;
+    const total = {
+      distance: 0,
+      time: 0,
+    };
 
     for (let i = 1; i < path.length; i++) {
-      const result = paths.find(({ from, to }) => path[i - 1] === from && path[i] === to);
-      totalDistance += result.distance;
-      totalTime += result.time;
+      const result = paths.find(
+        ({ from, to }) => (path[i - 1] === from && path[i] === to) || (path[i - 1] === to && path[i] === from),
+      );
+      total.distance += result.distance;
+      total.time += result.time;
     }
-
-    const total = {
-      distance: totalDistance,
-      time: totalTime,
-    };
 
     return total;
   }
