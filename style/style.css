@@ -1,3 +1,8 @@
+label {
+  display: inline-block;
+  margin: 5px;
+}
+
 table {
   border-spacing: 1px;
   border: 2px solid black;
