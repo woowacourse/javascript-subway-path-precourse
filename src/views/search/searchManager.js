@@ -1,23 +1,19 @@
 import render from "../../managers/render.js";
 import app from "../app.js";
 import Dijkstra from "../../utils/Dijkstra.js";
+import { validateStation } from "../search/validation.js";
 
 function onSearchBtnHandler() {
   let subwayDatas = JSON.parse(localStorage.getItem("subwayDatas"));
-  let departure = document.getElementById("departure-station-name-input").value;
-  let arrival = document.getElementById("arrival-station-name-input").value;
+  let departure = validateStation(document.getElementById("departure-station-name-input").value);
+  let arrival = validateStation(document.getElementById("arrival-station-name-input").value);
   let checkedRadioInput = checkRadioInput();
 
   let timeTableData = { totalTime: 0, totalDistance: 0, minPath: [] };
 
   timeTableData.minPath = makeMinPathResult(checkedRadioInput, departure, arrival);
-
-  //   timeTableData.totalDistance = makeTotalDistance(timeTableData.minPath);
-  //   timeTableData.totalTime = makeTotalTime(timeTableData.minPath);
   timeTableData.totalDistance = calculateTotalCost(timeTableData.minPath, "distance");
   timeTableData.totalTime = calculateTotalCost(timeTableData.minPath, "time");
-
-  // 최단 거리 minPath 를 이용하여 totalDistance, totalTime 계산하고 렌더링
 
   console.log(timeTableData);
   render(app(timeTableData, checkedRadioInput));
