@@ -13,8 +13,8 @@ export default function FindRoadEvent() {
     return;
   }
   const shortestPath = getShortestPath(startStation, endStation);
-  if (shortestPath === undefined) {
-    return alert(alertMessage.NOT_CONNECTED_LINE);
+  if (!isStationsConneted()) {
+    return;
   }
   const totalWeight = getShortestWeight(shortestPath);
   const totalDistance = totalWeight[0];
@@ -49,6 +49,14 @@ export default function FindRoadEvent() {
     } else {
       return undefined;
     }
+  }
+
+  function isStationsConneted() {
+    if (shortestPath === undefined) {
+      alert(alertMessage.NOT_CONNECTED_LINE);
+      return false;
+    }
+    return true;
   }
 
   function _getShortestPath(i, j, index) {

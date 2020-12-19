@@ -9,6 +9,7 @@ export const stations = [
   { name: "아현" }, // island node to test none connected stations
 ];
 
+// sections: [출발역, 다음역, 거리, 소요시간]
 export const lines = [
   {
     name: "2호선",
