@@ -1,5 +1,7 @@
 import { getDepartureStationName } from './src/index.js'
 import { line2, line3, lineNew, allLines } from '../line.js'
+import { getOptionValue } from './src/index.js'
+// import Dijkstra from "./src/utils/Dijkstra.js"
 
 const isValidLength = (stationName) => {
   return (stationName.length >= 2);
@@ -19,9 +21,13 @@ const isDuplicatedStation = (stationName) => {
   return (getDepartureStationName() === stationName);
 }
 
-const isSameLine = (line, arrivalStationName) => {
+const isSameLine = (line, departureStationName, arrivalStationName) => {
   const result = line.filter((station) => station.name === arrivalStationName)
-  console.log(result)
+  if (result.length === 0) {
+    console.log("next")
+  } else {
+    getOptionValue(line, departureStationName, arrivalStationName);
+  }
 }
 
 const isConnected = (departureStationName, arrivalStationName) => {
@@ -30,7 +36,8 @@ const isConnected = (departureStationName, arrivalStationName) => {
   let i;
   for (i = 0; i < LINE_LENGTH; i++) {
     if (lines[i].find((line) => line.name === departureStationName)) {
-      isSameLine(lines[i], arrivalStationName)
+      isSameLine(lines[i], departureStationName, arrivalStationName)
+      break
     }
   }
 }
