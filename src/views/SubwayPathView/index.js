@@ -1,11 +1,15 @@
 import addTemplateToDOM from '../../utils/addTemplateToDOM';
+import { SubwayPathViewEventDelegators } from '../../eventDelegators';
 import { message } from '../../constants';
 
 export default class SubwayPathView {
   constructor(viewModel, appContainer) {
     this.viewModel = viewModel;
     this.appContainer = appContainer;
+    this.eventDelegator = new SubwayPathViewEventDelegators(this.viewModel);
 
+    this.eventDelegator.bindView(this);
+    this.eventDelegator.bindEvent(this.appContainer);
     this.renderEnTireTags();
   }
 
@@ -14,6 +18,7 @@ export default class SubwayPathView {
     this.renderSubwayPathResultContainer();
     this.renderSubwayPathInputs();
     this.renderRadioButton();
+    this.renderSearchButton();
   }
 
   renderSubwayPathInputContainer() {
@@ -45,11 +50,20 @@ export default class SubwayPathView {
     addTemplateToDOM(
       this.appContainer.querySelector('#subway-path-input-container'),
       `
-      <div>
+      <div id="subway-path-radio-buttons-container">
       <input id="subway-path-radio-distance-button" type="radio" name="selectButton">${message.SHORTEST_DISTANCE}</input>
       <input id="subway-path-radio-time-button" type="radio" name="selectButton">${message.MINIMUN_TIME}</button>
       </div>
     `,
+    );
+  }
+
+  renderSearchButton() {
+    addTemplateToDOM(
+      this.appContainer.querySelector('#subway-path-input-container'),
+      `
+        <button id="subway-path-search-button">${message.SEARCH}</button>
+      `,
     );
   }
 }

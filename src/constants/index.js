@@ -31,6 +31,7 @@ const message = {
   END_STATION: '도착역',
   SHORTEST_DISTANCE: '최단거리',
   MINIMUN_TIME: '최소시간',
+  SEARCH: '길 찾기',
 };
 
 export { courses, stations, message };
