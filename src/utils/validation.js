@@ -11,7 +11,7 @@ export const StationValidation = {
   },
 
   isValidArrivalStation(station) {
-    return this.hasValidName(station);
+    return this.hasValidName(station) && this.isThereStation(station);
   },
 
   hasValidName(name) {

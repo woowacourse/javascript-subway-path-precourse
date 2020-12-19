@@ -31,7 +31,7 @@ export const StationName = {
 };
 
 export const ErrorMessage = {
-  ONLY_KOREAN_ALPHABET: "역 이름은 한글만 가능합니다.",
-  MINIMUM_NAME_LENGTH: "역 이름은 2글자 이상이어야 합니다.",
-  STATION_IS_NOT_THERE: "역이 존재하지 않습니다.",
+  ONLY_KOREAN_ALPHABET: "출발역과 도착역 이름은 모두 한글만 가능합니다.",
+  MINIMUM_NAME_LENGTH: "출발역과 도착역 이름은 모두 2글자 이상이어야 합니다.",
+  STATION_IS_NOT_THERE: "존재하지 않는 역이 있습니다.",
 };
