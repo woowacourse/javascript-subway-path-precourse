@@ -1,12 +1,4 @@
 import { isValidLength, isValidStation, isDuplicatedStation, isConnected } from "../check.js";
-
-const getIndex = (optionValue, line, departureStationName, arrivalStationName) => {
-  const arrayLine = line.map((station) => station.name)
-  const departureStationIndex = arrayLine.indexOf(departureStationName);
-  const arrivalStationIndex = arrayLine.indexOf(arrivalStationName);
-  console.log(departureStationIndex, arrivalStationIndex);
-}
-
 const getOptionValue = (line, departureStationName, arrivalStationName) => {
   const options = document.getElementsByName("search-type");
   let optionValue = '';
@@ -14,9 +6,16 @@ const getOptionValue = (line, departureStationName, arrivalStationName) => {
   for (i = 0; i < options.length; i++) {
     if (options[i].checked) {
       optionValue += options[i].value;
-      getIndex(optionValue, line, departureStationName, arrivalStationName);
+      console.log(optionValue)
     }
   }
+}
+
+const getIndex = (optionValue, line, departureStationName, arrivalStationName) => {
+  const arrayLine = line.map((station) => station.name)
+  const departureStationIndex = arrayLine.indexOf(departureStationName);
+  const arrivalStationIndex = arrayLine.indexOf(arrivalStationName);
+  console.log(departureStationIndex, arrivalStationIndex);
 }
 
 const onClickSearchButton = (departureStationName, arrivalStationName) => {
