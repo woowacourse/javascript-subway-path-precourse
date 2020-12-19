@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>지하철 길찾기</title>
+    <style>
+        label {
+            display:inline-block;
+            margin: 5px 0;
+        }
+    </style>
 </head>
 <body>
-<div id="app"></div>
+    <div id="app">
+        <h1>🚇지하철 길찾기</h1>
+        <label>
+            출발역
+            <input type="text" id="departure-station-name-input" />
+        </label>
+        <br />
+        <label>
+            도착역
+            <input type="text" id="arrival-station-name-input" />
+        </label>
+        <button id="search-button">길찾기</button>
+    </div>
+    <script type="module" src="src/index.js"></script>
 </body>
 </html>
