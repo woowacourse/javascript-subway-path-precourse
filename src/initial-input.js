@@ -1,4 +1,4 @@
-export const LINES = [
+export const initialLineInputs = [
   makeLine({
     lineName: "2호선",
     stationsOfLine: ["교대", "강남", "역삼"],
@@ -27,9 +27,9 @@ function makeLine({
 }) {
   const [startStation, ...stations] = stationsOfLine;
   return {
-    LINE_NAME: lineName,
-    STATIONS_OF_LINE: [startStation, ...stations],
-    DISTANCE_WEIGHT: distanceWeight,
-    DURATION_WEIGHT: durationWeight,
+    lineName: lineName,
+    stationsOfLine: [startStation, ...stations],
+    distanceWeight: distanceWeight,
+    durationWeight: durationWeight,
   };
 }

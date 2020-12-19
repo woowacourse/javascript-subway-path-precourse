@@ -191,7 +191,7 @@ export default function Dijkstra() {
         }
         visited[current] = true;
       }
-
+      console.log("거리", distance);
       let node = end;
 
       const route = [];
