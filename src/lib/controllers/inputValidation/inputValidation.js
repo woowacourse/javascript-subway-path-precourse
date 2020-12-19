@@ -24,7 +24,7 @@ export default class InputValidation extends UserInput {
       !stationNames.includes(this.startStation) ||
       !stationNames.includes(this.endStation);
   }
-  
+
   getResult() {
     if (this.isEmptyInput) return inputResult(false, EMPTY_INPUT_ERROR);
     if (this.isShortInput) return inputResult(false, SHORT_INPUT_ERROR);

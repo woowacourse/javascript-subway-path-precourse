@@ -1,5 +1,6 @@
 import UserInput from "../controllers/inputValidation/userInput.js";
 import InputValidation from "../controllers/inputValidation/inputValidation.js";
+import renderResult from "../views/components/renderResult/renderResult.js";
 
 import {
   DEPARTURE_STATION_INPUT_ID,
@@ -22,11 +23,9 @@ export default () => {
   const userInput = getUserInput();
   const inputValidation = new InputValidation(userInput);
   const { ok, message } = inputValidation.getResult();
-  console.log(userInput);
-  console.log(inputValidation);
   return new Promise((resolve, reject) => {
     if (ok) {
-      resolve(console.log("success!"));
+      resolve(renderResult(userInput));
     } else reject(alert(message));
   });
 };
