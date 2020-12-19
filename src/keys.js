@@ -6,6 +6,8 @@ export const words = {
 	SHORTEST_PATH: '최단거리',
 	SHORTEST_TIME: '최소시간',
 	RESULT: '📝 결과',
+	TOTAL_TIME: '총 거리',
+	TOTAL_DISTANCE: '총 소요 시간',
 };
 
 export const ids = {

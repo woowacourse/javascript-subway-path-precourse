@@ -55,5 +55,5 @@ const applyDijkstra = (type) => {
 };
 
 export const findPathButtonHandler = () => {
-	console.log(applyDijkstra(getSearhType()));
+	const [totalPath, totalTime, totalDistance] = applyDijkstra(getSearhType());
 };

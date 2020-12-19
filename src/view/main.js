@@ -78,6 +78,7 @@ const MainView = function (container) {
 		id: ids.FINDPAHT_BUTTON_ID,
 		clickEvent: findPathButtonHandler,
 	});
+
 	const resultTitle = makeElement({ tag: 'strong', innerText: words.RESULT });
 
 	this.initializer = () => {
