@@ -41,6 +41,29 @@
 
 ---
 
+## 📄 폴더 구조
+
+```
+├── README.md
+├── docs
+│   └── README.md
+├── index.html
+└── src
+    ├── components
+    │   ├── subwayPath.js
+    │   ├── subwayPathForm.js
+    │   └── subwayPathResult.js
+    ├── index.js
+    ├── share
+    │   ├── constants.js
+    │   ├── defaultInformation.js
+    │   └── validator.js
+    ├── template
+    │   └── resultTableTemplate.js
+    └── utils
+        └── Dijkstra.js
+```
+
 ## 👨🏻‍💻 개발환경
 
 - ESLint : [airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base)
