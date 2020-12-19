@@ -1,4 +1,8 @@
-import { isRegistredStation, isValidInputLength } from '../utils/index.js';
+import {
+  isRegistredStation,
+  isSameDepartureAndArrival,
+  isValidInputLength,
+} from '../utils/index.js';
 import { stations } from '../data.js';
 
 export default function PathInput({ findRoute }) {
@@ -19,19 +23,31 @@ export default function PathInput({ findRoute }) {
       .value;
     const arrival = document.getElementById('arrival-station-name-input').value;
     const radioButtons = document.getElementsByName('search-type');
-    if (this.isValid(departure, arrival)) {
+    if (
+      this.isValidName(departure, arrival) &&
+      this.isValid(departure, arrival)
+    ) {
       this.findRoute(departure, arrival, radioButtons);
     }
   };
 
   this.isValid = (departure, arrival) => {
-    if (!isValidInputLength(departure, arrival)) {
-      alert('출발역과 도착역은 2글자 이상이어야 합니다.');
+    if (!isRegistredStation(departure, arrival, stations)) {
+      alert('존재하는 역만 출발역 또는 도착역으로 입력가능합니다.');
       return false;
     }
 
-    if (!isRegistredStation(departure, arrival, stations)) {
-      alert('존재하는 역만 출발역 또는 도착역으로 입력가능합니다.');
+    return true;
+  };
+
+  this.isValidName = (departure, arrival) => {
+    if (isSameDepartureAndArrival(departure, arrival)) {
+      alert('출발역과 도착역은 달라야 합니다');
+      return false;
+    }
+
+    if (!isValidInputLength(departure, arrival)) {
+      alert('출발역과 도착역은 2글자 이상이어야 합니다.');
       return false;
     }
 

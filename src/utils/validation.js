@@ -1,3 +1,10 @@
+export const isSameDepartureAndArrival = (
+  departureStationName,
+  arrivalStationName
+) => {
+  return departureStationName === arrivalStationName;
+};
+
 export const isValidInputLength = (
   departureStationName,
   arrivalStationName
