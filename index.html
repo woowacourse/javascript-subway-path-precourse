@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>지하철 길찾기</title>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <h1>🚇 지하철 길찾기 </h1>
+
+    <div id="input-container">
+        <label>출발역<input id="departure-station-name-input"/></label>
+        <br>
+        <label>도착역<input id="arrival-station-name-input"/></label>
+        <br>
+        <input id="short-line" type="radio" name="search-type" checked/>
+        <label  for="huey">최단거리</label>
+        <input id="short-time" type="radio" name="search-type"/>
+        <label for="huey">최소시간</label>
+        <br>
+        <button id="search-button">길 찾기</button> 
+    </div>
+
+    <div id="result-container">
+        <h1>🚇 결과 </h1>
+    </div>
+</div>
+<script type="module" src="./src/index.js"></script>
 </body>
 </html>
