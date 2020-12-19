@@ -1,0 +1,9 @@
+html {
+  font-family: sans-serif;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+}
