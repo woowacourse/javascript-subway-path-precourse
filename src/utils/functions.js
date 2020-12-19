@@ -79,6 +79,8 @@ const Functions = function () {
     }
     return result;
   };
+
+  this.getFormattedPath = (path) => path.join("➨");
 };
 
 export const {
@@ -88,4 +90,5 @@ export const {
   setEdges,
   getMinimumPath,
   getMinimumCost,
+  getFormattedPath,
 } = new Functions();
