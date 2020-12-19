@@ -1,15 +1,20 @@
 import { times, distances, lines, sections } from '../database/data.js';
+import { default as view } from '../view/view.js';
 import { timeDijkstra, distanceDijkstra } from '../index.js';
 
 export default {
   init(tree, start, end) {
     this.tree = tree;
     this.shortestPath = tree.findShortestPath(start, end);
+    const time = this.getTime(this.shortestPath);
+    const distance = this.getDistance(this.shortestPath);
+    let flag = '';
     if (this.tree === timeDijkstra) {
-      this.getTime(this.shortestPath);
-    } else if (tree === distanceDijkstra) {
-      this.getDistance(this.shortestPath);
+      flag = 'time';
+    } else {
+      flag = 'distance';
     }
+    view.drawTable(distance, time, this.shortestPath, flag);
   },
 
   getTime(route) {
@@ -23,7 +28,7 @@ export default {
       }
       idx++;
     });
-    console.log(time);
+    return time;
   },
 
   getDistance(route) {
@@ -37,7 +42,7 @@ export default {
       }
       idx++;
     });
-    console.log(distance);
+    return distance;
   },
 
   checkStartEndBothInLine(start, end) {
