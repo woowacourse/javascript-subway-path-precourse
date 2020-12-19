@@ -5,6 +5,7 @@ export default function stationValidation(start, end, stations) {
   if (!stations.includes(start) || !stations.includes(start))
     return INPUT_ERROR.NOT_INCLUDES_ERROR;
   if (start === end) return INPUT_ERROR.SAME_STATION_ERROR;
+  return 'ok';
 }
 
 const ltTwo = name => {

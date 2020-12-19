@@ -11,6 +11,11 @@ export const lineData = [
     ],
   },
   {
+    name: '6호선',
+    distanceInfo: [['합정', '상수', 2]],
+    timeInfo: [['합정', '상수', 2]],
+  },
+  {
     name: '3호선',
     distanceInfo: [
       ['교대', '남부터미널', 3],

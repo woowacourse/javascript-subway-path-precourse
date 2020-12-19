@@ -1,3 +1,5 @@
+import { NOT_CONNECTION_ERROR } from '../utils/constants.js';
+
 export default function Dijkstra() {
   const Node = {
     init: function (val, priority) {
@@ -169,7 +171,7 @@ export default function Dijkstra() {
       while (true) {
         let current = pq.dequeue();
         if (!current?.val) {
-          return;
+          return { error: NOT_CONNECTION_ERROR };
         }
         current = current.val;
         if (current == end) {
@@ -206,7 +208,6 @@ export default function Dijkstra() {
 
   this.addEdge = (source, target, weight) => {
     WeightedGraph.addEdge(source, target, weight);
-    // console.log('addEdge: ', source, target, weight);
   };
 
   this.findShortestPath = (source, target) => {

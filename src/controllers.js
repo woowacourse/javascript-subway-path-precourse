@@ -25,15 +25,22 @@ export const initListener = subwayPath => {
       'serchType: ',
       checkradioValue(serchType)
     );
-    // console.log('subwayPath', subwayPath.stationList);
-    const result = stationValidation(
+    const validationResult = stationValidation(
       departureStationNameInput.value,
       arrivalStationNameInput.value,
       subwayPath.stationList
     );
-    if (result === 'ok') {
+    const findPathResult = subwayPath.distancePath.findPath(
+      departureStationNameInput.value,
+      arrivalStationNameInput.value
+    );
+    console.log('validationResult', validationResult);
+    if (validationResult === 'ok') {
+      if (findPathResult.error) {
+        alert(findPathResult.error);
+      }
     } else {
-      alert(result);
+      alert(validationResult);
     }
   });
 };

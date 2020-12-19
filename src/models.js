@@ -9,6 +9,10 @@ export function SubwayDistancePath() {
     });
   });
   this.stations = Object.keys(this.dijkstra.callAdjacencyList());
+
+  this.findPath = (start, end) => {
+    return this.dijkstra.findShortestPath(start, end);
+  };
 }
 
 export function SubwayTimePath() {

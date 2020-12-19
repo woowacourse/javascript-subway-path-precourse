@@ -3,3 +3,5 @@ export const INPUT_ERROR = {
   NOT_INCLUDES_ERROR: '존재하지 않는 역입니다.',
   SAME_STATION_ERROR: '출발역과 도착역이 동일합니다.',
 };
+
+export const NOT_CONNECTION_ERROR = '역이 연결되어 있지 않습니다.';
