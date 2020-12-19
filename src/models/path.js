@@ -1,4 +1,4 @@
-import paths from "../data/paths.js";
+import paths from "../../data/paths.js";
 import Dijkstra from "../utils/Dijkstra.js";
 
 const dijkstraForDistance = new Dijkstra();
