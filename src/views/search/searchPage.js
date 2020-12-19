@@ -1,7 +1,7 @@
-function searchPage() {
+function searchPage(timeTableData, checkedRadioInput) {
   let page = `
     <h2>📝 결과</h2>
-    <h4>최단거리/최소시간</h4>
+    <h4>${checkedRadioInput}</h4>
     <table width = "400px" border = 1px solid black>
     <thead>
     <tr>    
@@ -10,11 +10,11 @@ function searchPage() {
     </tr>
     </thead>
     <tr>    
-        <td>km</td>
-        <td>분</td>
+        <td>${timeTableData.totalDistance}km</td>
+        <td>${timeTableData.totalTime}분</td>
     </tr>
     <tr>    
-        <td colspan="2">ㅇ->ㅇ->ㅇ></td>
+        <td colspan="2">${timeTableData.minPath.join(" -> ")}</td>
     </tr>
     <tbody>
     </tbody>

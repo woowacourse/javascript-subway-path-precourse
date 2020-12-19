@@ -20,7 +20,7 @@ function onSearchBtnHandler() {
   // 최단 거리 minPath 를 이용하여 totalDistance, totalTime 계산하고 렌더링
 
   console.log(timeTableData);
-  render(app(timeTableData));
+  render(app(timeTableData, checkedRadioInput));
 }
 
 function calculateTotalCost(minPath, option) {
@@ -31,10 +31,10 @@ function calculateTotalCost(minPath, option) {
     subwayDatas.sections.forEach((section) => {
       let conditionOne = section.depart === minPath[i] && section.end === minPath[i + 1];
       let conditionTwo = section.end === minPath[i] && section.depart === minPath[i + 1];
-      if (conditionOne || (conditionTwo && option === "distance")) {
+      if ((conditionOne || conditionTwo) && option === "distance") {
         totalCost += Number(section.distance);
       }
-      if (conditionOne || (conditionTwo && option === "time")) {
+      if ((conditionOne || conditionTwo) && option === "time") {
         totalCost += Number(section.time);
       }
     });

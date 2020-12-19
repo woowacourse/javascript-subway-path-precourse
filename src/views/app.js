@@ -1,9 +1,9 @@
 import searchPage from "../views/search/searchPage.js";
 
-export default function app(timeTableData) {
+export default function app(timeTableData, checkRadioInput) {
   let app = ``;
 
-  app = searchPage(timeTableData);
+  app = searchPage(timeTableData, checkRadioInput);
 
   return app;
 }
