@@ -52,7 +52,7 @@ export const lines = [
       },
       {
         start: '양재',
-        end: '양재시민의 숲',
+        end: '양재시민의숲',
         time: 3,
         distance: 10,
       },

@@ -13,12 +13,8 @@ export class FindPathInputs {
   }
 
   initializeDOM = () => {
-    this.departureStationInput = document.getElementById(
-      'departure-station-name-input',
-    );
-    this.arrivalStationInput = document.getElementById(
-      'arrival-station-name-input',
-    );
+    this.departureStationInput = document.getElementById('departure-station-name-input');
+    this.arrivalStationInput = document.getElementById('arrival-station-name-input');
     this.timeRadioButton = document.getElementById('by-time');
     this.distanceRadioButton = document.getElementById('by-distance');
     this.searchButton = document.getElementById('search-button');
@@ -33,7 +29,6 @@ export class FindPathInputs {
     const arrival = this.arrivalStationInput.value;
 
     this.checkIsValidStations(departure, arrival);
-    this.initStationInput();
   };
 
   checkIsValidStations = (departure, arrival) => {
@@ -52,10 +47,5 @@ export class FindPathInputs {
   getNameCheckedWeight = () => {
     let time = this.timeRadioButton.checked;
     return time ? VALUE.TIME_VALUE : VALUE.DISTANCE_VALUE;
-  };
-
-  initStationInput = () => {
-    this.departureStationInput.value = '';
-    this.arrivalStationInput.value = '';
   };
 }
