@@ -1,7 +1,7 @@
 import View from './View.js';
 
 const tag = `[StationInputForm]`;
-export default class SearchPathInputForm extends View {
+export default class SearchPathInputFormView extends View {
   setup($element) {
     console.log(`${tag} init`);
     this.init($element);
