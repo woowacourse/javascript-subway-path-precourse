@@ -1,3 +1,8 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-invalid-this */
+/* eslint-disable no-inner-declarations */
+/* eslint-disable no-constant-condition */
 /* eslint-disable require-jsdoc */
 export default function Dijkstra() {
   const Node = {
