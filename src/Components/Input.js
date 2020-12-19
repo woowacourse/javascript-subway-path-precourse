@@ -1,5 +1,8 @@
 import { ID, INNER_TEXT, NAME } from "../Constants/Input.js";
-import { isValidStationName } from "../utils/InputValidator.js";
+import {
+  isValidStationName,
+  isValidRoute
+} from "../utils/InputValidator.js";
 import AbstractComponent from "./AbstractComponent.js";
 
 export default class Input extends AbstractComponent {
@@ -129,7 +132,11 @@ export default class Input extends AbstractComponent {
     const arrival = this.$arrivalStationInput.value;
     const isShortedDistanceChecked = this.$shortestDistanceRadioButton.checked;
 
-    if (isValidStationName(departure) && isValidStationName(arrival)) {
+    if (
+      isValidStationName(departure) &&
+      isValidStationName(arrival) &&
+      isValidRoute(departure, arrival)
+    ) {
       console.log(departure, arrival, isShortedDistanceChecked);
       // TODO: 최적의 경로를 찾아라!
     }

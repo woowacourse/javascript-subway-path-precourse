@@ -22,5 +22,7 @@ export const STATION_NAME_MIN_LENGTH = 2;
 
 export const ERROR_MESSAGE = {
   STATION_NAME_MIN_LENGTH: "역이름은 2글자 이상이어야 합니다.",
-  NO_STATION_EXISTENCE: "존재하지 않는 역을 입력할 수 없습니다."
+  NO_STATION_EXISTENCE: "존재하지 않는 역을 입력할 수 없습니다.",
+  NO_DUPLICATED_STATION_NAMES: "경로 조회 시 출발역과 도착역이 같을 수 없습니다",
+  NOT_CONNECTED_STATIONS: "출발역과 도착역이 연결되어 있지 않습니다."
 };
