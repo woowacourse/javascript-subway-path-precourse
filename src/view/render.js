@@ -54,4 +54,12 @@ export default class Render {
   static $appendChildElement(parent, name, child) {
     parent.$children[name] = child;
   }
+
+  static $addEventListener(node, eventObject) {
+    for (const key in eventObject) {
+      eventObject[key].map(handler => {
+        node.addEventListener(`${key}`, handler);
+      });
+    }
+  }
 }

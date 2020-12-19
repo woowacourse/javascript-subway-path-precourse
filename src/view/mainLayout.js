@@ -1,3 +1,4 @@
+import CustomError from '../utils/customError.js';
 import Render from './render.js';
 
 export default class MainLayout {
@@ -108,6 +109,7 @@ export default class MainLayout {
       tag: 'button',
       id: 'search-button',
       innerHTML: '길 찾기',
+      eventListener: { click: [() => this.handleInputButton()] },
     });
   }
 
@@ -136,5 +138,22 @@ export default class MainLayout {
       id: 'table-row',
       innerHTML: '<tr><td></td><td></td></tr><tr><td colspan="2"></td></tr>',
     });
+  }
+
+  /**
+   * 이벤트 핸들러
+   */
+  handleInputButton() {
+    try {
+      const depart = this.controller.getDepartmentInput();
+      const arrive = this.controller.getArrivalInput();
+
+      if (depart === arrive) {
+        throw new CustomError('출발역과 도착역은 달라야 합니다');
+      }
+      console.log(`${depart}, ${arrive}`);
+    } catch (error) {
+      error.alertUser();
+    }
   }
 }
