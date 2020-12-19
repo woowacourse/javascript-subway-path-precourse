@@ -1,0 +1,13 @@
+#departure-text {
+  display: inline-block; 
+  margin-top: 0px;
+}
+
+#arrival-text {
+  display: inline-block;
+  margin-top: 0px;
+}
+
+#table {
+  border: solid 1px black;
+}
