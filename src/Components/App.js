@@ -24,7 +24,10 @@ export default class App extends AbstractComponent {
   }
 
   renderInput() {
-    new Input({ $parent: this.$component });      
+    new Input({
+      $parent: this.$component,
+      tagname: "form"
+    });      
   }
 
   renderResult() {

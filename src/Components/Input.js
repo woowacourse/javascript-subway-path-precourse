@@ -5,6 +5,7 @@ export default class Input extends AbstractComponent {
   constructor(props) {
     super(props);
     this.render();
+    this.addClickEventListener();
   }
 
   render() {
@@ -113,5 +114,22 @@ export default class Input extends AbstractComponent {
     $radioButtonLabel.innerText = value;
 
     return [$radioButton, $radioButtonLabel];
+  }
+
+  addClickEventListener() {
+    this.$component.addEventListener("submit", event => {
+      event.preventDefault();
+      this.handleSearchRoute();
+    });
+  }
+
+  handleSearchRoute() {
+    const departure = this.$departureStationInput.value;
+    const arrival = this.$arrivalStationInput.value;
+    const isShortedDistanceChecked = this.$shortestDistanceRadioButton.checked;
+
+    console.log(departure);
+    console.log(arrival);
+    console.log(isShortedDistanceChecked);
   }
 }
