@@ -1,6 +1,6 @@
 import Dijkstra from './utils/Dijkstra.js';
 import {stations, lines, sections} from './model/subway.model.js';
-import {isInputValid, isLinkedStation} from './subway.validator.js';
+import {isInputValid} from './subway.validator.js';
 import {SEARCH_TYPE} from './constants.js';
 
 export default class SubwayAPP {
@@ -8,21 +8,18 @@ export default class SubwayAPP {
     this.stations = stations;
     this.lines = lines;
     this.sections = sections;
+
     this.dijkstra = new Dijkstra();
   }
 
   search(startStation, endStation, searchType) {
-    if (
-      !isInputValid(startStation, endStation, this.stations)
-    ) return null;
+    if (!isInputValid(startStation, endStation, this.stations)) {
+      return null;
+    }
 
     this.setEdge(this.lines, this.sections, searchType);
 
-    const result = this.dijkstra.findShortestPath(startStation, endStation);
-
-    if (!isLinkedStation(result)) return null;
-
-    return result;
+    return this.dijkstra.findShortestPath(startStation, endStation);
   }
 
   setEdge(lines, sections, searchType) {

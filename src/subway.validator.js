@@ -7,8 +7,8 @@ class SubwayValidator {
       return false;
     }
 
-    if (!this.hasStations(stations, startStation) ||
-        !this.hasStations(stations, endStation)) {
+    if (!this.hasStations(startStation, stations) ||
+        !this.hasStations(endStation, stations)) {
       alert(ALERT.NOT_EXIST);
       return false;
     }
@@ -21,8 +21,8 @@ class SubwayValidator {
     return true;
   }
 
-  hasStations(stations, station) {
-    return stations.some((currentStation) => currentStation === station);
+  hasStations(station, stations) {
+    return stations.some((currentStation) => currentStation.name === station);
   }
 }
 
