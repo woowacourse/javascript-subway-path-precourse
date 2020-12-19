@@ -1,5 +1,5 @@
 export function isNameShort(name) {
-  return (name<2);
+  return (name.length<2);
 }
 
 export function isStationAvaliable(name, data) {
