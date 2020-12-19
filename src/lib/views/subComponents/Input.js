@@ -6,7 +6,7 @@ export default class Input {
     this.element.id = id;
     this.element.type = "text";
     this.element.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") return () => callbackFunction();
+      if (e.key === "Enter") return callbackFunction();
     });
   }
 }

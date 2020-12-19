@@ -5,6 +5,5 @@ export default class Button {
     this.element.id = id;
     this.element.innerText = helperText;
     this.element.onclick = () => callbackFunction();
-    this.querySelector = `#${this.element.id}`;
   }
 }

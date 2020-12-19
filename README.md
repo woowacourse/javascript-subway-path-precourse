@@ -3,9 +3,19 @@
 ## 구현할 목록 정리
 0. 제목, input form 등 구역 설정하기(div로) -> 완료
 1. input 구현, 유효하지 않은 input 에러 처리
+    - input form 작성(완료)
+    - submit button 작성(완료)
+    - radio button 작성
+    - input 유효성 처리
 2. 사전 등록 정보로 데이터 초기화
+    - 데이터 모델링
+    - 초기화해서 local storage에 저장
+    - input 유효성 검사에서 포함 여부 업데이트
 3. 계산 결과 알고리즘 세우기
+    - 힌트 다익스트라 이용
 4. table로 결과 출력하기
+    - table dom 생성
+    - 데이터 집어넣기
 
 ## input 유효성 검사
 1. 출발역, 도착역 2글자 이상, 데이터에 포함되어 있어야 할 것.
