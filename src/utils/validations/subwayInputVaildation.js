@@ -1,5 +1,5 @@
-import { isEmptyValue, isExistStation } from "./index.js";
-import { alertMessage, clearInput } from "../domUtils.js";
+import { isEmptyValue, isExistStation, isValidInputLength } from "./index.js";
+import { alertMessage } from "../domUtils.js";
 import { MESSAGE } from "../constants/message.js";
 import { NUM } from "../constants/num.js";
 
@@ -22,16 +22,9 @@ export const isVaildStationName = ($input, nameList, name) => {
   return true;
 };
 
-export const isSameStation = (
-  $inputDeparture,
-  $inputArrival,
-  departure,
-  arrival,
-) => {
+export const isSameStation = (departure, arrival) => {
   if (departure === arrival) {
     alert(MESSAGE.SAME_STATION_SELECT_ERROR);
-    clearInput($inputArrival);
-    clearInput($inputDeparture);
     return false;
   }
 

@@ -1,4 +1,4 @@
-import { NUM } from "./number.js";
+import { NUM } from "./num.js";
 
 export const MESSAGE = {
   EMPTY_NAME_ERROR: `이름을 입력해주세요.`,
