@@ -48,12 +48,20 @@ export default class SubwayPath {
 
   // 최단거리 구하기
   findShortestDistancePath(source, target) {
-    return this.distanceDijkstra.findShortestPath(source, target);
+    const path = this.distanceDijkstra.findShortestPath(source, target);
+    if (path === undefined) {
+      return null;
+    }
+    return path;
   }
 
   // 최소시간 구하기
   findShortestTimePath(source, target) {
-    return this.timeDijkstra.findShortestPath(source, target);
+    const path = this.timeDijkstra.findShortestPath(source, target);
+    if (path === undefined) {
+      return null;
+    }
+    return path;
   }
 
   // 경로의 총 거리와 총 소요시간 구하기

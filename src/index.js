@@ -19,12 +19,15 @@ function clickSearchButton() {
   const departureStation = departureStationNameInput.value;
   const arrivalStation = arrivalStationNameInput.value;
   const radio = document.querySelector('input[name="search-type"]:checked');
-  resultDiv.classList.add('d-none');
   if (!checkStation(departureStation, arrivalStation)) {
     return;
   }
   titleH3.textContent = radio.labels[0].textContent;
   const path = findShortestDistancePath(departureStation, arrivalStation, radio.value);
+  if (path === null) {
+    alert('길을 찾을 수 없습니다.');
+    return;
+  }
   showResult(path);
 }
 
