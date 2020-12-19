@@ -6,7 +6,7 @@ import StationDistanceModel from '../models/StationDistanceModel.js';
 import StationTimeModel from '../models/StationTimeModel.js';
 
 import { Lines2, Lines3, LineSinbundang } from '../utils/data.js';
-import { SEARCH_PATH_TYPE } from '../utils/constants.js';
+import { SEARCH_PATH_TYPE, ERROR_MESSAGE } from '../utils/constants.js';
 import stationInputValidator from '../utils/stationInputValidator.js';
 
 export default class MainController {
@@ -100,6 +100,9 @@ export default class MainController {
   }
 
   onChangeSelectorHandler(targetId) {
+    if (!this.departureStationName || !this.arrivalStationName) {
+      return alert(ERROR_MESSAGE.IS_NOT_INPUT);
+    }
     this.selectPathType = targetId;
     this.findPath(this.departureStationName, this.arrivalStationName);
   }

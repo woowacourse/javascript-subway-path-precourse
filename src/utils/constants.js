@@ -11,6 +11,7 @@ const ERROR_MESSAGE = {
   IS_SAME_STATION: '서로 다른 역을 입력해주세요',
   IS_TOO_SHORT_STRING: '역이름은 두 글자 이상입니다',
   IS_NOT_EXIST: '존재하지 않는 역입니다',
+  IS_NOT_INPUT: '역을 먼저 입력해주세요',
 };
 
 const SEARCH_PATH_TYPE = {
