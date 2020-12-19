@@ -12,3 +12,14 @@ const isRightLength = (name) => {
   }
   return true;
 };
+
+const isExistInList = (name) => {
+  for (let i = 0; i < stations.length; i++) {
+    if (stations[i].name === name) {
+      return true;
+    }
+  }
+
+  alert(alertMessage.NO_EXIST_IN_STATION_LIST);
+  return false;
+};
