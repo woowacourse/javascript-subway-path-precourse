@@ -1,5 +1,6 @@
-import { allStation, lineInfo } from "./line-info.js";
+import { allStation, lineInfo } from "./utils/line-info.js";
 import { dijkstraByDistance, dijkstraByTime } from "./utils/dijkstra-object.js";
+
 export const getSearchType = () => {
   const type = document.getElementsByName("search-type");
   if (type[0].checked === true) {
@@ -38,7 +39,10 @@ export const isExistingStation = (departureStation, arrivalStation) => {
 
   return false;
 };
-
+export const notExistingRoute = () => {
+  alert("존재하지 않는 노선입니다.");
+  resetInput();
+};
 export const getOneDistanceAndTime = (startStation, endStation) => {
   for (let i in lineInfo) {
     const line = lineInfo[i];
@@ -97,9 +101,20 @@ export const makeResultUI = (searchType, distance, time, shortestRoute) => {
   document.getElementById("result").innerHTML += resultSubTitle;
   document.getElementById("result").innerHTML += resultTable;
 };
-export const notExistingRoute = () => {
-  alert("존재하지 않는 노선입니다.");
-  resetInput();
+export const showResult = (searchType, departureStation, arrivalStation) => {
+  const dijkstra =
+    searchType === "최단거리" ? dijkstraByDistance : dijkstraByTime;
+  const [totalDistance, totalTime, shortestRoute] = getResultInfo(
+    departureStation,
+    arrivalStation,
+    dijkstra
+  );
+  if (totalDistance !== 0 && totalTime !== 0) {
+    document.getElementById("result").innerHTML = "";
+    makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
+  } else {
+    notExistingRoute();
+  }
 };
 const btnSearch = document.getElementById("search-button");
 btnSearch.onclick = () => {
@@ -114,18 +129,6 @@ btnSearch.onclick = () => {
     isCorrectStationName(departureStation) &&
     isCorrectStationName(arrivalStation)
   ) {
-    const dijkstra =
-      searchType === "최단거리" ? dijkstraByDistance : dijkstraByTime;
-    const [totalDistance, totalTime, shortestRoute] = getResultInfo(
-      departureStation,
-      arrivalStation,
-      dijkstra
-    );
-    if (totalDistance !== 0 && totalTime !== 0) {
-      document.getElementById("result").innerHTML = "";
-      makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
-    } else {
-      notExistingRoute();
-    }
+    showResult(searchType, departureStation, arrivalStation);
   }
 };
