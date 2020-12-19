@@ -1,3 +1,5 @@
+import { initHTML } from "./managers/init.js";
+
 export default function main() {
   let subwayDatas = {
     stations: ["교대", "강남", "역삼", "남부터미널", "양재", "양재시민의숲", "매봉"],
@@ -23,4 +25,6 @@ export default function main() {
       { depart: "양재시민의숲", end: "양재", time: 3, distance: 10 },
     ],
   };
+
+  initHTML();
 }
