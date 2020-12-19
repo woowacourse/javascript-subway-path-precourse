@@ -8,8 +8,6 @@ export const STATION = [
   '매봉',
 ];
 
-export const LINE = ['2호선', '3호선', '신분당선'];
-
 export const SECTION = {
   '2호선': '교대 - ( 2km / 3분 ) - 강남 - ( 2km / 3분 ) - 역삼',
   '3호선':
