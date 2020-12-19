@@ -1,44 +1,44 @@
-import { INPUT, SEARCH } from "./constants.js";
-import { minPath } from "./getMinimum.js";
+import {INPUT, SEARCH} from './constants.js';
+import {minPath} from './getMinimum.js';
 import {
   display,
   appendDistanceToTable,
   appendPathToTable,
   appendTimeToTable,
-} from "./display.js";
-import { lines } from "./data.js";
+} from './display.js';
+import {lines} from './data.js';
 import {
   createDistanceMessage,
   createResultPathMessage,
   createTimeMessage,
-} from "./createMessages.js";
-import { totalBetweenStations } from "./getTotal.js";
+} from './createMessages.js';
+import {totalBetweenStations} from './getTotal.js';
 import {
   areStationsDifferent,
   areStationsLinked,
   isNameShort,
   isStationAvaliable,
-} from "./inputValid.js";
+} from './inputValid.js';
 
 export default function App() {
   this.data = lines;
 
-  SEARCH.BUTTON.addEventListener("click", (e) => {
+  SEARCH.BUTTON.addEventListener('click', (e) => {
     display(this);
     this.type = changeType();
     this.path = minPath(
-      this.data,
-      INPUT.DEPARTURE.value,
-      INPUT.ARRIVAL.value,
-      this.type.value
+        this.data,
+        INPUT.DEPARTURE.value,
+        INPUT.ARRIVAL.value,
+        this.type.value,
     );
     appendDistanceToTable(
-      createDistanceMessage(
-        totalBetweenStations(this.data, this.path, "distance")
-      )
+        createDistanceMessage(
+            totalBetweenStations(this.data, this.path, 'distance'),
+        ),
     );
     appendTimeToTable(
-      createTimeMessage(totalBetweenStations(this.data, this.path, "time"))
+        createTimeMessage(totalBetweenStations(this.data, this.path, 'time')),
     );
     appendPathToTable(createResultPathMessage(this.path));
     if (isInputValid(this, INPUT.DEPARTURE.value, INPUT.ARRIVAL.value)) {
@@ -60,22 +60,22 @@ function changeType() {
 
 function isInputValid(object, departure, arrival) {
   if (isNameShort(departure) || isNameShort(arrival)) {
-    window.alert("역 이름은 2글자 이상이어야 합니다!");
+    window.alert('역 이름은 2글자 이상이어야 합니다!');
     return;
   }
   if (
     !isStationAvaliable(departure, object.data) ||
     !isStationAvaliable(arrival, object.data)
   ) {
-    window.alert("존재하지 않는 역입니다!");
+    window.alert('존재하지 않는 역입니다!');
     return;
   }
   if (!areStationsDifferent(departure, arrival)) {
-    window.alert("서로 다른 역을 입력해주세요!");
+    window.alert('서로 다른 역을 입력해주세요!');
     return;
   }
   if (!areStationsLinked(object)) {
-    window.alert("연결된 역을 입력해주세요!");
+    window.alert('연결된 역을 입력해주세요!');
     return;
   }
 }
