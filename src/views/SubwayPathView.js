@@ -1,8 +1,28 @@
+import { message } from "../constants/constant.js";
+
 class SubwayPathView {
   constructor({ subwayPath }) {
     this.subwayPath = subwayPath;
     this.handleButtonClick();
   }
+
+  createResultTemplate = (option, pathLength, pathTime, path) => {
+    return `
+    <h1>결과</h1>
+    <h2>${option}</h2>
+    <table border=2>
+        <th>총 거리</th>
+        <th>총 소요 시간</th>
+        <tr>
+            <td>${pathLength}</td>
+            <td>${pathTime}</td>
+        </tr>
+        <tr>
+            <td>${path}</td>
+        </tr>
+    </table>
+    `;
+  };
 
   getSearchPathInput = () => {
     const departure = document.getElementById("departure-station-name-input")
@@ -18,7 +38,7 @@ class SubwayPathView {
     const { departure, arrival, option } = this.getSearchPathInput();
     if (this.subwayPath.checkVaild(departure, arrival)) {
       const path = this.subwayPath.searchPath(departure, arrival, option);
-      //renderResult(path, countPathLength(path), countPathTime(path));
+      console.log(this.subwayPath.countPathLengthAndTime(path));
     }
   };
 
