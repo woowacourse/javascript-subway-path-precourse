@@ -1,6 +1,6 @@
-import {APP} from './constants.js';
-import {initTemplate, resultTemplate} from './components/subway.component.js';
-import {INPUT, RADIO, RESULT} from './constants.js';
+import {APP} from '../constants.js';
+import {initTemplate, resultTemplate} from '../components/subway.component.js';
+import {INPUT, RADIO, RESULT} from '../constants.js';
 
 export default class SubwayView {
   constructor() {

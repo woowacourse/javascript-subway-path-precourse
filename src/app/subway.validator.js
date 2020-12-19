@@ -1,4 +1,4 @@
-import {ALERT} from './constants.js';
+import {ALERT} from '../constants.js';
 
 class SubwayValidator {
   isInputValid = (startStation, endStation, stations) => {

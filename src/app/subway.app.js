@@ -1,7 +1,7 @@
-import Dijkstra from './utils/Dijkstra.js';
-import {stations, lines, sections} from './model/subway.model.js';
+import Dijkstra from '../utils/Dijkstra.js';
+import {stations, lines, sections} from '../model/subway.model.js';
 import {isInputValid} from './subway.validator.js';
-import {SEARCH_TYPE} from './constants.js';
+import {SEARCH_TYPE} from '../constants.js';
 
 export default class SubwayAPP {
   constructor() {
