@@ -3,7 +3,6 @@ export default class Div {
     const { id, children } = props;
     this.element = document.createElement("div");
     this.element.id = id;
-    this.querySelector = `#${this.element.id}`;
     if (children) children.forEach((child) => this.addChildren(child));
   }
 
