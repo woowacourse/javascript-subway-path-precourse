@@ -84,32 +84,50 @@ export default class FindRoute extends Component {
   }
 
   mount() {
+    this.mountDepartureStationInput();
+    this.mountArrivalStationInput();
+    this.mountMinimumDistanceInput();
+    this.mountMinimumTimeInput();
+    this.mountFindRouteButton();
+  }
+
+  mountDepartureStationInput() {
     const departureStationInput = document.querySelector(
       "#departure-station-name-input"
     );
-    departureStationInput.addEventListener("blur", (event) => {
+    departureStationInput?.addEventListener("blur", (event) => {
       console.log(event.target.value);
       this.handleDepartureStation(event.target.value);
     });
+  }
+
+  mountArrivalStationInput() {
     const arrivalStationInput = document.querySelector(
       "#arrival-station-name-input"
     );
-    arrivalStationInput.addEventListener("blur", (event) => {
+    arrivalStationInput?.addEventListener("blur", (event) => {
       this.handleArrivalStation(event.target.value);
     });
+  }
+
+  mountMinimumDistanceInput() {
     const minimumDistanceInput = document.querySelector("#min-distance");
-    minimumDistanceInput.addEventListener("change", (event) => {
+    minimumDistanceInput?.addEventListener("change", (event) => {
       console.log(event.target.value);
       this.handleDistanceInput(event.target.value);
     });
+  }
 
+  mountMinimumTimeInput() {
     const minimumTimeInput = document.querySelector("#min-time");
-    minimumTimeInput.addEventListener("change", (event) => {
+    minimumTimeInput?.addEventListener("change", (event) => {
       this.handleTimeInput(event.target.value);
     });
+  }
 
+  mountFindRouteButton() {
     const findRouteButton = document.querySelector("#search-button");
-    findRouteButton.addEventListener("click", this.findRouteButtonClick);
+    findRouteButton?.addEventListener("click", this.findRouteButtonClick);
   }
 
   render() {
@@ -160,13 +178,4 @@ export default class FindRoute extends Component {
           }
           `;
   }
-}
-
-function isNull(tableNumber) {
-  return String(tableNumber) === "null" || String(tableNumber) === "undefined";
-}
-
-function renderIf(value, renderString) {
-  const result = value ? renderString : "";
-  return result;
 }
