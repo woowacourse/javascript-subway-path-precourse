@@ -1,10 +1,27 @@
-import { stations, sections, distanceDijkstra, timeDijkstra } from "./data.js";
+import Dijkstra from "./utils/Dijkstra.js";
+import { stations, sections } from "./data.js";
 
 export default class Model {
   stations = stations;
   sections = sections;
-  distanceDijkstra = distanceDijkstra;
-  timeDijkstra = timeDijkstra;
+  distanceDijkstra = new Dijkstra();
+  timeDijkstra = new Dijkstra();
+
+  constructor() {
+    this.initialize();
+  }
+
+  initialize() {
+    for (const section in this.sections) {
+      const [start, end] = section.split("-");
+      this.distanceDijkstra.addEdge(
+        start,
+        end,
+        this.sections[section].distance
+      );
+      this.timeDijkstra.addEdge(start, end, this.sections[section].time);
+    }
+  }
 
   getTotalTimeAndDistance(sections) {
     let totalDistance = 0;

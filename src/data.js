@@ -1,5 +1,3 @@
-import Dijkstra from "./utils/Dijkstra.js";
-
 const stations = [
   "교대",
   "강남",
@@ -41,13 +39,4 @@ const sections = {
   },
 };
 
-const distanceDijkstra = new Dijkstra();
-const timeDijkstra = new Dijkstra();
-
-for (const section in sections) {
-  const [start, end] = section.split("-");
-  distanceDijkstra.addEdge(start, end, sections[section].distance);
-  timeDijkstra.addEdge(start, end, sections[section].time);
-}
-
-export { stations, sections, distanceDijkstra, timeDijkstra };
+export { stations, sections };
