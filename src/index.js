@@ -19,32 +19,29 @@ function clickSearchButton() {
   const departureStation = departureStationNameInput.value;
   const arrivalStation = arrivalStationNameInput.value;
   const radio = document.querySelector('input[name="search-type"]:checked');
-  switch (radio.value) {
+  titleH3.textContent = radio.labels[0].textContent;
+  const path = findShortestDistancePath(departureStation, arrivalStation, radio.value);
+  showResult(path);
+}
+
+function findShortestDistancePath(source, target, type) {
+  "use strict";
+
+  let path = null;
+  switch (type) {
     case 'distance':
-      showDistanceResult(departureStation, arrivalStation);
+      path = subwayPath.findShortestDistancePath(source, target);
       break;
     case 'time':
-      showTimeResult(departureStation, arrivalStation);
+      path = subwayPath.findShortestTimePath(source, target);
       break;
   }
-  titleH3.textContent = radio.labels[0].textContent;
+  return path;
 }
 
-function showDistanceResult(source, target) {
+function showResult(path) {
   "use strict";
 
-  const path = subwayPath.findShortestDistancePath(source, target);
-  const totalDistanceAndTime = subwayPath.getTotalDistanceAndTime(path);
-  totalDistanceTd.textContent = `${totalDistanceAndTime.distance}km`;
-  totalTimeTd.textContent = `${totalDistanceAndTime.time}분`;
-  stepTd.textContent = path.join('→');
-  resultDiv.classList.remove('d-none');
-}
-
-function showTimeResult(source, target) {
-  "use strict";
-
-  const path = subwayPath.findShortestTimePath(source, target);
   const totalDistanceAndTime = subwayPath.getTotalDistanceAndTime(path);
   totalDistanceTd.textContent = `${totalDistanceAndTime.distance}km`;
   totalTimeTd.textContent = `${totalDistanceAndTime.time}분`;
