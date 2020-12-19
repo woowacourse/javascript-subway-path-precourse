@@ -45,21 +45,13 @@ const isValidStationsInSection = (
   return departureStationIndex < arrivalStationIndex;
 };
 
-const isValidSection = ($input, departureStation, arrivalStation, lineList) => {
-  const isValidList = lineList.map(line => {
-    return isValidStationsInSection(
-      line.station,
-      departureStation,
-      arrivalStation
-    );
-  });
-  const hasValidSection = isValidList.includes(true);
-
-  if (!hasValidSection) {
+const isValidSection = ($input, lineResult) => {
+  if (!lineResult) {
     showAlertMessage($input, ALERT.FAILED_TO_FIND_SECTION);
+    return false;
   }
 
-  return hasValidSection;
+  return true;
 };
 
 export { isValidStationName, isDuplicatedStations, isValidSection };
