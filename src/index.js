@@ -1,10 +1,34 @@
 import { lines, stations } from './subwayMapData.js';
+import { appendNew, appendNewRadioButton } from './utils/util-ui.js';
 import Dijkstra from './utils/Dijkstra.js';
 
 export default function SubwayPathFinder() {
   loadSubwayMapDataToLocalStorage();
   makeSubwayMapGraphAll();
+  appendUI();
 }
+
+const appendUI = () => {
+  const appDiv = document.getElementById('app');
+  let container;
+
+  appendNew('h2', appDiv, '🚇지하철 길찾기');
+  container = appendNew('div', appDiv, '', 'container');
+  appendStationNameInputs(container);
+  //appendRadioButtons(container);
+  //setDefaultOption('shortest-distance');
+  //appendNew('button', container, '길 찾기', 'search-button');
+  //appendTable();
+};
+
+const appendStationNameInputs = (container) => {
+  appendNew('label', container, '출발역');
+  appendNew('input', container, '', 'departure-station-name-input');
+  appendNew('br', container);
+  appendNew('label', container, '도착역');
+  appendNew('input', container, '', 'arrival-station-name-input');
+  appendNew('br', container);
+};
 
 const loadSubwayMapDataToLocalStorage = () => {
   localStorage.setItem('lines', JSON.stringify(lines));
@@ -18,10 +42,8 @@ const makeSubwayMapGraphAll = () => {
 
 const makeSubwayMapGraph = (lines, stations, key) => {
   const dijkstra = new Dijkstra();
-  console.log(dijkstra);
 
   stations.forEach((station) => dijkstra.addVertex(station));
-  console.log(dijkstra);
   lines.forEach((line) => {
     const stations = line.stations;
     const intervals = line[key];
