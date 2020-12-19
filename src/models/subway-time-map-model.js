@@ -12,18 +12,6 @@ export default class SubwayTimeMap {
 		this.setSubwayTimes();
 	}
 
-	getStations = () => {
-		return 	stations;
-	}
-
-	getLines = () => {
-		return lines;
-	}
-
-	getSections = () => {
-		return sections;
-	}
-
 	setSubwayStations = () => {
 		for (let station of stations) {
 			this.subwayTimeMap.addVertex(station.name);

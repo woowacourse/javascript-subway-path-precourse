@@ -12,18 +12,6 @@ export default class SubwayDistanceMap {
 		this.setSubwayDistances();
 	}
 
-	getStations = () => {
-		return 	stations;
-	}
-
-	getLines = () => {
-		return lines;
-	}
-
-	getSections = () => {
-		return sections;
-	}
-
 	setSubwayStations = () => {
 		for (let station of stations) {
 			this.subwayDistanceMap.addVertex(station.name);
