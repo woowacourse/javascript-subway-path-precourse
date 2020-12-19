@@ -1,10 +1,15 @@
 import { lines } from "./data/line.js";
 import StationService from "./service/station.service.js";
+import SectionService from "./service/section.service.js";
+import Dijkstra from "./utils/Dijkstra.js";
+const dijkstra = new Dijkstra();
 
 export default class App {
   constructor() {
-    this.lines = lines;
+    this.sectionService = new SectionService();
     this.stationService = new StationService();
+
+    this.addClickEvent();
   }
 
   getDepartureStationInput() {
@@ -38,6 +43,28 @@ export default class App {
     if (!isDepartureStationExist || !isArrivalStationExist) {
       throw new Error("존재하지 않는 역입니다.");
     }
+  }
+
+  searchPath() {
+    try {
+      const departureStation = this.getDepartureStationInput();
+      const arrivalStation = this.getArrivalStationInput();
+      const searchType = this.getSearchTypeInput();
+      this.validateStationNameLength(departureStation, arrivalStation);
+      this.validateStationExist(departureStation, arrivalStation);
+
+      const paths = this.sectionService.findShortestPath(departureStation, arrivalStation);
+      // this.renderPathTable(paths);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+  addClickEvent() {
+    const button = document.getElementById("search-button");
+    button.addEventListener("click", () => {
+      this.searchPath();
+    });
   }
 }
 
