@@ -30,6 +30,7 @@ export const INPUT_LIMIT = {
 export const ERROR_MESSAGE = {
   SAME_DEPARTURE_TO_ARRIVAL: `출발역과 도착역이 같은 역은 입력할 수 없습니다.`,
   MIN_STATION_NAME_LENGTH: `역 이름은 최소 ${INPUT_LIMIT.MIN_STATION_NAME_LENGTH}이상이어야 합니다.`,
+  NOT_EXIST_STATION_NAME: `존재하지 않는 역이름입니다.`,
 };
 
 export const TABLE_HEADER = `

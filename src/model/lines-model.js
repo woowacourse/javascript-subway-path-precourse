@@ -16,4 +16,14 @@ export default class LinesModel {
       );
     });
   }
+  hasStationName(name) {
+    return this.lines.some((line) => {
+      return this.hasStationNameInLine(line, name);
+    });
+  }
+  hasStationNameInLine(line, name) {
+    return line.stationsOfLine.some((stationName) => {
+      return stationName === name;
+    });
+  }
 }

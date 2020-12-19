@@ -37,6 +37,7 @@ class NameInputController extends Controller {
       const arrival = this.getInputValueByID(ID.ARRIVAL_STATION_NAME_INPUT);
       try {
         this._verifyInputStationNames(departure, arrival);
+        this._verifyInputStationExist(departure, arrival);
       } catch (error) {
         alert(error);
         return;
@@ -55,5 +56,13 @@ class NameInputController extends Controller {
     ) {
       throw ERROR_MESSAGE.MIN_STATION_NAME_LENGTH;
     }
+  }
+  _verifyInputStationExist(departure, arrival) {
+    const hasDepartureName = this._models.linesModel.hasStationName(departure);
+    const hasArrivalName = this._models.linesModel.hasStationName(arrival);
+    if (hasDepartureName && hasArrivalName) {
+      return;
+    }
+    throw ERROR_MESSAGE.NOT_EXIST_STATION_NAME;
   }
 }
