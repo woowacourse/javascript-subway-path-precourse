@@ -48,10 +48,10 @@ export const isValidRoute = (departure, arrival) => {
     validateDuplicatedStationNames(departure, arrival);
     validateStationConnection(departure, arrival);
 
-    return true;    
+    return true;
   } catch (error) {
     alert(error.message);
 
     return false;
   }
-}
+};
