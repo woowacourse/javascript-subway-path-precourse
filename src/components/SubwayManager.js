@@ -1,7 +1,11 @@
 import ValidateSubwayManager from "./ValidateSubwayManager.js";
 import PrintSubwayManager from "./PrintSubwayManager.js";
 import { stations, lines } from "../@shared/data.js";
-import { hideElement, getCheckedSearchType } from "../@shared/domUtils.js";
+import {
+  hideElement,
+  getCheckedSearchType,
+  showElement,
+} from "../@shared/domUtils.js";
 
 class SubwayManager {
   constructor() {
@@ -65,6 +69,7 @@ class SubwayManager {
     const isValidUserState = this.validateSubwayManager.checkNameValidation();
 
     if (isValidUserState) {
+      showElement(this.$resultContainer);
       this.printSubwayManager.print();
     }
   };
