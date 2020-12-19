@@ -10,10 +10,12 @@ export const clearContainer = (containerArray) => {
   containerArray.map((container) => (container.innerHTML = ""));
 };
 
-export const insertRow = (table, type, element1, element2) => {
+export const insertRow = (table, type, element) => {
   if (type === "heading") {
-    table.innerHTML += `<tr><th>${element1}</th><th>${element2}</th></tr>`;
+    table.innerHTML += `<tr><th>${element[0]}</th><th>${element[1]}</th></tr>`;
   } else if (type === "data") {
-    table.innerHTML += `<tr><td>${element1}</td><td>${element2}</td></tr>`;
+    table.innerHTML += `<tr><td>${element[0]}</td><td>${element[1]}</td></tr>`;
+  } else if (type === "path") {
+    table.innerHTML += `<tr><td colspan="2">${element[0]}</td></tr>`;
   }
 };
