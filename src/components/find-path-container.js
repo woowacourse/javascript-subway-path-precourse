@@ -3,8 +3,9 @@ import {
   clearElement,
 } from "../utils/display/display-utils.js";
 
+const app = document.getElementById("app");
+
 export default function findPath() {
-  const app = document.getElementById("app");
   const subwayPathHTML = `
     <div id="find-path">
       출발역 <input id="departure-station-name-input" type="text" /> <br />
@@ -18,11 +19,17 @@ export default function findPath() {
 
   const searchButton = document.getElementById("search-button");
   searchButton.addEventListener("click", () => {
-    resultWrapper();
-    const result = document.getElementById("result");
-    clearElement(result);
-    resultPath(result);
+    newResult(); //min distance Path
   });
+}
+
+function newResult() {
+  resultWrapper();
+  const result = document.getElementById("result");
+  clearElement(result);
+  resultPath(result);
+  resultPathTable(result);
+  minDistancePath(result);
 }
 
 function resultWrapper() {
@@ -33,4 +40,20 @@ function resultWrapper() {
 function resultPath(parent) {
   const subwayPathTitleHTML = `<h2>📝 결과</h2>`;
   parent.append(makeStringToHTML(subwayPathTitleHTML).firstElementChild);
+}
+
+function resultPathTable(parent) {
+  const subwayPathTableHTML = `
+    <table border="1">
+      <thead>
+        <tr>
+          <td><b>총 거리</b></td>
+          <td><b>총 소요 시간</b></td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  `;
+  parent.append(makeStringToHTML(subwayPathTableHTML).firstElementChild);
 }
