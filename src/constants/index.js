@@ -11,7 +11,7 @@ export const WORDS = {
 };
 
 export const SYMBOL = {
-  ARROW_RIGHT: "➡",
+  ARROW_RIGHT: " ➡ ",
 };
 
 export const LINE = {

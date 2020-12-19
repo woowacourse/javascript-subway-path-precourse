@@ -24,3 +24,22 @@ export const createTable = (names) => {
 
   return table;
 };
+
+export const createTableRow = (tdArray) => {
+  const tr = document.createElement("tr");
+
+  tdArray.forEach((td) => {
+    tr.appendChild(td);
+  });
+
+  return tr;
+};
+
+export const createTableData = (text, colspan = "") => {
+  const td = document.createElement("td");
+
+  td.innerText = text;
+  td.setAttribute("colspan", colspan);
+
+  return td;
+};

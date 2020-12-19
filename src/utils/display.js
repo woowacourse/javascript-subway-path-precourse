@@ -11,3 +11,9 @@ export const clearChilds = (targetId = "result") => {
 
   target.innerHTML = "";
 };
+
+export const appendTbody = (tr) => {
+  const tbody = document.querySelector("tbody");
+
+  tbody.appendChild(tr);
+};

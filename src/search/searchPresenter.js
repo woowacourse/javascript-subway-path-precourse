@@ -1,6 +1,11 @@
-import { WORDS } from "../constants/index.js";
-import { appendChilds, clearChilds } from "../utils/display.js";
-import { createHeader, createTable } from "../utils/HTMLElement.js";
+import { SYMBOL, WORDS } from "../constants/index.js";
+import { appendChilds, appendTbody, clearChilds } from "../utils/display.js";
+import {
+  createHeader,
+  createTable,
+  createTableData,
+  createTableRow,
+} from "../utils/HTMLElement.js";
 
 // 초기화면 구성
 const choiceTypeWord = (searchType) => {
@@ -26,12 +31,27 @@ const displayInitialResult = (searchType) => {
   return true;
 };
 
-const searchPresenter = (searchType) => {
+// 경로 표시
+const displayPath = (path) => {
+  const removeLastStringPath = path.map((station) => {
+    const editedStation = station.slice(0, -1);
+
+    return editedStation;
+  });
+  const pathInfo = removeLastStringPath.join(SYMBOL.ARROW_RIGHT);
+
+  const td = createTableData(pathInfo, 2);
+  const tr = createTableRow([td]);
+
+  appendTbody(tr);
+};
+
+const searchPresenter = (searchType, path) => {
   const isInitialDisplayed = displayInitialResult(searchType);
 
-  // if(isInitialDisplayed){
-
-  // }
+  if (isInitialDisplayed) {
+    displayPath(path);
+  }
 };
 
 export default searchPresenter;

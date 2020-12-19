@@ -26,6 +26,6 @@
 
 - [x] 초기 화면 - `displayInitialResult`
 - [ ] 경로 조회 결과 표시
-  - [ ] 경로 표시
+  - [x] 경로 표시 - `displayPath`
   - [ ] 최단거리 표시
   - [ ] 최소시간 표시

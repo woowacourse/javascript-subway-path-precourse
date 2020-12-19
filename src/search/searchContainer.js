@@ -51,7 +51,7 @@ const searchContainer = (lineData) => {
     arrivalStation
   );
 
-  searchPresenter(searchType);
+  searchPresenter(searchType, path);
 };
 
 export default searchContainer;
