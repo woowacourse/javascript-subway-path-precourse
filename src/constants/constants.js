@@ -1,5 +1,5 @@
-export const CONSTANT = '';
+export const MIN_STATION_NAME_LENGTH = 2;
 
 export default {
-  CONSTANT,
+  MIN_STATION_NAME_LENGTH,
 };
