@@ -55,4 +55,17 @@ export default class subwayPathModel {
       this.dijkstraForMinimumTimePath.addEdge(startStationName, endStationName, time);
     });
   }
+
+  findShortestPath(startStation, endStation) {
+    console.log(this.dijkstraForShortestPath.findShortestPath(startStation, endStation));
+  }
+
+  findMinimumTimePath(startStation, endStation) {
+    console.log(this.dijkstraForMinimumTimePath.findShortestPath(startStation, endStation));
+  }
+
+  findsAllKindOfPath(startStation, endStation) {
+    this.findShortestPath(startStation, endStation);
+    this.findMinimumTimePath(startStation, endStation);
+  }
 }
