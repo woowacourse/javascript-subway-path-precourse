@@ -59,45 +59,45 @@ export const LineSinbundang = [
   },
 ];
 
-const time = [
+export const stationTime = [
   {
     departureStation: '교대',
     endStation: '강남',
-    distance: 3,
+    time: 3,
   },
   {
     departureStation: '강남',
     endStation: '역삼',
-    distance: 3,
+    time: 3,
   },
   {
     departureStation: '교대',
     endStation: '남부터미널',
-    distance: 2,
+    time: 2,
   },
   {
     departureStation: '남부터미널',
     endStation: '양재',
-    distance: 5,
+    time: 5,
   },
   {
     departureStation: '양재',
     endStation: '매봉',
-    distance: 1,
+    time: 1,
   },
   {
     departureStation: '강남',
     endStation: '양재',
-    distance: 8,
+    time: 8,
   },
   {
     departureStation: '양재',
     endStation: '양재시민의숲',
-    distance: 3,
+    time: 3,
   },
 ];
 
-const distance = [
+export const stationDistance = [
   {
     departureStation: '교대',
     endStation: '강남',

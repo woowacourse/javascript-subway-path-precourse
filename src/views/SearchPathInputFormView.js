@@ -1,5 +1,5 @@
 import View from './View.js';
-import { SEARCH_PATH } from '../utils/constants.js';
+import { SEARCH_PATH_TYPE } from '../utils/constants.js';
 
 const tag = `[StationInputForm]`;
 export default class SearchPathInputFormView extends View {
@@ -17,8 +17,10 @@ export default class SearchPathInputFormView extends View {
 
     this.$departureStationInput = this.$element.querySelector('#departure-station-name-input');
     this.$ArrivalStationInput = this.$element.querySelector('#arrival-station-name-input');
-    this.$pathSelector = document.getElementsByName('search-type');
-    this.bindEvent();
+    this.$pathSelectorContainer = this.$element.querySelector('.path-selectors');
+    // this.$pathSelector = document.getElementsByName('search-type');
+    this.bindInputEvent();
+    this.bindClickEvent();
     return this;
   }
 
@@ -36,8 +38,8 @@ export default class SearchPathInputFormView extends View {
   getSelectSearchTypeBtnHTML() {
     console.log(`${tag} getSelectSearchTypeBtnHTML`);
     return `<div class="path-selectors">
-        <input type="radio" id=${SEARCH_PATH.MIN_DISTANCE} name="search-type" checked> <label for=${SEARCH_PATH.MIN_DISTANCE}>최단거리</label>
-        <input type="radio" id=${SEARCH_PATH.MIN_TIME} name="search-type"> <label for=${SEARCH_PATH.MIN_TIME}>최소시간</label>
+        <input type="radio" id=${SEARCH_PATH_TYPE.MIN_DISTANCE} name="search-type" checked> <label id="min_distance_selector_label" for=${SEARCH_PATH_TYPE.MIN_DISTANCE}>최단거리</label>
+        <input type="radio" id=${SEARCH_PATH_TYPE.MIN_TIME} name="search-type"> <label for=${SEARCH_PATH_TYPE.MIN_TIME}>최소시간</label>
       </div>`;
   }
 
@@ -51,8 +53,8 @@ export default class SearchPathInputFormView extends View {
     this.$ArrivalStationInput.value = '';
   }
 
-  bindEvent() {
-    console.log(`${tag} bindEvent`);
+  bindInputEvent() {
+    console.log(`${tag} bindInputEvent`);
     this.$element
       .querySelector('#search-button')
       .addEventListener('click', () => this.onSubmitSearchPathHandler());
@@ -62,11 +64,21 @@ export default class SearchPathInputFormView extends View {
     const searchInputValue = {
       departureStationName: this.$departureStationInput.value,
       arrivalStationName: this.$ArrivalStationInput.value,
-      searchType: this.$pathSelector[0].checked
-        ? this.$pathSelector[0].id
-        : this.$pathSelector[1].id,
     };
 
     this.emit('submitSearchInputValue', searchInputValue);
+  }
+
+  bindClickEvent() {
+    console.log(`${tag} bindClickEvent`);
+    this.$pathSelectorContainer.addEventListener('click', (e) =>
+      this.onChangeSearchPathHandler(e.target.id)
+    );
+  }
+
+  onChangeSearchPathHandler(targetId) {
+    if (targetId === SEARCH_PATH_TYPE.MIN_DISTANCE || targetId === SEARCH_PATH_TYPE.MIN_TIME) {
+      this.emit('onChangeSelector', targetId);
+    }
   }
 }

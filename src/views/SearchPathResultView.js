@@ -9,13 +9,19 @@ export default class SearchPathInputFormView extends View {
     return this;
   }
 
-  renderSearchPathResult(searchType) {
+  renderSearchPathResult(path, totalDistance, totalTime, searchType) {
+    console.log(path, totalDistance, totalTime, searchType);
     console.log(`${tag} renderSearchInputForm`);
-    this.$element.innerHTML = this.getSearchPathResultHTML(searchType);
+    this.$element.innerHTML = this.getSearchPathResultHTML(
+      path,
+      totalDistance,
+      totalTime,
+      searchType
+    );
     return this;
   }
 
-  getSearchPathResultHTML(searchType) {
+  getSearchPathResultHTML(path, totalDistance, totalTime, searchType) {
     return `<h2>📝 결과</h2>
       <table border="1">
         <caption id="path-result-title">${searchType}</caption>
@@ -27,14 +33,18 @@ export default class SearchPathInputFormView extends View {
         </thead>
         <tbody class="station_manager_tbody">
           <tr>
-            <td>0${UNIT.DISTANCE}</td>
-            <td>0${UNIT.TIME}</td>
+            <td>${totalDistance}${UNIT.DISTANCE}</td>
+            <td>${totalTime}${UNIT.TIME}</td>
           </tr>
           <tr>
-            <td colspan="2">최종거리를 입력하는 곳입니다.</td>
+            <td colspan="2">${this.getPathHTML(path)}</td>
           </tr>
         </tbody>
       </table>
     </div>`;
+  }
+
+  getPathHTML(path) {
+    return `${path.join('👉🏻')}`;
   }
 }
