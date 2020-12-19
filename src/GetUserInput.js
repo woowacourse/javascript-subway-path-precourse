@@ -1,4 +1,6 @@
 import { stations } from './data/defaulData.js'
+import { DepartureError, ArrivalError, NoStationError, SameStationError } from './data/Error.js'
+
 
 export default class GetUserInput {
   constructor() {
@@ -6,6 +8,19 @@ export default class GetUserInput {
     this.arrival = document.getElementById('arrival-station-name-input').value;
     this.option = document.getElementsByName('search-type');
     this.minNameLength = 2;
+  }
+
+  isValid() {
+    if (!(this.isValidLength(this.departure) && this.isInStations(this.departure))) {
+      return DepartureError;
+    }
+    if (!(this.isValidLength(this.arrival) && this.isInStations(this.arrival))) {
+      return ArrivalError;
+    }
+    if (this.isSameStation(this.departure, this.arrival)) {
+      return SameStationError;
+    }
+    return 1;
   }
 
   isValidLength(name) {
