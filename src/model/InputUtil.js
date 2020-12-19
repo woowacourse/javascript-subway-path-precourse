@@ -10,7 +10,7 @@ export const checkAndReturnInput = () => {
     checkInput(endStation);
     checkStartEndSame(startStation, endStation);
 
-    return [startStation, endStation, getSeletion()];
+    return [startStation, endStation, selection];
 }
 
 

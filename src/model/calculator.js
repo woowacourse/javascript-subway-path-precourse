@@ -1,5 +1,5 @@
 import { stationNodes } from "../stationNodes.js"
-
+import { text } from "../text.js"
 export const calculateDistance = (resultPath) => {
     const checkLength = resultPath.length - 1;
     let totalDistance = 0;
@@ -27,12 +27,12 @@ const addDistance = (stationNodes, resultPath, index, totalDistance) => {
     for (const stationNode of stationNodes) {
         if (stationNode.startStation === resultPath[index] &&
             stationNode.endStation === resultPath[index + 1]) {
-            return totalDistance += stationNode.selection["distance"];
+            return totalDistance += stationNode.selection[text.DISTANCE];
         }
 
         if (stationNode.startStation === resultPath[index + 1] &&
             stationNode.endStation === resultPath[index]) {
-            return totalDistance += stationNode.selection["distance"];
+            return totalDistance += stationNode.selection[text.DISTANCE];
         }
     }
 }
@@ -41,12 +41,12 @@ const addtime = (stationNodes, resultPath, index, totalTime) => {
     for (const stationNode of stationNodes) {
         if (stationNode.startStation === resultPath[index] &&
             stationNode.endStation === resultPath[index + 1]) {
-            return totalTime += stationNode.selection["time"];
+            return totalTime += stationNode.selection[text.TIME];
         }
 
         if (stationNode.startStation === resultPath[index + 1] &&
             stationNode.endStation === resultPath[index]) {
-            return totalTime += stationNode.selection["time"];
+            return totalTime += stationNode.selection[text.TIME];
         }
     }
 }

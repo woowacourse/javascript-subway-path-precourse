@@ -1,4 +1,4 @@
-
+import { text } from "../text.js"
 
 export const makeResultHTML = (distance, time, pathResult, selection) => {
     let resultHTML = document.getElementById("result-div");
@@ -32,5 +32,5 @@ const makeTable = (distance, time, pathResult) => {
 }
 
 const addArrowTopathResult = (pathResult) => {
-    return pathResult.join("➡");
+    return pathResult.join(text.ARROW);
 }

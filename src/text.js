@@ -1,6 +1,12 @@
 export const text = {
     EMPTY: "",
-    TWO: 2
+    TWO: 2,
+    START_STATION: 0,
+    END_STATION: 1,
+    SELECTION: 2,
+    ARROW: "➡",
+    DISTANCE: "distance",
+    TIME: "time"
 }
 
 export const alertText = {
