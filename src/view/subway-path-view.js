@@ -54,10 +54,10 @@ class ResultPrintView extends View {
     }
     this.setTableRow();
   }
-
   setTableRow() {
     this.setContainerByID(ID.RESULT_TABLE, this._makeTableRow());
   }
+
   _makeTableRow() {
     return `
     ${TABLE_HEADER}

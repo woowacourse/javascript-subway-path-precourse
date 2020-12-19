@@ -45,7 +45,6 @@ class NameInputController extends Controller {
       this.updateResultPrintView(departure, arrival);
     });
   }
-
   _verifyInputStationNames(departure, arrival) {
     if (departure === arrival) {
       throw ERROR_MESSAGE.SAME_DEPARTURE_TO_ARRIVAL;

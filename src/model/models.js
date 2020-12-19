@@ -47,10 +47,7 @@ export default class Models {
     for (let i = 0; i < route.length - 1; i++) {
       const departure = route[i];
       const arrival = route[i + 1];
-      const result = this.durationDijkstra.findShortestPath(
-        departure,
-        arrival
-      );
+      const result = this.durationDijkstra.findShortestPath(departure, arrival);
       duration += result.costs[arrival];
       console.log(result);
     }
