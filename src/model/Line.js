@@ -8,9 +8,22 @@ export class Line {
 
 export const LineModel = {
   lines: [],
+  allStations: [],
 
   list() {
     return this.lines;
+  },
+
+  // listAllStations() {
+  //   return this.allStations;
+  // },
+
+  listAllStationsSet() {
+    const allStations = this.list()
+      .map(({ stations }) => stations)
+      .flat();
+
+    return new Set(allStations);
   },
 
   add(object) {

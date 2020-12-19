@@ -1,7 +1,12 @@
+import { LineModel } from "../model/Line.js";
 import { Constant, ErrorMessage } from "./constant.js";
 
 export const StationValidation = {
   isValidDepartureStation(station) {
+    if (!this.isThereStation(station)) {
+      return;
+    }
+
     return this.hasValidName(station);
   },
 
@@ -18,7 +23,7 @@ export const StationValidation = {
       return;
     }
 
-    return;
+    return true;
   },
 
   hasOnlyKoreanAlphabet(name) {
@@ -27,5 +32,15 @@ export const StationValidation = {
 
   hasMinimumLength(name) {
     return name.length >= Constant.MINIMUM_NAME_LENGTH;
+  },
+
+  isThereStation(name) {
+    if (!LineModel.listAllStationsSet().has(name)) {
+      alert(ErrorMessage.STATION_IS_NOT_THERE);
+
+      return;
+    }
+
+    return true;
   },
 };

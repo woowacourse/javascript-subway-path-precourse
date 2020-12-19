@@ -28,6 +28,16 @@ export const SubwayPathController = {
         StationName.YANGJAE_CITIZENS_FOREST,
       ])
     );
+
+    // LineModel.allStations.push(
+    //   StationName.SEOUL_NATIONAL_UNIV_OF_EDUCATION,
+    //   StationName.GANGNAM,
+    //   StationName.YEOKSAM,
+    //   StationName.NAMBU_BUS_TERMINAL,
+    //   StationName.YANGJAE,
+    //   StationName.YANGJAE_CITIZENS_FOREST,
+    //   StationName.MAEBONG
+    // );
   },
 
   onClickSearchButton() {

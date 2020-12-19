@@ -9,6 +9,7 @@ const app = () => {
 const subwayPathManager = () => {
   SubwayPathController.init();
   // console.log(LineModel.list());
+  // console.log(LineModel.listAllStationsSet());
 
   document
     .querySelector(Constant.SEARCH_BUTTON_ID)
