@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>지하철 길찾기</title>
+    <link rel="stylesheet" href="./src/style.css">
+    <title>🚇지하철 길찾기</title>
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <h1>🚇지하철 길찾기</h4>
+    <h3>출발역</h3>
+    <input type="text" id="departure-station-name-input"/>
+    <p></p>
+    <h3>도착역</h3>
+    <input type="text" id="arrival-station-name-input"/>
+    <p></p>
+    <input type="radio" name="search-type" checked="checked">최단거리</input>
+    <input type="radio" name="search-type">최소시간</input>
+    <p></p>
+    <button id="search-button">길 찾기</button>
+    <h1>📝결과</h4>
+</div>
+<script type="module" src="src/index.js"></script>
 </body>
 </html>
