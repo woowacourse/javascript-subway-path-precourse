@@ -1,5 +1,5 @@
 import { PathInput } from './components/index.js';
-import { Dijkstra } from './utils/index.js';
+import { Dijkstra, isConnectedStation } from './utils/index.js';
 import { stations, lines } from './data.js';
 
 export default function SubwayPath() {
@@ -19,7 +19,18 @@ export default function SubwayPath() {
       this.addAllTimeToEdge(dijkstra);
     }
     const path = dijkstra.findShortestPath(departure, arrival);
-    console.log(path);
+    if (this.isValidRoute(path)) {
+      console.log(path);
+    }
+  };
+
+  this.isValidRoute = path => {
+    if (!isConnectedStation(path)) {
+      alert('출발역과 도착역이 연결되지 않아 경로를 조회할 수 없습니다.');
+      return false;
+    }
+
+    return true;
   };
 
   this.addAllStationToVertex = (stations, dijkstra) => {

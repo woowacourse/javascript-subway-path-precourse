@@ -1,4 +1,7 @@
-export const isValidInput = (departureStationName, arrivalStationName) => {
+export const isValidInputLength = (
+  departureStationName,
+  arrivalStationName
+) => {
   return departureStationName.length >= 2 && arrivalStationName.length >= 2;
 };
 
