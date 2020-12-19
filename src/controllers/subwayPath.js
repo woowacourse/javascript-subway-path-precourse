@@ -13,6 +13,16 @@ export const getStation = (stationName) => {
   return stationNameInputValue;
 };
 
+const hasValidName = (name, stations) => {
+  if (!isValidNameLength(name)) {
+    return null;
+  } else if (!isNameInStations(stations, name)) {
+    return null;
+  } else {
+    return name;
+  }
+};
+
 export const getShortestSelect = () => {
   const selectors = document.getElementsByName(`${NAME.SEARCH_TYPE}`);
   let selected = '';
@@ -23,16 +33,6 @@ export const getShortestSelect = () => {
     }
   });
   return selected;
-};
-
-export const hasValidName = (name, stations) => {
-  if (!isValidNameLength(name)) {
-    return null;
-  } else if (!isNameInStations(stations, name)) {
-    return null;
-  } else {
-    return name;
-  }
 };
 
 export const hasValidInput = (departureStation, arrivalStation) => {

@@ -1,5 +1,4 @@
-import Dijkstra from '../utils/Dijkstra.js';
-import { stationsDistance, stationsTime } from './stationsInitialData.js';
+import { stationsDistance } from './stationsInitialData.js';
 
 export default class Stations {
   constructor() {
@@ -9,11 +8,12 @@ export default class Stations {
   }
 
   getStations() {
-    for (let i = 0; i < stationsDistance.length; i++) {
-      this.stations.push(stationsDistance[i].start);
-      this.stations.push(stationsDistance[i].end);
-    }
+    stationsDistance.forEach((station) => {
+      this.stations.push(station.start);
+      this.stations.push(station.end);
+    });
 
+    // 중복제거
     this.stations = [...new Set(this.stations)];
   }
 }

@@ -15,3 +15,7 @@ export const ALERT = {
   VALIDNAME: '다시 입력해주세요.',
   DUPLICATEDNAME: '중복됩니다. 다시 입력해주세요.',
 };
+
+export const NUMBER = {
+  VALID_STATION_NAME_LENGTH: 2,
+};
