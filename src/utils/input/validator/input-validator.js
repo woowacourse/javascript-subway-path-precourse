@@ -1,4 +1,4 @@
-import { lines } from "../data.js";
+import { lines } from "../../../data.js";
 
 function isValidStation(input) {
   const allStationArray = [...allStations()];
@@ -23,10 +23,12 @@ function allStations() {
   return notDuplicatedStations;
 }
 
-export default function validateInput(input) {
+export function validateInput(input) {
   const MINIMUM_INPUT_LENGTH = 2;
   const noSpaceInput = input.trim();
+
   let isValid = false;
+
   if (noSpaceInput.length < MINIMUM_INPUT_LENGTH) {
     alert("2글자 이상의 역 이름을 입력하셔야 합니다!");
   } else if (isValidStation(noSpaceInput)) {

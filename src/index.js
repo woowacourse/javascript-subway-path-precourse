@@ -1,7 +1,4 @@
-import findPath from "./components/find-path.js";
-import { makeStringToHTML } from "./utils/display/display-utils.js";
-
-const app = document.getElementById("app");
+import findPath from "./components/find-path-input-container.js";
 
 function subwayPath() {
   findPath();
