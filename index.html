@@ -5,6 +5,43 @@
     <title>지하철 길찾기</title>
 </head>
 <body>
-<div id="app"></div>
+    <div id="app">
+        <div id="menu">
+            <button id="station-manage">역 관리</button>
+            <button id="line-manage">노선 관리</button>
+            <button id="section-manage">구간 관리</button>
+        </div>
+        <div id="station-manager-container" style="display: none;">
+            <br />
+            <div>역 이름</div>
+            <input id="station-name-input" placeholder="역 이름을 입력해주세요." />
+            <button id="station-name-button">역 추가</button>
+            <h2>🚉 지하철 역 목록</h2>
+            <table id="station-name-table"></table>
+        </div>
+        <div id="line-manager-container" style="display: none;">
+            <br />
+            <div>노선 이름</div>
+            <input id="line-name-input" placeholder="노선 이름을 입력해주세요." />
+            <br />
+            <br />
+            상행 종점
+            <select id="line-start-name-selector"></select
+            ><br />
+            하행 종점
+            <select id="line-start-end-selector"></select>
+            <br />
+            <br />
+            <button id="line-name-button">노선 추가</button>
+            <h2>🚉 지하철 노선 목록</h2>
+            <table id="line-name-table"></table>
+        </div>
+        <div id="section-manager-container" style="display: none;">
+            <h3>구간을 수정할 노선을 선택해주세요.</h3>
+            <div id="line-menu-container"></div>
+            <div id="section-manage-container"></div>
+        </div>
+    </div>
+    <script type="module" src="src/index.js"></script>
 </body>
 </html>
