@@ -1,3 +1,5 @@
+import Result from './Result.js';
+
 export default class App {
   constructor(target) {
     this.target = target;
@@ -5,6 +7,10 @@ export default class App {
     this.createStationInput(target);
     this.createRadioButton(target);
     this.createSearchButton(target);
+
+    this.resultContainer = document.createElement('div');
+    this.resultContainer.className = 'result';
+    target.appendChild(this.resultContainer);
   }
 
   createHeader(target) {
@@ -48,7 +54,7 @@ export default class App {
         <input
           type="radio"
           name="search-type"
-          value="shortest-distance"
+          value="최단거리"
           checked
         /> 최단거리
       </label>
@@ -56,16 +62,30 @@ export default class App {
         <input 
           type="radio"
           name="search-type"
-          value="minimum-time"
+          value="최소시간"
         /> 최소시간
       </label>
     `;
   }
 
   createSearchButton(target) {
+    const { renderResult } = this;
     const container = document.createElement('div');
     target.appendChild(container);
 
     container.innerHTML = `<button id="search-button">길찾기</button>`;
+
+    const addButton = document.querySelector('#search-button');
+    addButton.addEventListener('click', renderResult.bind(this));
+  }
+
+
+  renderResult() {
+    const searchType = document
+      .querySelector('input[name="search-type"]:checked').value;
+    this.resultContainer.innerHTML = ``;
+    this.result = new Result(this.resultContainer, {
+      searchType,
+    });
   }
 }
