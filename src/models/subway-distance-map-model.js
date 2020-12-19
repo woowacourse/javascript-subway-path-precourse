@@ -43,20 +43,20 @@ export default class SubwayDistanceMap {
 	}
 
 	getShortestTotalDistance = shortestDistancePath => {
-		let totalStationDistance = 0;
+		let totalSectionDistance = 0;
 
 		for (let stationIndex = 1; stationIndex < shortestDistancePath.length; stationIndex++) {
 			let startStation = shortestDistancePath[stationIndex - 1];
 			let endStation = shortestDistancePath[stationIndex];
-			let stationDistance = this.getStationDistance(sections, startStation, endStation);
+			let stationDistance = this.getSectionDistance(sections, startStation, endStation);
 
-			totalStationDistance += stationDistance;
+			totalSectionDistance += stationDistance;
 		}
 
-		return totalStationDistance;
+		return totalSectionDistance;
 	}
 
-	getStationDistance = (sections, startStation, endStation) => {
+	getSectionDistance = (sections, startStation, endStation) => {
 		for (let section of sections) {
 			if (isIncludesBothStations(section.connectedStations, startStation, endStation)) {
 				return section.distance;
