@@ -3,6 +3,6 @@ export class StationNode {
         this.startStation = startStation;
         this.endStation = endStation;
         this.node = [startStation, endStation];
-        this.timeAndDistance = timeAndDistance;
+        this.selection = timeAndDistance;
     }
 }
