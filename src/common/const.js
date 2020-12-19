@@ -23,6 +23,10 @@ export const CSS = {
   TABLE_COLSPAN: 2,
 };
 
+export const TABLE_HEADER = `
+<th>총 거리</th>
+<th>총 소요시간</th>`;
+
 export const TEMPLATE = {
   STATION_NAME_INPUT: `
     <p>
@@ -40,16 +44,8 @@ export const TEMPLATE = {
   RESULT_PRINT: `
   <h2>📝 결과 </h2>
   <h3> 최단 거리 </h3>
-  <table id="RESULT_TABLE" border="1">
-    <th>총 거리</th>
-    <th>총 소요시간</th>
-    <tr>
-      <td>거리</td>
-      <td>시간</td>
-    </tr>
-    <tr>
-      <td colspan ="2">경로가 나옵니다</td>
-    </tr>
+  <table id="${ID.RESULT_TABLE}" border="${CSS.TABLE_BORDER}">
+    
   </table>
   `,
 };

@@ -1,4 +1,4 @@
-import { ID, TEMPLATE } from "../common/const.js";
+import { ID, TEMPLATE, TABLE_HEADER, CSS } from "../common/const.js";
 import { makeElement } from "../utils/html-maker.js";
 import View from "./view.js";
 
@@ -47,5 +47,24 @@ class ResultPrintView extends View {
   }
   setInitialView() {
     this.setContainerByID(this._containerID, TEMPLATE.RESULT_PRINT);
+    this.setTableRow();
+  }
+
+  setTableRow() {
+    this.setContainerByID(ID.RESULT_TABLE, this._makeTableRow());
+  }
+  _makeTableRow() {
+    return `
+    ${TABLE_HEADER}
+    <tr>
+      <td>${this.dijkstraResult.distance}km</td>
+      <td>${this.dijkstraResult.duration}분</td>
+    </tr>
+    <tr>
+      <td colspan ="${CSS.TABLE_COLSPAN}">${this.dijkstraResult.route.join(
+      "->"
+    )}</td>
+    </tr>
+    `;
   }
 }
