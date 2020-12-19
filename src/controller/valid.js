@@ -5,7 +5,7 @@ export const isInputValid = ($departureName, $arrivalName, stations) => {
   if (!isIncluded($arrivalName, stations)) {
     return false;
   }
-  if (!isBothDifferent($arrivalName, $arrivalName)) {
+  if (!isBothDifferent($departureName, $arrivalName)) {
     return false;
   }
 
