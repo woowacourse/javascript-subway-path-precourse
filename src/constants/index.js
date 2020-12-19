@@ -9,3 +9,8 @@ export const NAME = {
   SHORTESTDISTANCE: '최단거리',
   SHORTESTTIME: '최소시간',
 };
+
+export const ALERT = {
+  VALIDNAME: '다시 입력해주세요.',
+  DUPLICATEDNAME: '중복됩니다. 다시 입력해주세요.',
+};

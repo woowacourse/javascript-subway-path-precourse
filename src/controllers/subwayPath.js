@@ -1,11 +1,15 @@
 import Stations from '../models/stations.js';
-import { ID, NAME } from '../constants/index.js';
+import { ID, NAME, ALERT } from '../constants/index.js';
+import { isValidNameLength, isNameInStations } from '../utils/userException.js';
 
 export default class SubwayPath {
   constructor() {
     this.departureStation;
     this.arrivalStation;
     this.shortestSelect;
+
+    const stations = new Stations();
+    this.stations = stations.stations;
 
     this.search();
   }
@@ -14,22 +18,18 @@ export default class SubwayPath {
     const searchButton = document.querySelector(`#${ID.SEARCH_BUTTON}`);
 
     searchButton.addEventListener('click', () => {
-      this.departureStation = this.getDepartureStation();
-      this.arrivalStation = this.getDepartureStation();
+      this.departureStation = this.getStation(ID.DEPARTURE_STATION_NAME_INPUT);
+      this.arrivalStation = this.getStation(ID.ARRIVAL_STATION_NAME_INPUT);
+      this.hasValidInput();
       this.shortestSelect = this.getShortestSelect();
     });
   }
 
-  getDepartureStation() {
-    const departureStation = document.querySelector(`#${ID.DEPARTURE_STATION_NAME_INPUT}`);
+  getStation(stationName) {
+    const stationNameInput = document.querySelector(`#${stationName}`);
 
-    return departureStation.value;
-  }
-
-  getArrivalStation() {
-    const arrivalStation = document.querySelector(`#${ID.ARRIVAL_STATION_NAME_INPUT}`);
-
-    return arrivalStation.value;
+    const stationNameInputValue = this.hasValidName(stationNameInput.value);
+    return stationNameInputValue;
   }
 
   getShortestSelect() {
@@ -40,5 +40,23 @@ export default class SubwayPath {
         return selector.defaultValue;
       }
     });
+  }
+
+  hasValidName(name) {
+    if (!isValidNameLength(name)) {
+      return null;
+    } else if (!isNameInStations(this.stations, name)) {
+      return null;
+    } else {
+      return name;
+    }
+  }
+
+  hasValidInput() {
+    if (this.departureStation === null || this.arrivalStation === null) {
+      alert(ALERT.VALIDNAME);
+    } else if (this.departureStation === this.arrivalStation) {
+      alert(ALERT.DUPLICATEDNAME);
+    }
   }
 }
