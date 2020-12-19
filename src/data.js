@@ -10,7 +10,9 @@ export const lineTwo = [
         time : 3
     },
     {
-        station : '역삼'
+        station : '역삼',
+        distance : 0,
+        time : 0
     }
 ]
 
@@ -31,7 +33,9 @@ export const lineThree = [
         time : 1 
     },
     {
-        station : '매봉'
+        station : '매봉',
+        distance : 0,
+        time : 0
     }
 ]
 
@@ -47,6 +51,8 @@ export const lineBoondang = [
         time : 3
     },
     {
-        station : '양재시민의숲'
+        station : '양재시민의숲',
+        distance : 0,
+        time : 0
     }
 ]
