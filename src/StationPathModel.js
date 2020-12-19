@@ -66,4 +66,20 @@ export default class StationPathModel {
     }
     return time;
   }
+
+  getDistance(line, path) {
+    const sections = this.findSections(line);
+    let distance = 0;
+    for (let i = 0; i < path[0].length - 1; i++) {
+      const start = path[0][i];
+      const end = path[0][i + 1]
+      sections.forEach((section) => {
+        if ((section.start === start && section.end === end)
+            || (section.start === end && section.end === start)) {
+              distance += section.distance;
+            }
+      })
+    }
+    return distance;
+  } 
 }
