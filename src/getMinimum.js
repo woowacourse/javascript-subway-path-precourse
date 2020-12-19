@@ -1,7 +1,7 @@
 import Dijkstra from "./utils/Dijkstra.js";
 import {lines} from './data.js'; 
 
-export function minPath(departure, arrival, type) {
+function minPath(departure, arrival, type) {
     const dijkstra = new Dijkstra();
     importDataDijkstra(dijkstra, type);
     const result = dijkstra.findShortestPath(departure, arrival);
@@ -15,4 +15,9 @@ function importDataDijkstra(dijkstra, type) {
         }
     }
     return dijkstra;
+}
+
+export function createResultPathMessage(departure, arrival, type) {
+    const resultPath = minPath(departure, arrival, type);
+    return resultPath.join('->');
 }
