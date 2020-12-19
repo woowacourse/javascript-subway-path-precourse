@@ -4,7 +4,6 @@ export default class LinesModel {
   constructor(initialInput) {
     this.lines = [];
     this.parseInitialInput(initialInput);
-    console.log(this.lines);
   }
   parseInitialInput(lines) {
     lines.forEach((line) => {

@@ -1,5 +1,3 @@
-import { makeElement } from "../utils/html-maker.js";
-
 export default class View {
   constructor(containerID) {
     this._containerID = containerID;

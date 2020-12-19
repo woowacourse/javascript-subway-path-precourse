@@ -17,12 +17,6 @@ export const initialLineInputs = [
     distanceWeight: [2, 10],
     durationWeight: [8, 3],
   }),
-  makeLine({
-    lineName: "세진선",
-    stationsOfLine: ["세진1", "세진2", "세진3"],
-    distanceWeight: [2, 10],
-    durationWeight: [8, 3],
-  }),
 ];
 
 function makeLine({

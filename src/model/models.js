@@ -51,7 +51,6 @@ export default class Models {
       const arrival = route[i + 1];
       const result = this.durationDijkstra.findShortestPath(departure, arrival);
       duration += result.costs[arrival];
-      console.log(result);
     }
     return duration;
   }
@@ -62,7 +61,6 @@ export default class Models {
       const arrival = route[i + 1];
       const result = this.distDijkstra.findShortestPath(departure, arrival);
       distance += result.costs[arrival];
-      console.log(result);
     }
     return distance;
   }
