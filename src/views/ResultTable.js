@@ -38,10 +38,4 @@ export default class ResultTable extends View {
   resultListHTML(result) {
     return `${result.join("▶︎")}`;
   }
-
-  //   clear() {
-  //     while (this._app.children.length > 2) {
-  //       this._app.children[this._app.children.length - 1].remove();
-  //     }
-  //   }
 }

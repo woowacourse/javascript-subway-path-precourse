@@ -11,6 +11,7 @@ import ResultTable from "../views/ResultTable.js";
 export default class MainController {
   constructor() {
     this.tag = "[MainController]";
+    this._app = document.querySelector("#app");
     this.FormView = new FormView();
     this.DepartureStationView = new DepartureStationView();
     this.ArrivalStationView = new ArrivalStationView();
@@ -44,6 +45,11 @@ export default class MainController {
 
     this.ResultTable.setup(document.querySelector("#app"));
   }
+  clear() {
+    while (this._app.children.length > 2) {
+      this._app.children[this._app.children.length - 1].remove();
+    }
+  }
 
   onSubmit(e) {
     console.log(this.tag, "onSubmit", e);
@@ -62,7 +68,7 @@ export default class MainController {
       arrivalStation,
       this.radioOption
     );
-
+    this.clear();
     this.ResultTable.render(result, this.radioOptionText(this.radioOption));
   }
 
