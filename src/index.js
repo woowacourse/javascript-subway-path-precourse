@@ -1,10 +1,10 @@
-import getStationNames from "./get-station-names.js";
-import getSubwayDirection from "./get-subway-direction.js";
+import processStationNames from "./process-station-names.js";
+import processSubwayDirection from "./process-subway-direction.js";
 
 export default class Index {
     constructor() {
-        this.getStationNames = new getStationNames();
-        this.getSubwayDirection = new getSubwayDirection();
+        this.processStationNames = new processStationNames();
+        this.processSubwayDirection = new processSubwayDirection();
     }
 }
 
