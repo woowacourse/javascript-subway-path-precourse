@@ -18,7 +18,6 @@ export const isExistingStation = (departureStation, arrivalStation) => {
   alert("존재하지 않는 역입니다.");
   return false;
 };
-export const isExistingRoute = () => {};
 export const getOneDistanceAndTime = (startStation, endStation) => {
   for (let i in lineInfo) {
     const line = lineInfo[i];
@@ -31,6 +30,7 @@ export const getOneDistanceAndTime = (startStation, endStation) => {
       }
     }
   }
+  return [0, 0];
 };
 export const getTotalDistanceAndTime = (route) => {
   let totalDistance = 0;
@@ -76,6 +76,12 @@ export const makeResultUI = (searchType, distance, time, shortestRoute) => {
   document.getElementById("result").innerHTML += resultSubTitle;
   document.getElementById("result").innerHTML += resultTable;
 };
+export const notExistingRoute = () => {
+  alert("존재하지 않는 노선입니다.");
+  document.getElementById("departure-station-name-input").value = "";
+  document.getElementById("arrival-station-name-input").value = "";
+  document.getElementsByName("search-type")[0].checked = true;
+};
 const btnSearch = document.getElementById("search-button");
 btnSearch.onclick = () => {
   const departureStation = document.getElementById(
@@ -91,6 +97,10 @@ btnSearch.onclick = () => {
     arrivalStation,
     dijkstra
   );
-  document.getElementById("result").innerHTML = "";
-  makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
+  if (totalDistance !== 0 && totalTime !== 0) {
+    document.getElementById("result").innerHTML = "";
+    makeResultUI(searchType, totalDistance, totalTime, shortestRoute);
+  } else {
+    notExistingRoute();
+  }
 };
