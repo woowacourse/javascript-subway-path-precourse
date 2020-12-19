@@ -1,10 +1,16 @@
-const resultDiv = document.getElementById('result');
 const RESULT_TABLE = 'result-table';
 const TIME_UNIT = '분';
 const DISTANCE_UNIT = 'km';
 const RESULT_HEADER = '📝 결과';
 const TABLE_HEADER_DISTANCE = '총 거리';
 const TABLE_HEADER_TIME = '총 소요 시간';
+const resultDiv = document.getElementById('result');
+const departureStationNameInput = document.getElementById(
+  'departure-station-name-input'
+);
+const arrivalStationNameInput = document.getElementById(
+  'arrival-station-name-input'
+);
 
 export default class ViewController {
   printSearchResult(result, searchType) {
@@ -40,5 +46,11 @@ export default class ViewController {
   clearResultDiv() {
     resultDiv.innerHTML = '';
     resultDiv.style.visibility = 'visible';
+  }
+
+  clearStationInputs() {
+    departureStationNameInput.value = '';
+    arrivalStationNameInput.value = '';
+    departureStationNameInput.focus();
   }
 }

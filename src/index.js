@@ -52,8 +52,8 @@ export default class SubwayPath {
     const searchType = document.querySelector(
       'input[name="search-type"]:checked'
     ).value;
-    const path = this.findPathByDijkstra(departure, arrival, searchType);
     try {
+      const path = this.findPathByDijkstra(departure, arrival, searchType);
       isStationNamesValid(this.stations, departure, arrival);
       isPathValid(path);
       const result = this.calculatePathResult(path);
@@ -61,6 +61,7 @@ export default class SubwayPath {
       this.viewController.printSearchResult(result, searchType);
     } catch (error) {
       alert(error);
+      this.viewController.clearStationInputs();
     }
   }
 
