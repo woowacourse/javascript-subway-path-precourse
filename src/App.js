@@ -96,10 +96,47 @@ export default class App {
     addButton.addEventListener('click', setState.bind(this));
   }
 
+  isLessThenTwo(name) {
+    return name.length >= 2;
+  }
+
+  isIncludeStation(name) {
+    return Data.stations.includes(name);
+  }
+
+  isIncludeSpace(name) {
+    return /\s/g.test(name);
+  }
+
+  isEqual(startStation, endStation) {
+    return startStation === endStation;
+  }
+
+  isPossible(startStation, endStation) {
+    const { isIncludeSpace, isLessThenTwo, isIncludeStation, isEqual } = this;
+    if(isIncludeSpace(startStation) || isIncludeSpace(endStation)) {
+      return alert('역 이름에 공백이 포함되어 있습니다. 다시 입력해주세요.');
+    }
+    if(!isLessThenTwo(startStation) || !isLessThenTwo(endStation)) {
+      return alert('출발역과 도착역의 이름은 두글자 이상이어야 합니다.');
+    }
+    if(isEqual(startStation, endStation)) {
+      return alert('출발역과 도착역의 이름이 같을 수 없습니다.');
+    }
+    if(!isIncludeStation(startStation) || !isIncludeStation(endStation)) {
+      return alert('존재하지 않은 역이 입력되었습니다.');
+    }
+    return true;
+  }
+
   setState() {
     const startStation = document.querySelector('#departure-station-name-input').value;
     const endStation = document.querySelector('#arrival-station-name-input').value;
     const searchType = document.querySelector('input[name="search-type"]:checked').value;
+
+    if(!this.isPossible(startStation, endStation)) {
+      return;
+    }
 
     let shortestPath;
     if(searchType === '최단거리') {

@@ -1,5 +1,6 @@
 import Dijkstra from './utils/Dijkstra.js';
 
+export const stations = ['교대', '강남', '역삼', '남부터미널', '양재', '양재시민의숲', '매봉'];
 
 export function fetchShortestDistanceDijkstra() {
   const dijkstra = new Dijkstra();
