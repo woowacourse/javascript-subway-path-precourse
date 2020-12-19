@@ -70,7 +70,7 @@ export default class SearchForm {
         <input id="${FORM_ELEMENT.arrivalStationInput.id}" type="text">
       </label><br>
       <label>
-        <input type="radio" name="search-type" value="최단거리">
+        <input type="radio" name="search-type" value="최단거리" checked>
         최단거리
       </label>
       <label>
