@@ -1,3 +1,5 @@
+import { isValidStationName } from "../utils/validation.js";
+
 class ValidateSubwayManager {
   constructor(getState, getStations) {
     this.getState = getState;
@@ -13,6 +15,35 @@ class ValidateSubwayManager {
     this.$arrivalStationInput = document.querySelector(
       "#arrival-station-name-input"
     );
+  };
+
+  checkDepartureStation = () => {
+    return isValidStationName(
+      this.$departureStationInput,
+      this.departureStation,
+      this.stations
+    );
+  };
+
+  checkArrivalStation = () => {
+    return isValidStationName(
+      this.$arrivalStationInput,
+      this.arrivalStation,
+      this.stations
+    );
+  };
+
+  checkValidation = () => {
+    const userState = this.getState();
+    this.departureStation = userState.departureStation;
+    this.arrivalStation = userState.arrivalStation;
+    this.stations = this.getStations();
+
+    const isValidDepartureStation = this.checkDepartureStation();
+    if (!isValidDepartureStation) return;
+
+    const isValidArrivalStation = this.checkArrivalStation();
+    if (!isValidArrivalStation) return;
   };
 
   render = () => {
