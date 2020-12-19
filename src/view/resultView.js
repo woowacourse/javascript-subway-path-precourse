@@ -21,11 +21,16 @@ const makeTableTitle = (selection) => {
 }
 
 const makeTable = (distance, time, pathResult) => {
-    let tableHTMl = `
-                <table>
-                    <th>총 거리</th><th>총 소요 시간</th>
-                    <tr><td>${distance}km</td><td>${time}분</td></tr>
-                    <tr><td>${pathResult}</td></tr>
+    let tableHTML = `
+                <table border=1px text-align=>
+                    <tr><th>총 거리</th><th>총 소요 시간</th></tr>
+                    <tr><td><center>${distance}km</center></td><td><center>${time}분</center></td></tr>
+                    <tr><td colspan=2><center>${addArrowTopathResult(pathResult)}</center></td></tr>
                 </table>`
+
+    return tableHTML
 }
 
+const addArrowTopathResult = (pathResult) => {
+    return pathResult.join("➡");
+}
