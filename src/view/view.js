@@ -4,12 +4,13 @@ import { timeDijkstra, distanceDijkstra } from '../index.js';
 export default {
   show() {
     const section = document.querySelector('#result-section');
-    section.style.display = 'block';
     const start = document.querySelector('#departure-station-name-input').value;
     const end = document.querySelector('#arrival-station-name-input').value;
+    section.style.display = 'block';
     const flag = document.querySelector('input[name="search-type"]:checked')
       .value;
     const tree = this.defineTree(flag);
+    this.clear();
     controller.init(tree, start, end);
   },
 
@@ -44,5 +45,10 @@ export default {
       }
     });
     return way;
+  },
+
+  clear() {
+    document.querySelector('#departure-station-name-input').value = '';
+    document.querySelector('#arrival-station-name-input').value = '';
   },
 };

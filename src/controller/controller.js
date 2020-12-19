@@ -58,4 +58,8 @@ export default {
   getStartEnd(idx, route) {
     return [route[idx], route[idx + 1]];
   },
+  clear() {
+    document.querySelector('#departure-station-name-input').value = '';
+    document.querySelector('#arrival-station-name-input').value = '';
+  },
 };
