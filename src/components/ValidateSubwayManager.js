@@ -51,10 +51,8 @@ class ValidateSubwayManager {
     this.stations = this.getStations();
 
     if (!this.isValidDepartureStation()) return false;
-
     if (!this.isValidArrivalStation()) return false;
-
-    if (!this.isDuplicatedStation()) return false;
+    if (this.isDuplicatedStation()) return false;
 
     return true;
   };
