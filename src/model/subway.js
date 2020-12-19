@@ -1,5 +1,6 @@
 import {STATION, SECTION} from '../constant/constant.js';
 import {splitSection} from '../utils/split.js';
+import {findTotalTimeOrDistance} from '../utils/total.js';
 import Dijkstra from '../utils/Dijkstra.js';
 
 export default class Subway {
@@ -19,8 +20,9 @@ export default class Subway {
       }
     });
     const result = dijkstra.findShortestPath(departure, arrival);
+    const total = findTotalTimeOrDistance(result, this.splitedSection);
 
-    return result;
+    return {result, total};
   }
 
   findShortTime(departure, arrival) {
@@ -33,7 +35,8 @@ export default class Subway {
       }
     });
     const result = dijkstra.findShortestPath(departure, arrival);
+    const total = findTotalTimeOrDistance(result, this.splitedSection);
 
-    return result;
+    return {result, total};
   }
 }

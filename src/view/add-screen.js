@@ -1,13 +1,13 @@
 import {$resultWrapper} from './element.js';
 
-export const renderResultScreen = (text, result) => {
+export const renderResultScreen = (text, {result, total}) => {
   renderResultWrapper(text);
   const $table = document.createElement('table');
   $table.innerHTML = tableContainer;
   $table.querySelector('tbody').innerHTML += `
     <tr>
-      <td>5km</td>
-      <td>5분</td>
+      <td>${total.distance}km</td>
+      <td>${total.time}분</td>
     </tr>
     <tr>
       <td colspan="2">${result.join(' -> ')}</td>
