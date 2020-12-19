@@ -8,6 +8,11 @@
             display:inline-block;
             margin: 5px 0;
         }
+
+        table, th, td {
+            border: 1px solid #bfbfbf;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
@@ -22,7 +27,38 @@
             도착역
             <input type="text" id="arrival-station-name-input" />
         </label>
+        <br />
+        <label>
+            <input type="radio" name="search-type" value="0" checked />
+            최단거리
+        </label>
+        <label>
+            <input type="radio" name="search-type" value="1" />
+            최소시간
+        </label>
+        <br />
         <button id="search-button">길찾기</button>
+        <div id="result">
+            <h2>📝결과</h2>
+            <h3>최단거리</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th><strong>총 거리</strong></th>
+                        <th><strong>총 소요 시간</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="distance-sum"></td>
+                        <td id="time-sum"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" id="route"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <script type="module" src="src/index.js"></script>
 </body>
