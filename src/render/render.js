@@ -23,7 +23,7 @@ export const render = (route, distance, time) => {
     return alert('연결되지 않은 역은 입력할 수 없습니다.');
   }
   renderResultTable();
-  renderRouteTable(route.join('➡'));
+  renderRouteTable(route.join(' ➡'));
   renderDistanceTable(distance);
   renderTimeTable(time);
 };
