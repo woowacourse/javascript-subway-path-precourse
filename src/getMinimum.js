@@ -1,23 +1,17 @@
 import Dijkstra from "./utils/Dijkstra.js";
-import {lines} from './data.js'; 
 
-export function minPath(departure, arrival, type) {
+export function minPath(data, departure, arrival, type) {
     const dijkstra = new Dijkstra();
-    importDataDijkstra(dijkstra, type);
+    importDataToDijkstra(data, dijkstra, type);
     const result = dijkstra.findShortestPath(departure, arrival);
     return result;
 }
-
-function importDataDijkstra(dijkstra, type) {
-    for (let line of lines) {
-        for (let i=0; i<line.length-2; i++) {
-            dijkstra.addEdge(line[i], line[i+2], line[i+1][type]);
+function importDataToDijkstra(data, dijkstra, type) {
+    for (let i=0; i<data.length; i++) {
+        for (let j=0; j<data[i].stations.length-2; j+=2) {
+            dijkstra.addEdge(data[i].stations[j], data[i].stations[j+2], data[i].stations[j+1][type]);
+            // console.log(data[i].stations[j], data[i].stations[j+2], data[i].stations[j+1][type]);
         }
     }
     return dijkstra;
 }
-
-// export function createResultPathMessage(departure, arrival, type) {
-//     const resultPath = minPath(departure, arrival, type);
-//     return resultPath.join('->');
-// }
