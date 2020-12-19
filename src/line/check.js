@@ -1,6 +1,6 @@
-import { getDepartureStationName } from './src/index.js'
-import { line2, line3, lineNew, allLines } from './src/line/line.js'
-import { getOptionValue } from './src/index.js'
+import { getDepartureStationName } from '../index.js'
+import { line2, line3, lineNew, allLines } from './line.js'
+import { getOptionValue } from '../index.js'
 
 const isValidLength = (stationName) => {
   return (stationName.length >= 2);

@@ -1,4 +1,4 @@
-import { isValidLength, isValidStation, isDuplicatedStation, isConnected } from "../check.js";
+import { isValidLength, isValidStation, isDuplicatedStation, isConnected } from "./line/check.js";
 import Dijkstra from "../src/utils/Dijkstra.js"
 
 const getMinimumDistance = (line, departureStationIndex, arrivalStationIndex, departureStationName, arrivalStationName) => {
