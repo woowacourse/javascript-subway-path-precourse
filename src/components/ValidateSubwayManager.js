@@ -1,4 +1,7 @@
-import { isValidStationName } from "../utils/validation.js";
+import {
+  isValidStationName,
+  isDuplicatedStations,
+} from "../utils/validation.js";
 
 class ValidateSubwayManager {
   constructor(getState, getStations) {
@@ -33,16 +36,27 @@ class ValidateSubwayManager {
     );
   };
 
-  checkValidation = () => {
+  isDuplicatedStation = () => {
+    return isDuplicatedStations(
+      this.$arrivalStationInput,
+      this.departureStation,
+      this.arrivalStation
+    );
+  };
+
+  checkNameValidation = () => {
     const userState = this.getState();
     this.departureStation = userState.departureStation;
     this.arrivalStation = userState.arrivalStation;
     this.stations = this.getStations();
 
-    if (!this.isValidDepartureStation()) return;
+    if (!this.isValidDepartureStation()) return false;
 
-    if (!this.isValidArrivalStation()) return;
+    if (!this.isValidArrivalStation()) return false;
 
+    if (!this.isDuplicatedStation()) return false;
+
+    return true;
   };
 
   render = () => {
