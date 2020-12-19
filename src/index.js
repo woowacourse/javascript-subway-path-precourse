@@ -13,6 +13,7 @@ const subwayPath = new SubwayPath();
 
 searchButton.addEventListener('click', clickSearchButton);
 
+// 길 찾기 버튼 클릭
 function clickSearchButton() {
   "use strict";
 
@@ -31,6 +32,7 @@ function clickSearchButton() {
   showResult(path);
 }
 
+// 지하철 역 이름 확인
 function checkStation(departureStation, arrivalStation) {
   "use strict";
 
@@ -47,6 +49,7 @@ function checkStation(departureStation, arrivalStation) {
   return true;
 }
 
+// 최단 경로 찾기
 function findShortestDistancePath(source, target, type) {
   "use strict";
 
@@ -62,6 +65,7 @@ function findShortestDistancePath(source, target, type) {
   return path;
 }
 
+// 결과 출력
 function showResult(path) {
   "use strict";
 
