@@ -39,9 +39,6 @@ class App extends Component {
       resultPath
     );
 
-    console.log(
-      `time: ${totalTime}, distance: ${totalDistance}, path:${resultPath}`
-    );
     return { searchType, resultPath, totalTime, totalDistance };
   }
 
@@ -59,9 +56,9 @@ class App extends Component {
     return dijkstra.findShortestPath(departureStation, arrivalStation);
   }
 
-  initializeDijkstra(lines, searchType) {
+  initializeDijkstra = searchType => {
     const dijkstra = new Dijkstra();
-    lines.forEach(line =>
+    this.#lines.forEach(line =>
       line.sections.forEach(section => {
         const { departureStation, arrivalStation, distance, time } = section;
         const priority = searchType === DISTANCE_FIRST ? distance : time;
@@ -71,7 +68,7 @@ class App extends Component {
     );
 
     return dijkstra;
-  }
+  };
 
   getTotalTimeAndDistance(path) {
     let totalTime = 0;
@@ -131,6 +128,7 @@ class App extends Component {
       searchRequest,
       stations,
       mountSearchResult: this.mountSearchResult,
+      initializeDijkstra: this.initializeDijkstra,
     });
   }
 

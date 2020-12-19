@@ -63,8 +63,16 @@ class RouteInput extends Component {
       arrivalStation.length >= MINIMUM_INPUT_LENGTH &&
       arrivalStation !== departureStation &&
       stations.includes(departureStation) &&
-      stations.includes(arrivalStation)
+      stations.includes(arrivalStation) &&
+      this.hasPath(departureStation, arrivalStation)
     );
+  }
+
+  hasPath(departureStation, arrivalStation) {
+    const searchType = this.getSearchType();
+    const dijkstra = this._props.initializeDijkstra(searchType);
+
+    return dijkstra.findShortestPath(departureStation, arrivalStation);
   }
 
   setSearchRequest(departureStation, arrivalStation) {
