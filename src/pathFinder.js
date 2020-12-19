@@ -33,7 +33,7 @@ const caclTotal = (path, sections) => {
       }
     }
   }
-  setResultTable(totalDistance, totalTime);
+  setResultTable(totalDistance, totalTime, path);
 };
 
 export const findShortestPath = (departure, arrival, sections) => {
