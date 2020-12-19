@@ -9,7 +9,7 @@ export default class StationPathController {
     document.addEventListener('click', (event) => {
       const id = event.target.id;
       if (id === 'search-button') {
-        this.findRouteButtonClick();
+        this.searchButtonClick();
       }
     })
   }
