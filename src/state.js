@@ -41,7 +41,7 @@ const State = function () {
     arrivalStation: "",
     orderBy: "distance",
   };
-  this.setState = (key, value) = this.state[key] = value;
+  this.setState = (key, value) => (this.state[key] = value);
 };
 
 export const { state, setState } = new State();
