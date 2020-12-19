@@ -56,7 +56,24 @@ export default class MainController {
     this.dijkstraResult(departureStation, arrivalStation, this.radioOption);
   }
 
-  dijkstraResult(start, end, option) {}
+  dijkstraResult(start, end, option) {
+    console.log(this.tag, "dijkstraResult()", start, end, option);
+
+    Lines.forEach((lineInfo) => {
+      const lineStations = lineInfo.stations;
+      const lineLength = lineStations.length;
+
+      for (let i = 0; i < lineLength - 1; i++) {
+        this.Dijkstra.addEdge(
+          lineStations[i],
+          lineStations[i + 1],
+          lineInfo[option][i]
+        );
+      }
+    });
+
+    const result = this.Dijkstra.findShortestPath(start, end);
+  }
 
   selectedOptionRadio() {
     console.log(this.tag, "selectedOptionRadio", this.radioOption);
