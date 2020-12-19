@@ -1,4 +1,4 @@
-import { stations, lines } from "../datas/data.js";
+import { lines } from "../datas/data.js";
 import { message, value } from "../constants/constant.js";
 
 class util {
@@ -38,6 +38,7 @@ class util {
   };
 
   isAvailable = (departure, arrival) => {
+    const stations = Object.keys(lines);
     if (!(stations.includes(departure) && stations.includes(arrival))) {
       return message.ALERT_NOT_IN_STATIONS;
     }

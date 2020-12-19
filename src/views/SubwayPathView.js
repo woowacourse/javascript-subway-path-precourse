@@ -6,6 +6,16 @@ class SubwayPathView {
     this.handleButtonClick();
   }
 
+  getSearchPathInput = () => {
+    const departure = document.getElementById("departure-station-name-input")
+      .value;
+    const arrival = document.getElementById("arrival-station-name-input").value;
+    const option = document.querySelector("input[name='search-type']:checked")
+      .value;
+
+    return { departure, arrival, option };
+  };
+
   createResultTemplate = option => {
     return `
     <h1>📝 결과</h1>
@@ -31,8 +41,7 @@ class SubwayPathView {
 
   renderResult = (option, pathLength, pathTime, path) => {
     const resultContainer = document.getElementById("subway-path-output");
-    resultContainer.innerHTML = "";
-    resultContainer.innerHTML += this.createResultTemplate(option);
+    resultContainer.innerHTML = this.createResultTemplate(option);
     resultContainer.innerHTML += this.createResultTable(
       pathLength,
       pathTime,
@@ -40,23 +49,11 @@ class SubwayPathView {
     );
   };
 
-  getSearchPathInput = () => {
-    const departure = document.getElementById("departure-station-name-input")
-      .value;
-    const arrival = document.getElementById("arrival-station-name-input").value;
-    const option = document.querySelector("input[name='search-type']:checked")
-      .value;
-
-    return { departure, arrival, option };
-  };
-
   manageSearchPath = () => {
     const { departure, arrival, option } = this.getSearchPathInput();
     if (this.subwayPath.checkVaild(departure, arrival)) {
       const path = this.subwayPath.searchPath(departure, arrival, option);
-      const { pathLength, pathTime } = this.subwayPath.countPathLengthAndTime(
-        path
-      );
+      const { pathLength, pathTime } = this.subwayPath.getLengthAndTime(path);
       this.renderResult(option, pathLength, pathTime, path);
     }
   };

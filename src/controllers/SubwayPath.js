@@ -15,9 +15,8 @@ class SubwayPath {
 
   createDijkstra = (departure, arrival, option) => {
     const dijkstra = new Dijkstra();
-
-    for (let start in lines) {
-      for (let node of lines[start]) {
+    for (let start in this.lines) {
+      for (let node of this.lines[start]) {
         const end = node[value.LINE_NODE_INDEX];
         const edge = node[option];
         dijkstra.addEdge(start, end, edge);
@@ -50,15 +49,13 @@ class SubwayPath {
     }
   };
 
-  countPathLengthAndTime = path => {
+  getLengthAndTime = path => {
     let pathLength = 0;
     let pathTime = 0;
     for (let i = 0; i < path.length - 1; i++) {
-      const start = path[i];
-      const end = path[i + 1];
       const { nodeLength, nodeTime } = this.searchNodeInfo(
-        this.lines[start],
-        end
+        this.lines[path[i]],
+        path[i + 1]
       );
       pathLength += nodeLength;
       pathTime += nodeTime;
