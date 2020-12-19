@@ -1,0 +1,18 @@
+#input-search-station-container{
+  margin-bottom: 1rem;
+}
+
+.station-input-form-container >input {
+  height: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.path-selectors {
+  margin-bottom: 1rem;
+}
+
+#path-result-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
