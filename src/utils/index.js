@@ -1,2 +1,2 @@
-export { default as Dijkstra } from './Dijkstra.js';
+export { default as Dijkstra } from './dijkstra.js';
 export * from './validation.js';
