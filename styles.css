@@ -10,3 +10,14 @@ td {
 td {
   text-align: center;
 }
+
+.departure-station,
+.arrival-station {
+  margin: 8px 0;
+}
+
+.station-input,
+.radio-button,
+.search {
+  margin: 16px 0;
+}

@@ -52,7 +52,7 @@ export default class App {
   createStationInput(target) {
     const container = this.createContainer(target, 'station-input');
     container.innerHTML = `
-      <div>
+      <div class="departure-station">
         <label for="departure">출발역</label>
         <input
           type="text"
@@ -60,7 +60,7 @@ export default class App {
           id="departure-station-name-input"
         />
       </div>
-      <div>
+      <div class="arrival-station">
         <label for="arrival">도착역</label>
         <input
           type="text"
@@ -94,7 +94,7 @@ export default class App {
 
   createSearchButton(target) {
     const { setState, createContainer } = this;
-    const container = createContainer(target, 'div');
+    const container = createContainer(target, 'search');
     container.innerHTML = `<button id="search-button">길찾기</button>`;
 
     const addButton = document.querySelector('#search-button');
@@ -138,7 +138,6 @@ export default class App {
     const startStation = document.querySelector('#departure-station-name-input').value;
     const endStation = document.querySelector('#arrival-station-name-input').value;
     const searchType = document.querySelector('input[name="search-type"]:checked').value;
-
     if(!this.isPossible(startStation, endStation)) {
       return;
     }
