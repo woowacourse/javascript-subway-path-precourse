@@ -1,5 +1,5 @@
 import ValidateSubwayManager from "./ValidateSubwayManager.js";
-import SearchLineManager from "./SearchLineManager.js";
+import PrintResultManager from "./PrintResultManager.js";
 import DijkstraManager from "./DijkstraManager.js";
 import { stations, lines } from "../utils/data.js";
 import {
@@ -38,9 +38,9 @@ class SubwayManager {
       this.getStations,
       this.getLines
     );
-    this.searchLineManager = new SearchLineManager(
-      this.getState,
-      this.getLines
+    this.printResultManager = new PrintResultManager(
+      this.getLines,
+      this.getLineResult
     );
     this.dijkstraManager = new DijkstraManager(this.getLines);
   };
@@ -65,6 +65,10 @@ class SubwayManager {
     return this.lines;
   };
 
+  getLineResult = () => {
+    return this.lineResult;
+  };
+
   handleSearchButton = event => {
     event.preventDefault();
     this.userState.departureStation = this.$departureStationInput.value;
@@ -80,6 +84,7 @@ class SubwayManager {
     if (!isValidSection(this.$arrivalStationInput, this.lineResult)) return;
 
     showElement(this.$resultContainer);
+    this.printResultManager.render();
   };
 
   getLineResult = () => {
