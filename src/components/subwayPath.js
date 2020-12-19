@@ -19,8 +19,22 @@ export default class SubWayPath {
 
     this.form = new Form();
     this.resultSection = new ResultTable();
+  }
 
+  init() {
+    this.dataInitialize();
     this.form.container.addEventListener('submit', this.onSubmit);
+  }
+
+  dataInitialize() {
+    this.lineList
+      .map((line) => line.section)
+      .flat()
+      .forEach((section) => {
+        const { start, end, distance, time } = section;
+        this.distanceDijkstra.addEdge(start, end, distance);
+        this.timeDijkstra.addEdge(start, end, time);
+      });
   }
 
   onSubmit = (event) => {
@@ -84,12 +98,14 @@ export default class SubWayPath {
     return true;
   };
 
+  setDijkstra = (searchType) =>
+    searchType === SEARCH_TYPE.MIN_DISTANCE
+      ? this.distanceDijkstra
+      : this.timeDijkstra;
+
   getResultValues() {
     const values = this.form.getValues();
-    const finder =
-      values.searchType === SEARCH_TYPE.MIN_DISTANCE
-        ? this.distanceDijkstra
-        : this.timeDijkstra;
+    const finder = this.setDijkstra(values.searchType);
     const route = finder
       .findShortestPath(values.departureStationName, values.arrivalStationName)
       .join('=>');
