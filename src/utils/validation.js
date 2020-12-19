@@ -17,4 +17,14 @@ const isValidStationName = ($input, stationName, stationList) => {
   return isValidNameLength && isValidStation;
 };
 
-export { isValidStationName };
+const isDuplicatedStations = ($input, departureStation, arrivalStation) => {
+  const isDuplicated = departureStation === arrivalStation;
+
+  if (isDuplicated) {
+    showAlertMessage($input, ALERT.DUPLICATED_STATIONS);
+  }
+
+  return isDuplicated;
+};
+
+export { isValidStationName, isDuplicatedStations };
