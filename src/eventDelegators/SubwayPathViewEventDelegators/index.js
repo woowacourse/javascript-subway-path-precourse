@@ -29,14 +29,14 @@ export default class SubwayPathViewEventDelegators {
     const how = this.getCheckedButtonValue(radioButtons);
     const result = this.viewModel.searchPath(startStation, endStation, how);
 
-    if (how === 'searchShortestPath') {
+    if (result && how === 'searchShortestPath') {
       this.view.resetSubwayPathResultContainer();
       this.view.renderHeadingForShortestPath();
       this.view.renderTableContainer();
       this.view.renderTable(result);
     }
 
-    if (how === 'searchMinumumTimePath') {
+    if (result && how === 'searchMinumumTimePath') {
       this.view.resetSubwayPathResultContainer();
       this.view.renderHeadingForMinumumTimePath();
       this.view.renderTableContainer();

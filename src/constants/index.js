@@ -37,6 +37,9 @@ const message = {
   ENTIRE_TIME: '총 소요 시간',
   KM: 'km',
   MINUTES: '분',
+  SHORTER_THAN_TWO: '역 이름은 2글자 이상이어야합니다',
+  OVERLAPTED_STATION: '출발역과 도착역 이름이 중복됩니다.',
+  IS_NOT_IN_COURSES: '츨발역 혹은 도착역이 어느 노선에서도 존재하지 않습니다.',
 };
 
 export { courses, stations, message };
