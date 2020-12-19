@@ -4,12 +4,12 @@ import Dijkstra from "./utils/Dijkstra.js";
 
 console.log(lineTwo[1]); // lineTwo 리스트의 첫번째 딕셔너리 출력
 
-let departStation = document.getElementById.length('departure-station-name-input').value;
+let departureStation = document.getElementById.length('departure-station-name-input').value;
 let arrivalStation = document.getElementById.length('arrival-station-name-input').value;
 //Validation
 
 function isUpperTwoCharactersDeparture() { 
-    if (departStation.length < 2) {
+    if (departureStation.length < 2) {
         alert("두자리 이상의 역 이름을 입력해주세요.")
     }
 }
@@ -20,7 +20,12 @@ function isUpperTwoCharactersArrival() {
     }
 }
 
-
+let stationNameList = ['교대', '강남', '역삼', '남부터미널', '양재', '양재시민의숲', '매봉']
+function isNotUsuableDepartureStation () {
+    if (stationNameList.includes(departureStation) !== False) {
+        alert("사용 가능한 역 이름이 아닙니다.")
+    }
+}
 
 
 
