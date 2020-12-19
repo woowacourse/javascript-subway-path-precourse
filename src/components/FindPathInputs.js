@@ -46,7 +46,7 @@ export class FindPathInputs {
     }
 
     let checkedWeight = this.getNameCheckedWeight();
-    this.findPath(checkedWeight);
+    this.findPath(departure, arrival, checkedWeight);
   };
 
   getNameCheckedWeight = () => {

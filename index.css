@@ -1,11 +1,15 @@
+table, th ,td{
+  border:1px solid;
+}
+
 .station-name-input {
-    margin-bottom:10px;
+  margin-bottom:10px;
 }
 
 #radio_container {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #result_container {
-    margin-top: 10px;
+  margin-top: 10px;
 }

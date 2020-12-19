@@ -22,9 +22,11 @@ export class SubwayFindPath {
 
   initializeData = () => {};
 
-  renderResult = (weight, dijkstra) => {
+  renderResult = (departure, arrival, weight, dijkstra) => {
     this.findPathResult.render({
       ...this.props,
+      departure: departure,
+      arrival: arrival,
       weight: weight,
       dijkstra: dijkstra,
     });
@@ -32,13 +34,13 @@ export class SubwayFindPath {
 
   onUpdate = () => {};
 
-  findPath = (weight) => {
+  findPath = (departure, arrival, weight) => {
     if (weight === VALUE.TIME_VALUE) {
       this.addEdgesByTimeWeight();
-      this.renderResult(weight, this.dijkstraByTime);
+      this.renderResult(departure, arrival, weight, this.dijkstraByTime);
     } else if (weight === VALUE.DISTANCE_VALUE) {
       this.addEdgesByDistanceWeight();
-      this.renderResult(weight, this.dijkstraByDistance);
+      this.renderResult(departure, arrival, weight, this.dijkstraByDistance);
     }
   };
 
