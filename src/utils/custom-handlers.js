@@ -23,7 +23,7 @@ export const getDepartureStationNameInputValue = (appContainer) => {
   ).value.trim();
 };
 
-export const getArrivalStationNameInput = (appContainer) => {
+export const getArrivalStationNameInputValue = (appContainer) => {
   const $arrivalStationNameLabel = appContainer.getElementsByTagName(
     "label"
   )[1];
