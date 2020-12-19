@@ -1,7 +1,7 @@
-import Dijkstra from '../utils/Dijkstra.js';
+import Dijkstra from './Dijkstra.js';
 import { station } from '../data/station.js';
 import { section } from '../data/section.js';
-import { render } from './render.js';
+import { render } from '../render/render.js';
 
 const getStationDistance = (start, end) => {
   const result = [];

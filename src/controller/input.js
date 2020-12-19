@@ -1,5 +1,5 @@
 import { station } from '../data/station.js';
-import { getReuslt } from '../render/getResult.js';
+import { getReuslt } from '../utils/getResult.js';
 
 const MIN_STATION_LENGTH = 2;
 
