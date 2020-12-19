@@ -7,13 +7,12 @@
   "directories": {
     "doc": "docs"
   },
-  "dependencies": {
-    "prettier": "^2.2.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.16.0"
+    "eslint": "^7.16.0",
+    "prettier": "^2.2.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
