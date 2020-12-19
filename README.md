@@ -3,6 +3,10 @@
 
 ## 구현 세부사항
 
+### index.js
+- data.js로부터 데이터들을 들고오는 `initializeData`
+- 역과 역 사이의 시간 및 거리 정보를 구해 저장하는 `constructSTS`
+
 ### consts/data.js
 - 초기화에 필요한 데이터 정보들을 저장한다.
 
