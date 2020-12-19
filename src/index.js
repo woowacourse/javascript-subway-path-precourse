@@ -6,3 +6,5 @@ export const subway = new Subway();
 document.body
   .querySelector('#search-button')
   .addEventListener('click', onFindRoute);
+
+subway.findShortDistance();
