@@ -1,6 +1,6 @@
-export const stations = ["교대", "강남", "역삼", "남부터미널", "양재", "양재시민의숲", "매봉"];
+export const STATIONS = ["교대", "강남", "역삼", "남부터미널", "양재", "양재시민의숲", "매봉"];
 
-export const lines = [
+export const LINES = [
   {
     name: "2호선",
     sections: [
