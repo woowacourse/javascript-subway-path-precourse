@@ -13,7 +13,8 @@ export default function SubwayPath() {
   this.findRoute = (departure, arrival) => {
     const dijkstra = new Dijkstra();
     this.addAllStationToVertex(stations, dijkstra);
-    this.addAllDistanceToEdge(dijkstra);
+    // this.addAllDistanceToEdge(dijkstra);
+    this.addAllTimeToEdge(dijkstra);
     const path = dijkstra.findShortestPath(departure, arrival);
   };
 
@@ -29,6 +30,14 @@ export default function SubwayPath() {
           stations[index + 1].name,
           distance
         );
+      });
+    });
+  };
+
+  this.addAllTimeToEdge = dijkstra => {
+    lines.forEach(({ stations, sections }) => {
+      sections.forEach(({ time }, index) => {
+        dijkstra.addEdge(stations[index].name, stations[index + 1].name, time);
       });
     });
   };
