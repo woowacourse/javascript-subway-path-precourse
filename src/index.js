@@ -38,11 +38,12 @@ export default class subwayGetDirection {
     this.route = dijkstra.findShortestPath(this.startStation, this.endStation);
   }
   drawTable() {
+    const $divResult = document.querySelector("#result");
+    $divResult.innerHTML = ``;
     const distanceResult = this.getDistanceInRoute();
     const minuteResult = this.getMinuteInRoute();
-    const routeResult = this.route.join("→");
+    const routeResult = this.route;
     const $table = createTable(distanceResult, minuteResult, routeResult);
-    const $divResult = document.querySelector("#result");
     const $headerH1 = createHeader("h1", "📝결과");
     const $headerH3 = createHeader("h3", this.searchType);
     $divResult.append($headerH1, $headerH3, $table);

@@ -36,7 +36,7 @@ export const createTable = (distance, time, route) => {
         <td>${time}분</td>
       </tr>
       <tr>
-        <td colspan="2">${route}</td>
+        <td colspan="2">${route.join("➡")}</td>
       </tr>
     `;
   return $table;
