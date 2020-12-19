@@ -1,5 +1,5 @@
 import { stations, lines } from "../datas/data.js";
-import { message } from "../constants/constant.js";
+import { message, value } from "../constants/constant.js";
 
 class util {
   linesDfs = startNode => {
@@ -19,7 +19,10 @@ class util {
   };
 
   isEnoughLength = (departure, arrival) => {
-    if (departure.length < 2 || arrival.length < 2) {
+    if (
+      departure.length < value.STATION_NAME_MIN_LENGTH ||
+      arrival.length < value.STATION_NAME_MIN_LENGTH
+    ) {
       return message.ALERT_NOT_ENOUGH_LENGTH;
     }
 

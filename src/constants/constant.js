@@ -5,4 +5,16 @@ const message = {
   ALERT_NOT_CONNECTED_STATION: "입력한 두 역이 노선상 연결되어 있지 않습니다",
 };
 
-export { message };
+const text = {
+  MIN_LENGTH: "최단거리",
+  MIN_TIME: "최소시간",
+};
+
+const value = {
+  STATION_NAME_MIN_LENGTH: 2,
+  LINE_NODE_INDEX: 0,
+  LINE_LENGTH_INDEX: 1,
+  LINE_WEIGHT_INDEX: 2,
+};
+
+export { message, text, value };

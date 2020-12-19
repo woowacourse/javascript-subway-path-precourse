@@ -6,6 +6,7 @@ import {
   isAvailable,
   isConnected,
 } from "../utils/util.js";
+import { text, value } from "../constants/constant.js";
 
 class SubwayPath {
   constructor() {
@@ -17,7 +18,7 @@ class SubwayPath {
 
     for (let start in lines) {
       for (let node of lines[start]) {
-        const end = node[0];
+        const end = node[value.LINE_NODE_INDEX];
         const edge = node[option];
         dijkstra.addEdge(start, end, edge);
       }
@@ -28,10 +29,10 @@ class SubwayPath {
 
   searchPath = (departure, arrival, option) => {
     let route = [];
-    if (option === "최단거리") {
-      route = this.createDijkstra(departure, arrival, 1);
-    } else if (option === "최소시간") {
-      route = this.createDijkstra(departure, arrival, 2);
+    if (option === text.MIN_LENGTH) {
+      route = this.createDijkstra(departure, arrival, value.LINE_LENGTH_INDEX);
+    } else if (option === text.MIN_TIME) {
+      route = this.createDijkstra(departure, arrival, value.LINE_WEIGHT_INDEX);
     }
 
     return route;
@@ -44,9 +45,9 @@ class SubwayPath {
       const start = path[i];
       const end = path[i + 1];
       this.lines[start].forEach(line => {
-        if (line[0] === end) {
-          pathLength += line[1];
-          pathTime += line[2];
+        if (line[value.LINE_NODE_INDEX] === end) {
+          pathLength += line[value.LINE_LENGTH_INDEX];
+          pathTime += line[value.LINE_WEIGHT_INDEX];
         }
       });
     }
