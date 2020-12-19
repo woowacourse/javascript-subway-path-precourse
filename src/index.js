@@ -80,17 +80,12 @@ btnSearch.onclick = () => {
   const arrivalStation = document.getElementById("arrival-station-name-input")
     .value;
   const searchType = getSearchType();
-  if (searchType === "minimum-distance") {
-    const dijkstra = dijkstraByDistance;
-    const [totalDistance, totalTime, shortestRoute] = getResultInfo(
-      departureStation,
-      arrivalStation,
-      dijkstra
-    );
-    makeResultUI(totalDistance, totalTime, shortestRoute);
-  } else {
-    const dijkstra = dijkstraByTime;
-    getResultInfo(dijkstra);
-    makeResultUI();
-  }
+  const dijkstra =
+    searchType === "minimum-distance" ? dijkstraByDistance : dijkstraByTime;
+  const [totalDistance, totalTime, shortestRoute] = getResultInfo(
+    departureStation,
+    arrivalStation,
+    dijkstra
+  );
+  makeResultUI(totalDistance, totalTime, shortestRoute);
 };
