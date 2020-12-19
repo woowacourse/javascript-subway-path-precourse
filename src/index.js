@@ -19,6 +19,7 @@ function clickSearchButton() {
   const departureStation = departureStationNameInput.value;
   const arrivalStation = arrivalStationNameInput.value;
   const radio = document.querySelector('input[name="search-type"]:checked');
+  resultDiv.classList.add('d-none');
   if (!checkStation(departureStation, arrivalStation)) {
     return;
   }
@@ -35,6 +36,9 @@ function checkStation(departureStation, arrivalStation) {
     return false;
   } else if (!(subwayPath.includeStation(departureStation) && subwayPath.includeStation(arrivalStation))) {
     alert('존재하지 않는 역입니다.');
+    return false;
+  } else if (departureStation === arrivalStation) {
+    alert('출발역과 도착역이 같을 수 없습니다.');
     return false;
   }
   return true;
