@@ -35,4 +35,8 @@ export default class SubwayMap {
       [end]: [distance, travelTime],
     });
   }
+
+  hasStation(station) {
+    return this.stationsGraph.has(station);
+  }
 }
