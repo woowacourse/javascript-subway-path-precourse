@@ -56,6 +56,14 @@ const Visualization = function () {
     );
     return table;
   };
+
+  this.renderResult = (formattedPath, minDistance, minTime) => {
+    const resultDiv = document.getElementById("result");
+    const resultTitle = this.getAdvancedEle("h2", null, "📑 결과");
+    const resultSubTitle = this.getAdvancedEle("h3", null, "최단거리");
+    const table = this.createTable(formattedPath, minDistance, minTime);
+    this.appendChildren(resultDiv, resultTitle, resultSubTitle, table);
+  };
 };
 
-export const { clearResultDiv } = new Visualization();
+export const { renderResult, clearResultDiv } = new Visualization();
