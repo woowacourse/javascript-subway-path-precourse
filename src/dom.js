@@ -7,3 +7,8 @@ export const getArrivalStationName = () => {
   const $inputArrivalStationName = document.querySelector("#arrival-station-name-input");
   return $inputArrivalStationName.value;
 };
+
+export const getSearchType = () => {
+  const $inputSearchType = document.querySelector('input[name="search-type"]:checked');
+  return $inputSearchType.value;
+};
