@@ -1,4 +1,5 @@
 import { lineInfo } from "./line-info.js";
+import { notExistingRoute } from "./exception-handling.js";
 
 export function FindRoute(departureStation, arrivalStation, dijkstra) {
   this.departureStation = departureStation;
@@ -28,14 +29,21 @@ export function FindRoute(departureStation, arrivalStation, dijkstra) {
         }
       }
     }
+
+    return [0, 0];
   };
   this.getTotalDistance = () => {
     let totalDistance = 0;
     for (let i = 0; i < this.route.length - 1; i++) {
-      totalDistance += this.getOneDistanceAndTime(
+      const res = this.getOneDistanceAndTime(
         this.route[i],
         this.route[i + 1]
       )[0];
+      if (res !== 0) {
+        totalDistance += res;
+      } else {
+        notExistingRoute();
+      }
     }
 
     return totalDistance;
@@ -43,10 +51,15 @@ export function FindRoute(departureStation, arrivalStation, dijkstra) {
   this.getTotalTime = () => {
     let totalTime = 0;
     for (let i = 0; i < this.route.length - 1; i++) {
-      totalTime += this.getOneDistanceAndTime(
+      const res = this.getOneDistanceAndTime(
         this.route[i],
         this.route[i + 1]
       )[1];
+      if (res !== 0) {
+        totalTime += res;
+      } else {
+        notExistingRoute();
+      }
     }
 
     return totalTime;
