@@ -8,9 +8,7 @@ const subTitleText = {
 
 const resultContainer = document.querySelector(DOMTag.RESULT_CONTAINER_QUERY);
 const resultTitle = createElement({ tagType: "h2", innerText: STRING.RESULT });
-const resultSubtitle = createElement({
-  tagType: "h3",
-});
+const resultSubtitle = createElement({ tagType: "h3" });
 const resultTable = createElement({ tagType: "table" });
 
 export const renderer = (type, dijkstraData) => {
