@@ -1,5 +1,5 @@
-import SubwayListener from './subway.listener.js';
 import SubwayView from './subway.view.js';
-import Subway from './subway.js';
+import SubwayListener from './subway.listener.js';
+import SubwayAPP from './subway.app.js';
 
-new SubwayListener(new Subway(), new SubwayView());
+new SubwayListener(new SubwayAPP(), new SubwayView());
