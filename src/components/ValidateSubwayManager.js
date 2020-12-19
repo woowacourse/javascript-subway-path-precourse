@@ -17,7 +17,7 @@ class ValidateSubwayManager {
     );
   };
 
-  checkDepartureStation = () => {
+  isValidDepartureStation = () => {
     return isValidStationName(
       this.$departureStationInput,
       this.departureStation,
@@ -25,7 +25,7 @@ class ValidateSubwayManager {
     );
   };
 
-  checkArrivalStation = () => {
+  isValidArrivalStation = () => {
     return isValidStationName(
       this.$arrivalStationInput,
       this.arrivalStation,
@@ -39,11 +39,10 @@ class ValidateSubwayManager {
     this.arrivalStation = userState.arrivalStation;
     this.stations = this.getStations();
 
-    const isValidDepartureStation = this.checkDepartureStation();
-    if (!isValidDepartureStation) return;
+    if (!this.isValidDepartureStation()) return;
 
-    const isValidArrivalStation = this.checkArrivalStation();
-    if (!isValidArrivalStation) return;
+    if (!this.isValidArrivalStation()) return;
+
   };
 
   render = () => {
