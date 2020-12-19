@@ -1,7 +1,11 @@
 import { ERROR_MESSAGE, FORM, RESULT } from '../share/constants.js';
 import { lineList, stationList } from '../share/defaultInformation.js';
-import { isInclude, isSameStation, isValidLength } from '../share/validator.js';
-import resultTableTemplate from '../template/resultTableTemplate.js';
+import {
+  isInclude,
+  isSameStation,
+  isValidLength,
+  isEmpty,
+} from '../share/validator.js';
 import Dijkstra from '../utils/Dijkstra.js';
 
 export default class SubWayPath {
@@ -33,8 +37,6 @@ export default class SubWayPath {
     const allValues = this.getValues();
     if (this.isValid(allValues)) {
       console.log('통과');
-      this.render();
-      this.showResult();
     }
   };
 
@@ -72,12 +74,21 @@ export default class SubWayPath {
     }
     if (isSameStation(values.departureStationName, values.arrivalStationName)) {
       alert(ERROR_MESSAGE.SAME_STATION);
+      return false;
+    }
+    if (!this.checkValidSection()) {
+      alert(ERROR_MESSAGE.NOT_CONNECTED);
+      return false;
     }
     return true;
   }
 
-  checkSection() {
-    const allSection = this.getAllSections();
+  checkValidSection(values) {
+    const sectionByTime = this.timeDijkstra.findShortestPath(
+      values.departureStationName,
+      values.arrivalStationName,
+    );
+    return !isEmpty(sectionByTime);
   }
 
   getAllSections = () => this.lineList.map((line) => line.section);
