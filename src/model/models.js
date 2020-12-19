@@ -1,5 +1,8 @@
 export default class Models {
-  constructor() {
-    
+  constructor(initialInput) {
+    this._parseInitialInput(initialInput);
+  }
+  _parseInitialInput() {
+
   }
 }
