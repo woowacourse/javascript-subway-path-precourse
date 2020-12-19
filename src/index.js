@@ -1,9 +1,7 @@
-import { loadStations, loadLines, makeDijkstra } from './utils/helpers.js';
+import { stations } from './data.js';
+import { makeDijkstra, printResult } from './utils/helpers.js';
 
 export default function SubwayPath() {
-  // const app = document.getElementById('app');
-  const stations = loadStations();
-  const lines = loadLines(stations);
   const dijkstraDist = makeDijkstra('dist', stations);
   const dijkstraTime = makeDijkstra('time', stations);
 
@@ -17,9 +15,11 @@ export default function SubwayPath() {
     if (searchType === 'dist') {
       const result = dijkstraDist.findShortestPath(departStation.value, arriveStation.value);
       console.log(result);
+      printResult(result, stations);
     } else if (searchType === 'time') {
       const result = dijkstraTime.findShortestPath(departStation.value, arriveStation.value);
       console.log(result);
+      printResult(result, stations);
     }
   });
 }
