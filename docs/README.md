@@ -3,8 +3,8 @@
 ## 구현할 기능 목록
 
 1. 프로그램(App)의 UI구조
-   - [ ] App은 Header, Input, Result로 구성되어 있다.
-   - [ ] Header는 `🚇 지하철 길찾기`헤더이다.
+   - App은 Header, Input, Result로 구성되어 있다.
+   - [x] Header는 `🚇 지하철 길찾기`헤더이다.
    - [ ] Input은
      - 출발역 입력 input태그(`#departure-station-name-input`), 
      - 도착역 입력 input태그(`#arrival-station-name-input`), 
