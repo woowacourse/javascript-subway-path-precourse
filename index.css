@@ -1,0 +1,11 @@
+.input-box {
+  margin: 10px 0;
+}
+
+#radio-container {
+  display: flex;
+}
+
+#search-button {
+  margin-top: 20px;
+}
