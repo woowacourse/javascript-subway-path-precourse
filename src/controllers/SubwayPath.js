@@ -37,28 +37,17 @@ class SubwayPath {
     return route;
   };
 
-  searchNodeInfo = (toSearch, toFind) => {
-    for (let i = 0; i < toSearch.length; i++) {
-      const line = toSearch[i];
-      if (line[value.LINE_NODE_INDEX] === toFind) {
-        const nodeLength = line[value.LINE_LENGTH_INDEX];
-        const nodeTime = line[value.LINE_WEIGHT_INDEX];
-
-        return { nodeLength, nodeTime };
-      }
-    }
-  };
-
   getLengthAndTime = path => {
     let pathLength = 0;
     let pathTime = 0;
     for (let i = 0; i < path.length - 1; i++) {
-      const { nodeLength, nodeTime } = this.searchNodeInfo(
-        this.lines[path[i]],
-        path[i + 1]
+      const start = path[i];
+      const end = path[i + 1];
+      const nodeInfo = this.lines[start].find(
+        line => line[value.LINE_NODE_INDEX] === end
       );
-      pathLength += nodeLength;
-      pathTime += nodeTime;
+      pathLength += nodeInfo[value.LINE_LENGTH_INDEX];
+      pathTime += nodeInfo[value.LINE_WEIGHT_INDEX];
     }
 
     return { pathLength, pathTime };

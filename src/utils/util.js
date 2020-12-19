@@ -8,10 +8,9 @@ class util {
     while (stack.length > 0) {
       const node = stack.pop();
       if (!visited.includes(node)) {
+        const extend = lines[node].map(line => line[value.LINE_NODE_INDEX]);
+        stack = stack.concat(extend);
         visited.push(node);
-        lines[node].forEach(line => {
-          stack.push(line[0]);
-        });
       }
     }
 
