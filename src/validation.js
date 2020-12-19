@@ -1,4 +1,5 @@
 import { stationDistanceKMMap } from "./utils/data.js";
+
 const validateNameLength = (name) => name.trim().length < 2;
 
 const existStationName = (name) => !stationDistanceKMMap[name];
