@@ -23,6 +23,7 @@ export const appendContainer = () => {
   setDefaultOption('distance');
   searchButton = appendNew('button', container, '길 찾기', 'search-button');
   searchButton.addEventListener('click', (e) => requestToFindShortestPath(e));
+  appendNew('div', container, '', 'search-result');
 };
 
 const appendStationNameInputs = (container) => {
@@ -46,9 +47,9 @@ const setDefaultOption = (option) => {
 };
 
 export const appendSearchResult = (path, distance, time) => {
-  const container = document.getElementById('container');
-  const resultDiv = appendNew('div', container, '', 'search-result');
+  const resultDiv = document.getElementById('search-result');
 
+  emptyElement(resultDiv);
   appendNew('h3', resultDiv, '📝 결과');
   appendNew('h4', resultDiv, '최단거리');
   appendNew('div', resultDiv, getResultTableHTML(path, distance, time));
