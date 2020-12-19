@@ -1,8 +1,8 @@
-import MainView from './view/main_view.js';
+import MainController from './controller/main_controller.js';
 
 export default class SubwayPath {
-  constructor() {
-    new MainView();
+  constructor() {    
+    new MainController();
   }
 }
 
