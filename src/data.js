@@ -27,8 +27,8 @@ export const lines = [
     name: '2호선',
     stations: [{ name: '교대' }, { name: '강남' }, { name: '역삼' }],
     sections: [
-      { distance: '2km', time: '3분' },
-      { distance: '2km', time: '3분' },
+      { distance: '2', time: '3' },
+      { distance: '2', time: '3' },
     ],
   },
   {
@@ -40,17 +40,17 @@ export const lines = [
       { name: '매봉' },
     ],
     sections: [
-      { distance: '3km', time: '2분' },
-      { distance: '6km', time: '5분' },
-      { distance: '1km', time: '1분' },
+      { distance: '3', time: '2' },
+      { distance: '6', time: '5' },
+      { distance: '1', time: '1' },
     ],
   },
   {
     name: '신분당선',
     stations: [{ name: '강남' }, { name: '양재' }, { name: '양재시민의숲' }],
     sections: [
-      { distance: '2km', time: '8분' },
-      { distance: '10km', time: '3분' },
+      { distance: '2', time: '8' },
+      { distance: '10', time: '3' },
     ],
   },
 ];

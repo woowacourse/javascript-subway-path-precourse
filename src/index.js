@@ -10,13 +10,27 @@ export default function SubwayPath() {
     this.app.innerHTML = this.pathInput.template();
   };
 
-  this.findRoute = () => {
+  this.findRoute = (departure, arrival) => {
     const dijkstra = new Dijkstra();
-    this.addAllVertex(stations, dijkstra);
+    this.addAllStationToVertex(stations, dijkstra);
+    this.addAllDistanceToEdge(dijkstra);
+    const path = dijkstra.findShortestPath(departure, arrival);
   };
 
-  this.addAllVertex = (stations, dijkstra) => {
+  this.addAllStationToVertex = (stations, dijkstra) => {
     stations.forEach(({ name }) => dijkstra.addVertex(name));
+  };
+
+  this.addAllDistanceToEdge = dijkstra => {
+    lines.forEach(({ stations, sections }) => {
+      sections.forEach(({ distance }, index) => {
+        dijkstra.addEdge(
+          stations[index].name,
+          stations[index + 1].name,
+          distance
+        );
+      });
+    });
   };
 
   this.delegateEvent = ({ target }) => {
