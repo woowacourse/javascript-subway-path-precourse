@@ -23,6 +23,11 @@ export const CSS = {
   TABLE_COLSPAN: 2,
 };
 
+export const ERROR_MESSAGE = {
+  SAME_DEPARTURE_TO_ARRIVAL: `출발역과 도착역이 같은 역은 입력할 수 없습니다.`,
+  
+}
+
 export const TABLE_HEADER = `
 <th>총 거리</th>
 <th>총 소요시간</th>`;

@@ -1,4 +1,4 @@
-import { ID, NAME, VALUE } from "../common/const.js";
+import { ERROR_MESSAGE, ID, NAME, VALUE } from "../common/const.js";
 import Controller from "./controller.js";
 
 export default class SubwayPathController extends Controller {
@@ -29,7 +29,19 @@ class NameInputController extends Controller {
     this.addClickEventByID(ID.SEARCH_BUTTON, () => {
       const departure = this.getInputValueByID(ID.DEPARTURE_STATION_NAME_INPUT);
       const arrival = this.getInputValueByID(ID.ARRIVAL_STATION_NAME_INPUT);
+      try {
+        this._verifyInputStationNames(departure, arrival);
+      } catch (error) {
+        alert(error);
+        return;
+      }
       this.updateResultPrintView(departure, arrival);
     });
+  }
+
+  _verifyInputStationNames(departure, arrival) {
+    if (departure === arrival) {
+      throw ERROR_MESSAGE.SAME_DEPARTURE_TO_ARRIVAL;
+    }
   }
 }
