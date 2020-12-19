@@ -1,7 +1,7 @@
 import searchContainer from "./searchContainer.js";
 
-const searchHandler = () => {
-  searchContainer();
+const searchHandler = (lineData) => {
+  searchContainer(lineData);
 };
 
 export default searchHandler;

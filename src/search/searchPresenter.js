@@ -22,10 +22,16 @@ const displayInitialResult = (searchType) => {
 
   clearChilds();
   appendChilds(elements);
+
+  return true;
 };
 
 const searchPresenter = (searchType) => {
-  displayInitialResult(searchType);
+  const isInitialDisplayed = displayInitialResult(searchType);
+
+  // if(isInitialDisplayed){
+
+  // }
 };
 
 export default searchPresenter;

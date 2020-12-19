@@ -13,8 +13,22 @@ const findSelectRadio = () => {
   return searchType;
 };
 
-const searchContainer = () => {
+const getStations = () => {
+  const departureStation = document.getElementById(
+    "departure-station-name-input"
+  ).value;
+  const arrivalStation = document.getElementById("arrival-station-name-input")
+    .value;
+
+  return { departureStation, arrivalStation };
+};
+
+const searchContainer = (lineData) => {
   const searchType = findSelectRadio();
+
+  const { departureStation, arrivalStation } = getStations();
+  console.log(departureStation, arrivalStation);
+
   searchPresenter(searchType);
 };
 
