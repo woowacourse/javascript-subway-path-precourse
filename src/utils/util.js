@@ -6,6 +6,13 @@ class util {
       return message.ALERT_NOT_ENOUGH_LENGTH;
     }
   };
+
+  isDiffrentName = (departure, arrival) => {
+    if (departure === arrival) => {
+      return message.ALERT_NAME_EQUAL;
+    }
+  };
+
 }
 
-export const {} = new util();
+export const {isEnoughLength, isDiffrentName} = new util();
