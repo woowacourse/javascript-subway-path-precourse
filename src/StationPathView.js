@@ -1,3 +1,5 @@
+import { ErrorMsg } from "./data/Error.js";
+
 export default class StationPathView {
   constructor() {
     this.app = document.getElementById('app');
@@ -56,5 +58,9 @@ export default class StationPathView {
       </tr>
     </table>
     `;
+  }
+
+  alertError(errorNum) {
+    alert(ErrorMsg[errorNum]);
   }
 }
