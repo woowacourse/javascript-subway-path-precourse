@@ -22,7 +22,7 @@ export const lines = [
       {
         departureStation: '교대',
         arrivalStation: '남부터미널',
-        ddistance: 3,
+        distance: 3,
         time: 2,
       },
       {
