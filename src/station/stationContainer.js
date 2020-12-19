@@ -1,4 +1,5 @@
 import { isValidStationName } from "../utils/utils";
+import { setLocalStorage, getLocalStorage } from "../utils/LocalStorage";
 
 export default function stationContainer() {
   const stationContainer = document.querySelector("#station-manager-container");
@@ -8,6 +9,8 @@ export default function stationContainer() {
 
   const addStation = inputValue => {
     stationList.push(inputValue);
+    setLocalStorage(stationList, "stationList");
+    stationInput.value = "";
   };
 
   const init = () => {
@@ -24,5 +27,6 @@ export default function stationContainer() {
     );
   };
 
+  stationList = getLocalStorage("stationList");
   init();
 }
