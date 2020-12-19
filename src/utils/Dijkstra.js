@@ -46,12 +46,14 @@ export default function Dijkstra() {
 
       let idxOfTarget = 0;
 
+      // eslint-disable-next-line no-constant-condition
       while (true) {
         let idxOfLeftChild = idxOfTarget * 2 + 1;
         let idxOfRightChild = idxOfTarget * 2 + 2;
         let leftChild = this.values[idxOfLeftChild];
         let rightChild = this.values[idxOfRightChild];
 
+        // eslint-disable-next-line no-inner-declarations
         function swap(direction) {
           const idxOfChild =
             direction == "left" ? idxOfLeftChild : idxOfRightChild;
@@ -103,6 +105,7 @@ export default function Dijkstra() {
       this.length = 0;
     },
     addVertex: function (vertex) {
+      // eslint-disable-next-line no-prototype-builtins
       if (!this.adjacencyList.hasOwnProperty(vertex)) {
         this.adjacencyList[vertex] = {};
         this.length++;
@@ -116,14 +119,17 @@ export default function Dijkstra() {
       return this.adjacencyList;
     },
     removeEdge: function (vertex1, vertex2) {
+      // eslint-disable-next-line no-prototype-builtins
       if (!this.adjacencyList.hasOwnProperty(vertex1)) {
         return `There's no ${vertex1}`;
       }
+      // eslint-disable-next-line no-prototype-builtins
       if (!this.adjacencyList.hasOwnProperty(vertex2)) {
         return `There's no ${vertex2}`;
       }
 
       function removeHelper(v1, v2) {
+        // eslint-disable-next-line no-prototype-builtins
         if (!this.adjacencyList.hasOwnProperty(v1)) {
           return `There's no edge between ${v1} and ${v2}`;
         }
@@ -139,6 +145,7 @@ export default function Dijkstra() {
       return this.adjacencyList;
     },
     removeVertex: function (vertex) {
+      // eslint-disable-next-line no-prototype-builtins
       if (!this.adjacencyList.hasOwnProperty(vertex)) {
         return `There's no ${vertex}`;
       }
@@ -165,7 +172,7 @@ export default function Dijkstra() {
         distance[vertexName] = priority;
         previous[vertexName] = null;
       }
-
+      // eslint-disable-next-line no-constant-condition
       while (true) {
         let current = pq.dequeue();
         if (!current?.val) {
@@ -178,6 +185,7 @@ export default function Dijkstra() {
         const neighbors = hashOfVertex[current];
 
         for (const vertexName in neighbors) {
+          // eslint-disable-next-line no-prototype-builtins
           if (visited.hasOwnProperty(vertexName)) {
             continue;
           }
