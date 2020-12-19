@@ -20,7 +20,7 @@
 - 길 찾기 버튼에 이벤트리스너를 등록하는 `startManager`
 - 라디오버튼에 체크된 값, 출발역과 도착역을 검증한 뒤 다익스트라를 수행해 renderer에 데이터를 전달해주는 `buttonHandler`
 - 체크되어 있는 라디오 버튼을 찾고 값을 반환하는 `checkedButtonType`
-- 길 찾기 버튼이 눌렸을 때 그 입력값이 적절한지 검증하는 `buttonValidator`
+- 길 찾기 버튼이 눌렸을 때 그 입력값이 적절한지 검증하는 `inputValidator`
 - 해당 역이 존재하는지 검증하는 `findStation`
 - 타입(경로, 시간)에 맞는 다익스트라를 수행하고 결과를 전달하는 `runDijkstra`
 - 경로에 따라 총 거리 및 소요 시간을 계산하고 전달하는 `totalPathData`

@@ -28,7 +28,7 @@ const buttonHandler = () => {
   const deptStation = document.querySelector(DOMTag.DEPT_INPUT_QUERY).value;
   const destStation = document.querySelector(DOMTag.DEST_INPUT_QUERY).value;
 
-  if (buttonValidator(type, deptStation, destStation)) {
+  if (inputValidator(type, deptStation, destStation)) {
     const dijkstraData = runDijkstra(type, deptStation, destStation);
     if (!dijkstraData) {
       alert(ALERT.NO_PATH);
@@ -49,7 +49,7 @@ const checkedButtonType = () => {
   return type;
 };
 
-const buttonValidator = (value, dept, dest) => {
+const inputValidator = (value, dept, dest) => {
   if (!value) alert(ALERT.SELECT_RADIO_BUTTON);
   else if (dept === dest) alert(ALERT.DEPT_DEST_EQUAL);
   else if (dept.length < 2 || dest.length < 2) alert(ALERT.MINIMUM_LENGTH);
