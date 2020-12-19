@@ -5,10 +5,10 @@ const isLessThanTwoLetter = (start, end) => {
 	if (start.length < 2 || end.length < 2) {
 		if (start.length < 2) {
 			alert(errorMessage.LESS_THAN_TWO_LETTER);
-			document.getElementById(ids.STARTPOINT_INPUT_ID).value = '';
+			clearStartInput();
 		} else if (end.length < 2) {
 			alert(errorMessage.LESS_THAN_TWO_LETTER);
-			document.getElementById(ids.ENDPOINT_INPUT_ID).value = '';
+			clearEndInput();
 		}
 		return true;
 	}
@@ -18,8 +18,8 @@ const isLessThanTwoLetter = (start, end) => {
 const isSameStation = (start, end) => {
 	if (start === end) {
 		alert(errorMessage.SAME_START_END_POINT);
-		document.getElementById(ids.STARTPOINT_INPUT_ID).value = '';
-		document.getElementById(ids.ENDPOINT_INPUT_ID).value = '';
+		clearStartInput();
+		clearEndInput();
 		return true;
 	}
 	return false;
@@ -34,6 +34,12 @@ const isExistedStation = (targetStation) => {
 	alert(errorMessage.NOT_EXISTED_STATION);
 	return false;
 };
+
+export const clearStartInput = () =>
+	(document.getElementById(ids.STARTPOINT_INPUT_ID).value = '');
+
+export const clearEndInput = () =>
+	(document.getElementById(ids.ENDPOINT_INPUT_ID).value = '');
 
 export const getStartPointValue = () =>
 	document.getElementById(ids.STARTPOINT_INPUT_ID).value;
@@ -50,5 +56,7 @@ export const getValidInput = (start, end) => {
 	) {
 		return true;
 	}
+	clearStartInput();
+	clearEndInput();
 	return false;
 };

@@ -2,23 +2,19 @@ import { errorMessage, ids, words } from '../keys.js';
 import { edges, stations } from '../data.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import TableContainer from '../view/table.js';
+import { getSearhType, radioButtonInit } from './radioButtonController.js';
 import {
 	getStartPointValue,
 	getEndPointValue,
 	getValidInput,
+	clearStartInput,
+	clearEndInput,
 } from './stationInputController.js';
 import {
 	appendChilds,
 	clearAllContents,
 	makeElement,
 } from '../utils/elementUtils.js';
-
-const getSearhType = () => {
-	const radioButtons = document.getElementsByName(ids.RADIO_BUTTON_NAME);
-	for (const radioButton of radioButtons) {
-		if (radioButton.checked) return radioButton.value;
-	}
-};
 
 const getEdgeByStations = (start, end) => {
 	for (const edge of edges) {
@@ -46,9 +42,16 @@ const getTotalTimeAndDistance = (dijkstraResultPath) => {
 	return [totalTime, totalDistance];
 };
 
+const allInputClear = () => {
+	radioButtonInit();
+	clearStartInput();
+	clearEndInput();
+};
+
 const isPathExisted = (totalPath) => {
 	if (!totalPath || totalPath.length < 2) {
 		alert(errorMessage.CANNOT_FIND);
+		allInputClear();
 		return false;
 	}
 	return true;
