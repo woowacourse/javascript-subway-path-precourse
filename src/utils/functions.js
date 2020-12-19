@@ -59,12 +59,25 @@ const Functions = function () {
     setState("dijkstra", new Dijkstra());
     setState("alreadyGoneStations", []);
     const station =
-        state.stations[this.getStationIndex(state.departureStation)]
+      state.stations[this.getStationIndex(state.departureStation)];
     setEdges(station);
     return state.dijkstra.findShortestPath(
       state.departureStation,
       state.arrivalStation
     );
+  };
+
+  this.getMinimumCost = (type) => {
+    const minimumPath = this.getMinimumPath();
+    let result = 0;
+    for (let i = 0; i < minimumPath.length - 1; i++) {
+      result += state.stations[
+        this.getStationIndex(minimumPath[i])
+      ].relatedStations.filter(
+        (relatedStation) => relatedStation.name === minimumPath[i + 1]
+      )[0][type];
+    }
+    return result;
   };
 };
 
@@ -72,5 +85,7 @@ export const {
   setDepartureStation,
   setArrivalStation,
   isValid,
-  setEdges,getMinimumPath
+  setEdges,
+  getMinimumPath,
+  getMinimumCost,
 } = new Functions();
