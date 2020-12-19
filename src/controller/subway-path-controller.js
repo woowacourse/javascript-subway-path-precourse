@@ -14,25 +14,22 @@ class NameInputController extends Controller {
     super(view, models);
     this._addEventToSearchButton();
   }
+  updateResultPrintView(departure, arrival) {
+    const selectedOption = this.getSelectedRadioOptionByName(NAME.SEARCH_TYPE);
+    if (selectedOption === VALUE.DISTANCE) {
+      const result = this._models.getMinDistance(departure, arrival);
+      this._view.setResultPrintView(result, VALUE.DISTANCE);
+    } else if (selectedOption === VALUE.DURATION) {
+      const result = this._models.getMinDuration(departure, arrival);
+      this._view.setResultPrintView(result, VALUE.DURATION);
+    }
+  }
 
   _addEventToSearchButton() {
     this.addClickEventByID(ID.SEARCH_BUTTON, () => {
-      const departureStation = this.getInputValueByID(
-        ID.DEPARTURE_STATION_NAME_INPUT
-      );
-      const arrivalStation = this.getInputValueByID(
-        ID.ARRIVAL_STATION_NAME_INPUT
-      );
-      const selectedOption = this.getSelectedRadioOptionByName(
-        NAME.SEARCH_TYPE
-      );
-      if (selectedOption === VALUE.DISTANCE) {
-        const result = this._models.getMinDistance(
-          departureStation,
-          arrivalStation
-        );
-        this._view.setResultPrintView(result);
-      }
+      const departure = this.getInputValueByID(ID.DEPARTURE_STATION_NAME_INPUT);
+      const arrival = this.getInputValueByID(ID.ARRIVAL_STATION_NAME_INPUT);
+      this.updateResultPrintView(departure, arrival);
     });
   }
 }

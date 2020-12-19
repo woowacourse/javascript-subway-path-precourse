@@ -18,6 +18,17 @@ export default class Models {
       route: result.route,
     };
   }
+  getMinDuration(departure, arrival) {
+    const result = this._durationDijkstra.findShortestPath(departure, arrival);
+    const route = result.route;
+    const distance = this._getDistanceFromMinPath(route);
+    return {
+      distance: distance,
+      duration: result.costs[arrival],
+      route: result.route,
+    };
+  }
+
   parseInitialInput(lines) {
     lines.forEach((line) => {
       this._parseToDistDijkstra({
@@ -44,6 +55,17 @@ export default class Models {
       console.log(result);
     }
     return duration;
+  }
+  _getDistanceFromMinPath(route) {
+    let distance = 0;
+    for (let i = 0; i < route.length - 1; i++) {
+      const departure = route[i];
+      const arrival = route[i + 1];
+      const result = this._distDijkstra.findShortestPath(departure, arrival);
+      distance += result.costs[arrival];
+      console.log(result);
+    }
+    return distance;
   }
   _parseToDistDijkstra({ stationsOfLine, distanceWeight }) {
     for (let i = 0; i < distanceWeight.length; i++) {

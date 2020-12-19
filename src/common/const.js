@@ -41,9 +41,16 @@ export const TEMPLATE = {
     </p>
     <button id="${ID.SEARCH_BUTTON}">길찾기</button> 
     `,
-  RESULT_PRINT: `
+  DISTANCE_RESULT_PRINT: `
   <h2>📝 결과 </h2>
   <h3> 최단 거리 </h3>
+  <table id="${ID.RESULT_TABLE}" border="${CSS.TABLE_BORDER}">
+    
+  </table>
+  `,
+  DURATION_RESULT_PRINT: `
+  <h2>📝 결과 </h2>
+  <h3> 최소 시간 </h3>
   <table id="${ID.RESULT_TABLE}" border="${CSS.TABLE_BORDER}">
     
   </table>

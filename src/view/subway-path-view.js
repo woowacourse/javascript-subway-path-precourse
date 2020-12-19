@@ -1,4 +1,4 @@
-import { ID, TEMPLATE, TABLE_HEADER, CSS } from "../common/const.js";
+import { ID, TEMPLATE, TABLE_HEADER, CSS, VALUE } from "../common/const.js";
 import { makeElement } from "../utils/html-maker.js";
 import View from "./view.js";
 
@@ -21,10 +21,11 @@ export default class SubwayPathView extends View {
     ]);
     this.nameInputView = new NameInputView(ID.STATION_NAME_INPUT_CONTINAER);
   }
-  setResultPrintView(dijkstraResult) {
+  setResultPrintView(dijkstraResult, radioOption) {
     this.resultPrintView = new ResultPrintView(
       ID.RESULT_PRINT_CONTAINER,
-      dijkstraResult
+      dijkstraResult,
+      radioOption
     );
   }
 }
@@ -40,13 +41,17 @@ class NameInputView extends View {
 }
 
 class ResultPrintView extends View {
-  constructor(containerID, dijkstraResult) {
+  constructor(containerID, dijkstraResult, radioOption) {
     super(containerID);
     this.dijkstraResult = dijkstraResult;
-    this.setInitialView();
+    this.setInitialView(radioOption);
   }
-  setInitialView() {
-    this.setContainerByID(this._containerID, TEMPLATE.RESULT_PRINT);
+  setInitialView(radioOption) {
+    if (radioOption === VALUE.DISTANCE) {
+      this.setContainerByID(this._containerID, TEMPLATE.DISTANCE_RESULT_PRINT);
+    } else if (radioOption === VALUE.DURATION) {
+      this.setContainerByID(this._containerID, TEMPLATE.DURATION_RESULT_PRINT);
+    }
     this.setTableRow();
   }
 
