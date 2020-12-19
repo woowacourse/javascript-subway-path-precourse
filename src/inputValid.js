@@ -17,6 +17,6 @@ export function areStationsDifferent(departure,arrival) {
     return (departure!==arrival);
 }
 
-export function areStationsLinked(path) {
-    return (path!==false);
+export function areStationsLinked(object) {
+    return (object.path!==false);
 }

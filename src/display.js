@@ -21,7 +21,7 @@ export function changeTypeTitle(type) {
     }
 }
 
-export function display() {
-    changeTypeTitle(this.type);
+export function display(object) {
+    changeTypeTitle(object.type);
     RESULT.DISPLAY.style.display = 'block';
 }
