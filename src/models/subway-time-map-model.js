@@ -35,7 +35,7 @@ export default class SubwayTimeMap {
 		}
 	}
 
-	getShortestTime = (departureStation, arrivalStation) => {
+	getShortestTimePath = (departureStation, arrivalStation) => {
 		const shortestTime = this.subwayDistanceMap.findShortestPath(departureStation, arrivalStation);
 		
 		return shortestTime;
