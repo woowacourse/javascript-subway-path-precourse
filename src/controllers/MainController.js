@@ -4,8 +4,9 @@ import FormView from "../views/FormView.js";
 export default class MainController {
   constructor() {
     this.tag = "[MainController]";
+    this.FormView = new FormView();
   }
   init() {
-    console.log("dd");
+    this.FormView.setup(document.querySelector("#app"));
   }
 }
