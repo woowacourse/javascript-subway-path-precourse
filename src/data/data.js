@@ -3,7 +3,7 @@ export const stations = ['교대', '강남', '역삼', '남부터미널', '양�
 export const lines = [
   {
     lineName: '2호선',
-    lines: [
+    sections: [
       {
         start: '교대',
         end: '강남',
@@ -20,7 +20,7 @@ export const lines = [
   },
   {
     lineName: '3호선',
-    lines: [
+    sections: [
       {
         start: '교대',
         end: '남부터미널',
@@ -43,7 +43,7 @@ export const lines = [
   },
   {
     lineName: '3호선',
-    lines: [
+    sections: [
       {
         start: '강남',
         end: '양재',
