@@ -34,8 +34,8 @@ export default class Result {
     const path = shortestPath.join(' -> ')
     const renderer = `
       <tr>
-        <td>${totalDistance}km</td>
-        <td>${totalTime}분</td>
+        <td data-total-distance=${totalDistance}>${totalDistance}km</td>
+        <td data-total-time=${totalTime}>${totalTime}분</td>
       </tr>
       <tr>
         <td colspan="2">${path}</td>
