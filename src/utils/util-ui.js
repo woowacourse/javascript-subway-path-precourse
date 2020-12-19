@@ -17,3 +17,7 @@ export const appendNewRadioButton = (parent, labelText, id, name) => {
   radioButton.setAttribute('name', name);
   return radioButton;
 };
+
+export const emptyElement = (element) => {
+  element.innerHTML = '';
+};

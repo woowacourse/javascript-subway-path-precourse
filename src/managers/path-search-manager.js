@@ -1,3 +1,4 @@
+import { appendContainer as updateContainer } from './../managers/view-manager.js';
 import {
   ERROR_MESSAGES,
   STATION_NAME_LEN_LIMIT,
@@ -36,8 +37,17 @@ const validateOneStation = (stationName) => {
   if (!STATIONS.includes(stationName)) {
     return 'STAION_NAME_NOT_EXIST';
   }
+  return false;
+};
+
+const validateRelationshipBetweenStations = (departureName, arrivalName) => {
+  if (departureName === arrivalName) {
+    return 'BOTH_STAION_NAMES_SAME';
+  }
+  return false;
 };
 
 const processException = (exception) => {
   alert(ERROR_MESSAGES[exception]);
+  updateContainer();
 };
