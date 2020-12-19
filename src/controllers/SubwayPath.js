@@ -37,6 +37,24 @@ class SubwayPath {
     return route;
   };
 
+  countPathLengthAndTime = path => {
+    let pathLength = 0;
+    let pathTime = 0;
+    for (let i = 0; i < path.length - 1; i++) {
+      const start = path[i];
+      const end = path[i + 1];
+      this.lines[start].forEach(line => {
+        if (line[0] === end) {
+          console.log(start, end, line, pathLength, pathTime);
+          pathLength += line[1];
+          pathTime += line[2];
+        }
+      });
+    }
+
+    return { pathLength, pathTime };
+  };
+
   checkVaild = (departure, arrival) => {
     const vaild =
       isEnoughLength(departure, arrival) ||
