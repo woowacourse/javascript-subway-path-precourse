@@ -1,14 +1,22 @@
+import UserInput from "../controllers/inputValidation/userInput.js";
 import {
   DEPARTURE_STATION_INPUT_ID,
   ARRIVAL_STATION_INPUT_ID,
+  SHORTEST_PATH_SELECT_ID,
+  FASTEST_PATH_SELECT_ID,
 } from "../common/DOMelementNames.js";
 
+const getUserInput = () => {
+  return new UserInput({
+    startStation: document.getElementById(DEPARTURE_STATION_INPUT_ID).value,
+    endStation: document.getElementById(ARRIVAL_STATION_INPUT_ID).value,
+    shortestPathChecked: document.getElementById(SHORTEST_PATH_SELECT_ID)
+      .checked,
+    fastestPathChecked: document.getElementById(FASTEST_PATH_SELECT_ID).checked,
+  });
+};
+
 export default () => {
-  const $departureStationInput = document.getElementById(
-    DEPARTURE_STATION_INPUT_ID,
-  );
-  const $arrivalStationInput = document.getElementById(
-    ARRIVAL_STATION_INPUT_ID,
-  );
-  console.log($departureStationInput.value, $arrivalStationInput.value);
+  const userInput = getUserInput();
+  console.log(userInput);
 };
