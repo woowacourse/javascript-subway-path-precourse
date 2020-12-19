@@ -87,6 +87,22 @@ export default class SubwayMap {
     );
   }
 
+  getPathSumByWeightType(path, weightType) {
+    let sum = 0;
+    for (let i = 0; i < path.length - 1; i++) {
+      sum += this.stationsGraph.get(path[i])[path[i + 1]][weightType];
+    }
+    return sum;
+  }
+
+  getDistanceSum(path) {
+    return this.getPathSumByWeightType(path, WEIGHT_TYPE_DISTANCE);
+  }
+
+  getTravelTimeSum(path) {
+    return this.getPathSumByWeightType(path, WEIGHT_TYPE_TRAVEL_TIME);
+  }
+
   hasStation(station) {
     return this.stationsGraph.has(station);
   }

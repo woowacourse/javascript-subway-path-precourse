@@ -78,10 +78,24 @@ const getShortestPathBySearchType = (
   }
 };
 
+const renderDistanceSum = ($tbody, shortestPath) => {
+  const $distanceSum = $tbody.children[0].children[0];
+  $distanceSum.innerHTML = `
+    ${subwayMap.getDistanceSum(shortestPath)}km
+  `;
+};
+
+const renderTravelTimeSum = ($tbody, shortestPath) => {
+  const $travelTimeSum = $tbody.children[0].children[1];
+  $travelTimeSum.innerHTML = `
+    ${subwayMap.getTravelTimeSum(shortestPath)}분
+  `;
+};
+
 const renderShortestPath = ($tbody, shortestPath) => {
   const $route = $tbody.children[1].children[0];
   $route.innerHTML = shortestPath.reduce((_result, _station) => {
-    return (_result += `=>${_station}`);
+    return (_result += `➡︎${_station}`);
   });
 };
 
@@ -89,6 +103,8 @@ const showShortestPathTable = (resultContainer, shortestPath) => {
   const $table = resultContainer.getElementsByTagName("table")[0];
   const $tbody = $table.getElementsByTagName("tbody")[0];
   $table.style.display = "";
+  renderDistanceSum($tbody, shortestPath);
+  renderTravelTimeSum($tbody, shortestPath);
   renderShortestPath($tbody, shortestPath);
 };
 
@@ -105,8 +121,6 @@ const showResult = (appContainer) => {
 };
 
 export default function searchButtonHandler(e) {
-  console.log("clicked");
-  console.log(e.target.parentElement);
   if (isInputsValid(e.target.parentElement)) {
     showResult(e.target.parentElement);
   }
