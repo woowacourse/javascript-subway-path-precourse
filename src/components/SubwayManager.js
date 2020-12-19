@@ -1,5 +1,5 @@
 import ValidateSubwayManager from "./ValidateSubwayManager.js";
-import PrintSubwayManager from "./PrintSubwayManager.js";
+import SearchLineManager from "./SearchLineManager.js";
 import { stations, lines } from "../@shared/data.js";
 import {
   hideElement,
@@ -35,7 +35,7 @@ class SubwayManager {
       this.getStations,
       this.getLines
     );
-    this.printSubwayManager = new PrintSubwayManager();
+    this.searchLineManager = new SearchLineManager();
   };
 
   resetState = () => {
@@ -70,7 +70,7 @@ class SubwayManager {
 
     if (isValidUserState) {
       showElement(this.$resultContainer);
-      this.printSubwayManager.print();
+      this.searchLineManager.print();
     }
   };
 
