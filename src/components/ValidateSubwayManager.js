@@ -46,14 +46,6 @@ class ValidateSubwayManager {
     );
   };
 
-  isValidStationsSection = () => {
-    return isValidSection(
-      this.$arrivalStationInput,
-      this.departureStation,
-      this.arrivalStation,
-      this.lines
-    );
-  };
 
   checkNameValidation = () => {
     const userState = this.getState();
@@ -65,7 +57,6 @@ class ValidateSubwayManager {
     if (!this.isValidDepartureStation()) return false;
     if (!this.isValidArrivalStation()) return false;
     if (this.isDuplicatedStation()) return false;
-    if (!this.isValidStationsSection()) return false;
 
     return true;
   };
