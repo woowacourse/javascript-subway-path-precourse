@@ -1,12 +1,17 @@
 import Dijkstra from "./Dijkstra.js";
-import { printTable } from "./view";
-
+import { visibleToggle, printTable } from "./view.js";
 export function findRoads(departure, arrival) {
+  let result;
+  let num;
   if (document.getElementsByName("search-type")[0].checked === true) {
-    addValue(0, this, departure, arrival);
+    num = 0;
+    result = addValue(num, this, departure, arrival);
   } else {
-    addValue(1, this, departure, arrival);
+    num = 1;
+    result = addValue(num, this, departure, arrival);
   }
+  visibleToggle();
+  printTable(num, result, this);
 }
 
 export const addValue = (num, stations, departure, arrival) => {
@@ -17,5 +22,5 @@ export const addValue = (num, stations, departure, arrival) => {
       dijkstra.addEdge(element.name, nextStation, next[nextStation][num]);
     });
   });
-  const result = dijkstra.findShortestPath(departure, arrival);
+  return dijkstra.findShortestPath(departure, arrival);
 };
