@@ -19,7 +19,19 @@ export default class Subway {
       }
     });
     const result = dijkstra.findShortestPath(departure, arrival);
-    findTotalTimeAndDistance(result);
+
+    return result;
+  }
+
+  findShortTime(departure, arrival) {
+    const dijkstra = new Dijkstra();
+    this.splitedSection.forEach((station) => {
+      const {names, time} = station;
+      for (let i = 0; i < time.length; i++) {
+        dijkstra.addEdge(names[i], names[i + 1], time[i]);
+      }
+    });
+    const result = dijkstra.findShortestPath(departure, arrival);
 
     return result;
   }
