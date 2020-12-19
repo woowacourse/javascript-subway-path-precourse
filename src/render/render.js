@@ -8,6 +8,11 @@ const renderDistanceTable = (distance) => {
   $distanceTable.innerHTML = `${distance}km`;
 };
 
+const renderTimeTable = (time) => {
+  const $timeTable = document.querySelector('#time-table');
+  $timeTable.innerHTML = `${time}분`;
+};
+
 const renderResultTable = () => {
   const $resultContainer = document.querySelector('#result-container');
   $resultContainer.removeAttribute('hidden');
@@ -21,4 +26,5 @@ export const render = (route, distance, time) => {
   renderResultTable();
   renderRouteTable(route.join('➡'));
   renderDistanceTable(distance);
+  renderTimeTable(time);
 };
