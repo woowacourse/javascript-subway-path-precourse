@@ -14,7 +14,8 @@ export default class FindRoute extends Component {
     this.state = {
       start: "",
       end: "",
-      method: "min-time",
+      method: "min-distance",
+      total: [],
     };
 
     this.handleDepartureStation = (departure) => {
@@ -48,9 +49,14 @@ export default class FindRoute extends Component {
       this.setState({ ...this.state, method: distance });
       console.log(this.state);
     };
+
     this.handleTimeInput = (time) => {
       this.setState({ ...this.state, method: time });
       console.log(this.state);
+    };
+
+    this.findRouteButtonClick = () => {
+      this.setState({ ...this.state, total: [{ ...this.state }] });
     };
   }
 
@@ -78,10 +84,13 @@ export default class FindRoute extends Component {
     minimumTimeInput.addEventListener("change", (event) => {
       this.handleTimeInput(event.target.value);
     });
+
+    const findRouteButton = document.querySelector("#search-button");
+    findRouteButton.addEventListener("click", this.findRouteButtonClick);
   }
 
   render() {
-    const { start, end, method } = this.state;
+    const { start, end, method, total } = this.state;
     return `
           <h2>🚇 지하철 길찾기</h2>
           <div>
@@ -101,26 +110,40 @@ export default class FindRoute extends Component {
             <label for="min-time">최소시간</label>
           </div>
           <button id="search-button">길 찾기</button>
-          <div>
-            <h3>결과</h3>
-            <h4>최소시간</h4>
-            <table>
-              <thead>
-                <tr>
-                  <td>총 거리</td>
-                  <td>총 소요 시간</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>5km</td>
-                  <td>4분</td>
-                </tr>
-                <tr>
-                  <td colspan="2">교대 → 강남</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>`;
+          ${
+            total.length === 0
+              ? ""
+              : `<div>
+          <h3>결과</h3>
+          <h4>최소시간</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>총 거리</td>
+                <td>총 소요 시간</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>5km</td>
+                <td>4분</td>
+              </tr>
+              <tr>
+                <td colspan="2">교대 → 강남</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>`
+          }
+          `;
   }
+}
+
+function isNull(tableNumber) {
+  return String(tableNumber) === "null" || String(tableNumber) === "undefined";
+}
+
+function renderIf(value, renderString) {
+  const result = value ? renderString : "";
+  return result;
 }
