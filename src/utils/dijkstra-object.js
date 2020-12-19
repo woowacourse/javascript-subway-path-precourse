@@ -1,5 +1,5 @@
 import Dijkstra from "./Dijkstra.js";
-import { lineInfo } from "../line-info.js";
+import { lineInfo } from "./line-info.js";
 export const dijkstraByDistance = new Dijkstra();
 for (let i in lineInfo) {
   for (let j = 0; j < lineInfo[i].stationList.length - 1; j++) {
