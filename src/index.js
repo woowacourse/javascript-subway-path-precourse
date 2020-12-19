@@ -20,3 +20,14 @@ function subwayPath() {
 }
 
 new subwayPath();
+
+// 결과 화면 그리기 table을 만들어야 함
+function resultPath() {
+  const app = document.getElementById("app");
+  const subwayPathHTML = `
+    <div id="result">
+      <h2>📝 결과</h2> 
+    </div>
+  `;
+  app.append(makeStringToHTML(subwayPathHTML).firstElementChild);
+}
