@@ -54,8 +54,8 @@ export default function Dijkstra() {
 
         function swap(direction) {
           const idxOfChild =
-            direction == "left" ? idxOfLeftChild : idxOfRightChild;
-          const child = direction == "left" ? leftChild : rightChild;
+            direction == 'left' ? idxOfLeftChild : idxOfRightChild;
+          const child = direction == 'left' ? leftChild : rightChild;
           this.values[idxOfChild] = this.values[idxOfTarget];
           this.values[idxOfTarget] = child;
           idxOfTarget = idxOfChild;
@@ -67,14 +67,14 @@ export default function Dijkstra() {
 
         if (!rightChild) {
           if (leftChild.priority < lastItem.priority) {
-            swap.call(this, "left");
+            swap.call(this, 'left');
             continue;
           }
           return dequeued;
         }
 
         if (leftChild.priority == rightChild.priority) {
-          swap.call(this, "left");
+          swap.call(this, 'left');
           continue;
         }
 
@@ -82,7 +82,7 @@ export default function Dijkstra() {
           leftChild.priority < rightChild.priority &&
           leftChild.priority < lastItem.priority
         ) {
-          swap.call(this, "left");
+          swap.call(this, 'left');
           continue;
         }
 
@@ -90,7 +90,7 @@ export default function Dijkstra() {
           rightChild.priority < leftChild.priority &&
           rightChild.priority < lastItem.priority
         ) {
-          swap.call(this, "right");
+          swap.call(this, 'right');
           continue;
         }
       }
@@ -150,7 +150,7 @@ export default function Dijkstra() {
     },
     findShortestRoute: function (start, end) {
       if (!start || !end) {
-        throw Error("출발지와 도착지를 모두 입력해야 합니다.");
+        throw Error('출발지와 도착지를 모두 입력해야 합니다.');
       }
       const distance = {};
       const previous = {};
@@ -209,10 +209,11 @@ export default function Dijkstra() {
   };
 
   this.findShortestPath = (source, target) => {
+    console.log(WeightedGraph);
     return WeightedGraph.findShortestRoute(source, target);
   };
 
-  this.addVertex = (vertex) => {
+  this.addVertex = vertex => {
     WeightedGraph.addVertex(vertex);
   };
 
