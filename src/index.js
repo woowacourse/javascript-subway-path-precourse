@@ -3,6 +3,7 @@ import {
   isCorrectStationName,
   isExistingStation,
   notExistingRoute,
+  removeBlank,
 } from "./utils/exception-handling.js";
 import { FindRoute } from "./utils/find-route.js";
 
@@ -65,11 +66,12 @@ export const showResult = (searchType, departureStation, arrivalStation) => {
 };
 const btnSearch = document.getElementById("search-button");
 btnSearch.onclick = () => {
-  const departureStation = document.getElementById(
-    "departure-station-name-input"
-  ).value;
-  const arrivalStation = document.getElementById("arrival-station-name-input")
+  let departureStation = document.getElementById("departure-station-name-input")
     .value;
+  let arrivalStation = document.getElementById("arrival-station-name-input")
+    .value;
+  departureStation = removeBlank(departureStation);
+  arrivalStation = removeBlank(arrivalStation);
   const searchType = getSearchType();
   if (
     isExistingStation(departureStation, arrivalStation) &&

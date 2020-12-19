@@ -35,3 +35,6 @@ export const notExistingRoute = () => {
   alert("존재하지 않는 노선입니다.");
   resetInput();
 };
+export const removeBlank = (name) => {
+  return name.trim();
+};
