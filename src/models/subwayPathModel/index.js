@@ -61,24 +61,18 @@ export default class SubwayPathModel {
   }
 
   findShortestPath(startStation, endStation) {
-    console.log(this.dijkstraForShortestPath.findShortestPath(startStation, endStation));
-
     const shortestPath = this.dijkstraForShortestPath.findShortestPath(startStation, endStation);
-    const minimunTimePath = this.dijkstraForMinimumTimePath.findShortestPath(
-      startStation,
-      endStation,
-    );
-    this.calculateDistanceOfPath(shortestPath);
-    this.calculateTimeOfPath(minimunTimePath);
+
+    return [shortestPath, this.calculateDistanceOfPath(shortestPath)];
   }
 
   findMinimumTimePath(startStation, endStation) {
-    console.log(this.dijkstraForMinimumTimePath.findShortestPath(startStation, endStation));
-
     const minimunTimePath = this.dijkstraForMinimumTimePath.findShortestPath(
       startStation,
       endStation,
     );
+
+    return [minimunTimePath, this.calculateTimeOfPath(minimunTimePath)];
   }
 
   calculateDistanceOfPath(shortestPath) {
@@ -129,10 +123,5 @@ export default class SubwayPathModel {
       costForDistance,
       costForTime,
     );
-  }
-
-  findsAllKindOfPath(startStation, endStation) {
-    this.findShortestPath(startStation, endStation);
-    this.findMinimumTimePath(startStation, endStation);
   }
 }

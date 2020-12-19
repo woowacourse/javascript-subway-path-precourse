@@ -26,9 +26,22 @@ export default class SubwayPathViewEventDelegators {
     const endStation = this.appContainer.querySelector('#subway-path-end-station-input').value;
     const radioButtons = this.appContainer.querySelectorAll('.subway-path-radio-button');
 
-    this.getCheckedButtonValue(radioButtons);
+    const how = this.getCheckedButtonValue(radioButtons);
+    const result = this.viewModel.searchPath(startStation, endStation, how);
 
-    console.log(startStation, endStation);
+    if (how === 'searchShortestPath') {
+      this.view.resetSubwayPathResultContainer();
+      this.view.renderHeadingForShortestPath();
+      this.view.renderTableContainer();
+      this.view.renderTable(result);
+    }
+
+    if (how === 'searchMinumumTimePath') {
+      this.view.resetSubwayPathResultContainer();
+      this.view.renderHeadingForMinumumTimePath();
+      this.view.renderTableContainer();
+      this.view.renderTable(result);
+    }
   }
 
   getCheckedButtonValue(radioButtons) {
@@ -36,7 +49,6 @@ export default class SubwayPathViewEventDelegators {
       return button.checked;
     });
 
-    console.log(checkedButton[0].value);
-    return checkedButton[0];
+    return checkedButton[0].value;
   }
 }

@@ -32,6 +32,11 @@ const message = {
   SHORTEST_DISTANCE: '최단거리',
   MINIMUN_TIME: '최소시간',
   SEARCH: '길 찾기',
+  RESULT: '결과',
+  ENTIRE_DISTANCE: '총 거리',
+  ENTIRE_TIME: '총 소요 시간',
+  KM: 'km',
+  MINUTES: '분',
 };
 
 export { courses, stations, message };
