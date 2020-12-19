@@ -6,10 +6,15 @@ class SubwayPathView {
     this.handleButtonClick();
   }
 
-  createResultTemplate = (option, pathLength, pathTime, path) => {
+  createResultTemplate = option => {
     return `
     <h1>📝 결과</h1>
     <h2>${option}</h2>
+    `;
+  };
+
+  createResultTable = (pathLength, pathTime, path) => {
+    return `
     <table border="2">
         <th>총 거리</th>
         <th>총 소요 시간</th>
@@ -27,8 +32,8 @@ class SubwayPathView {
   renderResult = (option, pathLength, pathTime, path) => {
     const resultContainer = document.getElementById("subway-path-output");
     resultContainer.innerHTML = "";
-    resultContainer.innerHTML += this.createResultTemplate(
-      option,
+    resultContainer.innerHTML += this.createResultTemplate(option);
+    resultContainer.innerHTML += this.createResultTable(
       pathLength,
       pathTime,
       path
