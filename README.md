@@ -16,6 +16,13 @@
 - 종류에 따라 타이틀을 변경시키고, 컨테이너를 비워준 뒤 내용을 채워넣는 `renderer`
 - renderer 내부에서 테이블에 데이터를 채워넣는 `constructTable`
 
+### component/manager.js
+- 길 찾기 버튼에 이벤트리스너를 등록하는 `startManager`
+- 체크되어 있는 라디오 버튼을 찾고, 출발역과 도착역을 검증한 뒤 다익스트라를 수행해 renderer에 데이터를 전달해주는 `buttonHandler`
+- 길 찾기 버튼이 눌렸을 때 그 입력값이 적절한지 검증하는 `buttonValidator`
+- 타입(경로, 시간)에 맞는 다익스트라를 수행하고 결과를 전달하는 `runDijkstra`
+- 경로에 따라 총 거리 및 소요 시간을 계산하고 전달하는 `totalPathData`
+
 ### consts/data.js
 - 초기화에 필요한 데이터 정보들을 저장한다.
 
