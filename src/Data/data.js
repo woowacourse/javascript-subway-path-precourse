@@ -20,7 +20,7 @@ export const sections = [
     station: "교대",
     adjacent: [
       { station: "강남", dist: 2, time: 3 },
-      { station: "남부터미널", dist: 6, time: 5 }
+      { station: "남부터미널", dist: 3, time: 2 }
     ]
   },
   {
@@ -34,8 +34,8 @@ export const sections = [
   {
     station: "남부터미널",
     adjacent: [
-      { station: "양재", dist: 1, time: 1 },
-      { station: "교대", dist: 3, time: 2 }
+      { station: "교대", dist: 3, time: 2 },
+      { station: "양재", dist: 6, time: 5 },
     ]
   },
   {
