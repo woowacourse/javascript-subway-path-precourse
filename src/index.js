@@ -1,10 +1,10 @@
-import { lineInfo } from "./utils/line-info.js";
 import { dijkstraByDistance, dijkstraByTime } from "./utils/dijkstra-object.js";
 import {
   isCorrectStationName,
   isExistingStation,
   notExistingRoute,
 } from "./utils/exception-handling.js";
+import { FindRoute } from "./utils/find-route.js";
 
 export const getSearchType = () => {
   const type = document.getElementsByName("search-type");
@@ -13,34 +13,11 @@ export const getSearchType = () => {
   }
   return "최소시간";
 };
-export const getOneDistanceAndTime = (startStation, endStation) => {
-  for (let i in lineInfo) {
-    const line = lineInfo[i];
-    for (let idx = 0; idx < line.stationList.length - 1; idx++) {
-      if (
-        startStation === line.stationList[idx] &&
-        endStation === line.stationList[idx + 1]
-      ) {
-        return [line.distanceInfo[idx], line.timeInfo[idx]];
-      }
-    }
-  }
-  return [0, 0];
-};
-export const getTotalDistanceAndTime = (route) => {
-  let totalDistance = 0;
-  let totalTime = 0;
-  for (let i = 0; i < route.length - 1; i++) {
-    totalDistance += getOneDistanceAndTime(route[i], route[i + 1])[0];
-    totalTime += getOneDistanceAndTime(route[i], route[i + 1])[1];
-  }
-  return [totalDistance, totalTime];
-};
-
 export const getResultInfo = (departureStation, arrivalStation, dijkstra) => {
-  const route = dijkstra.findShortestPath(departureStation, arrivalStation);
-  const [totalDistance, totalTime] = getTotalDistanceAndTime(route);
-  const shortestRoute = route.join(" => ");
+  const finder = new FindRoute(departureStation, arrivalStation, dijkstra);
+  const totalDistance = finder.getTotalDistance();
+  const totalTime = finder.getTotalTime();
+  const shortestRoute = finder.getRoute();
 
   return [totalDistance, totalTime, shortestRoute];
 };
