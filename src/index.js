@@ -10,13 +10,19 @@ import { Dijkstra, isConnectedStation } from './utils/index.js';
 
 export default function SubwayPath() {
   this.app = document.getElementById(APP);
+  this.stations = stations;
+  this.lines = lines;
   this.header = {};
   this.pathInput = {};
   this.PathResult = {};
 
+  this.getStations = () => {
+    return this.stations;
+  };
+
   this.findPath = (departure, arrival, search_type) => {
     const dijkstra = new Dijkstra();
-    this.addAllStationToVertex(stations, dijkstra);
+    this.addAllStationToVertex(dijkstra);
     this.addEdge(search_type, dijkstra);
     const path = dijkstra.findShortestPath(departure, arrival);
     if (this.isValidRoute(path)) {
@@ -25,8 +31,8 @@ export default function SubwayPath() {
     }
   };
 
-  this.addAllStationToVertex = (stations, dijkstra) => {
-    stations.forEach(({ name }) => dijkstra.addVertex(name));
+  this.addAllStationToVertex = dijkstra => {
+    this.stations.forEach(({ name }) => dijkstra.addVertex(name));
   };
 
   this.addEdge = (search_type, dijkstra) => {
@@ -38,7 +44,7 @@ export default function SubwayPath() {
   };
 
   this.addAllDistanceToEdge = dijkstra => {
-    lines.forEach(({ stations, sections }) => {
+    this.lines.forEach(({ stations, sections }) => {
       sections.forEach(({ distance }, index) => {
         dijkstra.addEdge(
           stations[index].name,
@@ -50,7 +56,7 @@ export default function SubwayPath() {
   };
 
   this.addAllTimeToEdge = dijkstra => {
-    lines.forEach(({ stations, sections }) => {
+    this.lines.forEach(({ stations, sections }) => {
       sections.forEach(({ time }, index) => {
         dijkstra.addEdge(stations[index].name, stations[index + 1].name, time);
       });
@@ -69,7 +75,7 @@ export default function SubwayPath() {
   this.getTotalDistanceAndTime = path => {
     let [totalDistance, totalTime, start] = [0, 0, 0];
     while (start < path.length - 1) {
-      lines.forEach(({ stations, sections }) => {
+      this.lines.forEach(({ stations, sections }) => {
         sections.forEach(({ distance, time }, index) => {
           if (this.isSameSection(stations, index, path, start)) {
             totalDistance += Number(distance);
@@ -84,8 +90,10 @@ export default function SubwayPath() {
 
   this.isSameSection = (stations, index, path, start) => {
     return (
-      stations[index].name === path[start] &&
-      stations[index + 1].name === path[start + 1]
+      (stations[index].name === path[start] &&
+        stations[index + 1].name === path[start + 1]) ||
+      (stations[index + 1].name === path[start] &&
+        stations[index].name === path[start + 1])
     );
   };
 
@@ -98,7 +106,10 @@ export default function SubwayPath() {
   };
 
   this.header = new Header();
-  this.pathInput = new PathInput({ findPath: this.findPath });
+  this.pathInput = new PathInput({
+    getStations: this.getStations,
+    findPath: this.findPath,
+  });
   this.pathResult = new PathResult();
   this.app.addEventListener('click', this.handleClickApp);
 }

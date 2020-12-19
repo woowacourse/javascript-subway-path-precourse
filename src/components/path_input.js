@@ -1,4 +1,3 @@
-import { stations } from '../data.js';
 import {
   ARRIVAL_STATION_NAME_INPUT,
   DEPARTURE_STATION_NAME_INPUT,
@@ -16,7 +15,7 @@ import {
   isValidInputLength,
 } from '../utils/index.js';
 
-export default function PathInput({ findPath }) {
+export default function PathInput({ getStations, findPath }) {
   this.pathInputConatiner = document.querySelector('.path-input-container');
 
   this.template = () => {
@@ -45,6 +44,7 @@ export default function PathInput({ findPath }) {
   };
 
   this.isValid = (departure, arrival) => {
+    const stations = getStations();
     if (!isRegistredStation(departure, arrival, stations)) {
       alert(NOT_REGISTRED_STATION);
       return false;
