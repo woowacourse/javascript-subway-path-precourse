@@ -11,24 +11,33 @@ export const startManager = () => {
   const findingPathButton = document.querySelector(
     DOMTag.FINDING_PATH_BUTTON_QUERY
   );
+
   findingPathButton.addEventListener("click", buttonHandler);
 };
 
 const buttonHandler = () => {
-  let type;
-  const radioButtons = document.getElementsByName(DOMTag.RADIO_BUTTON_NAME);
-  for (let idx = 0; idx < radioButtons.length; idx++) {
-    if (radioButtons[idx].checked) type = radioButtons[idx].value;
-  }
+  let type = checkedButtonType();
 
   const deptStation = document.querySelector(DOMTag.DEPARTURE_INPUT_QUERY)
     .value;
   const destStation = document.querySelector(DOMTag.DESTINATION_INPUT_QUERY)
     .value;
+
   if (buttonValidator(type, deptStation, destStation)) {
     const dijkstraData = runDijkstra(type, deptStation, destStation);
     renderer(type, dijkstraData);
   }
+};
+
+const checkedButtonType = () => {
+  let type;
+
+  const radioButtons = document.getElementsByName(DOMTag.RADIO_BUTTON_NAME);
+  for (let idx = 0; idx < radioButtons.length; idx++) {
+    if (radioButtons[idx].checked) type = radioButtons[idx].value;
+  }
+
+  return type;
 };
 
 const buttonValidator = (value, dept, dest) => {
