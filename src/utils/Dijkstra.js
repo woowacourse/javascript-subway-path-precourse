@@ -200,7 +200,7 @@ export default function Dijkstra() {
         node = previous[node];
       }
 
-      return route;
+      return { route, distance };
     },
   };
 
