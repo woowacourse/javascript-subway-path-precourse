@@ -55,10 +55,13 @@ class RouteInput extends Component {
 
   isValidInput(departureStation, arrivalStation) {
     const MINIMUM_INPUT_LENGTH = 2;
+    const { stations } = this._props;
     return (
       departureStation.length >= MINIMUM_INPUT_LENGTH &&
       arrivalStation.length >= MINIMUM_INPUT_LENGTH &&
-      arrivalStation !== departureStation
+      arrivalStation !== departureStation &&
+      stations.includes(departureStation) &&
+      stations.includes(arrivalStation)
     );
   }
 
