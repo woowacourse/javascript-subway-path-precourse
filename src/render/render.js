@@ -1,3 +1,8 @@
+const renderResultTable = () => {
+  const $resultContainer = document.querySelector('#result-container');
+  $resultContainer.removeAttribute('hidden');
+};
+
 const renderRouteTable = (route) => {
   const $routeTable = document.querySelector('#route-table');
   $routeTable.innerHTML = route;
@@ -11,11 +16,6 @@ const renderDistanceTable = (distance) => {
 const renderTimeTable = (time) => {
   const $timeTable = document.querySelector('#time-table');
   $timeTable.innerHTML = `${time}분`;
-};
-
-const renderResultTable = () => {
-  const $resultContainer = document.querySelector('#result-container');
-  $resultContainer.removeAttribute('hidden');
 };
 
 export const render = (route, distance, time) => {

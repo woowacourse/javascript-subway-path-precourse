@@ -16,7 +16,7 @@ const getStationDistance = (start, end) => {
   return result[0];
 };
 
-const getDistance = (route) => {
+const getTotalDistance = (route) => {
   let result = 0;
   const stations = [...route];
   while (stations.length > 1) {
@@ -41,7 +41,7 @@ const getStationTime = (start, end) => {
   return result[0];
 };
 
-const getTime = (route) => {
+const getTotalTime = (route) => {
   let result = 0;
   const stations = [...route];
   while (stations.length > 1) {
@@ -91,10 +91,10 @@ export const getReuslt = (inputStations) => {
   const option = getSelected();
   if (option === 'distance') {
     const route = getDistanceResult(inputStations, option);
-    render(route, getDistance(route), getTime(route));
+    render(route, getTotalDistance(route), getTotalTime(route));
   }
   if (option === 'time') {
     const route = getTimeResult(inputStations, option);
-    render(route, getDistance(route), getTime(route));
+    render(route, getTotalDistance(route), getTotalTime(route));
   }
 };
