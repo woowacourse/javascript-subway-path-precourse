@@ -22,6 +22,15 @@ export default class App {
     return searchTypeInputField.value;
   }
 
+  validateStationNameLength(departureStationName, arrivalStationName) {
+    if (
+      departureStationName.length < this.stationService.MIN_STATION_NAME_LENGTH ||
+      arrivalStationName.length < this.stationService.MIN_STATION_NAME_LENGTH
+    ) {
+      throw new Error("역 이름은 두글자 이상이어야 합니다.");
+    }
+  }
+
   validateStationExist(departureStationName, arrivalStationName) {
     const isDepartureStationExist = this.stationService.findByName(departureStationName).length;
     const isArrivalStationExist = this.stationService.findByName(arrivalStationName).length;
