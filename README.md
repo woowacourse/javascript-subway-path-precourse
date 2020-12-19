@@ -2,6 +2,10 @@
 
 - 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.
 
+### URL
+
+#### https://yungo1846.github.io/javascript-subway-path-precourse/
+
 ### 디렉토리 구조
 
 ```bash
