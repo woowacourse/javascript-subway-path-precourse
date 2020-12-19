@@ -1,5 +1,6 @@
 import { ids, words } from '../keys.js';
 import { appendChilds, makeElement } from '../utils/elementUtils.js';
+import { findPathButtonHandler } from '../controller/mainController.js';
 
 const StationInputContainer = function () {
 	const stationInputContainer = makeElement({ tag: 'div' });
@@ -75,6 +76,7 @@ const MainView = function (container) {
 		tag: 'button',
 		innerText: words.FINDPATH_BUTTON,
 		id: ids.FINDPAHT_BUTTON_ID,
+		clickEvent: findPathButtonHandler,
 	});
 	const resultTitle = makeElement({ tag: 'strong', innerText: words.RESULT });
 
