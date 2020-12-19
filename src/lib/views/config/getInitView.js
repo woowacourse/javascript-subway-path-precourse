@@ -1,6 +1,12 @@
-import Apptitle from "../sections/Apptitle.js";
+import Apptitle from "../components/Apptitle.js";
+import InputContainer from "../components/containers/InputContainer.js";
+import ResultContainer from "../components/containers/ResultContainer.js";
+import addChildrenToParentNode from "./addChildrenToParentNode.js";
 
 export default () => {
   const $appContainer = document.getElementById("app");
-  $appContainer.appendChild(Apptitle.element);
+  addChildrenToParentNode(
+    [Apptitle, InputContainer, ResultContainer],
+    $appContainer,
+  );
 };
