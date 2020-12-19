@@ -19,12 +19,11 @@ export const checkBlank = (departureStation, arrivalStation) => {
 export const checkStationExist = (departureStation, arrivalStation) => {
   let isExist = false;
 
-  if (INITIAL_STATION.includes(departureStation)) {
+  if (
+    INITIAL_STATION.includes(departureStation) &&
+    INITIAL_STATION.includes(arrivalStation)
+  ) {
     isExist = true;
-  } else if (INITIAL_STATION.includes(arrivalStation)) {
-    isExist = true;
-  } else {
-    isExist = false;
   }
 
   return isExist;
