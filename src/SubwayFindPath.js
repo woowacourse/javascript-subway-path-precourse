@@ -3,10 +3,11 @@ import { FindPathInputs } from './components/FindPathInputs.js';
 export class SubwayFindPath {
   constructor() {
     this.initializeData();
+    this.initializeComponents();
   }
 
   initializeComponents = () => {
-    this.findPathInputs = FindPathInputs();
+    this.findPathInputs = new FindPathInputs();
   };
 
   initializeData = () => {
