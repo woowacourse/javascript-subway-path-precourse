@@ -53,8 +53,7 @@ export default function Dijkstra() {
         let rightChild = this.values[idxOfRightChild];
 
         function swap(direction) {
-          const idxOfChild =
-            direction == "left" ? idxOfLeftChild : idxOfRightChild;
+          const idxOfChild = direction == "left" ? idxOfLeftChild : idxOfRightChild;
           const child = direction == "left" ? leftChild : rightChild;
           this.values[idxOfChild] = this.values[idxOfTarget];
           this.values[idxOfTarget] = child;
@@ -78,18 +77,12 @@ export default function Dijkstra() {
           continue;
         }
 
-        if (
-          leftChild.priority < rightChild.priority &&
-          leftChild.priority < lastItem.priority
-        ) {
+        if (leftChild.priority < rightChild.priority && leftChild.priority < lastItem.priority) {
           swap.call(this, "left");
           continue;
         }
 
-        if (
-          rightChild.priority < leftChild.priority &&
-          rightChild.priority < lastItem.priority
-        ) {
+        if (rightChild.priority < leftChild.priority && rightChild.priority < lastItem.priority) {
           swap.call(this, "right");
           continue;
         }
@@ -199,7 +192,6 @@ export default function Dijkstra() {
         route.unshift(node);
         node = previous[node];
       }
-
       return route;
     },
   };

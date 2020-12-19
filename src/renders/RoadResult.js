@@ -1,4 +1,4 @@
-function resultContainerTemplate(information) {
+function resultContainerTemplate(information, result) {
   return `<h2>📑결과<h3>
               <h3>${information}<h3>
               <table id="map-result-table" border="1">
