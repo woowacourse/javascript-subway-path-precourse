@@ -15,7 +15,6 @@ export const validateStationNames = (departureName, arrivalName) => {
 
 const validateOneStation = (stationName) => {
   stationName = stationName.replace(' ', '');
-
   if (stationName.length === 0) {
     return 'STAION_NAME_ONLY_SPACE';
   }
