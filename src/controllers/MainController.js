@@ -76,10 +76,8 @@ export default class MainController {
     console.log(this.tag, "totalDistance()", result);
     let distance = 0;
     let time = 0;
-    let count = 0;
 
     while (result.length) {
-      count++;
       const nowResult = result[0];
       Lines.forEach((lineInfo) => {
         const stations = lineInfo.stations;
@@ -92,19 +90,16 @@ export default class MainController {
           result[1] === stations[stationIndex + 1]
         ) {
           result.shift();
-          console.log(result);
           distance += lineInfo.distance[stationIndex];
           time += lineInfo.time[stationIndex];
         }
       });
 
-      if (count > 30) break;
+      if (result.length === 1) break;
     }
     console.log(distance, time);
     return { distance, time };
   }
-
-  totalTime(result) {}
 
   radioOptionText(option) {
     if (option === "distance") return "최단거리";
@@ -145,7 +140,6 @@ export default class MainController {
     }
 
     return new Error("잘못된 radio value 값");
-    // console.log("option----", this.radioOption);
   }
 
   isValidStationName(departureStation, arrivalStation) {
