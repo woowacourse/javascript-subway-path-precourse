@@ -1,4 +1,4 @@
-import { allStation } from "./line-info.js";
+import { allStation, lineInfo } from "./line-info.js";
 import { dijkstraByDistance, dijkstraByTime } from "./utils/dijkstra-object.js";
 export const getSearchType = () => {
   const type = document.getElementsByName("search-type");
@@ -19,10 +19,30 @@ export const isExistingStation = (departureStation, arrivalStation) => {
   return false;
 };
 export const isExistingRoute = () => {};
+export const getOneDistance = (startStation, endStation) => {
+  for (let i in lineInfo) {
+    const line = lineInfo[i];
+    for (let idx = 0; idx < line.stationList.length - 1; idx++) {
+      if (
+        startStation === line.stationList[idx] &&
+        endStation === line.stationList[idx + 1]
+      ) {
+        return line.distanceInfo[idx];
+      }
+    }
+  }
+};
+export const getTotalDistance = (route) => {
+  let totalDistance = 0;
+  for (let i = 0; i < route.length - 1; i++) {
+    totalDistance += getOneDistance(route[i], route[i + 1]);
+  }
+  return totalDistance;
+};
 export const getResultInfo = (departureStation, arrivalStation, dijkstra) => {
-  const totalDistance = getTotalDistance();
-  const totalTime = getTotalTime();
   const route = dijkstra.findShortestPath(departureStation, arrivalStation);
+  const totalDistance = getTotalDistance(route);
+  const totalTime = getTotalTime(route);
   const shortestRoute = route.join(" => ");
 
   return [totalDistance, totalTime, shortestRoute];
