@@ -23,17 +23,20 @@ export default class Model {
     }
   }
 
-  getTotalTimeAndDistance(sections) {
-    let totalDistance = 0;
-    let totalTime = 0;
-    let i;
-    for (i = 0; i < sections.length - 1; i++) {
-      const { distance, time } = this.sections[
-        `${sections[i]}-${sections[i + 1]}`
-      ];
+  getTotalTimeAndDistance(shortestPath) {
+    let i,
+      totalTime = 0,
+      totalDistance = 0;
+    for (i = 0; i < shortestPath.length - 1; i++) {
+      const { distance, time } = this.sections.hasOwnProperty(
+        `${shortestPath[i]}-${shortestPath[i + 1]}`
+      )
+        ? this.sections[`${shortestPath[i]}-${shortestPath[i + 1]}`]
+        : this.sections[`${shortestPath[i + 1]}-${shortestPath[i]}`];
       totalDistance += distance;
       totalTime += time;
     }
+
     return [totalDistance, totalTime];
   }
 }
