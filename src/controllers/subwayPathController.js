@@ -32,7 +32,11 @@ export default class SubwayPathController {
   }
 
   getResult() {
-    const resultPath = getResultPath(this.departureStation, this.arrivalStation);
+    const resultPath = getResultPath(
+      this.shortestSelect,
+      this.departureStation,
+      this.arrivalStation
+    );
     const resultDistance = getResultDistance(resultPath);
     const resultTime = getResultTime(resultPath);
 

@@ -1,6 +1,6 @@
 import { ID, NAME, ALERT } from '../constants/index.js';
 import { isValidNameLength, isNameInStations } from '../utils/userException.js';
-import { addDijkstraEdgeDistance } from '../utils/addDijkstra.js';
+import { addDijkstraEdgeDistance, addDijkstraEdgeTime } from '../utils/addDijkstra.js';
 import { stationsDistance, stationsTime } from '../models/stationsInitialData.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import Stations from '../models/stations.js';
@@ -43,11 +43,16 @@ export const hasValidInput = (departureStation, arrivalStation) => {
   }
 };
 
-export const getResultPath = (departureStation, arrivalStation) => {
+export const getResultPath = (shortestSelect, departureStation, arrivalStation) => {
   const dijkstra = new Dijkstra();
   let result = '';
 
-  addDijkstraEdgeDistance(dijkstra);
+  if (shortestSelect === NAME.SHORTESTDISTANCE) {
+    addDijkstraEdgeDistance(dijkstra);
+  } else if (shortestSelect === NAME.SHORTESTTIME) {
+    addDijkstraEdgeTime(dijkstra);
+  }
+
   result = dijkstra.findShortestPath(departureStation, arrivalStation);
   return result;
 };
