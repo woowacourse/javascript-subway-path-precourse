@@ -28,7 +28,7 @@ export default class GetUserInput {
   }
 
   isInStations(name) {
-    return stations.indexOf(name);
+    return stations.indexOf(name) > -1;
   }
 
   isSameStation(departure, arrival) {
