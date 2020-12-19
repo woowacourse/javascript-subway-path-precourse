@@ -144,3 +144,30 @@ const result = dijkstra.findShortestPath("V1", "V3");
 - **기능을 구현하기 전에 javascript-subway-path-precourse/docs/README.md 파일에 구현할 기능 목록**을 정리해 추가한다.
 - **git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가**한다.
 - [프리코스 과제 제출](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 문서 절차를 따라 미션을 제출한다.
+
+## 📝 기능 구현 목록
+
+### 1. 입력
+ - 출발역
+ - 도착역
+ - 최단거리 or 최소시간 (라디오버튼 입력)
+
+### 2.알고리즘(과정)
+ - 역들을 초기 등록한다.
+  - 역의 이름들 / 역과 역의 연결 정보
+  <br>
+ **1) 최단거리의 경우**<br>
+  - 다익스트라 라이브러리를 import한다.
+  - 역과 역의 연결정보를 다익스트라에 추가한다.(addEdge함수 이용)
+  - 최단거리를 찾는다(findShortestPath함수 이용)
+  - findShortestPath함수의 리턴값인 배열로 총 거리를 계산한다.
+  - findShortestPath함수의 리턴값인 배열로 총 소요시간를 계산한다.
+  - 결과를 출력한다.
+
+**2) 최소시간의 경우**<br>
+  - 다익스트라 라이브러리를 import한다.
+  - 역과 역의 연결정보를 다익스트라에 추가한다.(addEdge함수 이용)
+  - 최소시간을 찾는다(findShortestPath함수 이용)
+  - findShortestPath함수의 리턴값인 배열로 총 거리를 계산한다.
+  - findShortestPath함수의 리턴값인 배열로 총 소요시간를 계산한다.
+  - 결과를 출력한다.
