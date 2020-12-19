@@ -10,11 +10,11 @@ export default class ResultTable extends View {
     return this;
   }
 
-  render() {
+  render(result, header) {
     const tableContainer = document.createElement("div");
     tableContainer.innerHTML = `
         <h2>📃 결과</h2>
-            <h4>최단 거리--</h4>
+            <h4>${header}</h4>
             <table>
             <thead>
                 <th>총 거리</th>
@@ -26,7 +26,7 @@ export default class ResultTable extends View {
                 <td></td>
                 </tr>
                 <tr>
-                <td></td>
+                <td colspan='2'>${this.resultListHTML(result)}</td>
                 </tr>
             </tbody>
         </table>
@@ -34,4 +34,14 @@ export default class ResultTable extends View {
 
     this.el.append(tableContainer);
   }
+
+  resultListHTML(result) {
+    return `${result.join("▶︎")}`;
+  }
+
+  //   clear() {
+  //     while (this._app.children.length > 2) {
+  //       this._app.children[this._app.children.length - 1].remove();
+  //     }
+  //   }
 }

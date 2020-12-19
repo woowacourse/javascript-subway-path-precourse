@@ -62,14 +62,13 @@ export default class MainController {
       arrivalStation,
       this.radioOption
     );
-    console.log(result, this.radioOptionText(this.radioOption));
 
-    this.ResultTable.render();
+    this.ResultTable.render(result, this.radioOptionText(this.radioOption));
   }
 
   radioOptionText(option) {
-    if ((option = "distance")) return "최단거리";
-    if ((option = "time")) return "최소거리";
+    if (option === "distance") return "최단거리";
+    if (option === "time") return "최소거리";
   }
 
   dijkstraResult(start, end, option) {
