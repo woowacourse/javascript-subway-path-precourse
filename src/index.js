@@ -1,6 +1,7 @@
 import { stations, lines, routes } from './data.js';
 import Dijkstra from './utils/Dijkstra.js';
 import { ViewController, DOMStrings, constants } from './view.js';
+import { isStationNamesValid, isPathValid } from './valid.js';
 
 const departureStationNameInput = document.getElementById(DOMStrings.DEPARTURE_STATION_NAME_INPUT);
 const arrivalStationNameInput = document.getElementById(DOMStrings.ARRIVAL_STATION_NAME_INPUT);
@@ -8,7 +9,7 @@ const searchButton = document.getElementById(DOMStrings.SEARCH_BUTTON);
 
 export default class SubwayPath {
     constructor() {
-        this.stations = stations;
+        this.stations = this.getStationsArray(stations);
         this.lines = lines;
         this.routes = routes;
         this.viewController = new ViewController();
@@ -18,6 +19,10 @@ export default class SubwayPath {
 
     setEventListeners() {
         searchButton.addEventListener('click', this.clickSearchButton.bind(this));
+    }
+
+    getStationsArray(stations) {
+        return stations.map(station => station.name);
     }
 
     createDijkstras() {
@@ -35,9 +40,16 @@ export default class SubwayPath {
         const arrivalStation = arrivalStationNameInput.value;
         const searchType = document.querySelector(DOMStrings.CHECKED_RADIO_BUTTON).value;
         const path = this.findPathByDijkstra(departureStation, arrivalStation, searchType);
-        const result = this.calculatePathResult(path);
-        this.viewController.clearResultDiv();
-        this.viewController.printSearchResult(result, searchType);
+        try {
+            isStationNamesValid(this.stations, departureStation, arrivalStation);
+            isPathValid(path);
+            const result = this.calculatePathResult(path);
+            this.viewController.clearResultDiv();
+            this.viewController.printSearchResult(result, searchType);
+        } catch(error) {
+            alert(error);
+            console.log(error);
+        }
     }
 
     findPathByDijkstra(departure, arrival, searchType) {

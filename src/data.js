@@ -20,6 +20,9 @@ export const stations = [
     {
         name: '매봉',
     },
+    {
+        name: '신사',
+    }
 ];
 
 export const lines = [
@@ -37,44 +40,74 @@ export const lines = [
 export const routes = [
     {
         line: '2호선',
-        stations: ['교대', '강남'],
+        stations: [
+            '교대', 
+            '강남',
+        ],
         distance: 2,
         time: 3,
     },
     {
         line: '2호선',
-        stations: ['강남', '역삼'],
+        stations: [
+            '강남', 
+            '역삼',
+        ],
         distance: 2,
         time: 3,
     },
     {
         line: '3호선',
-        stations: ['교대', '남부터미널'],
+        stations: [
+            '교대', 
+            '남부터미널',
+        ],
         distance: 3,
         time: 2,
     },
     {
         line: '3호선',
-        stations: ['남부터미널', '양재'],
+        stations: [
+            '남부터미널', 
+            '양재',
+        ],
         distance: 6,
         time: 5,
     },
     {
         line: '3호선',
-        stations: ['양재', '매봉'],
+        stations: [
+            '양재', 
+            '매봉',
+        ],
         distance: 1,
         time: 1,
     },
     {
         line: '신분당선',
-        stations: ['강남', '양재'],
+        stations: [
+            '강남', 
+            '양재',
+        ],
         distance: 2,
         time: 8,
     },
     {
         line: '신분당선',
-        stations: ['양재', '양재시민의숲'],
+        stations: [
+            '양재', 
+            '양재시민의숲',
+        ],
         distance: 10,
-        time: 3
+        time: 3,
     },
+    {
+        line: '2호선',
+        stations: [
+            '신사',
+            '혜화',
+        ],
+        distance: 5,
+        time: 5,
+    }
 ];
