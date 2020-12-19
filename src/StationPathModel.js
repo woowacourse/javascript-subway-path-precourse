@@ -1,5 +1,5 @@
 import Dijkstra from "./utils/Dijkstra.js";
-import { stations, lines } from "./data/defaulData.js"
+import { lines } from "./data/defaulData.js"
 
 export default class StationPathModel {
   constructor() {
@@ -13,7 +13,7 @@ export default class StationPathModel {
       line.sections.forEach((section) => {
         lineStations.push(section.start, section.end)
       })
-      if (lineStations.includes(departure) && lineStations.includes(arrival)) {
+      if (lineStations.includes(departure) || lineStations.includes(arrival)) {
         lineNames.push(line.name);
       }
     })
@@ -23,8 +23,8 @@ export default class StationPathModel {
   findSections(name) {
     let sections = []
     lines.forEach((line) => {
-      if (line.name === name) {
-        sections = line.sections;
+      if (name.includes(line.name)) {
+        sections.push(line.sections);
         return;
       }
     })
@@ -33,68 +33,75 @@ export default class StationPathModel {
 
   getLineGraph(line, option) {
     const dijkstra = new Dijkstra();
-    const sections = this.findSections(line);
-    sections.forEach((section) => {
-      if (option === 'distance') {
-        dijkstra.addEdge(section.start, section.end, section.distance);
-      }
-      if (option === 'time') {
-        dijkstra.addEdge(section.start, section.end, section.time);
-      }
-    });
+    line.forEach ((eachline) => {
+      const sections = this.findSections(eachline)
+      sections.forEach((section) => {
+        section.forEach((eachSection) => {
+          if (option === 'distance') {
+            dijkstra.addEdge(eachSection.start, eachSection.end, eachSection.distance);
+          }
+          if (option === 'time') {
+            dijkstra.addEdge(eachSection.start, eachSection.end, eachSection.time);
+          }
+        })
+      });
+    })
 
     return dijkstra;
   }
 
   getShortestDistancePath(departure, arrival) {
-    const result = []
     const lineNames = this.findLines(departure, arrival);
-    lineNames.forEach((line) => {
-      const dijkstra = this.getLineGraph(line, 'distance');
-      result.push(dijkstra.findShortestPath(departure, arrival));
-    })
-    return result;
+    const dijkstra = this.getLineGraph(lineNames, 'distance');
+    console.log("dij", dijkstra.findShortestPath(departure, arrival));
+    return dijkstra.findShortestPath(departure, arrival);
   }
 
   getShortestTimePath(departure, arrival) {
-    const result = []
     const lineNames = this.findLines(departure, arrival);
-    lineNames.forEach((line) => {
-      const dijkstra = this.getLineGraph(line, 'time');
-      result.push(dijkstra.findShortestPath(departure, arrival));
-    })
-    return result;
+    const dijkstra = this.getLineGraph(lineNames, 'time');
+    return dijkstra.findShortestPath(departure, arrival)
   }
 
   getTime(line, path) {
+    console.log("path: ", path)
+    console.log("line: ", line)
     const sections = this.findSections(line);
+    console.log("sections", sections)
     let time = 0;
-    for (let i = 0; i < path[0].length - 1; i++) {
-      const start = path[0][i];
-      const end = path[0][i + 1]
-      sections.forEach((section) => {
-        if ((section.start === start && section.end === end)
-            || (section.start === end && section.end === start)) {
-              time += section.time;
-            }
+    sections.forEach((section) => {
+      section.forEach((eachSection) => {
+        for (let i = 0; i < path.length - 1; i++) {
+          const start = path[i];
+          const end = path[i + 1]
+          if ((eachSection.start === start && eachSection.end === end)
+              || (eachSection.start === end && eachSection.end === start)) {
+                time += eachSection.time;
+                return;
+          }
+        }
       })
-    }
+    })
+
     return time;
   }
 
   getDistance(line, path) {
     const sections = this.findSections(line);
     let distance = 0;
-    for (let i = 0; i < path[0].length - 1; i++) {
-      const start = path[0][i];
-      const end = path[0][i + 1]
-      sections.forEach((section) => {
-        if ((section.start === start && section.end === end)
-            || (section.start === end && section.end === start)) {
-              distance += section.distance;
-            }
+    sections.forEach((section) => {
+      section.forEach((eachSection) => {
+        for (let i = 0; i < path.length - 1; i++) {
+          const start = path[i];
+          const end = path[i + 1]
+          if ((eachSection.start === start && eachSection.end === end)
+              || (eachSection.start === end && eachSection.end === start)) {
+                distance += eachSection.distance;
+                return;
+          }
+        }
       })
-    }
+    })
     return distance;
   } 
 }

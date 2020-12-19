@@ -37,8 +37,8 @@ export default class StationPathController {
     if (userInput.option === 'shortest-time') {
       path = stationPathModel.getShortestTimePath(userInput.departure, userInput.arrival);
     }
-    const distance = stationPathModel.getDistance(lines[0], path);
-    const time = stationPathModel.getTime(lines[0], path);
-    view.resultView(distance, time, path[0]);
+    const distance = stationPathModel.getDistance(lines, path);
+    const time = stationPathModel.getTime(lines, path);
+    view.resultView(distance, time, path);
   }
 }
