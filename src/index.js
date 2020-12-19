@@ -1,7 +1,7 @@
-import { stations, lines, routes } from './data.js';
+import { stations, lines, sections } from './data.js';
 import Dijkstra from './utils/Dijkstra.js';
 import ViewController from './view.js';
-import { isStationNamesValid, isPathValid } from './valid.js';
+import { isStationsValid, isPathValid } from './valid.js';
 
 const SHORTEST_DISTANCE = '최단거리';
 const SHORTEST_TIME = '최소시간';
@@ -18,7 +18,7 @@ export default class SubwayPath {
   constructor() {
     this.stations = this.getStationsArray(stations);
     this.lines = lines;
-    this.routes = routes;
+    this.sections = sections;
     this.viewController = new ViewController();
     [this.distanceDijkstra, this.timeDijkstra] = this.createDijkstras();
     this.setEventListeners();
@@ -35,13 +35,17 @@ export default class SubwayPath {
   createDijkstras() {
     const distanceDijkstra = new Dijkstra();
     const timeDijkstra = new Dijkstra();
-    this.routes.forEach(route => {
+    this.sections.forEach(section => {
       distanceDijkstra.addEdge(
-        route.stations[0],
-        route.stations[1],
-        route.distance
+        section.stations[0],
+        section.stations[1],
+        section.distance
       );
-      timeDijkstra.addEdge(route.stations[0], route.stations[1], route.time);
+      timeDijkstra.addEdge(
+        section.stations[0],
+        section.stations[1],
+        section.time
+      );
     });
     return [distanceDijkstra, timeDijkstra];
   }
@@ -53,19 +57,18 @@ export default class SubwayPath {
       'input[name="search-type"]:checked'
     ).value;
     try {
-      const path = this.findPathByDijkstra(departure, arrival, searchType);
-      isStationNamesValid(this.stations, departure, arrival);
+      const path = this.findPath(departure, arrival, searchType);
+      isStationsValid(this.stations, departure, arrival);
       isPathValid(path);
       const result = this.calculatePathResult(path);
-      this.viewController.clearResultDiv();
-      this.viewController.printSearchResult(result, searchType);
+      this.viewController.showResults(result, searchType);
     } catch (error) {
       alert(error);
       this.viewController.clearStationInputs();
     }
   }
 
-  findPathByDijkstra(departure, arrival, searchType) {
+  findPath(departure, arrival, searchType) {
     if (searchType === SHORTEST_DISTANCE) {
       return this.distanceDijkstra.findShortestPath(departure, arrival);
     } else if (searchType === SHORTEST_TIME) {
@@ -77,13 +80,13 @@ export default class SubwayPath {
     let totalDistance = 0;
     let totalTime = 0;
     for (let i = 1; i < path.length; i++) {
-      const pathIndex = this.routes.findIndex(
-        route =>
-          route.stations.includes(path[i]) &&
-          route.stations.includes(path[i - 1])
+      const pathIndex = this.sections.findIndex(
+        section =>
+          section.stations.includes(path[i]) &&
+          section.stations.includes(path[i - 1])
       );
-      totalDistance += this.routes[pathIndex].distance;
-      totalTime += this.routes[pathIndex].time;
+      totalDistance += this.sections[pathIndex].distance;
+      totalTime += this.sections[pathIndex].time;
     }
     return {
       pathString: path.join(RESULT_ARROW),

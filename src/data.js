@@ -34,7 +34,7 @@ export const lines = [
   },
 ];
 
-export const routes = [
+export const sections = [
   {
     line: '2호선',
     stations: ['교대', '강남'],

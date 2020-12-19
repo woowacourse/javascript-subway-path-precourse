@@ -53,4 +53,9 @@ export default class ViewController {
     arrivalStationNameInput.value = '';
     departureStationNameInput.focus();
   }
+
+  showResults(result, searchType) {
+    this.clearResultDiv();
+    this.printSearchResult(result, searchType);
+  }
 }

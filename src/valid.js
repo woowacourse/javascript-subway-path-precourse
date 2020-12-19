@@ -16,7 +16,7 @@ const isNotAText = input => {
   return texts.test(input);
 };
 
-export const isStationNamesValid = (stations, departure, arrival) => {
+export const isStationsValid = (stations, departure, arrival) => {
   if (isNotAText(departure) || isNotAText(arrival)) {
     throw Error(ERROR_SYMBOLS_NOT_PERMITTED);
   } else if (isUnderMinimumLength(departure) || isUnderMinimumLength(arrival)) {
