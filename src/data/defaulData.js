@@ -1,4 +1,4 @@
-export const station = [
+export const stations = [
   {
     name: '교대'
   },
