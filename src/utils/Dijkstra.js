@@ -201,8 +201,7 @@ export default function Dijkstra() {
         route.unshift(node);
         node = previous[node];
       }
-
-      return route;
+      return { route, distance };
     },
   };
 
