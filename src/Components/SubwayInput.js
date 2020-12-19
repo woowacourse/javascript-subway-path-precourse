@@ -30,7 +30,7 @@ class SubwayInput {
 
   onClick({ target }) {
     if (target.id !== `search-button`) return;
-    const { stations } = this.props;
+    const { stations, sections, getTotalInfo } = this.props;
     const [departure, arrival, option] = this.getInputValues();
 
     if (
@@ -42,7 +42,7 @@ class SubwayInput {
     }
 
     const path = this.calculateResult(departure, arrival, option);
-    console.log(path);
+    console.log(getTotalInfo(sections, path));
   }
 
   getInputValues() {

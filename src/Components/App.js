@@ -1,6 +1,6 @@
 import SubwayInput from "./SubwayInput.js";
 import SubwayResult from "./SubwayResult.js";
-import { stations } from "../data/index.js";
+import { stations, sections } from "../data/index.js";
 import { minDistanceStore, minTimeStore } from "../data/subwayStore.js";
 
 class App {
@@ -14,6 +14,7 @@ class App {
 
   initState() {
     this.stations = stations;
+    this.sections = sections;
     this.minDistanceStore = minDistanceStore;
     this.minTimeStore = minTimeStore;
   }
@@ -26,15 +27,35 @@ class App {
   mountComponents() {
     new SubwayInput(this.$inputContainer, {
       stations: this.stations.map(station => station.name),
+      sections: this.sections,
       minDistanceStore: this.minDistanceStore,
       minTimeStore: this.minTimeStore,
+      getTotalInfo: this.getTotalInfo,
     });
 
     new SubwayResult(this.$resultContainer, {
-      stations: this.stations,
-      lines: this.lines,
       sections: this.sections,
     });
+  }
+
+  getTotalInfo(sections, path) {
+    let totalTime = 0;
+    let totalDistance = 0;
+
+    for (let i = 0; i < path.length - 1; i++) {
+      const _departure = path[i];
+      const _arrival = path[i + 1];
+
+      const section = sections.find(
+        ({ departure, arrival }) =>
+          departure === _departure && arrival === _arrival,
+      );
+
+      totalTime += section.time;
+      totalDistance += section.distance;
+    }
+
+    return { totalTime, totalDistance, path };
   }
 }
 
