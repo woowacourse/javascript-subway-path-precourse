@@ -1,15 +1,18 @@
+import { requestToFindShortestPath } from './path-search-manager.js';
 import { appendNew, appendNewRadioButton } from '../utils/util-ui.js';
 
 export const appendView = () => {
   const appDiv = document.getElementById('app');
   let container;
+  let searchButton;
 
   appendNew('h2', appDiv, '🚇지하철 길찾기');
   container = appendNew('div', appDiv, '', 'container');
   appendStationNameInputs(container);
   appendRadioButtons(container);
   setDefaultOption('shortest-distance');
-  appendNew('button', container, '길 찾기', 'search-button');
+  searchButton = appendNew('button', container, '길 찾기', 'search-button');
+  searchButton.addEventListener('click', (e) => requestToFindShortestPath(e));
   //appendTable();
 };
 

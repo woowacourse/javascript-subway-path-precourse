@@ -1,14 +1,14 @@
-import { lines, stations } from '../subwayMapData.js';
+import { LINES, STATIONS } from '../configuration.js';
 import Dijkstra from '../utils/Dijkstra.js';
 
 export const loadSubwayMapDataToLocalStorage = () => {
-  localStorage.setItem('lines', JSON.stringify(lines));
-  localStorage.setItem('stations', JSON.stringify(stations));
+  localStorage.setItem('lines', JSON.stringify(LINES));
+  localStorage.setItem('stations', JSON.stringify(STATIONS));
 };
 
 export const makeSubwayMapGraphAll = () => {
-  makeSubwayMapGraph(lines, stations, 'distanceInterval');
-  makeSubwayMapGraph(lines, stations, 'timeInterval');
+  makeSubwayMapGraph(LINES, STATIONS, 'distanceInterval');
+  makeSubwayMapGraph(LINES, STATIONS, 'timeInterval');
 };
 
 const makeSubwayMapGraph = (lines, stations, key) => {
