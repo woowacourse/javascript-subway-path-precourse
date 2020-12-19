@@ -2,6 +2,36 @@
 
 - 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.
 
+### 디렉토리 구조
+
+```bash
+│  index.html
+│  README.md
+│
+├─images
+│      dijkstra_example.png
+│      path_result.gif
+│      path_result.jpg
+│
+└─src
+    │  index.js
+    │
+    ├─common
+    │      alertMessage.js
+    │      checkInput.js
+    │      constant.js
+    │      StationInfo.js
+    │
+    ├─events
+    │      FindRoadEvent.js
+    │
+    ├─renders
+    │      RoadResult.js
+    │
+    └─utils
+            Dijkstra.js
+```
+
 ### 초기 설정
 
 - 프로그램 시작 시 역, 노선, 구간 데이터를 초기 설정 해야 한다.
