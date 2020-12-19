@@ -36,4 +36,8 @@ export const ERROR_MESSAGES = {
   STAION_NAME_TOO_SHORT: `🚨안 내🚨\n
   입력된 지하철역 이름이 너무 짧습니다.
   ${STATION_NAME_LEN_LIMIT}글자 이상의 지하철 역 이름으로 다시 입력해주세요.`,
+  STAION_NAME_NOT_EXIST: `🚨안 내🚨\n
+  존재하지 않는 지하철역 이름입니다.
+  노선에 등록되어 있는 역 이름으로 다시 입력해주세요.\n
+  [목록] ${STATIONS}`,
 };
