@@ -6,13 +6,13 @@ export default class SubwayListener {
     this.subway = subway;
     this.subwayView = subwayView;
 
-    this.addFindButtonListener();
+    this.addSearchButtonListener();
   }
 
-  addFindButtonListener() {
-    const $findButton = document.getElementById(BUTTON.ID);
+  addSearchButtonListener() {
+    const $searchButton = document.getElementById(BUTTON.ID);
 
-    $findButton.addEventListener('click', () => {
+    $searchButton.addEventListener('click', () => {
       handleSearchButton(this.subway, this.subwayView);
     });
   }
