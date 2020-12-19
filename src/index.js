@@ -1,4 +1,4 @@
-import { stations, lines, sections } from './data.js';
+import { stations, lines } from './data.js';
 import Dijkstra from './utils/Dijkstra.js';
 import ViewController from './view.js';
 import { isStationsValid, isPathValid } from './valid.js';
@@ -15,8 +15,7 @@ const searchButton = document.getElementById('search-button');
 export default class SubwayPath {
   constructor() {
     this.stations = this.getStationsArray(stations);
-    this.lines = lines;
-    this.sections = sections;
+    this.sections = this.getSectionsArray(lines);
     this.viewController = new ViewController();
     [this.distanceDijkstra, this.timeDijkstra] = this.createDijkstras();
     this.setEventListeners();
@@ -29,6 +28,17 @@ export default class SubwayPath {
   // 역 이름 문자열만 빼내서 배열로 만듦
   getStationsArray(stations) {
     return stations.map(station => station.name);
+  }
+
+  // 노선 데이터에서 구간 정보만 빼서 배열로 만듦
+  getSectionsArray(lines) {
+    let result = [];
+    lines.forEach(line => {
+      line.sections.forEach(section => {
+        result.push(section);
+      });
+    });
+    return result;
   }
 
   createDijkstras() {
