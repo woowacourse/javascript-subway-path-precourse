@@ -26,16 +26,16 @@ export default class StationPathController {
     }
     const stationPathModel = new StationPathModel();
     const lines = stationPathModel.findLines(userInput.departure, userInput.arrival);
-    if (lines.length === 0) {
-      view.alertError(NotLinkedError)
-      return;
-    }
     let path = [];
     if (userInput.option === 'shortest-path') {
       path = stationPathModel.getShortestDistancePath(userInput.departure, userInput.arrival);
     }
     if (userInput.option === 'shortest-time') {
       path = stationPathModel.getShortestTimePath(userInput.departure, userInput.arrival);
+    }
+    if (path === undefined) {
+      view.alertError(NotLinkedError)
+      return;
     }
     const distance = stationPathModel.getDistance(lines, path);
     const time = stationPathModel.getTime(lines, path);
