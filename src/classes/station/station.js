@@ -4,4 +4,8 @@ export default class Station {
   static isStationNameTooLong(stationName) {
     return stationName.length < MIN_STATION_NAME_LENGTH;
   }
+
+  static isStationNamesSame(startStationName, endStationName) {
+    return startStationName === endStationName;
+  }
 }
