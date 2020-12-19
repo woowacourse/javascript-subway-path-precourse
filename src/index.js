@@ -3,6 +3,7 @@ import Dijkstra from './utils/Dijkstra.js';
 import ViewController from './view.js';
 import { isStationsValid, isPathValid } from './valid.js';
 
+const PATH_START_INDEX = 1;
 const SHORTEST_DISTANCE = '최단거리';
 const SHORTEST_TIME = '최소시간';
 const RESULT_ARROW = '→';
@@ -86,7 +87,7 @@ export default class SubwayPath {
   calculatePathResult(path) {
     let totalDistance = 0;
     let totalTime = 0;
-    for (let i = 1; i < path.length; i++) {
+    for (let i = PATH_START_INDEX; i < path.length; i++) {
       const pathIndex = this.getSectionIndex(this.sections, path, i);
       totalDistance += this.sections[pathIndex].distance;
       totalTime += this.sections[pathIndex].time;
