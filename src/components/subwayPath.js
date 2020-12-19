@@ -1,11 +1,15 @@
-import { ERROR_MESSAGE, FORM } from '../share/constants.js';
+import { ERROR_MESSAGE, FORM, RESULT } from '../share/constants.js';
 import { lineList, stationList } from '../share/defaultInformation.js';
 import { isInclude, isSameStation, isValidLength } from '../share/validator.js';
+import resultTableTemplate from '../template/resultTableTemplate.js';
+import Dijkstra from '../utils/Dijkstra.js';
 
 export default class SubWayPath {
   constructor() {
     this.stationList = stationList;
     this.lineList = lineList;
+    this.distanceDijkstra = new Dijkstra();
+    this.timeDijkstra = new Dijkstra();
 
     this.form = document.forms[FORM.CONTAINER];
     this.departureStationNameInput = this.form[
@@ -14,7 +18,12 @@ export default class SubWayPath {
     this.arrivalStationNameInput = this.form[FORM.ARRIVAL_STATION_NAME_INPUT];
     this.distanceRadioInput = this.form[FORM.SEARCH_TYPE_DISTANCE_RADIO];
     this.timeRadioInput = this.form[FORM.SEARCH_TYPE_TIME_RADIO];
-    this.searchButton = this.form[FORM.SEARCH_BUTTON_BUTTON];
+
+    this.resultContainer = document.querySelector(`#${RESULT.CONTAINER}`);
+    this.resultHeader = document.querySelector(`#${RESULT.RESULT_HEADER}`);
+    this.resultTableBody = document.querySelector(
+      `#${RESULT.RESULT_TABLE_BODY}`,
+    );
 
     this.form.addEventListener('submit', this.onSubmit);
   }
@@ -24,6 +33,8 @@ export default class SubWayPath {
     const allValues = this.getValues();
     if (this.isValid(allValues)) {
       console.log('통과');
+      this.render();
+      this.showResult();
     }
   };
 
@@ -70,4 +81,8 @@ export default class SubWayPath {
   }
 
   getAllSections = () => this.lineList.map((line) => line.section);
+
+  showResult() {
+    this.resultContainer.style.display = 'block';
+  }
 }

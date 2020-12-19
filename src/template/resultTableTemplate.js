@@ -1,0 +1,23 @@
+export default ({ searchTypeText, distance, time, route }) =>
+  `<h2 id="result-header">📝 결과</h2>
+  <h3 id="result-type">${searchTypeText}</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>총 거리</th>
+          <th>총 소요시간</th>
+        </tr>
+      </thead>
+  <tbody id="result-table-body">
+      <tr>
+        <th>${distance}</th>
+        <th>${time}</th>
+      </tr>
+      <tr>
+        <th colspan="2">
+        ${route}
+        </th>
+      </tr>
+  </tbody>
+</table>
+`;
