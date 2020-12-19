@@ -1,3 +1,4 @@
+import SubwayDistanceMap from '../models/subway-distance-map-model.js';
 import SubwayPathInput from '../views/subway-path-input.js';
 import SubwayPathOutput from '../views/Subway-path-output.js';
 
@@ -5,27 +6,26 @@ export default class SubwayPathController {
 	constructor() {
 		this.subwayPathOutput = new SubwayPathOutput();
 		this.subwayPathInput = new SubwayPathInput();
+		this.subwayDistanceMap = new SubwayDistanceMap();
 
 		this.handleSearchInputs();
 	}
 
 	handleSearchInputs = () => {
-		this.subwayPathInput.bindSearchButton(this.setSearchInputs);
+		this.subwayPathInput.bindSearchButton(this.getResultData);
 	}
 
-	setSearchInputs = searchInputs => {
+	getResultData = searchInputs => {
 		let departureStationName;
 		let arrivalStationName;
 		let radioSelect;
 
 		[departureStationName, arrivalStationName, radioSelect] = [...searchInputs];
 
-		console.log(departureStationName, arrivalStationName, radioSelect);
-
-		const totalDistance = 5;
-		const totalTime = 7;
-		const totalPath = ['1', '2', '3', '4'];
-		const resultTableData = [radioSelect, totalDistance, totalTime, totalPath];
+		const shortestDistancePath = this.subwayDistanceMap.getShortestDistancePath(departureStationName, arrivalStationName);
+		const shortestTotalDistance = this.subwayDistanceMap.getShortestTotalDistance(shortestDistancePath);
+		const totalTime = 0;
+		const resultTableData = [radioSelect, shortestTotalDistance, totalTime, shortestDistancePath];
 		this.subwayPathOutput.renderResult(resultTableData);
 	}
 }
