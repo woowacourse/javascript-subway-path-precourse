@@ -1,9 +1,11 @@
 import { Stations, Lines } from "../models/data.js";
-import { DOM } from "../utils/constants.js";
+import { DOM, INITIAL_RADIO_OPTION } from "../utils/constants.js";
 import Dijkstra from "../utils/Dijkstra.js";
 import FormView from "../views/FormView.js";
 import DepartureStationView from "../views/DepartureStationView.js";
 import ArrivalStationView from "../views/ArrivalStationView.js";
+import shortestRadioView from "../views/shortestRadioView.js";
+import minimumRadioView from "../views/minimumRadioView.js";
 
 export default class MainController {
   constructor() {
@@ -12,6 +14,10 @@ export default class MainController {
     this.DepartureStationView = new DepartureStationView();
     this.ArrivalStationView = new ArrivalStationView();
     this.Dijkstra = new Dijkstra();
+    this.shortestRadioView = new shortestRadioView();
+    this.minimumRadioView = new minimumRadioView();
+
+    this.radioOption = INITIAL_RADIO_OPTION;
   }
 
   init() {
@@ -25,6 +31,14 @@ export default class MainController {
     this.ArrivalStationView.setup(
       document.querySelector("#" + DOM.ARRIVAL_STAION_NAME_INPUT_ID)
     );
+
+    this.shortestRadioView.setup(
+      document.querySelector("#" + DOM.SHORTEST_DISTANCE_RADIO_ID)
+    );
+    this.minimumRadioView.setup(
+      document.querySelector("#" + DOM.MINIMUM_DISTANCE_RADIO_ID)
+    );
+    this.selectedOptionRadio();
   }
 
   onSubmit(e) {
@@ -37,6 +51,26 @@ export default class MainController {
       this.ArrivalStationView.reset();
       return;
     }
+
+    this.selectedOptionRadio();
+  }
+
+  selectedOptionRadio() {
+    console.log(this.tag, "selectedOptionRadio", this.radioOption);
+    if (this.shortestRadioView.radioInfo()) {
+      this.radioOption = "shortest";
+      console.log("option----", this.radioOption);
+      return;
+    }
+
+    if (this.minimumRadioView.radioInfo()) {
+      this.radioOption = "minimum";
+      console.log("option----", this.radioOption);
+      return;
+    }
+
+    return new Error("잘못된 radio value 값");
+    // console.log("option----", this.radioOption);
   }
 
   isValidStationName(departureStation, arrivalStation) {

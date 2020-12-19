@@ -5,3 +5,5 @@ export const DOM = {
   SHORTEST_DISTANCE_RADIO_ID: "shortest-distance-radio",
   MINIMUM_DISTANCE_RADIO_ID: "minimum-distance-radio",
 };
+
+export const INITIAL_RADIO_OPTION = "shortest";
