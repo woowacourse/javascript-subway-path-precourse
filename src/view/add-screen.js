@@ -1,18 +1,9 @@
 import {$resultWrapper} from './element.js';
 
-const a = `
-<tbody>
-  <tr>
-    <th>총 거리</th>
-    <th>총 소요 시간</th>
-  </tr>
-</tbody>
-`;
-
 export const renderResultScreen = (text, result) => {
   renderResultWrapper(text);
   const $table = document.createElement('table');
-  $table.innerHTML = a;
+  $table.innerHTML = tableContainer;
   $table.querySelector('tbody').innerHTML += `
     <tr>
       <td>5km</td>
@@ -35,3 +26,12 @@ const renderResultWrapper = (text) => {
   $resultWrapper.appendChild($title);
   $resultWrapper.appendChild($resultText);
 };
+
+const tableContainer = `
+<tbody>
+  <tr>
+    <th>총 거리</th>
+    <th>총 소요 시간</th>
+  </tr>
+</tbody>
+`;
