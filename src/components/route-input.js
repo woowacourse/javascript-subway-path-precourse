@@ -1,3 +1,4 @@
+import { DISTANCE_FIRST, TIME_FIRST } from '../constants/search-type.js';
 import Component from '../core/component.js';
 
 class RouteInput extends Component {
@@ -24,8 +25,8 @@ class RouteInput extends Component {
   createRadioButtonTemplate() {
     return `
 			<form>
-				<input type="radio" name="search-type" value="distance-first" checked> 최단거리
-				<input type="radio" name="search-type" value="time-first"> 최소시간
+				<input type="radio" name="search-type" value="${DISTANCE_FIRST}" checked /> 최단거리
+				<input type="radio" name="search-type" value="${TIME_FIRST}" /> 최소시간
 			</form>
 		`;
   }

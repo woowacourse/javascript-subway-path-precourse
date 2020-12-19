@@ -1,3 +1,4 @@
+import { DISTANCE_FIRST } from '../constants/search-type.js';
 import Component from '../core/component.js';
 
 class RouteResult extends Component {
@@ -24,9 +25,11 @@ class RouteResult extends Component {
 
   createSearchTypeH3Template() {
     const { searchType } = this._props.searchResult.value;
+    const DISTANCE_FIRST_TEXT = '최단거리';
+    const TIME_FIRST_TEXT = '최단거리';
     return `
 			<h3>
-				${searchType === 'distance-first' ? '최단거리' : '최소시간'}
+				${searchType === DISTANCE_FIRST ? DISTANCE_FIRST_TEXT : TIME_FIRST_TEXT}
 			</h3>
 		`;
   }

@@ -1,3 +1,4 @@
+import { DISTANCE_FIRST } from '../constants/search-type.js';
 import Component from '../core/component.js';
 import ComputedState from '../core/computed-state.js';
 import State from '../core/state.js';
@@ -53,17 +54,17 @@ class App extends Component {
       arrivalStation,
       searchType,
     } = this.#searchRequest?.value;
-    const dijkstra = this.initializeDijkstra(searchType);
+    const dijkstra = this.initializeDijkstra(this.#lines, searchType);
 
     return dijkstra.findShortestPath(departureStation, arrivalStation);
   }
 
-  initializeDijkstra(searchType) {
+  initializeDijkstra(lines, searchType) {
     const dijkstra = new Dijkstra();
-    this.#lines.forEach(line =>
+    lines.forEach(line =>
       line.sections.forEach(section => {
         const { departureStation, arrivalStation, distance, time } = section;
-        const priority = searchType === 'distance-first' ? distance : time;
+        const priority = searchType === DISTANCE_FIRST ? distance : time;
         dijkstra.addEdge(departureStation, arrivalStation, priority);
         dijkstra.addEdge(arrivalStation, departureStation, priority);
       })
