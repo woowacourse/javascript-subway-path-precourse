@@ -36,6 +36,7 @@ class RouteResult extends Component {
   createTableBodyTemplate() {
     const { searchResult } = this._props;
     const { totalTime, totalDistance, resultPath } = searchResult.value;
+
     return `
 			<tr>
 				<td>${totalDistance}km</td>
