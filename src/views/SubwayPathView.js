@@ -1,0 +1,3 @@
+class SubwayPathView {
+  constructor() {}
+}
