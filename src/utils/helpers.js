@@ -18,9 +18,9 @@ export const makeDijkstra = (type, stations) => {
 };
 
 export const printResult = (result, stations) => {
-  clearTable();
+  clearResult();
   const app = document.getElementById('app');
-  const resultTitle = document.createElement('h1');
+  const resultTitle = document.createElement('h2');
   resultTitle.innerHTML = '📝 결과';
 
   const table = document.createElement('table');
@@ -30,7 +30,7 @@ export const printResult = (result, stations) => {
   createTableHeader(table);
   createTableData(table, result, stations);
 
-  app.appendChild(table);
+  app.append(resultTitle, table);
 };
 
 const createTableHeader = table => {
@@ -85,9 +85,11 @@ const getRoute = result => {
   return routeData;
 };
 
-const clearTable = () => {
+const clearResult = () => {
+  const title = document.querySelector('h2');
   const table = document.querySelector('table');
-  if (table) {
+  if (title && table) {
+    title.remove();
     table.remove();
   }
 };
