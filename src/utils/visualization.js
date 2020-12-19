@@ -48,12 +48,11 @@ const Visualization = function () {
     const distanceAndTimeTr = document.createElement("tr");
     const distanceTd = this.createTd(`${minDistance}km`);
     const timeTd = this.createTd(`${minTime}분`);
-    const pathTr = document.createElement("tr");
-    const pathTd = this.createTd(formattedPath);
+    const pathTr = this.getAdvancedEle("tr", { id: "path-td" }, formattedPath);
     this.appendRecursiveChild(
       table,
       [distanceAndTimeTr, distanceTd, timeTd],
-      [pathTr, pathTd]
+      pathTr
     );
     return table;
   };
