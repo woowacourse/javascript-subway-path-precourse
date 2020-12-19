@@ -1,8 +1,12 @@
-import { Header, PathInput, PathResult } from './components/index.js';
-import { Dijkstra, isConnectedStation } from './utils/index.js';
 import { stations, lines } from './data.js';
-import { APP, NOT_CONNECTED_STATIONS } from './constants/index.js';
-import { MINIMUM_TIME, SHORTEST_DISTANCE } from './constants/standard.js';
+import { Header, PathInput, PathResult } from './components/index.js';
+import {
+  APP,
+  MINIMUM_TIME,
+  NOT_CONNECTED_STATIONS,
+  SHORTEST_DISTANCE,
+} from './constants/index.js';
+import { Dijkstra, isConnectedStation } from './utils/index.js';
 
 export default function SubwayPath() {
   this.app = document.getElementById(APP);

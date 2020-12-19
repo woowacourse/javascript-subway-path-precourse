@@ -18,7 +18,7 @@ export const stations = [
     name: '양재시민의숲',
   },
   {
-    name: '매봉 ',
+    name: '매봉',
   },
 ];
 

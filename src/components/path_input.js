@@ -1,8 +1,3 @@
-import {
-  isRegistredStation,
-  isSameDepartureAndArrival,
-  isValidInputLength,
-} from '../utils/index.js';
 import { stations } from '../data.js';
 import {
   ARRIVAL_STATION_NAME_INPUT,
@@ -15,6 +10,11 @@ import {
   SHORTEST_TIME_INPUT,
   STATION_NAME_LENGTH_LIMIT,
 } from '../constants/index.js';
+import {
+  isRegistredStation,
+  isSameDepartureAndArrival,
+  isValidInputLength,
+} from '../utils/index.js';
 
 export default function PathInput({ findRoute }) {
   this.pathInputConatiner = document.querySelector('.path-input-container');
