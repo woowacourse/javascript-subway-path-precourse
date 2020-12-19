@@ -29,6 +29,7 @@ const getEdgeByStations = (start, end) => {
 
 const getTotalTimeAndDistance = (dijkstraResultPath) => {
 	let [totalTime, totalDistance] = [0, 0];
+	console.log(dijkstraResultPath);
 	while (dijkstraResultPath.length > 0) {
 		const currStation = dijkstraResultPath.shift();
 		const nextStation = dijkstraResultPath.shift();

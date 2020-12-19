@@ -1,4 +1,5 @@
 import { errorMessage, ids } from '../keys.js';
+import { stations } from '../data.js';
 
 const getStartPointValue = () =>
 	document.getElementById(ids.STARTPOINT_INPUT_ID).value;
@@ -30,9 +31,24 @@ const isSameStation = (start, end) => {
 	return false;
 };
 
+const isExistedStation = (targetStation) => {
+	for (const station of stations) {
+		if (station.name === targetStation) {
+			return true;
+		}
+	}
+	alert(errorMessage.NOT_EXISTED_STATION);
+	return false;
+};
+
 export const getValidInput = () => {
 	const [start, end] = [getStartPointValue(), getEndPointValue()];
-	if (!isLessThanTwoLetter(start, end) && !isSameStation(start, end)) {
+	if (
+		!isLessThanTwoLetter(start, end) &&
+		!isSameStation(start, end) &&
+		isExistedStation(start) &&
+		isExistedStation(end)
+	) {
 		return [start, end];
 	}
 	return [-1, -1];
