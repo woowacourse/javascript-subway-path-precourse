@@ -28,7 +28,8 @@ export default class MainController {
     if (
       this.isDepartureStationName(departureStation) &&
       this.isArrivalStationName(arrivalStation) &&
-      this.isSameStation(departureStation, arrivalStation)
+      this.isSameStation(departureStation, arrivalStation) &&
+      this.isConnection(departureStation, arrivalStation)
     ) {
       return true;
     }
@@ -93,5 +94,16 @@ export default class MainController {
     return false;
   }
 
-  isConnection(start, end) {}
+  isConnection(start, end) {
+    console.log(this.tag, "isConnection()", start, end);
+    for (const line of Lines) {
+      if (line.stations.includes(start) && line.stations.includes(end)) {
+        return true;
+      }
+    }
+    window.alert(
+      `출발역 ${start}역은 도착역 ${end}역과 연결되어 있지 않습니다.`
+    );
+    return false;
+  }
 }
