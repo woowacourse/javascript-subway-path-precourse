@@ -1,5 +1,6 @@
 import { validator } from "./utils/validator.js";
 import { findShortestPath } from "./pathFinder.js";
+import { STATION } from "./constants.js";
 
 export default class SubwayManager {
   constructor() {
@@ -15,6 +16,11 @@ export default class SubwayManager {
       .value.replace(/ /g, "");
 
     if (validator(departure, arrival)) findShortestPath(departure, arrival);
+    else {
+      alert(STATION.INPUT_ERROR_MESSAGE);
+      document.getElementById("departure-station-name-input").value = "";
+      document.getElementById("arrival-station-name-input").value = "";
+    }
   }
 
   initEvent() {
