@@ -1,3 +1,9 @@
+import { clearInput } from "../utils/domUtils.js";
+import {
+  isSameStation,
+  isVaildStationName,
+} from "../utils/validations/subwayInputVaildation.js";
+
 class SubwayInput {
   constructor($target, props) {
     this.$target = $target;
@@ -24,9 +30,19 @@ class SubwayInput {
 
   onClick({ target }) {
     if (target.id !== `search-button`) return;
+    const { stations } = this.props;
     const [departure, arrival, option] = this.getInputValues();
 
-    console.log(departure, arrival, option);
+    if (
+      !isVaildStationName(this.$departureInput, stations, departure) ||
+      !isVaildStationName(this.$arrivalInput, stations, arrival) ||
+      isSameStation(departure, arrival)
+    ) {
+      return false;
+    }
+
+    const path = this.calculateResult(departure, arrival, option);
+    console.log(path);
   }
 
   getInputValues() {
@@ -37,6 +53,15 @@ class SubwayInput {
     ).value;
 
     return [departureStation, arrivalStation, option];
+  }
+
+  calculateResult(departure, arrival, option) {
+    const { minDistanceStore, minTimeStore } = this.props;
+    if (option == "최단거리") {
+      return minDistanceStore.findShortestPath(departure, arrival);
+    } else if (option == "최소시간") {
+      return minTimeStore.findShortestPath(departure, arrival);
+    }
   }
 }
 

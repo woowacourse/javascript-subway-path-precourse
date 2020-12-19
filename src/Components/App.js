@@ -25,7 +25,7 @@ class App {
 
   mountComponents() {
     new SubwayInput(this.$inputContainer, {
-      stations: this.stations,
+      stations: this.stations.map(station => station.name),
       minDistanceStore: this.minDistanceStore,
       minTimeStore: this.minTimeStore,
     });
