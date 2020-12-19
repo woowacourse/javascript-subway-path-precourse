@@ -2,12 +2,12 @@ import { DOMTag, STRING } from "../consts/consts.js";
 import { createElement, clearContainer, insertRow } from "../utils/utils.js";
 
 const subTitleText = {
-  distance: "최단경로",
-  time: "최단시간",
+  distance: STRING.MIN_DISTANCE,
+  time: STRING.MIN_TIME,
 };
 
 const resultContainer = document.querySelector(DOMTag.RESULT_CONTAINER_QUERY);
-const resultTitle = createElement({ tagType: "h2", innerText: "결과" });
+const resultTitle = createElement({ tagType: "h2", innerText: STRING.RESULT });
 const resultSubtitle = createElement({
   tagType: "h3",
 });
@@ -25,5 +25,5 @@ export const renderer = (type, dijkstraData) => {
 const constructTable = (table, [dist, time, path]) => {
   insertRow(table, "heading", [STRING.TOTAL_DIST, STRING.TOTAL_TIME]);
   insertRow(table, "data", [`${dist}km`, `${time}분`]);
-  insertRow(table, "path", [path.toString()]);
+  insertRow(table, "path", [path.join("➜")]);
 };
