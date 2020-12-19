@@ -1,3 +1,5 @@
+import { createPathResult } from "../utils/util.js";
+
 class SubwayResult {
   constructor($target, props) {
     this.$target = $target;
@@ -16,7 +18,7 @@ class SubwayResult {
           <td>${totalTime}분</td>
         <tr>
         <tr>
-          <td colspan="2">${path.join("->")}</td>
+          <td colspan="2">${createPathResult(path)}</td>
         </tr>
     </table>
     `;
