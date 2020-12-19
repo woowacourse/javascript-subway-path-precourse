@@ -1,3 +1,9 @@
 export const SubwayPathView = {
-  render() { },
+  renderDistance(result) {
+    console.log(result);
+  },
+
+  renderTime(result) {
+    console.log(result);
+  },
 };

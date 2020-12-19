@@ -3,6 +3,8 @@ export const Constant = {
   SEARCH_BUTTON_ID: "#search-button",
   DEPARTURE_STATION_NAME_INPUT_ID: "#departure-station-name-input",
   ARRIVVAL_STATION_NAME_INPUT_ID: "#arrival-station-name-input",
+  SEARCH_TYPE_DISTANCE_ID: "#search-type-distance",
+  SEARCH_TYPE_TIME_ID: "#search-type-time",
 
   CLICK: "click",
   BLOCK: "block",

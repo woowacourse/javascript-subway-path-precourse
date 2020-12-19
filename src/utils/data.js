@@ -4,6 +4,7 @@ import Dijkstra from "./Dijkstra.js";
 
 export const Data = {
   dijkstraDistance: new Dijkstra(),
+  dijkstraTime: new Dijkstra(),
 
   initStations() {
     LineModel.add(
@@ -28,16 +29,6 @@ export const Data = {
         StationName.YANGJAE_CITIZENS_FOREST,
       ])
     );
-
-    // LineModel.allStations.push(
-    //   StationName.SEOUL_NATIONAL_UNIV_OF_EDUCATION,
-    //   StationName.GANGNAM,
-    //   StationName.YEOKSAM,
-    //   StationName.NAMBU_BUS_TERMINAL,
-    //   StationName.YANGJAE,
-    //   StationName.YANGJAE_CITIZENS_FOREST,
-    //   StationName.MAEBONG
-    // );
   },
 
   initDistance() {
@@ -66,6 +57,35 @@ export const Data = {
       StationName.YANGJAE,
       StationName.YANGJAE_CITIZENS_FOREST,
       10
+    );
+  },
+
+  initTime() {
+    // 2
+    this.dijkstraTime.addEdge(
+      StationName.SEOUL_NATIONAL_UNIV_OF_EDUCATION,
+      StationName.GANGNAM,
+      3
+    );
+    this.dijkstraTime.addEdge(StationName.GANGNAM, StationName.YEOKSAM, 3);
+    // 3
+    this.dijkstraTime.addEdge(
+      StationName.SEOUL_NATIONAL_UNIV_OF_EDUCATION,
+      StationName.NAMBU_BUS_TERMINAL,
+      2
+    );
+    this.dijkstraTime.addEdge(
+      StationName.NAMBU_BUS_TERMINAL,
+      StationName.YANGJAE,
+      5
+    );
+    this.dijkstraTime.addEdge(StationName.YANGJAE, StationName.MAEBONG, 1);
+    // 신분당
+    this.dijkstraTime.addEdge(StationName.GANGNAM, StationName.YANGJAE, 8);
+    this.dijkstraTime.addEdge(
+      StationName.YANGJAE,
+      StationName.YANGJAE_CITIZENS_FOREST,
+      3
     );
   },
 };
