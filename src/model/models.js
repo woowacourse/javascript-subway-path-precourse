@@ -28,7 +28,6 @@ export default class Models {
       route: result.route,
     };
   }
-
   parseInitialInput(lines) {
     lines.forEach((line) => {
       this._parseToDistDijkstra({

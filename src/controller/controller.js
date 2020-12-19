@@ -18,7 +18,6 @@ export default class Controller {
     }
     return selectedOption;
   }
-
   addClickEventByID(id, event) {
     const button = document.getElementById(id);
     button.addEventListener("click", event.bind(this));

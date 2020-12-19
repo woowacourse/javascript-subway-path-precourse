@@ -17,11 +17,4 @@ export default class View {
       container.appendChild(content);
     });
   }
-  makeSpan(innerText) {
-    const span = makeElement({
-      tag: "span",
-      innerHTML: innerText,
-    });
-    return span;
-  }
 }
