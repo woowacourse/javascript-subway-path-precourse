@@ -16,8 +16,24 @@ const setMapByWeightType = (map, edges, weightType) => {
   }
 };
 
-const caclTotalDistance = () => {};
-const caclTotalTime = () => {};
+const caclTotal = (path, sections) => {
+  let totalDistance = 0;
+  let totalTime = 0;
+  for (let i = 0; i < path.length - 1; i++) {
+    for (let line in sections) {
+      for (let j = 0; j < sections[line].length; j++) {
+        if (
+          path[i] === sections[line][j][EDGE_INFO.DEPARTURE] &&
+          path[i + 1] === sections[line][j][EDGE_INFO.ARRIVAL]
+        ) {
+          totalDistance += sections[line][j][EDGE_INFO.DISTANCE];
+          totalTime += sections[line][j][EDGE_INFO.TIME];
+        }
+      }
+    }
+  }
+  console.log(totalDistance, totalTime);
+};
 
 export const findShortestPath = (departure, arrival, sections) => {
   const radioElems = document.getElementsByName("search-type");
@@ -30,6 +46,6 @@ export const findShortestPath = (departure, arrival, sections) => {
     for (let line in sections)
       setMapByWeightType(dijkstra, sections[line], EDGE_INFO.TIME);
   }
-
-  console.log(dijkstra.findShortestPath(departure, arrival));
+  const findedPath = dijkstra.findShortestPath(departure, arrival);
+  caclTotal(findedPath, sections);
 };
