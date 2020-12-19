@@ -10,33 +10,29 @@ function showResult() {
     document.getElementById("result").style.display="block";
 }
 
-const stationsLineTwo = ['교대', '강남', '역삼'];
 export function findData(departureStation, arrivalStation) {
-    if (stationsLineTwo.includes(departureStation) && stationsLineTwo.includes(arrivalStation)){
-        let v1 = '', v2 = '', v3 = '';
-        let distance = 0, time = 0;
-        let indexOfDeparture = 0;
-        let indexOfArrival = 0;
-        for (let i = 0; i < lineTwo.length; i += 1) {
-            if (departureStation === lineTwo[i].station) {
-                v1 = lineTwo[i].station;
-                distance += lineTwo[i].distance;
-                time += lineTwo[i].time;
-                indexOfDeparture = lineTwo.indexOf(lineTwo[i]);
-            }
-            if (arrivalStation === lineTwo[i].station) {
-                v3 = lineTwo[i].station;
-                indexOfArrival = lineTwo.indexOf(lineTwo[i]);
-            }
-            if (indexOfDeparture - indexOfArrival > 1) {
-                v2 = lineTwo[i-1].station;
-                distance += lineTwo[i].distance;
-                time += lineTwo[i].time;
-            }  
+    let v1 = '', v2 = '', v3 = '';
+    let distance = 0, time = 0;
+    let indexOfDeparture = 0;
+    let indexOfArrival = 0;
+    for (let i = 0; i < lineTwo.length; i += 1) {
+        if (departureStation === lineTwo[i].station) {
+            v1 = lineTwo[i].station;
+            distance += lineTwo[i].distance;
+            time += lineTwo[i].time;
+            indexOfDeparture = lineTwo.indexOf(lineTwo[i]);
         }
-        getShortestPath(v1, v2, v3, distance, time);
+        if (arrivalStation === lineTwo[i].station) {
+            v3 = lineTwo[i].station;
+            indexOfArrival = lineTwo.indexOf(lineTwo[i]);
+        }
+        if (indexOfDeparture - indexOfArrival > 1) {
+            v2 = lineTwo[i-1].station;
+            distance += lineTwo[i].distance;
+            time += lineTwo[i].time;
+        }  
     }
-    
+    getShortestPath(v1, v2, v3, distance, time);
 }
 
 function getShortestPath(v1, v2, v3, distance, time) {
@@ -75,4 +71,3 @@ function makeTable( distance, time, shortestPathOfDistance) {
     resultTable.id = 'print-result-table';
     container.appendChild(resultTable);
 }
-
