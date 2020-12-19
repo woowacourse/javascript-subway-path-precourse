@@ -11,10 +11,10 @@ import {
 	clearEndInput,
 } from './stationInputController.js';
 import {
-	appendChilds,
-	clearResultTable,
+    appendChilds,
 	makeElement,
 } from '../utils/elementUtils.js';
+import { clearResultTable } from './resultAreaController.js';
 
 const getEdgeByStations = (start, end) => {
 	for (const edge of edges) {
