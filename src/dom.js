@@ -17,3 +17,9 @@ export const setBtnGetDirection = (func) => {
   const $btnGetDirection = document.querySelector("#get-direction");
   $btnGetDirection.addEventListener("click", (e) => func(e));
 };
+
+export const createTableHeader = () => {
+  const $h3TableHeader = document.createElement("h1");
+  $h3TableHeader.innerText = `📝결과`;
+  return $h3TableHeader;
+};
