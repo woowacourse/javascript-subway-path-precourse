@@ -45,6 +45,7 @@ export default class ViewController {
     resultDiv.style.visibility = 'visible';
   }
 
+  // 역 이름 입력받는 input을 전부 비우고, 출발역 input에다 focus
   clearStationInputs() {
     departureInput.value = '';
     arrivalInput.value = '';

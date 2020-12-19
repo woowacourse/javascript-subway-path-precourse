@@ -4,7 +4,6 @@ import ViewController from './view.js';
 import { isStationsValid, isPathValid } from './valid.js';
 
 const PATH_START_INDEX = 1;
-const SHORTEST_DISTANCE = '최단거리';
 const SHORTEST_TIME = '최소시간';
 const RESULT_ARROW = '→';
 const CHECKED_RADIO_BUTTON = 'input[name="search-type"]:checked';
@@ -77,10 +76,11 @@ export default class SubwayPath {
   }
 
   findPath(departure, arrival, searchType) {
-    if (searchType === SHORTEST_DISTANCE) {
-      return this.distanceDijkstra.findShortestPath(departure, arrival);
-    } else if (searchType === SHORTEST_TIME) {
+    if (searchType === SHORTEST_TIME) {
       return this.timeDijkstra.findShortestPath(departure, arrival);
+    } else {
+      // default 값이 최단거리이므로 최소시간이 아니면 전부 최단거리로 취급
+      return this.distanceDijkstra.findShortestPath(departure, arrival);
     }
   }
 
