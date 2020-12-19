@@ -86,10 +86,10 @@ const getNowLineSections = (_prevStation, _nextStation) => {
   return lines.find((x) => isInLine(x, _prevStation, _nextStation)).sections;
 };
 
-const getNowSection = (_nowLineSections) => {
+const getNowSection = (_nowLineSections, _prevStation, _nextStation) => {
   return _nowLineSections[
-    (_nowLineSections.indexOf(nextStation) +
-      _nowLineSections.indexOf(prevStation)) /
+    (_nowLineSections.indexOf(_nextStation) +
+      _nowLineSections.indexOf(_prevStation)) /
       2
   ];
 };
@@ -104,7 +104,7 @@ const getDistanceAndTime = (_path) => {
     nextStation = _path[i];
 
     const nowLineSections = getNowLineSections(prevStation, nextStation);
-    const nowSection = getNowSection(nowLineSections);
+    const nowSection = getNowSection(nowLineSections, prevStation, nextStation);
 
     section.distance += nowSection.distance;
     section.time += nowSection.time;
@@ -123,7 +123,7 @@ const init = () => {
     const section = getDistanceAndTime(path);
     const searchType = pathFinderInput[2];
 
-    return [path, section.distance, section.time, searchType];
+    return [searchType, section.distance, section.time, path];
   }
 };
 

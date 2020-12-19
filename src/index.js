@@ -5,7 +5,7 @@ const pathFinderInputBtn = document.getElementById("path-finder-input-button");
 
 export default function SubwayPath() {
   pathFinderInputBtn.addEventListener("click", () => {
-    init();
+    printLayout(...init());
   });
 }
 
