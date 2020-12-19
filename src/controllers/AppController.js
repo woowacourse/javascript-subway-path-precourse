@@ -1,5 +1,3 @@
-import StationModel from '../models/StationModel.js';
-import LineModel from '../models/LineModel.js';
 import ResultView from '../views/ResultView.js';
 import Dijkstra from '../utils/Dijkstra.js';
 import { lines, stations, paths } from '../data.js';
@@ -14,8 +12,9 @@ import {
 
 export default class AppController {
   constructor() {
-    this.stationModel = new StationModel(stations);
-    this.lineModel = new LineModel(lines);
+    this.stations = stations;
+    this.lines = lines;
+    this.paths = paths;
     this.resultView = new ResultView();
     this.graphs = {
       shortestDistance: new Dijkstra(),
@@ -55,7 +54,7 @@ export default class AppController {
   }
 
   isExistStation(name) {
-    return this.stationModel.data.includes(name);
+    return this.stations.includes(name);
   }
 
   validateSearchType(type) {
@@ -99,7 +98,7 @@ export default class AppController {
     };
 
     for (let i = 1; i < path.length; i++) {
-      const result = paths.find(
+      const result = this.paths.find(
         ({ from, to }) => (path[i - 1] === from && path[i] === to) || (path[i - 1] === to && path[i] === from),
       );
       total.distance += result.distance;
