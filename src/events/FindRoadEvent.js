@@ -13,6 +13,7 @@ export default function FindRoadEvent() {
     return;
   }
   const shortestPath = getShortestPath(startStation, endStation);
+  console.log(shortestPath);
   const totalWeight = getShortestWeight(shortestPath);
   const totalDistance = totalWeight[0];
   const totalTime = totalWeight[1];
@@ -66,8 +67,6 @@ export default function FindRoadEvent() {
       index = 2;
     } else if (information == "최소시간") {
       index = 3;
-    } else {
-      return console.log("잘못된 정보를 입력했습니다.");
     }
     for (let i = 0; i < stations.length; i++) {
       for (let j = 0; j < lines.length; j++) {
@@ -85,6 +84,12 @@ export default function FindRoadEvent() {
       if (
         lines[j].sections[k][0] === shortestPath[i] &&
         lines[j].sections[k][1] === shortestPath[i + 1]
+      ) {
+        _distance += lines[j].sections[k][2];
+        _time += lines[j].sections[k][3];
+      } else if (
+        lines[j].sections[k][1] === shortestPath[i] &&
+        lines[j].sections[k][0] === shortestPath[i + 1]
       ) {
         _distance += lines[j].sections[k][2];
         _time += lines[j].sections[k][3];
