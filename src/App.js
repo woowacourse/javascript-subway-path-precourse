@@ -1,3 +1,5 @@
+import Path from "./models/path.js";
+
 export default {
 	init(selector) {
 		this.element = document.querySelector(selector);
@@ -24,6 +26,12 @@ export default {
 		}
 		if(departure === arrival) {
 			return alert('출발역과 도착역이 같습니다.');
+		}
+		if(!Path.isExistStation(departure)) {
+			return alert(`${departure}역을 찾을 수 없습니다.`);
+		}
+		if(!Path.isExistStation(arrival)) {
+			return alert(`${arrival}역을 찾을 수 없습니다.`);
 		}
 	},
 }
