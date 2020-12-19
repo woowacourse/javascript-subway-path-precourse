@@ -1,10 +1,12 @@
+import {TIME, DISTANCE} from '../constant/constant.js';
+
 export const splitSection = (section) => {
   const lines = [];
   for (const line in section) {
     const sections = section[line].split(' - ').filter((v, i) => i % 2 === 0);
     const remain = section[line].split(' - ').filter((v, i) => i % 2 === 1);
-    const distance = splitTimeOrDistance(remain, 'k');
-    const time = splitTimeOrDistance(remain, '분');
+    const distance = splitTimeOrDistance(remain, DISTANCE);
+    const time = splitTimeOrDistance(remain, TIME);
     lines.push(combineValue(sections, distance, time));
   }
 
@@ -14,7 +16,7 @@ export const splitSection = (section) => {
 const splitTimeOrDistance = (timeOrDistance, string) => {
   const splitedResult = timeOrDistance.map((v) => {
     const findIndex = v.indexOf(string);
-    if (string === 'k') {
+    if (string === DISTANCE) {
       return parseInt(v.slice(2, findIndex));
     }
     return parseInt(v.slice(8, findIndex));

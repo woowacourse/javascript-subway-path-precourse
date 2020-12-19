@@ -1,3 +1,5 @@
+import {error_message} from '../constant/constant.js';
+
 export const isInputValid = ($departureName, $arrivalName, stations) => {
   if (!isIncluded($departureName, stations)) {
     return false;
@@ -14,7 +16,7 @@ export const isInputValid = ($departureName, $arrivalName, stations) => {
 
 const isIncluded = ($name, stations) => {
   if (!stations.includes($name)) {
-    return alert('존재하지 않는 역입니다.');
+    return alert(error_message.NOT_STATION);
   }
 
   return true;
@@ -22,7 +24,7 @@ const isIncluded = ($name, stations) => {
 
 const isBothDifferent = (first, second) => {
   if (first === second) {
-    return alert('동일한 역을 입력하셨습니다.');
+    return alert(error_message.SAME_STATION);
   }
 
   return true;
