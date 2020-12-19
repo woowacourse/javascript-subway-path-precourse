@@ -1,3 +1,3 @@
-import subwayPathModel from './subwayPathModel';
+import SubwayPathModel from './SubwayPathModel';
 
-export { subwayPathModel };
+export { SubwayPathModel };

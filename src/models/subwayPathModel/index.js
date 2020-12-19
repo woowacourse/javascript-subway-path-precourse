@@ -1,7 +1,7 @@
 import { courses, stations } from '../../constants';
 import Dijkstra from '../../utils/Dijkstra';
 
-export default class subwayPathModel {
+export default class SubwayPathModel {
   constructor() {
     this.stations = stations;
     this.courses = courses;
@@ -88,7 +88,7 @@ export default class subwayPathModel {
     let costForDistance = 0;
     let costForTime = 0;
 
-    this.getCosts(
+    return this.getCosts(
       endStation,
       nowStation,
       nowStationIndex,
@@ -110,7 +110,6 @@ export default class subwayPathModel {
         }
       }
     }
-    console.log(costForDistance, costForTime);
 
     return [costForDistance, costForTime];
   }
@@ -122,7 +121,7 @@ export default class subwayPathModel {
     let costForDistance = 0;
     let costForTime = 0;
 
-    this.getCosts(
+    return this.getCosts(
       endStation,
       nowStation,
       nowStationIndex,
