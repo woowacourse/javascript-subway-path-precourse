@@ -26,17 +26,7 @@ export default function App() {
   SEARCH.BUTTON.addEventListener('click', (e) => {
     display(this);
     this.type = changeType();
-    if (isNameShort(INPUT.DEPARTURE.value) || isNameShort(INPUT.ARRIVAL.value)) {
-      window.alert('역 이름은 2글자 이상이어야 합니다!');
-      return;
-    } else if (!isStationAvaliable(INPUT.DEPARTURE.value, this.data) || !isStationAvaliable(INPUT.DEPARTURE.value, this.data)) {
-      window.alert('존재하지 않는 역입니다!');
-      return;
-    }
-    if (!areStationsDifferent(INPUT.DEPARTURE.value, INPUT.ARRIVAL.value)) {
-      window.alert('서로 다른 역을 입력해주세요!');
-      return;
-    }
+    isValid(this);
     this.path = minPath(this.data, INPUT.DEPARTURE.value, INPUT.ARRIVAL.value, this.type.value,);
     if (!areStationsLinked(this.path)) {
       window.alert('연결된 역을 입력해주세요!');
@@ -57,6 +47,19 @@ function changeType() {
     type = SEARCH.TYPE[1];
   }
   return type;
+}
+
+function isValid(object) {
+  if (isNameShort(INPUT.DEPARTURE.value) || isNameShort(INPUT.ARRIVAL.value)) {
+    window.alert('역 이름은 2글자 이상이어야 합니다!');
+    return;
+  } else if (!isStationAvaliable(INPUT.DEPARTURE.value, object.data) || !isStationAvaliable(INPUT.DEPARTURE.value, object.data)) {
+    window.alert('존재하지 않는 역입니다!');
+    return;
+  } else if (!areStationsDifferent(INPUT.DEPARTURE.value, INPUT.ARRIVAL.value)) {
+    window.alert('서로 다른 역을 입력해주세요!');
+    return;
+  }
 }
 
 new App();
