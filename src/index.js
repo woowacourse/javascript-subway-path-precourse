@@ -7,6 +7,8 @@ export default class subwayGetDirection {
   constructor() {
     this.stationDistanceList = stationDistanceList;
     this.stationMinuteList = stationMinuteList;
+    this.stationDistanceMap = stationDistanceMap;
+    this.stationMinuteMap = stationMinuteMap;
     this.searchType = null;
     this.startStation = null;
     this.endStation = null;
@@ -16,7 +18,20 @@ export default class subwayGetDirection {
   init() {
     setBtnGetDirection(this.getDirection.bind(this));
   }
-  getWeightInRoute(type) {}
+  getDistanceInRoute() {
+    let distance = 0;
+    for (let start = 0; start < this.route.length - 1; start++) {
+      distance += this.stationDistanceMap[this.route[start]][this.route[start + 1]];
+    }
+    return distance;
+  }
+  getMinuteInRoute() {
+    let minute = 0;
+    for (let start = 0; start < this.route.length - 1; start++) {
+      minute += this.stationMinuteMap[this.route[start]][this.route[start + 1]];
+    }
+    return minute;
+  }
   startDijkstra(data) {
     const dijkstra = new Dijkstra();
     data.forEach(([start, end, weight]) => dijkstra.addEdge(start, end, weight));
@@ -32,11 +47,11 @@ export default class subwayGetDirection {
         <th>총 소요시간</th>
       </tr>
       <tr>
-        <td>총 거리</td>
-        <td>총 소요시간</td>
+        <td>${this.getDistanceInRoute()}KM</td>
+        <td>${this.getMinuteInRoute()}분</td>
       </tr>
       <tr>
-        <td colspan="2">길이</td>
+        <td colspan="2">${this.route.join("->")}</td>
       </tr>
     </table>
     `;
@@ -57,6 +72,7 @@ export default class subwayGetDirection {
     if (this.searchType === "최단시간") {
       this.startDijkstra(this.stationMinuteList);
     }
+    this.getDistanceInRoute();
     this.drawTable();
   }
 }
