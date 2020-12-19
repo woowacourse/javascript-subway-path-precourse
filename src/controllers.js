@@ -12,35 +12,38 @@ const departureStationNameInput = document.querySelector(
 const arrivalStationNameInput = document.querySelector(
   '#arrival-station-name-input'
 );
-const serchType = document.getElementsByName('search-type');
+const searchType = document.getElementsByName('search-type');
 const searchButton = document.querySelector('#search-button');
 
 export const initListener = subwayPath => {
   searchButton.addEventListener('click', () => {
-    console.log(
-      'departure: ',
-      departureStationNameInput.value,
-      'arrival: ',
-      arrivalStationNameInput.value,
-      'serchType: ',
-      checkradioValue(serchType)
-    );
-    const validationResult = stationValidation(
-      departureStationNameInput.value,
-      arrivalStationNameInput.value,
-      subwayPath.stationList
-    );
-    const findPathResult = subwayPath.distancePath.findPath(
-      departureStationNameInput.value,
-      arrivalStationNameInput.value
-    );
-    console.log('validationResult', validationResult);
-    if (validationResult === 'ok') {
-      if (findPathResult.error) {
-        alert(findPathResult.error);
-      }
-    } else {
-      alert(validationResult);
-    }
+    clickButton(subwayPath);
   });
+};
+
+const clickButton = subwayPath => {
+  const validationResult = stationValidation(
+    departureStationNameInput.value,
+    arrivalStationNameInput.value,
+    subwayPath.stationList
+  );
+  const findPathResult =
+    checkradioValue(searchType) === 'distance'
+      ? subwayPath.distancePath.findPath(
+          departureStationNameInput.value,
+          arrivalStationNameInput.value
+        )
+      : subwayPath.timePath.findPath(
+          departureStationNameInput.value,
+          arrivalStationNameInput.value
+        );
+  if (validationResult.success) {
+    if (!findPathResult.error) {
+      console.log(findPathResult);
+    } else {
+      alert(findPathResult.error);
+    }
+  } else {
+    alert(validationResult.error);
+  }
 };
