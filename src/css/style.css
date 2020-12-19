@@ -1,0 +1,11 @@
+table {
+   
+    border: 1px solid #444444;
+  }
+  th, td {
+    border: 1px solid #444444;
+  }
+  #section-button{
+    padding:5px
+
+  }
