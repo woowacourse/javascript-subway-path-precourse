@@ -49,9 +49,9 @@ const calculatePath = (lineData, startStation, endStation) => {
 
 const searchContainer = (lineData) => {
   const searchType = findSelectRadio();
-  const { departureStation, arrivalStation } = getStations();
+  const result = getStations();
 
-  if ((departureStation, arrivalStation)) {
+  if (result && result.departureStation && result.arrivalStation) {
     const CALCULATE_REFRENCE = searchType === "distance" ? "D" : "T";
     const startStation = departureStation + CALCULATE_REFRENCE;
     const endStation = arrivalStation + CALCULATE_REFRENCE;
