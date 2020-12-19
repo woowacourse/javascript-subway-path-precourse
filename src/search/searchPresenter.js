@@ -32,25 +32,25 @@ const displayInitialResult = (searchType) => {
 };
 
 // 경로 표시
-const displayPath = (path) => {
-  const removeLastStringPath = path.map((station) => {
+const displayPath = (route) => {
+  const removeLastStringRoute = route.map((station) => {
     const editedStation = station.slice(0, -1);
 
     return editedStation;
   });
-  const pathInfo = removeLastStringPath.join(SYMBOL.ARROW_RIGHT);
+  const routeInfo = removeLastStringRoute.join(SYMBOL.ARROW_RIGHT);
 
-  const td = createTableData(pathInfo, 2);
+  const td = createTableData(routeInfo, 2);
   const tr = createTableRow([td]);
 
   appendTbody(tr);
 };
 
-const searchPresenter = (searchType, path) => {
+const searchPresenter = (searchType, route) => {
   const isInitialDisplayed = displayInitialResult(searchType);
 
   if (isInitialDisplayed) {
-    displayPath(path);
+    displayPath(route);
   }
 };
 

@@ -43,23 +43,26 @@ const calculatePath = (
   const startStation = departureStation + CALCULATE_REFRENCE;
   const endStation = arrivalStation + CALCULATE_REFRENCE;
 
-  const path = lineData.findShortestPath(startStation, endStation);
+  const { distance, route } = lineData.findShortestPath(
+    startStation,
+    endStation
+  );
 
-  return path;
+  return { distance, route };
 };
 
 const searchContainer = (lineData) => {
   const searchType = findSelectRadio();
   const { departureStation, arrivalStation } = getStations();
 
-  const path = calculatePath(
+  const { distance, route } = calculatePath(
     searchType,
     lineData,
     departureStation,
     arrivalStation
   );
 
-  searchPresenter(searchType, path);
+  searchPresenter(searchType, route);
 };
 
 export default searchContainer;
