@@ -123,5 +123,8 @@ const showResult = (appContainer) => {
 export default function searchButtonHandler(e) {
   if (isInputsValid(e.target.parentElement)) {
     showResult(e.target.parentElement);
+  } else {
+    const $table = getChildById(e.target.parentElement, "result").children[2];
+    $table.style.display = "none";
   }
 }
