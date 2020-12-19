@@ -12,7 +12,14 @@ export const startManager = () => {
     DOMTag.FINDING_PATH_BUTTON_QUERY
   );
 
-  findingPathButton.addEventListener("click", buttonHandler);
+  findingPathButton.addEventListener("click", () => {
+    try {
+      buttonHandler();
+    } catch (e) {
+      console.error(e);
+      alert(ALERT.INTERNAL_ERROR);
+    }
+  });
 };
 
 const buttonHandler = () => {
@@ -68,8 +75,6 @@ const runDijkstra = (type, dept, dest) => {
 };
 
 const totalPathData = (path) => {
-  console.log(stationToStation);
-
   let time = 0,
     dist = 0;
   for (let idx = 0; idx < path.length - 1; idx++) {
