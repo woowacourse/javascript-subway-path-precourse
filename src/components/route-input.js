@@ -39,13 +39,26 @@ class RouteInput extends Component {
   }
 
   handleSubmitEvent() {
-    const departureStation = document.querySelector(
-      '#departure-station-name-input'
-    )?.value;
-    const arrivalStation = document.querySelector('#arrival-station-name-input')
-      ?.value;
-    if (this.isValidInput(departureStation, arrivalStation))
-      this.setSearchRequest(departureStation, arrivalStation);
+    const departureStation = document
+      .querySelector('#departure-station-name-input')
+      ?.value.trim();
+    const arrivalStation = document
+      .querySelector('#arrival-station-name-input')
+      ?.value.trim();
+    const INPUT_ALERT_MESSAGE = '잘못된 입력입니다. 다시 입력해주세요.';
+    if (!this.isValidInput(departureStation, arrivalStation)) {
+      alert(INPUT_ALERT_MESSAGE);
+      return;
+    }
+    this.setSearchRequest(departureStation, arrivalStation);
+  }
+
+  isValidInput(departureStation, arrivalStation) {
+    const MINIMUM_INPUT_LENGTH = 2;
+    return (
+      departureStation.length >= MINIMUM_INPUT_LENGTH &&
+      arrivalStation.length >= MINIMUM_INPUT_LENGTH
+    );
   }
 
   setSearchRequest(departureStation, arrivalStation) {
