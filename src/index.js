@@ -51,7 +51,7 @@ export default class subwayGetDirection {
         <td>${this.getMinuteInRoute()}분</td>
       </tr>
       <tr>
-        <td colspan="2">${this.route.join("->")}</td>
+        <td colspan="2">${this.route.join("→")}</td>
       </tr>
     </table>
     `;
