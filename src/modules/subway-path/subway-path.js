@@ -76,6 +76,7 @@ export default class SubwayPath {
     const resultContainer = document.querySelector('#result');
     resultContainer.innerHTML = this.createResultTitle();
     resultContainer.innerHTML += this.createResultTable();
+    this.renderPath();
   }
 
   createResultTitle() {
@@ -98,5 +99,19 @@ export default class SubwayPath {
                 </tr>
               </thead>
             </table>`;
+  }
+
+  renderPath() {
+    const table = document.querySelector('#result-table');
+
+    table.innerHTML += `<tbody>
+                          <tr>
+                            <td>${this._totalDistance}km</td>
+                            <td>${this._totalTime}분</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2">${this._path.join('⮕')}</td>
+                          </tr>
+                        </tbody>`;
   }
 }
