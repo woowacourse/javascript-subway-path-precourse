@@ -1,0 +1,30 @@
+{
+  "name": "javascript-subway-path-precourse",
+  "version": "1.0.0",
+  "description": "- 등록된 지하철 노선도에서 경로를 조회하는 기능을 구현한다.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YUJO42/javascript-subway-path-precourse.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YUJO42/javascript-subway-path-precourse/issues"
+  },
+  "homepage": "https://github.com/YUJO42/javascript-subway-path-precourse#readme",
+  "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "prettier": "^2.2.1"
+  }
+}
