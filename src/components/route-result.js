@@ -11,7 +11,7 @@ class RouteResult extends Component {
   mountTemplate() {
     console.log(this._props.searchResult.value);
     this._$target.innerHTML = `
-			<h1>결과</h1>
+			<h1>📝 결과</h1>
 			${this.createSearchTypeH3Template()}
 			<table border="1">
 					<tr>
@@ -43,7 +43,7 @@ class RouteResult extends Component {
 				<td>${totalTime}분</td>
 			</tr>
 			<tr>
-				<td colspan="2">${resultPath.join('->')}</td>
+				<td colspan="2">${resultPath.join(' 🡆')}</td>
 			</tr>
 		`;
   }
