@@ -6,13 +6,26 @@ export default function FindRoadEvent(event) {
   const dijkstra = new Dijkstra();
   const startStation = document.getElementById("start-station-input").value;
   const endStation = document.getElementById("end-station-input").value;
-  const information = "최단거리"; // 하드코딩
-  const shortestPath = getShortestPath("교대", "양재시민의숲");
+  const information = whichRadioChecked();
+  const shortestPath = getShortestPath(startStation, endStation);
   const totalWeight = getShortestWeight(shortestPath);
   const totalDistance = totalWeight[0];
   const totalTime = totalWeight[1];
   console.log(totalDistance, totalTime);
   RoadResult(information, shortestPath, totalDistance, totalTime);
+
+  function whichRadioChecked() {
+    const shortestPathRadio = document.getElementById("shortest-path-radio");
+    const minTimeRadio = document.getElementById("min-time-path-radio");
+
+    if (shortestPathRadio.checked) {
+      return shortestPathRadio.value;
+    } else if (minTimeRadio.checked) {
+      return minTimeRadio.value;
+    } else {
+      return alert("최단거리와 최소시간 중 하나를 선택해주세요!");
+    }
+  }
 
   function _getShortestPath(i, j, index) {
     for (let k = 0; k < lines[j].sections.length; k++) {
