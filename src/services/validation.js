@@ -3,7 +3,6 @@ import {
 	MINIMUM_STATION_NAME_LENGTH_ALERT,
 	SAME_STATION_ALERT,
 	NOT_ON_LINE_ALERT,
-	NOT_CONNECTED_STATIONS_ALERT
 } from './constants.js';
 import {stations} from '../data/station-data.js';
 
@@ -11,8 +10,6 @@ const includesBothStations = (connectedStations, startStation, endStation) => {
 	if (connectedStations.includes(startStation) && connectedStations.includes(endStation)) {
 		return true;
 	}
-
-	alert(NOT_CONNECTED_STATIONS_ALERT);
 }
 
 export const isIncludesBothStations = (connectedStations, startStation, endStation) => {
