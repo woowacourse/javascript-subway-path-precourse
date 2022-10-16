@@ -3,8 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>지하철 길찾기</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<div id="app"></div>
+<div id="app">
+    <header>
+        <h1>🚇지하철 길찾기</h1>
+    </header>
+    <main>
+        <section>
+            <article class="section__search">
+                <div class="section__search-wrapper">
+                    <h2 class="section__search-title">출발역</h2>
+                    <input id="departure-station-name-input">
+                </div>
+                <div class="section__search-wrapper">
+                    <h2 class="section__search-title">도착역</h2>
+                    <input id="arrival-station-name-input">
+                </div>
+            </article>
+            <article class="section__select">
+                <div>
+                    <input type="radio">
+                    최단거리
+                </div>
+                <div>
+                    <input type="radio">
+                    최소시간
+                </div>
+            </article>
+            <button class="search-btn" name="search-type">길 찾기</button>
+        </section>
+        <section class="section__result hidden">
+            <h1>📝 결과</h1>
+            <article>
+                <h2>최단거리</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>총 거리</th>
+                            <th>총 소요시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </main>
+</div>
 </body>
 </html>
