@@ -1,0 +1,42 @@
+.section__search {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 60px;
+}
+
+.section__search-wrapper {
+  display: flex;
+
+  height: 20px;
+}
+
+.section__search-title {
+  margin: 0;
+}
+
+.section__select {
+  display: flex;
+
+  margin-top: 20px;
+}
+
+.search-btn {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+table,
+td,
+th{
+    border: 1px solid #333;
+}
+
+thead,
+tbody {
+    color: black
+}
