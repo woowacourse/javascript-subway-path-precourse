@@ -19,3 +19,10 @@ export const route = {
     time: [8, 3],
   },
 };
+
+export const stationRoute = {
+  "교대": {
+    "강남" : 2,
+    "남부터미널" : 3
+  }
+}
